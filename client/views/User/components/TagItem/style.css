@@ -1,0 +1,16 @@
+.tag-item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.tag-item:nth-of-type(2n) a{
+    background: orangered;
+}
+.tag-item:nth-of-type(2n+1) a{
+    background: pink;
+}
+.tag-item a {
+    display: inline-block;
+    padding: 2px 5px;
+    color: white;
+    border-radius: 5px;
+}

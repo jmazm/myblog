@@ -1,0 +1,17 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+}
+.img--management .content {
+    flex: 1;
+    padding: 20px;
+    background: white;
+}
+.img--managenent .content-inner {
+
+}
+.img--management .content-title {
+    font: bolder 24px/2 '';
+    padding-bottom: 10px;
+    border-bottom: 1px solid #c0c0c0;
+}

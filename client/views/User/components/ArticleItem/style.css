@@ -1,0 +1,62 @@
+.article-item {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #c0c0c0;
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 3px;
+    background: white;
+}
+.article-item:hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 5px;
+}
+.article-item .article-inner {
+    position: relative;
+    padding: 10px 30px;
+}
+.article-item .article-title a {
+    font: bolder 24px/2 '';
+    margin-bottom: 10px;
+}
+.article-item .article-title a:hover {
+    color: dodgerblue;
+}
+.article-item .article-link {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+    border: 1px solid #eeeeee;
+}
+.article-item .article-img {
+    width: 100%;
+    display: block;
+}
+.article-item .article-content {
+    color: #999999;
+    margin: 10px 0;
+}
+.article-item .article-tag-list {
+    margin: 10px 0;
+}
+.article-tag-list .tag-item {
+    padding: 3px 10px;
+    margin-right: 10px;
+    color: dodgerblue;
+    border: 1px solid dodgerblue;
+    border-radius: 5px;
+    background: white;
+}
+.article-tag-list .tag-item:hover {
+    color: white;
+    background: dodgerblue;
+}
+.article-item .article-time {
+    position: absolute;
+    left: -55px;
+    top: 40px;
+    padding: 10px 10px;
+    color: white;
+    background: dodgerblue;
+}
+.article-item .article-time span {
+    display: block;
+}

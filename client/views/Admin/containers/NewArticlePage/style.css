@@ -1,0 +1,41 @@
+.blog-management {
+    display: flex;
+    background: #ffffff;
+}
+.blog-management-content {
+    flex: 1;
+    padding: 20px;
+}
+.article-item-wrapper .article-item-ti {
+    display: block;
+    font: bold 16px/2 '';
+    margin: 10px 0;
+}
+.article-item-wrapper .input {
+    width: 300px;
+    height: 28px;
+    font: 14px/2 '';
+    border: 1px solid #c0c0c0;
+    text-indent: 5px;
+}
+.article-item-wrapper .textarea {
+    width: 600px;
+    height: 300px;
+    resize: none;
+}
+.article-item-wrapper .select {
+    width: 300px;
+    height: 28px;
+    border: 1px solid #c0c0c0;
+}
+.btn-wrapper {
+    margin: 10px 0;
+}
+.btn-wrapper .btn {
+    padding: 5px 10px;
+    color: white;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    background: dodgerblue;
+}

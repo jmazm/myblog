@@ -1,0 +1,17 @@
+.aside {
+    width: 30%;
+    max-width: 250px;
+    height: 100vh;
+    min-height: 650px;
+    background: dodgerblue;
+}
+.aside .aside-nav-list .list-item{
+    margin-bottom: 15px;
+}
+.aside .aside-nav-list{
+   padding: 20px;
+}
+.aside .aside-nav-list a {
+    color: white;
+    font: 16px/2 '';
+}
