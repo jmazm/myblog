@@ -14,10 +14,13 @@ router.get('/article/:id', articleCtrl.getArticleDetail)
 router.post('/article', articleCtrl.addArticle, userAuth)
 
 // 修改文章
-router.put('/article', articleCtrl.modifyArticle)
+router.put('/article', articleCtrl.modifyArticle, userAuth)
 
 // 删除文章
-router.del('/article/:id', articleCtrl.delArticle)
+router.del('/article/:id', articleCtrl.delArticle, userAuth)
+
+// 发布文章/取消发布文章
+router.post('/article/publish', articleCtrl.publish, userAuth)
 
 
 

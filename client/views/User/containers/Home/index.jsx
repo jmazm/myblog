@@ -6,18 +6,15 @@ import PropTypes from 'prop-types'
 import Header from '../../components/Header'
 import SearchBar from '../../components/SearchBar'
 import ArticleList from '../../components/ArticleList'
-// import AboutMe from '../../components/AboutMe'
 import TagList from '../../components/TagList'
 
 import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
-import {actions as TagReducer} from '../../../../redux/reducer/tagReducer'
 
 import { Pagination } from 'antd';
 
 import './style.css'
 
 const {get_all_articles} = ArticleReducer
-const {get_all_tags} = TagReducer
 
 class Home extends Component {
   constructor (props) {
@@ -30,22 +27,16 @@ class Home extends Component {
     })
   }
   render () {
-    const {articleList, total, tags} = this.props
+    const {articleList, total} = this.props
     return (
-      <div className="my-blog">
+      <div className="container my--blog">
         <Header/>
-        <SearchBar/>
         <div className="main">
+          {/*<SearchBar/>*/}
           <div className="main-inner">
-            <div className="content-inner">
-              <ArticleList data={articleList}/>
-              <div className="pagination-wrapper">
-                <Pagination onChange={this.pageOnChange.bind(this)} defaultCurrent={1} total={parseInt(total)} defaultPageSize={5}/>
-              </div>
-            </div>
-            <div className="side-bar">
-              {/*<AboutMe/>*/}
-              <TagList data={tags}/>
+            <ArticleList data={articleList}/>
+            <div className="pagination-wrapper">
+              <Pagination onChange={this.pageOnChange.bind(this)} defaultCurrent={1} total={parseInt(total)} defaultPageSize={5}/>
             </div>
           </div>
         </div>
@@ -57,36 +48,31 @@ class Home extends Component {
       pageNum: 1,
       pageSize: 5
     })
-    this.props.get_all_tags()
   }
 }
 
 // 设置默认值
 Home.defaultProps = {
   articleList: [],
-  total: 0,
-  tags: []
+  total: 0
 }
 
 Home.propTypes = {
   articleList: PropTypes.array,
-  total: PropTypes.number,
-  tags: PropTypes.array
+  total: PropTypes.number
 }
 
 function mapStateToProps (state) {
   const {articleList, total} = state.articles
   return {
     articleList,
-    total,
-    tags: state.tags
+    total
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    get_all_articles: bindActionCreators(get_all_articles, dispatch),
-    get_all_tags: bindActionCreators(get_all_tags, dispatch)
+    get_all_articles: bindActionCreators(get_all_articles, dispatch)
   }
 }
 

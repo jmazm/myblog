@@ -2,12 +2,12 @@ module.exports = {
   publicPath: '/',
   server: {
     indexServerPort: '3000',
-    cmsServerPort: '8080'
+    cmsServerPort: '3003'
   },
   dev: {
     serverPort: '3001',
     imageUploadApi: 'http://localhost:3001/upload',
-    fileServerIP: 'http://localhost:3001',
+    fileServerIP: 'http://127.0.0.1:3002',
   },
   prod: { // 生成环境中，因为是同构，所以只需分官网和cms
     fileServerIP: 'http://120.79.205.192',

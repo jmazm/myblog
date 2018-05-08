@@ -4,18 +4,15 @@ import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 
 import Header from '../../components/Header'
-import SearchBar from '../../components/SearchBar'
-import CategoryList from '../../components/CategoryList'
+// import SearchBar from '../../components/SearchBar'
 import ArticleList from '../../components/ArticleList'
 
 import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
-import {actions as CategoryReducer} from '../../../../redux/reducer/categoryReducer'
 
 import { Pagination } from 'antd';
 
 
 const {get_all_articles} = ArticleReducer
-const {get_all_categories} = CategoryReducer
 
 class Category extends Component {
   constructor (props) {
@@ -30,22 +27,17 @@ class Category extends Component {
     })
   }
   render () {
-    const {articleList, total, categories} = this.props
+    const {articleList, total} = this.props
 
     return (
-      <div className="my-blog not-home-page">
+      <div className="container my--blog">
         <Header/>
-        <SearchBar/>
         <div className="main">
+          {/*<SearchBar/>*/}
           <div className="main-inner">
-            <div className="content-inner">
-              <ArticleList data={articleList}/>
-              <div className="pagination-wrapper">
-                <Pagination onChange={this.pageOnChange.bind(this)} defaultCurrent={1} total={parseInt(total)} defaultPageSize={5}/>
-              </div>
-            </div>
-            <div className="side-bar">
-              <CategoryList data={categories}/>
+            <ArticleList data={articleList}/>
+            <div className="pagination-wrapper">
+              <Pagination onChange={this.pageOnChange.bind(this)} defaultCurrent={1} total={parseInt(total)} defaultPageSize={5}/>
             </div>
           </div>
         </div>
@@ -59,7 +51,6 @@ class Category extends Component {
       pageSize: 5,
       category: id
     })
-    this.props.get_all_categories()
   }
 
   componentDidUpdate (prevPros, prevState) {
@@ -78,29 +69,25 @@ class Category extends Component {
 // 设置默认值
 Category.defaultProps = {
   articleList: [],
-  total: 0,
-  categories: []
+  total: 0
 }
 
 Category.propTypes = {
   articleList: PropTypes.array,
-  total: PropTypes.number,
-  categories: PropTypes.array
+  total: PropTypes.number
 }
 
 function mapStateToProps (state) {
   const {articleList, total} = state.articles
   return {
     articleList,
-    total,
-    categories: state.categories
+    total
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    get_all_articles: bindActionCreators(get_all_articles, dispatch),
-    get_all_categories: bindActionCreators(get_all_categories, dispatch)
+    get_all_articles: bindActionCreators(get_all_articles, dispatch)
   }
 }
 

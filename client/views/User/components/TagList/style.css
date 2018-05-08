@@ -1,17 +1,6 @@
-.tag-bar {
-    align-self: flex-start;
-    width: 100%;
-    padding: 20px;
-    border: 1px solid #c0c0c0;
-    background: white;
-}
-.tag-bar .tag-ti{
-    font: bold 18px/1.5 '';
-    padding-bottom: 10px;
-    border-bottom: 1px solid #c0c0c0;
-}
-.tag-bar .tag-list {
+.tag-list {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 10px;
+    justify-content: center;
+    margin-top: 15px;
 }

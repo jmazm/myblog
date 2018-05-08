@@ -42,16 +42,16 @@ class ArticleDetail extends Component {
     }
 
     return (
-      <div className="my-blog">
+      <div className="container my--blog">
         <Header/>
-        <SearchBar/>
         <div className="main">
+          {/*<SearchBar/>*/}
           <div className="main-inner">
-            <div className="content-inner">
-              <article className="article-detail">
-                <header className="article-header">
-                  <h1 className="article-title">{title}</h1>
-                </header>
+            <article className="article-detail">
+              <header className="article-header">
+                <h1 className="article-title">{title}</h1>
+              </header>
+              <main className="article-content">
                 <ul className="article-meta-list">
                   <li className="meta-list-item">时间：<time>{dateFormat(date, 'yyyy-mm-dd dddd')}</time></li>
                   <li className="meta-list-item">作者：<span>{"张静宜"}</span></li>
@@ -62,17 +62,14 @@ class ArticleDetail extends Component {
                 <section className="article-content">
                   {remark().use(remarkRender).processSync(content).contents}
                 </section>
-                <footer className="article-footer">
-                  <section className="article-copyright">
-                    <p>转载请务必注明出处，欢迎分享</p>
-                  </section>
-                </footer>
-              </article>
-              <Comment Article_id={id}/>
-            </div>
-            <div className="side-bar">
-              <TagList data={tags}/>
-            </div>
+              </main>
+              <footer className="article-footer">
+                <section className="article-copyright">
+                  <p>转载请务必注明出处，欢迎分享！</p>
+                </section>
+              </footer>
+            </article>
+            <Comment Article_id={id}/>
           </div>
         </div>
       </div>

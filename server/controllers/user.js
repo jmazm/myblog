@@ -88,11 +88,12 @@ class User {
 
     // 添加 access token
     const accessToken = jsonWebToken.sign({
-      id: id,
-      name: name
-    }, config.auth.CMS_ACCESS_TOKEN, {
-      expiresIn: '1h'
-    })
+        id: id,
+        name: name
+      }, config.auth.CMS_ACCESS_TOKEN, {
+        expiresIn: '188h'
+      }
+    )
 
     // 重置登录次数
     loginTotal = 0

@@ -5,20 +5,19 @@ const config = require("../../config")
 export async function userAuth (ctx) {
   try {
     // referer验证
-    _refererAuth(ctx)
-
-    // 登录验证
-    _accessAuth(ctx)
+    await _refererAuth(ctx)
 
     // csrf token验证
-    _csrfAuth(ctx)
+    await _csrfAuth(ctx)
+
+    // 登录验证
+    await _accessAuth(ctx)
+
   } catch (err) {
     let code = err.status || err.statusCode || 500
     let msg = err.message
-
-    if (err.name === 'JsonWebTokenError') {
+    if (/TokenExpiredError|JsonWebTokenError/.test(err.name)) {
       code = 401
-      msg = 'UNAUTHORIZED: NO ACCESS TOKEN'
     }
     ctx.throw(code, msg)
   }
@@ -55,10 +54,8 @@ function _csrfAuth (ctx) {
  * @private
  */
 function _refererAuth (ctx) {
-  const referer = ctx.headers['referer']
-
   // referer 验证
-  if (!/^https?:\/\/127\.0\.0\.1:8080/.test(referer)) {
+  if (!/^https?:\/\/127\.0\.0\.1:8080/.test(ctx.headers['referer'])) {
     ctx.throw(403, 'FORBIDDEN: REFERER WRONG')
   }
 }
@@ -70,15 +67,21 @@ function _refererAuth (ctx) {
  */
 function _accessAuth (ctx) {
   // 获取 access token 的渠道：query/body/x-access-token
-  const accessToken = ctx.request.body.accessToken || ctx.query.accessToken || ctx.headers['x-access-token']
+  // const accessToken = ctx.request.body.accessToken || ctx.query.accessToken || ctx.headers['x-access-token']
+  let accessToken = ctx.headers['authorization'] ? ctx.headers['authorization'].split(' ')[1] : ''
+
   // 解码access token
-  const d_accessToken = jsonwebtoken.verify(accessToken, config.auth.CMS_ACCESS_TOKEN)
+  let d_accessToken = jsonwebtoken.verify(accessToken, config.auth.CMS_ACCESS_TOKEN)
+
+  if (!(d_accessToken && d_accessToken.exp * 1000 > Date.now())) {
+    ctx.throw(401, 'jwt is expired')
+  }
+
   // 获取 cookie USER_SIGN
   const userSign = ctx.cookies.get('USER_SIGN')
+
   // 解码 cookie USER_SIGN，获取用户id
   const d_id = parseInt(crypt.decrypt(userSign))
-
-
   if (!accessToken || !d_accessToken || d_accessToken.id !== d_id) {
     ctx.throw(401, 'UNAUTHORIZED: NO ACCESS AUTHRIZATION')
   }

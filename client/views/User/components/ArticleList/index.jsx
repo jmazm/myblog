@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 
 import ArticleItem from '../ArticleItem'
 
-import './style.css'
-
 class ArticleList extends Component {
   constructor (props) {
     super(props)

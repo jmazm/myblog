@@ -18,12 +18,11 @@ class AdminTag extends Component {
   }
   render () {
     return (
-      <div className="blog-management">
+      <div className="blog-management-wrapper blog--management">
         <AdminNav/>
-        <div className="blog-management-content">
-          <AdminHeader title="标签管理"/>
-          <div>
-
+        <div className="management-content-wrapper">
+          <AdminHeader title="管理标签"/>
+          <div className="content-inner">
           </div>
         </div>
       </div>

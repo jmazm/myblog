@@ -1,10 +1,11 @@
 const config = require('./webpack.dev.config')
 const OpenBrowserWebpackPlugin  = require("open-browser-webpack-plugin")
+const port = require("../../config").server.cmsServerPort
 
 
 config.entry = {
   index: [
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
+    `webpack-dev-server/client?http://127.0.0.1:${port}`,
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
     './client/views/index.jsx'
@@ -23,7 +24,7 @@ config.entry = {
 
 config.plugins.push(
   new OpenBrowserWebpackPlugin({
-    url: 'http://127.0.0.1:8080/#/admin/login'
+    url: `http://127.0.0.1:${port}/#/admin/login`
   })
 )
 

@@ -1,8 +1,7 @@
 import {take, call, put} from 'redux-saga/effects'
-import {getRequest, putRequest, postRequest, api} from '../fetch/fetch'
+import {getRequest, putRequest, postRequest, delRequest, api} from '../fetch/fetch'
 import {actionTypes as IndexActionTypes} from '../redux/reducer'
 import {actionTypes as ArticleActionTypes} from '../redux/reducer/articleReducer'
-
 
 /**
  * 获取所有文章
@@ -11,12 +10,9 @@ import {actionTypes as ArticleActionTypes} from '../redux/reducer/articleReducer
  * @return {*}
  */
 function* getAllArticle (paramsObj) {
-  yield put({
-    type: IndexActionTypes.FETCH_START
-  })
   const {pageNum, pageSize} = paramsObj
-  try {
 
+  try {
       if (paramsObj.tag) {
         return yield call(getRequest, api.getAllArticleByTagApi(pageNum, pageSize, paramsObj.tag))
       } else if (paramsObj.category) {
@@ -24,26 +20,19 @@ function* getAllArticle (paramsObj) {
       } else {
         return yield call(getRequest, api.getAllArticleApi(pageNum, pageSize))
       }
+
   } catch (err) {
-      yield put({
-        type: IndexActionTypes.SET_MESSAGE,
-        msgContent: '网络请求错误',
-        msgType: 0
-      })
-  } finally {
-    // 异步请求结束
-    yield put({
-      type: IndexActionTypes.FETCH_END
-    })
+      console.log(err)
   }
 }
 
 export function* getAllArticleFlow () {
   while (true) {
+
     let req = yield take(ArticleActionTypes.GET_ALL_ARTICLES)
 
-
     let res = yield call(getAllArticle, req.paramsObj)
+    
     // 判断返回的响应
     if (res.status === 'success') {
       // 存储数据
@@ -53,11 +42,7 @@ export function* getAllArticleFlow () {
         total: res.total
       })
     } else {
-      yield put({
-        type: IndexActionTypes.SET_MESSAGE,
-        msgContent: res.message,
-        msgType: 0
-      });
+      console.log(err)
     }
   }
 }
@@ -69,40 +54,33 @@ export function* getAllArticleFlow () {
  * @return {*}
  */
 function* saveArticle (data) {
-  // 开始进行异步请求
-  yield put({
-    type: IndexActionTypes.FETCH_START
-  })
   try {
-    let id = yield select (state => state.articles.id)
-    console.log(id)
-    if (id) {
-      data.id = id
-      // 更新文章
-      return yield call(putRequest, '/v1/article', data)
-    } else {
-      // 添加文章
-      return yield call(postRequest, api.saveArticleApi, data)
-    }
-
+    // let id = yield select (state => state.articles.id)
+    // if (id) {
+    //   data.id = id
+    //   // 更新文章
+    //   return yield call(putRequest, '/v1/article', data)
+    // } else {
+    //   console.log(data)
+    //
+    //   // 添加文章
+    //   return yield call(postRequest, api.saveArticleApi, data)
+    // }
+    const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    return yield call(postRequest, api.saveArticleApi, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
   } catch (err) {
     // 报错处理
-    yield put({
-      type: IndexActionTypes.SET_MESSAGE,
-      msgContent: '网络请求错误',
-      msgType: 0
-    })
-  } finally {
-    // 异步请求结束
-    yield put({
-      type: IndexActionTypes.FETCH_END
-    })
+    console.log(err)
   }
 }
 
 export function* saveArticleFlow () {
   while (true) {
-    let request = yield take(ArticleActionTypes.SAVE_ARTICLE)
+    let request = yield take(ArticleActionTypes.POST_SAVE_ARTICLE)
     let articleData = request.data.articleData
 
     // if (articleData.title === '') {
@@ -132,9 +110,7 @@ export function* saveArticleFlow () {
     // }
 
     if (articleData.title && articleData.content && articleData.Category_id && articleData.Category_id) {
-      console.log(request.data)
       let res = yield call(saveArticle, request.data)
-      console.log(res)
       // 判断返回的响应
       if (res.status === 'success') {
         // yield put({
@@ -168,23 +144,11 @@ export function* saveArticleFlow () {
  */
 function* getArticleDetail (id) {
   // 开始进行异步请求
-  yield put({
-    type: IndexActionTypes.FETCH_START
-  })
   try {
     return yield call(getRequest, api.getArticleDetailApi(id))
   } catch (err) {
     // 报错处理
-    yield put({
-      type: IndexActionTypes.SET_MESSAGE,
-      msgContent: '网络请求错误',
-      msgType: 0
-    })
-  } finally {
-    // 异步请求结束
-    yield put({
-      type: IndexActionTypes.FETCH_END
-    })
+   console.log(err)
   }
 }
 
@@ -204,11 +168,35 @@ export function* getArticleDetailFlow () {
         data: res.data
       })
     } else {
-      yield put({
-        type: IndexActionTypes.SET_MESSAGE,
-        msgContent: res.message,
-        msgType: 0
-      });
+      alert(res.msg)
+    }
+  }
+}
+
+function* deleteArticleById (id) {
+  try {
+    const accessToken = localStorage.getItem('ACCESS_TOKEN')
+
+    return yield call(delRequest, api.deleteArticleApi(id),  {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+  } catch (err) {
+      console.log(err)
+  }
+}
+
+export function* deleteArticleByIdFlow () {
+  while (true) {
+    let req = yield take(ArticleActionTypes.DELETE_ARTICLE)
+
+    let res = yield call(deleteArticleById, req.id)
+
+    if (res.status === 'success') {
+      alert('删除成功')
+    } else {
+      alert(`删除失败，原因: ${res.msg}`)
     }
   }
 }

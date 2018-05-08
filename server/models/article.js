@@ -20,13 +20,24 @@ class Article {
    * ]
    */
   static async getAll (pageNum, pageSize) {
-    const sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date,
+    const sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
                   t.id AS Tag_id, t.name AS Tag_name, 
                   c.id AS Category_id, c.name AS Category_name
                   FROM article AS a, tag AS t, category AS c 
                   WHERE a.Tag_id=t.id AND a.Category_id=c.id 
                   ORDER BY date Limit ?,?`
     const [articles] = await global.db.query(sql, [(pageNum - 1) * pageSize, pageSize])
+    return articles
+  }
+
+  static async getAllIsPublished (isPublished,pageNum, pageSize) {
+    const sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date,  a.isPublished,
+                  t.id AS Tag_id, t.name AS Tag_name, 
+                  c.id AS Category_id, c.name AS Category_name
+                  FROM article AS a, tag AS t, category AS c 
+                  WHERE a.isPublished=? AND a.Tag_id=t.id AND a.Category_id=c.id 
+                  ORDER BY date Limit ?,?`
+    const [articles] = await global.db.query(sql, [isPublished, (pageNum - 1) * pageSize, pageSize])
     return articles
   }
 
@@ -49,7 +60,13 @@ class Article {
    * @return {Promise.<*>}
    */
   static async getByTag (tagId, pageNum, pageSize) {
-    const sql = `SELECT * FROM article WHERE Tag_id=? ORDER BY date Limit ?,?`
+
+    const sql =  `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
+                  t.id AS Tag_id, t.name AS Tag_name, 
+                  c.id AS Category_id, c.name AS Category_name
+                  FROM article AS a, tag AS t, category AS c 
+                  WHERE Tag_id=? AND a.Tag_id=t.id AND a.Category_id=c.id 
+                  ORDER BY date Limit ?,?`
     const [articles] = await global.db.query(sql, [tagId, (pageNum - 1) * pageSize, pageSize])
     return articles
   }
@@ -62,7 +79,13 @@ class Article {
    * @return {Promise.<*>}
    */
   static async getByCategory (categoryId, pageNum, pageSize) {
-    const sql = `SELECT * FROM article WHERE Category_id=? ORDER BY date Limit ?,?`
+
+    const sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
+                  t.id AS Tag_id, t.name AS Tag_name, 
+                  c.id AS Category_id, c.name AS Category_name
+                  FROM article AS a, tag AS t, category AS c 
+                  WHERE Category_id=? AND a.Tag_id=t.id AND a.Category_id=c.id 
+                  ORDER BY date Limit ?,?`
     const [articles] = await global.db.query(sql, [categoryId, (pageNum - 1) * pageSize, pageSize])
     return articles
   }
@@ -83,9 +106,20 @@ class Article {
    * @param articleDataObj
    * @return {Promise.<void>}
    */
-  static async modifyById (articleDataObj) {
+  static async modifyById (articleId, articleDataObj) {
     const sql = `UPDATE article SET ? WHERE id=?`
-    const result = await global.db.query(sql, [articleDataObj, parseInt(articleDataObj.idArticle)])
+    const result = await global.db.query(sql, [articleDataObj, parseInt(articleId)])
+    return result
+  }
+
+  /**
+   * 根据id修改文章：文章是否发布
+   * @param obj
+   * @return {Promise.<*>}
+   */
+  static async modifyIsPublishedById (obj) {
+    const sql = `UPDATE article SET isPublished=? WHERE id=?`
+    const result = await global.db.query(sql, [parseInt(obj.isPublished), parseInt(obj.id)])
     return result
   }
 
@@ -127,6 +161,12 @@ class Article {
   static async getTotalByCategory (categoryId) {
     const sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article WHERE Category_id=?`
     const [total] = await global.db.query(sql, [categoryId])
+    return total[0]["TOTAL_ARTICLE"]
+  }
+
+  static async getTotalByIsPublished (isPublished) {
+    const sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article WHERE Category_id=?`
+    const [total] = await global.db.query(sql, [isPublished])
     return total[0]["TOTAL_ARTICLE"]
   }
 }

@@ -8,7 +8,7 @@
 .article-detail .article-title {
     font: bolder 24px/2 '';
 }
-.article-detail .article-meta-list {
+.article-content .article-meta-list {
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #c0c0c0;
@@ -16,6 +16,7 @@
 }
 .article-meta-list .meta-list-item {
     margin-bottom: 5px;
+    list-style: none;
 }
 .article-meta-list .meta-list-item:last-of-type {
     margin-bottom: 0;
@@ -76,6 +77,8 @@
     color: orangered;
 }
 .article-content pre code {
+    display: inline-block;
+    width: 100%;
     color: blue;
 }
 .article-content hr {
@@ -92,13 +95,16 @@
 }
 .article-content img {
     display: block;
+    margin: 10px 0;
 }
 .article-footer {
-    color: white;
-    font-size: 16px;
-    padding: 15px 10px;
-    border: 1px solid #c0c0c0;
+    font: bold 16px/3 '';
+    padding: 0 10px;
+    margin-top: 20px;
+    border: 1px dashed #c0c0c0;
     border-radius: 5px;
-    box-shadow: inset rgba(0, 0, 0, 0.3) 2px 2px 1px;
-    background: rgba(0, 0, 0, 0.4);
+    box-shadow: inset rgba(0, 0, 0, 0.3) -2px -2px 1px;
+}
+.article-footer p {
+    margin-bottom: 0;
 }

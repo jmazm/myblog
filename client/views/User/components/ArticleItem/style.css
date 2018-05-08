@@ -1,62 +1,64 @@
 .article-item {
-    width: 100%;
-    margin-bottom: 10px;
-    border: 1px solid #c0c0c0;
-    box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 3px;
+    padding: 10px 30px;
+    margin-bottom: 15px;
+    border: 1px solid #eeeeee;
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 4px;
     background: white;
 }
-.article-item:hover {
-    box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 5px;
-}
-.article-item .article-inner {
+.article-item .article-header {
     position: relative;
-    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    margin-bottom: 15px;
 }
-.article-item .article-title a {
-    font: bolder 24px/2 '';
-    margin-bottom: 10px;
+.article-item .article-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -30px;
+    width: 4px;
+    height: 56px;
+    background: black;
 }
-.article-item .article-title a:hover {
+.article-header .article-title{
+    font: 22px/56px '';
+}
+.article-header .article-title a {
+    color: #333333;
+}
+.article-header .article-title a:hover {
     color: dodgerblue;
 }
-.article-item .article-link {
+.article-header .article-time {
+    font: 15px/56px '';
+}
+.article-time .fa-calendar {
+    margin-right: 8px;
+    color: #333333;
+}
+.article-main .article-img-link {
     display: block;
     width: 80%;
-    max-width: 300px;
-    padding: 10px;
-    border: 1px solid #eeeeee;
+    max-width: 600px;
+    padding: 15px;
+    border: 1px solid #eaeaea;
 }
-.article-item .article-img {
-    width: 100%;
+.article-main .article-img {
     display: block;
+    width: 100%;
 }
-.article-item .article-content {
-    color: #999999;
-    margin: 10px 0;
+.article-main .article-foreword {
+    font: 15px/1.8 '';
+    margin: 15px 0;
 }
-.article-item .article-tag-list {
-    margin: 10px 0;
+.article-tag-list {
+    font: 15px/2 '';
 }
 .article-tag-list .tag-item {
-    padding: 3px 10px;
-    margin-right: 10px;
-    color: dodgerblue;
-    border: 1px solid dodgerblue;
+    padding: 0 10px;
+    margin-right: 5px;
+    color: white;
     border-radius: 5px;
-    background: white;
-}
-.article-tag-list .tag-item:hover {
-    color: white;
-    background: dodgerblue;
-}
-.article-item .article-time {
-    position: absolute;
-    left: -55px;
-    top: 40px;
-    padding: 10px 10px;
-    color: white;
-    background: dodgerblue;
-}
-.article-item .article-time span {
-    display: block;
+    background: #ff945c;
 }

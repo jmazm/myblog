@@ -19,35 +19,65 @@ const initialState = {
 
 // ation: 表示改变状态的意图
 export const actionTypes = {
-  GET_ALL_ARTICLES: 'GET_ALL_ARTICLES',
-  RESPONSE_ALL_ARTICLES: 'RESPONSE_ALL_ARTICLES',
-  GET_ARTICLE_DETAIL: 'GET_ARTICLE_DETAIL',
-  RESPONSE_ARTICLE_DETAIL: 'RESPONSE_ARTICLE_DETAIL',
+  GET_ALL_ARTICLES: 'GET_ALL_ARTICLES', // 获取所有文章
+  RESPONSE_ALL_ARTICLES: 'RESPONSE_ALL_ARTICLES', // 响应所有文章数据
+  GET_ARTICLE_DETAIL: 'GET_ARTICLE_DETAIL', // 获取文章细节
+  RESPONSE_ARTICLE_DETAIL: 'RESPONSE_ARTICLE_DETAIL', // 响应文章细节
+  GET_IS_OR_NOT_PUBLISHED_ARTICLES: 'GET_IS_OR_NOT_PUBLISHED_ARTICLES', // 获取已发布或者未发布的文章
+  RESPONSE_IS_OR_NOT_PUBLISHED_ARTICLES: 'RESPONSE_IS_OR_NOT_PUBLISHED_ARTICLES', // 响应已发布或者未发布的文章
+  GET_ISNOTPUBLISHED_ARTICLES: 'GET_ISNOTPUBLISHED_ARTICLES', // 获取取消发布的文章
+  RESPONSE_ISNOTPUBLISHED_ARTICLES: 'RESPONSE_ISNOTPUBLISHED_ARTICLES', // 响应取消发布的文章
+
+  // SET_ARTICLE_ID: 'SET_ARTICLE_ID', // 设置文章ID
+  POST_SAVE_ARTICLE: 'POST_SAVE_ARTICLE', // 保存文章
+  POST_PUBLISH_ARTICLE: 'POST_PUBLISH_ARTICLE', // 发布文章
+  POST_CANCEL_ARTICLE: 'POST_CANCEL_ARTICLE', // 取消文章
+
+  PUT_MODIFY_ARTICLE: 'PUT_MODIFY_ARTICLE', // 修改文章
+
+  DELETE_ARTICLE: 'DELETE_ARTICLE', // 删除文章
+
   UPDATING_TITLE: 'UPDATING_TITLE', // 更新标题
   UPDATING_CONTENT: 'UPDATING_CONTENT', // 更新内容
   UPDATING_TAG: 'UPDATING_TAG', // 更新标签
   UPDATING_Category: 'UPDATING_Category', // 更新类别
   UPDATING_SHOWED_IMG_URL: 'UPDATING_SHOWED_IMG_URL', // 更新文章列表要展示的图片地址
   UPDATING_FOREWORD: 'UPDATING_FOREWORD', // 更新文章前言
-  SAVE_ARTICLE: 'SAVE_ARTICLE', // 保存文章
-  SET_ARTICLE_ID: 'SET_ARTICLE_ID' // 设置文章ID
+
 }
 
 // action creator：创建action的函数
-/**
- * @example {
+
+export const actions = {
+  /**
+   * @example {
  *    pageNum: paramsObj.pageNum,
       pageSize: paramsObj.pageSize,
       tag: paramsObj.tag,
       category: paramsObj.category
  * }
- * @type {{get_all_articles: actions.get_all_articles, get_article_detail: actions.get_article_detail}}
- */
-export const actions = {
+   * @type {{get_all_articles: actions.get_all_articles, get_article_detail: actions.get_article_detail}}
+   */
   get_all_articles: function (paramsObj) {
     return {
       type: actionTypes.GET_ALL_ARTICLES,
       paramsObj
+    }
+  },
+  /**
+   * 获取已发布或者未发布的文章
+   * @param paramsObj
+   * @example {
+   *  pageNum: paramsObj.pageNum,
+      pageSize: paramsObj.pageSize,
+      isPublished: 1(已发布) 0（未发布）
+   * }
+   * @return {{type: string, paramsObj: *}}
+   */
+  get_is_or_not_pubished_articles: function (paramObj) {
+    return {
+      type: actionTypes.GET_IS_OR_NOT_PUBLISHED_ARTICLES,
+      paramObj
     }
   },
   /**
@@ -136,10 +166,16 @@ export const actions = {
    * }
    * @return {{type: string, data: *}}
    */
-  save_article:function (postData) {
+  save_article: function (postData) {
     return {
-      type:actionTypes.SAVE_ARTICLE,
+      type:actionTypes.POST_SAVE_ARTICLE,
       data: postData
+    }
+  },
+  delete_an_article: function (id) {
+    return {
+      type:actionTypes.DELETE_ARTICLE,
+      id
     }
   }
 }
@@ -160,6 +196,10 @@ export function reducer (state = initialState, action) {
     case actionTypes.RESPONSE_ARTICLE_DETAIL:
       return {
         articleDetail: action.data
+      }
+    case actionTypes.RESPONSE_IS_OR_NOT_PUBLISHED_ARTICLES:
+      return {
+        articleList: action.data
       }
     case actionTypes.UPDATING_TITLE:
       return {
@@ -197,12 +237,12 @@ export function reducer (state = initialState, action) {
           Category_id: action.Category_id
         })
       }
-    case actionTypes.SET_ARTICLE_ID:
-      return {
-        newArticleData: Object.assign({}, state.newArticleData, {
-          id: action.id
-        })
-      }
+    // case actionTypes.SET_ARTICLE_ID:
+    //   return {
+    //     newArticleData: Object.assign({}, state.newArticleData, {
+    //       id: action.id
+    //     })
+    //   }
     default:
       return state
   }

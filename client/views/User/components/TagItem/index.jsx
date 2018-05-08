@@ -8,10 +8,10 @@ class TagList extends Component {
   }
 
   render () {
-    const {id, name} = this.props
+    const {id, name, type} = this.props
     return (
       <li className="tag-item">
-        <Link to={`/tag/${id}/article`}>{name}</Link>
+        <Link to={`/${type}/${id}/article`}>{name}</Link>
       </li>
     )
   }

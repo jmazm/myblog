@@ -113,7 +113,6 @@ class AdminNewArticle extends Component {
     }
 
     let articleData = {}
-
     articleData.title = reg.replaceHtml(this.props.newArticleData.title)
     articleData.content = reg.replaceHtml(this.props.newArticleData.content)
     articleData.foreword = reg.replaceHtml(this.props.newArticleData.foreword)
@@ -124,17 +123,14 @@ class AdminNewArticle extends Component {
     articleData.date = dateformat(new Date(), 'yyyy-mm-dd HH:MM:ss')
     articleData.isPublished = 1
     articleData.Admin_id = 1
-    
-    console.log(articleData)
 
     const csrfToken = Cookies.get('CSRF_TOKEN')
-    const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    // const accessToken = localStorage.getItem('ACCESS_TOKEN')
 
     // 发送请求
     this.props.save_article({
       articleData,
-      csrfToken,
-      accessToken
+      csrfToken
     })
   }
 
@@ -149,40 +145,42 @@ class AdminNewArticle extends Component {
   render () {
     const {tags, categories} = this.props
     return (
-      <div className="blog-management">
+      <div className="blog-management-wrapper blog--management">
         <AdminNav/>
-        <div className="blog-management-content">
+        <div className="management-content-wrapper">
           <AdminHeader title="发表文章"/>
-          <form className="publish-article" id="newArticleForm" ref={ele => this.form = ele}>
-            <div className="article-item-wrapper">
-              <span className="article-item-ti">标题</span>
-              <input className="input" name="title" value={this.props.newArticleData.title} placeholder="请输入文章标题" onChange={this.titleOnChange.bind(this)}/>
-            </div>
-            <div className="article-item-wrapper">
-              <span className="article-item-ti">文章前言</span>
-              <input className="input"  name="foreword" value={this.props.newArticleData.foreword} placeholder="请输入文章前言" onChange={this.forewordOnChange.bind(this)}/>
-            </div>
-            <div className="article-item-wrapper">
-              <span className="article-item-ti">文章展示的图片</span>
-              <input className="input" name="imgSrc" value={this.props.newArticleData.imgSrc} placeholder="请输入文章展示图片的地址" onChange={this.imgUrlOnChange.bind(this)}/>
-            </div>
-            <div className="article-item-wrapper">
-              <span className="article-item-ti">文章类别</span>
-              <CategorySelect value={this.props.newArticleData.Category_id} data={categories} onChange={this.categoryOnChange.bind(this)}/>
-            </div>
-            <div className="article-item-wrapper">
-              <span className="article-item-ti">文章标签</span>
-              <TagSelect value={this.props.newArticleData.Tag_id}  data={tags} onChange={this.tagOnChange.bind(this)}/>
-            </div>
-            <div className="article-item-wrapper">
-              <span className="article-item-ti">正文</span>
-              <textarea className="textarea" name="content" value={this.props.newArticleData.content} onChange={this.contentOnChange.bind(this)}></textarea>
-            </div>
-            <div className="btn-wrapper">
-              <button type="button" className="btn" onClick={this.publishArticle.bind(this)}>发布</button>
-              <button type="button" className="btn" onClick={this.clearContent.bind(this)}>清空</button>
-            </div>
-          </form>
+          <div className="content-inner">
+            <form className="publish-article" id="newArticleForm" ref={ele => this.form = ele}>
+              <div className="form-item-wrapper">
+                <span className="article-item-ti">标题</span>
+                <input className="input" name="title" value={this.props.newArticleData.title} placeholder="请输入文章标题" onChange={this.titleOnChange.bind(this)}/>
+              </div>
+              <div className="form-item-wrapper">
+                <span className="article-item-ti">文章前言</span>
+                <input className="input"  name="foreword" value={this.props.newArticleData.foreword} placeholder="请输入文章前言" onChange={this.forewordOnChange.bind(this)}/>
+              </div>
+              <div className="form-item-wrapper">
+                <span className="article-item-ti">文章展示的图片</span>
+                <input className="input" name="imgSrc" value={this.props.newArticleData.imgSrc} placeholder="请输入文章展示图片的地址" onChange={this.imgUrlOnChange.bind(this)}/>
+              </div>
+              <div className="form-item-wrapper">
+                <span className="article-item-ti">文章类别</span>
+                <CategorySelect value={this.props.newArticleData.Category_id} data={categories} onChange={this.categoryOnChange.bind(this)}/>
+              </div>
+              <div className="form-item-wrapper">
+                <span className="article-item-ti">文章标签</span>
+                <TagSelect value={this.props.newArticleData.Tag_id}  data={tags} onChange={this.tagOnChange.bind(this)}/>
+              </div>
+              <div className="form-item-wrapper">
+                <span className="article-item-ti">正文</span>
+                <textarea className="textarea" name="content" value={this.props.newArticleData.content} onChange={this.contentOnChange.bind(this)}></textarea>
+              </div>
+              <div className="btn-wrapper">
+                <button type="button" className="btn" onClick={this.publishArticle.bind(this)}>发布</button>
+                <button type="button" className="btn" onClick={this.clearContent.bind(this)}>清空</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     )

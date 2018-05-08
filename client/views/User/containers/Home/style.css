@@ -1,30 +1,46 @@
-.main {
-    width: 90%;
-    margin: 20px auto 0;
-}
-.main .main-inner {
-    display: flex;
-    display: flex;
-    justify-content: space-around;
+/*.main {*/
+    /*width: 90%;*/
+    /*margin: 20px auto 0;*/
+/*}*/
+/*.main .main-inner {*/
+    /*display: flex;*/
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+    /*width: 100%;*/
+/*}*/
+/*.main .content-inner {*/
+    /*width: 80%;*/
+    /*margin-right: 20px;*/
+/*}*/
+/*.pagination-wrapper {*/
+    /*display: flex;*/
+    /*justify-content: flex-end;*/
+    /*margin: 20px 0;*/
+/*}*/
+/*@media screen and (max-width: 1440px) {*/
+    /*.main {*/
+        /*max-width: 1200px;*/
+    /*}*/
+/*}*/
+/*.side-bar {*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*width: 23%;*/
+/*}*/
+
+.container {
     width: 100%;
+    background: #eaeaea;
 }
-.main .content-inner {
-    width: 80%;
-    margin-right: 20px;
+.container .main {
+    margin-left: 330px;
+    overflow: auto;
+}
+.container .main-inner {
+    padding: 15px 30px 15px 0;
 }
 .pagination-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin: 20px 0;
-}
-@media screen and (max-width: 1440px) {
-    .main {
-        max-width: 1200px;
-    }
-}
-.side-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 23%;
+    margin: 20px 0 15px;
+    text-align: center;
 }

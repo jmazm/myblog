@@ -52,11 +52,12 @@ export const api = {
   getAllArticleByCategoryApi: (pageNum, pageSize, id) => `${domain}/api/article?category=${id}&pageNum=${pageNum}&pageSize=${pageSize}`,
   getArticleDetailApi: (id) => `${domain}/api/article/${id}`,
   saveArticleApi: `${domain}/api/article`,
+  deleteArticleApi: (id) => `${domain}/api/article/${id}`,
   getAllTagApi: `${domain}/api/tag`,
   saveTagApi: `${domain}/api/tag`,
   getAllCategoryApi: `${domain}/api/category`,
   getCommentsApi: `${domain}/api/comment`,
   addCommentApi: `${domain}/api/comment`,
   adminLoginApi: `${domain}/api/login`,
-  getCaptchaApi: `${domain}/api/captcha`
+  getCaptchaApi: `${domain}/api/captcha`,
 }

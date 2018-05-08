@@ -21,7 +21,7 @@
 background-image: linear-gradient(to right, transparent 50%, #655 0);
 ```
 
-![progress-01](http://127.0.0.1:3002/progress/progress-01.png)
+![progress-01](/progress/progress-01.png)
 
 ### 1.3 利用伪元素画新的右半圆
 
@@ -40,7 +40,7 @@ background-image: linear-gradient(to right, transparent 50%, #655 0);
 
 这里利用到了 `clip: rect(0 auto auto 100px)` 实现右半圆，如下图所示，蓝色半圆就是右半圆（这里为了好分辨，所以才将右半圆设置为蓝色）
 
-![progress-02](http://127.0.0.1:3002/progress/progress-02.png)
+![progress-02](/progress/progress-02.png)
 
 ### 1.4 利用transform实现占比
 
@@ -51,7 +51,7 @@ background-image: linear-gradient(to right, transparent 50%, #655 0);
 transform: rotate(72deg);
 ```
 
-![progress-03](http://127.0.0.1:3002/progress/progress-03.png)
+![progress-03](/progress/progress-03.png)
 
 ---
 
@@ -63,7 +63,7 @@ transform: rotate(36deg);
 background: #655;
 ```
 
-![progress-04](http://127.0.0.1:3002/progress/progress-04.png)
+![progress-04](/progress/progress-04.png)
 
 ---
 
@@ -80,16 +80,16 @@ background: #655;
 
 对于占比在50%之内的饼图，其动态实现进度条是完全没有问题的！
 
-![p-01.gif](http://127.0.0.1:3002/css/progress/p-01.gif)
+![p-01.gif](/css/progress/p-01.gif)
 
 但是，对于占比超过50%的饼图，却是有问题的：进度条是一步一步去实现的，但是这里除了改变角度为，还要改变背景颜色，
 然而，在改变背景颜色的时候，显得整个进度条十分突兀，一点都不连续！
 
-![p-02.gif](http://127.0.0.1:3002/progress/p-02.gif)
+![p-02.gif](/progress/p-02.gif)
 
 ---
 
-* [demo](http://127.0.0.1:3002/progress/v2.html)
+* [demo](/progress/v2.html)
 
 ## 二、终极版环形进度条
 
@@ -122,7 +122,7 @@ background: #655;
 
 补充：
 
-一开始我在想用左右半圆实现的时候，其`html`结构如下：【[demo](http://127.0.0.1:3002/progress/v3.html)】
+一开始我在想用左右半圆实现的时候，其`html`结构如下：【[demo](/progress/v3.html)】
 
 ```html
 <div class="circle-bar">
@@ -134,13 +134,13 @@ background: #655;
 
 发现，占比在50%内进度条的动画是完全没问题，但是只要超过50%占比的进度条，其左半圆的背景总是会覆盖右半圆的背景！（因为动画是先从右半圆开始才到左半圆的）效果图如下：
 
-![p-03.gif](http://127.0.0.1:3002/progress/p-03.gif)
+![p-03.gif](/progress/p-03.gif)
 
 所以才有了接下来的`html`结构，其解决了我上述的问题！
 
 ### 2.2 先实现静态的进度条
 
-[demo](http://127.0.0.1:3002/progress/v4.html)
+[demo](/progress/v4.html)
 
 ```css
 .circle-bar {
@@ -203,11 +203,11 @@ background: #655;
 }
 ```
 
-![progress-04](http://127.0.0.1:3002/progress/progress-05.png)
+![progress-04](/progress/progress-05.png)
 
 ### 2.3 实现动态进度条
 
-关键代码如下：【[demo](http://127.0.0.1:3002/progress/v5.html)】
+关键代码如下：【[demo](/progress/v5.html)】
 
 ```css
 .p20 .left {
@@ -246,7 +246,7 @@ background: #655;
 }
 ```
 
-![p-04.gif](http://127.0.0.1:3002/progress/p-04.gif)
+![p-04.gif](/progress/p-04.gif)
 
 
 
