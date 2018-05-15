@@ -48,8 +48,8 @@ if (process.env.NODE_ENV !== 'development') {
 
 export const api = {
   getAllArticleApi: (pageNum, pageSize) => `${domain}/api/article?pageNum=${pageNum}&pageSize=${pageSize}`,
-  getAllArticleByTagApi: (pageNum, pageSize, id) => `${domain}/api/article?tag=${id}&pageNum=${pageNum}&pageSize=${pageSize}`,
-  getAllArticleByCategoryApi: (pageNum, pageSize, id) => `${domain}/api/article?category=${id}&pageNum=${pageNum}&pageSize=${pageSize}`,
+  getAllArticleByTagApi: (pageNum, pageSize, tag) => `${domain}/api/article?tag=${tag}&pageNum=${pageNum}&pageSize=${pageSize}`,
+  getAllArticleByCategoryApi: (pageNum, pageSize, category) => `${domain}/api/article?category=${category}&pageNum=${pageNum}&pageSize=${pageSize}`,
   getArticleDetailApi: (id) => `${domain}/api/article/${id}`,
   saveArticleApi: `${domain}/api/article`,
   deleteArticleApi: (id) => `${domain}/api/article/${id}`,

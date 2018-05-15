@@ -6,9 +6,9 @@ import { AppContainer } from 'react-hot-loader';
 import {AdminRouteMap, UserRouteMap} from '../router/index'
 import configureStore from '../redux/store/index'
 
-import './reset.css'
 import '../static/font-awesome-4.7.0/css/font-awesome.min.css'
 import 'antd/dist/antd.min.css'
+import './reset.css'
 
 import common from '../../config'
 

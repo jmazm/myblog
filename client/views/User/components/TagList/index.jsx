@@ -11,15 +11,17 @@ class SearchBar extends Component {
   render () {
     const {data, type} = this.props
     return (
-      <ul className="tag-list">
-        {
-          data.length > 0 ?
-            data.map((item, i) => {
-              return <TagItem id={item.id} name={item.name} key={i} type={type}/>
-            }) :
-            <li>暂无数据</li>
-        }
-      </ul>
+      <div className="tag-wrapper">
+        <ul className="tag-list">
+          {
+            data.length > 0 ?
+              data.map((item, i) => {
+                return <TagItem id={item.id} name={item.name} key={i} type={type}/>
+              }) :
+              <li>暂无数据</li>
+          }
+        </ul>
+      </div>
     )
   }
 }

@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import dateFormat from 'dateformat'
 import { Validator, reg } from '../../../../lib/verification'
+import {alert} from '../../../../plugin/popup/alert'
 
 import {actions as CommentActions} from '../../../../redux/reducer/commentReducer'
 import {postRequest, api} from '../../../../fetch/fetch'
+
 import './style.css'
 
 const {get_all_comments} = CommentActions
@@ -86,7 +88,7 @@ class Comment extends Component {
     // 表单验证
     const errorMsg = this.validateForm(form)
     if (errorMsg) {
-      console.log(errorMsg)
+      alert(errorMsg)
       return
     }
 

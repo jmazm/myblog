@@ -59,16 +59,30 @@ class Article {
    * @param pageSize
    * @return {Promise.<*>}
    */
-  static async getByTag (tagId, pageNum, pageSize) {
+  static async getByTag (tagName, pageNum, pageSize) {
+    let sql = `SELECT * FROM tag WHERE name=?`
+    const [tag] = await global.db.query(sql, [tagName])
 
-    const sql =  `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
+    if (!tag[0]) {
+      return
+    }
+
+    const tagId = tag[0].id
+    sql =  `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
                   t.id AS Tag_id, t.name AS Tag_name, 
                   c.id AS Category_id, c.name AS Category_name
                   FROM article AS a, tag AS t, category AS c 
                   WHERE Tag_id=? AND a.Tag_id=t.id AND a.Category_id=c.id 
                   ORDER BY date Limit ?,?`
     const [articles] = await global.db.query(sql, [tagId, (pageNum - 1) * pageSize, pageSize])
-    return articles
+
+    sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article WHERE Tag_id=?`
+    const [total] = await global.db.query(sql, [tagId])
+
+    return {
+      articles,
+      total: total[0]["TOTAL_ARTICLE"]
+    }
   }
 
   /**
@@ -78,16 +92,33 @@ class Article {
    * @param pageSize
    * @return {Promise.<*>}
    */
-  static async getByCategory (categoryId, pageNum, pageSize) {
+  static async getByCategory (categoryName, pageNum, pageSize) {
+    let sql = `SELECT * FROM category WHERE name=?`
+    const [category] = await global.db.query(sql, [categoryName])
+    console.log(category)
 
-    const sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
+    if (!category[0]) {
+      return
+    }
+
+    const categoryId = category[0].id
+
+     sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
                   t.id AS Tag_id, t.name AS Tag_name, 
                   c.id AS Category_id, c.name AS Category_name
                   FROM article AS a, tag AS t, category AS c 
                   WHERE Category_id=? AND a.Tag_id=t.id AND a.Category_id=c.id 
                   ORDER BY date Limit ?,?`
     const [articles] = await global.db.query(sql, [categoryId, (pageNum - 1) * pageSize, pageSize])
-    return articles
+
+    sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article WHERE Category_id=?`
+
+    const [total] = await global.db.query(sql, [categoryId])
+
+    return {
+      articles,
+      total: total[0]["TOTAL_ARTICLE"]
+    }
   }
 
   /**
@@ -141,26 +172,6 @@ class Article {
   static async getTotal () {
     const sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article`
     const [total] = await global.db.query(sql)
-    return total[0]["TOTAL_ARTICLE"]
-  }
-
-  /**
-   * 获取同一标签下文章的总数
-   * @return {Promise.<*>}
-   */
-  static async getTotalByTag (tagId) {
-    const sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article WHERE Tag_id=?`
-    const [total] = await global.db.query(sql, [tagId])
-    return total[0]["TOTAL_ARTICLE"]
-  }
-
-  /**
-   * 获取同一类别下文章的总数
-   * @return {Promise.<*>}
-   */
-  static async getTotalByCategory (categoryId) {
-    const sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article WHERE Category_id=?`
-    const [total] = await global.db.query(sql, [categoryId])
     return total[0]["TOTAL_ARTICLE"]
   }
 

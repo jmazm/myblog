@@ -1,6 +1,11 @@
+.tag-wrapper {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+}
 .tag-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 15px;
+    justify-content: space-between;
+    padding: 20px 10px;
 }

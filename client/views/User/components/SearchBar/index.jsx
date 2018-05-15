@@ -8,10 +8,10 @@ class SearchBar extends Component {
   }
   render () {
     return (
-      <div className="search-bar clearfix">
-        <div className="search-inner clearfix">
+      <div className="search-bar">
+        <div className="search-bar-inner">
           <input className="search-input"/>
-          <button type="button" className="search-btn">搜素</button>
+          <button className="fa fa-search"></button>
         </div>
       </div>
     )

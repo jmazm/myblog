@@ -4,15 +4,11 @@ import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 
 import Header from '../../components/Header'
-import SearchBar from '../../components/SearchBar'
-import ArticleList from '../../components/ArticleList'
+import TagList from '../../components/TagList'
 
-import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
+import {actions as TagReducer} from '../../../../redux/reducer/tagReducer'
 
-import { Pagination } from 'antd';
-
-
-const {get_all_articles} = ArticleReducer
+const {get_all_tags} = TagReducer
 
 class Tag extends Component {
   constructor (props) {
@@ -21,29 +17,17 @@ class Tag extends Component {
       currentPage: 1
     }
   }
-  pageOnChange (page, pagesize) {
-    const id = this.props.match.params.id
-    this.props.get_all_articles({
-      pageNum: page,
-      pageSize: pagesize,
-      tag: id
-    })
-    this.setState({
-      currentPage: page
-    })
-  }
   render () {
-    const {articleList, total} = this.props
+    const {tags} = this.props
 
     return (
       <div className="container my--blog">
         <Header/>
         <div className="main">
-          {/*<SearchBar/>*/}
           <div className="main-inner">
-            <ArticleList data={articleList}/>
-            <div className="pagination-wrapper">
-              <Pagination onChange={this.pageOnChange.bind(this)} defaultCurrent={1} total={parseInt(total)} defaultPageSize={5}/>
+            <div className="widget-wrapper">
+              <h2 className="widget-title"><i className="fa fa-bookmark"></i>标签展示</h2>
+              <TagList data={tags} type="tag"/>
             </div>
           </div>
         </div>
@@ -51,50 +35,28 @@ class Tag extends Component {
     )
   }
   componentDidMount () {
-    const id = this.props.match.params.id
-    this.props.get_all_articles({
-      pageNum: 1,
-      pageSize: 5,
-      tag: id
-    })
-  }
-
-  componentDidUpdate (prevPros) {
-    const preId = prevPros.match.params.id
-    const curId = this.props.match.params.id
-    if (curId && preId && preId !== curId) {
-      console.log(preId, curId)
-      this.props.get_all_articles({
-        pageNum: 1,
-        pageSize: 5,
-        tag: curId
-      })
-    }
+    this.props.get_all_tags()
   }
 }
 
 // 设置默认值
 Tag.defaultProps = {
-  articleList: [],
-  total: 0
+  tags: []
 }
 
 Tag.propTypes = {
-  articleList: PropTypes.array,
-  total: PropTypes.number
+  tags: PropTypes.array
 }
 
 function mapStateToProps (state) {
-  const {articleList, total} = state.articles
   return {
-    articleList,
-    total
+    tags: state.tags
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    get_all_articles: bindActionCreators(get_all_articles, dispatch)
+    get_all_tags: bindActionCreators(get_all_tags, dispatch)
   }
 }
 

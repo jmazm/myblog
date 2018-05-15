@@ -16,6 +16,7 @@ function* getAllArticle (paramsObj) {
       if (paramsObj.tag) {
         return yield call(getRequest, api.getAllArticleByTagApi(pageNum, pageSize, paramsObj.tag))
       } else if (paramsObj.category) {
+        console.log(paramsObj)
         return yield call(getRequest, api.getAllArticleByCategoryApi(pageNum, pageSize, paramsObj.category))
       } else {
         return yield call(getRequest, api.getAllArticleApi(pageNum, pageSize))

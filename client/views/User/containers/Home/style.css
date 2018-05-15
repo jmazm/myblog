@@ -1,46 +1,31 @@
-/*.main {*/
-    /*width: 90%;*/
-    /*margin: 20px auto 0;*/
-/*}*/
-/*.main .main-inner {*/
-    /*display: flex;*/
-    /*display: flex;*/
-    /*justify-content: space-around;*/
-    /*width: 100%;*/
-/*}*/
-/*.main .content-inner {*/
-    /*width: 80%;*/
-    /*margin-right: 20px;*/
-/*}*/
-/*.pagination-wrapper {*/
-    /*display: flex;*/
-    /*justify-content: flex-end;*/
-    /*margin: 20px 0;*/
-/*}*/
-/*@media screen and (max-width: 1440px) {*/
-    /*.main {*/
-        /*max-width: 1200px;*/
-    /*}*/
-/*}*/
-/*.side-bar {*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*width: 23%;*/
-/*}*/
-
 .container {
     width: 100%;
     background: #eaeaea;
 }
 .container .main {
-    margin-left: 330px;
     overflow: auto;
+    margin-left: 330px;
 }
 .container .main-inner {
-    padding: 15px 30px 15px 0;
+    position: relative;
+    height: 100%;
+    margin: 30px 30px 30px 0;
 }
 .pagination-wrapper {
-    margin: 20px 0 15px;
+    margin-top: 40px;
     text-align: center;
 }
+
+.widget-wrapper {
+    padding: 10px 40px;
+    background: white;
+}
+.widget-title {
+    font: bold 30px/2 '';
+    text-align: center;
+    border-bottom: 1px dashed #999999;
+}
+.widget-title .fa-bookmark {
+    margin-right: 10px;
+}
+

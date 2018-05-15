@@ -4,8 +4,6 @@
     bottom: 0;
     left: 0;
     width: 300px;
-    height: 100vh;
-    min-height: 600px;
     background: white;
 }
 .blog-header .overlay {
@@ -46,81 +44,14 @@
 .blog-header .header-ti a {
     color: #696969;
 }
-.menu-wrapper {
-    width: 90%;
+.nav-bar .list-item {
+    font: 16px/2 '';
 }
-.switch-btn {
-    position: relative;
-    z-index: 1000;
-}
-.switch-btn .fa-bars {
-    font-size: 16px;
-    color: white;
-    padding: 5px 6px;
-    border-radius: 3px;
-    background: #c0c0c0;
-    cursor: pointer;
-}
-.switch-btn .fa-bars:hover {
-    background: black;
-}
-
-.switch-btn .tips {
-    position: relative;
-}
-.switch-btn .tips-list {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    padding: 5px;
-    text-align: center;
-    color: white;
-    border-radius: 5px;
-    background: rgba(0, 0, 0, 0.9);
-}
-.switch-btn .tips-list::before {
-    content: '';
-    position: absolute;
-    top: -16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border: 8px solid rgba(0, 0, 0, 0.8);
-    border-top-color: transparent;
-    border-right-color: transparent;
-    border-left-color: transparent;
-}
-.switch-btn .tips-list .list-item {
-    cursor: pointer;
-    padding: 0 10px;
-}
-.switch-btn .tips-list .list-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-.menu-wrapper .switch-area {
-    margin: 15px 0;
-}
-.switch-area .area-ti {
-    display: inline-block;
-    font-size: 15px;
-    margin: 0;
-    padding: 0 8px 3px 8px;
-    color: #696969;
-    border-bottom: 2px dotted #696969;
-}
-.switch-area .area-nav a {
+.nav-bar .list-item a {
     color: #696969;
 }
-.switch-area .area-nav .list-item {
-    font: 14px/2 '';
+.nav-bar .list-item a:hover {
+    color: black;
 }
-.switch-area .area-nav a:hover {
-    color: #b0a0aa;
-}
-
-
 
 

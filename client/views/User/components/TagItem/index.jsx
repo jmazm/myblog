@@ -11,7 +11,7 @@ class TagList extends Component {
     const {id, name, type} = this.props
     return (
       <li className="tag-item">
-        <Link to={`/${type}/${id}/article`}>{name}</Link>
+        <Link to={`/${type}/${name}/article`}>{name}</Link>
       </li>
     )
   }

@@ -18,16 +18,23 @@ class Article {
     let total
 
     // 根据标签获取文章：/v1/article?tag=1&pageNum=1&pageSize=10
+    // 根据标签获取文章：/v1/article?tag=http&pageNum=1&pageSize=10
     if (query.tag) {
-      const tagId = parseInt(query.tag)
-      articles = await articleModel.getByTag(tagId, pageNum, pageSize)
-      total = await articleModel.getTotalByTag(tagId)
+      const tag = query.tag
+      const result = await articleModel.getByTag(tag, pageNum, pageSize)
+      if (result) {
+        articles = result.articles
+        total = result.total
+      }
     }
     // 根据类别获取文章：v1/article?category=1&pageNum=1&pageSize=10
     else if (query.category) {
-      const categoryId = parseInt(query.category)
-      articles = await articleModel.getByCategory(categoryId, pageNum, pageSize)
-      total = await articleModel.getTotalByCategory(categoryId)
+      const category = query.category
+      const result = await articleModel.getByCategory(category, pageNum, pageSize)
+      if (result) {
+        articles = result.articles
+        total = result.total
+      }
     }
     // 获取已发表文章或者未发表文章
     // v1/article?isPublished=1&pageNum=1&pageSize=10
