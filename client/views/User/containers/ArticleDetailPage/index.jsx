@@ -5,12 +5,10 @@ import {bindActionCreators} from 'redux'
 import remark from 'remark'
 import remarkRender from 'remark-react'
 import dateFormat from 'dateformat'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
-import SearchBar from '../../components/SearchBar'
-import TagList from '../../components/TagList'
 import Comment from '../../components/Comment'
-
 
 import {actions as articleAction} from '../../../../redux/reducer/articleReducer'
 import {actions as tagAction} from '../../../../redux/reducer/tagReducer'
@@ -23,9 +21,11 @@ const {get_all_tags} = tagAction
 class ArticleDetail extends Component {
   constructor (props) {
     super(props)
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
   }
   render () {
-    const {articleDetail, tags} = this.props
+    const {articleDetail} = this.props
     const {id, title, date, content, Tag_id, Category_id, visitTotal, commentTotal} = articleDetail
     let idCategory
     let CategoryName

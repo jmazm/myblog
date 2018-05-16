@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 import dateformat from 'dateformat'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
 
@@ -18,9 +19,14 @@ const {get_all_articles} = ArticleReducer
 class Tag extends Component {
   constructor (props) {
     super(props)
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
+
     this.state = {
       currentPage: 1
     }
+
+    this.pageOnChange = this.pageOnChange.bind(this)
   }
   pageOnChange (page, pagesize) {
     const tag = decodeURIComponent(this.props.match.params.tag)
@@ -69,7 +75,7 @@ class Tag extends Component {
 
               </div>
               <div className="pagination-wrapper">
-                <Pagination onChange={this.pageOnChange.bind(this)} defaultCurrent={1} total={parseInt(total)} defaultPageSize={10}/>
+                <Pagination onChange={this.pageOnChange} defaultCurrent={1} total={parseInt(total)} defaultPageSize={10}/>
               </div>
             </div>
           </div>
@@ -79,6 +85,7 @@ class Tag extends Component {
   }
   componentDidMount () {
     const tag = this.props.match.params.tag
+
     this.props.get_all_articles({
       pageNum: 1,
       pageSize: 10,
@@ -89,6 +96,7 @@ class Tag extends Component {
   componentDidUpdate (prevPros) {
     const preTag = prevPros.match.params.tag
     const curTag = this.props.match.params.tag
+
     if (curTag && preTag && preTag !== curTag) {
       console.log(preTag, curTag)
       this.props.get_all_articles({

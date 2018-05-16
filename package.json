@@ -65,6 +65,7 @@
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1",
+    "webpack-merge": "^4.1.2",
     "webpack-parallel-uglify-plugin": "^1.1.0"
   },
   "dependencies": {
@@ -95,6 +96,7 @@
     "path": "^0.12.7",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
+    "react-addons-pure-render-mixin": "^15.6.2",
     "react-dom": "^16.3.1",
     "react-hot-loader": "^4.0.1",
     "react-redux": "^5.0.7",

@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
+
 import './style.css'
 
 class TagList extends Component {
   constructor (props) {
     super(props)
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
   }
 
   render () {

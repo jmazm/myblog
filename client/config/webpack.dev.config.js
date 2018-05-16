@@ -2,7 +2,6 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
-
 const config = require('./webpack.base.config')
 
 config.mode = 'development'
@@ -17,26 +16,6 @@ config.devtool = 'source-map'
  './client/views/index.jsx'
  ]
  */
-
-// 入口配置
-config.entry = {
-  index: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
-    'webpack/hot/only-dev-server',
-    './client/views/index.jsx'
-  ],
-
-  // lib: [
-  //   'react',
-  //   'react-dom',
-  //   'react-router',
-  //   'react-router-dom',
-  //   'react-redux',
-  //   'redux',
-  //   'redux-saga'
-  // ]
-}
 
 config.module.rules.push(
   {

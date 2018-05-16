@@ -4,9 +4,8 @@ const port = require("../../config").server.indexServerPort
 
 config.entry = {
   index: [
-
-    // 'webpack-dev-server/client?http://0.0.0.0:5000',
-    `webpack-dev-server/client?http://127.0.0.1:${port}/`,
+    'webpack-dev-server/client?http://0.0.0.0:5000',
+    // `webpack-dev-server/client?http://127.0.0.1:${port}/`,
     'react-hot-loader/patch',
     'webpack/hot/only-dev-server',
     './client/views/index.jsx'

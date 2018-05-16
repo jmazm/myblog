@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import TagItem from '../TagItem'
 
@@ -7,6 +8,8 @@ import './style.css'
 class SearchBar extends Component {
   constructor (props) {
     super(props)
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
   }
   render () {
     const {data, type} = this.props

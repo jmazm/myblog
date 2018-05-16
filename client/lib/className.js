@@ -53,14 +53,10 @@ export function removeClass (node, classname) {
  */
 export function replaceClass (node, oldClassname, newClassname) {
   let initClassName = node.className.split(' ')
-  console.log(initClassName)
 
   initClassName = initClassName.map((item) => {
-    console.log(item === oldClassname)
     return item === oldClassname ? newClassname : item
   })
-  
-  console.log(initClassName)
 
   node.className = initClassName.join(' ')
 }

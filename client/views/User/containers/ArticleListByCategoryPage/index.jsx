@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 import dateformat from 'dateformat'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
 
@@ -17,12 +18,17 @@ const {get_all_articles} = ArticleReducer
 class ArticleListByCategory extends Component {
   constructor (props) {
     super(props)
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
+
     this.state = {
       currentPage: 1
     }
+    this.pageOnChange = this.pageOnChange.bind(this)
   }
   pageOnChange (page, pagesize) {
     const category = decodeURIComponent(this.props.match.params.category)
+
     this.props.get_all_articles({
       pageNum: page,
       pageSize: pagesize,
@@ -66,7 +72,7 @@ class ArticleListByCategory extends Component {
                 }
               </div>
               <div className="pagination-wrapper">
-                <Pagination onChange={this.pageOnChange.bind(this)} defaultCurrent={1} total={parseInt(total)} defaultPageSize={10}/>
+                <Pagination onChange={this.pageOnChange} defaultCurrent={1} total={parseInt(total)} defaultPageSize={10}/>
               </div>
             </div>
           </div>

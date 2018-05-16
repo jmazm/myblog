@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
 import TagList from '../../components/TagList'
@@ -13,6 +14,9 @@ const {get_all_tags} = TagReducer
 class Tag extends Component {
   constructor (props) {
     super(props)
+    
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
+    
     this.state = {
       currentPage: 1
     }

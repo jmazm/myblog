@@ -2,11 +2,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
-import SearchBar from '../../components/SearchBar'
 import ArticleList from '../../components/ArticleList'
-import TagList from '../../components/TagList'
 
 import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
 
@@ -19,6 +18,9 @@ const {get_all_articles} = ArticleReducer
 class Home extends Component {
   constructor (props) {
     super(props)
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
+    this.pageOnChange = this.pageOnChange.bind(this)
   }
   pageOnChange (page, pagesize) {
     this.props.get_all_articles({
@@ -28,6 +30,7 @@ class Home extends Component {
   }
   render () {
     const {articleList, total} = this.props
+
     return (
       <div className="container my--blog">
         <Header/>
@@ -36,7 +39,7 @@ class Home extends Component {
           <div className="main-inner">
             <ArticleList data={articleList}/>
             <div className="pagination-wrapper">
-              <Pagination onChange={this.pageOnChange.bind(this)} defaultCurrent={1} total={parseInt(total)} defaultPageSize={5}/>
+              <Pagination onChange={this.pageOnChange} defaultCurrent={1} total={parseInt(total)} defaultPageSize={5}/>
             </div>
           </div>
         </div>

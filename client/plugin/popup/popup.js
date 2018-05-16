@@ -192,6 +192,13 @@ Popup.prototype = {
         .popup-close {
             animation: zoomOut 0.3s linear forwards;
         }
+        .popup-input {
+            display: block;
+            width: 80%;
+            margin: 10px 0;
+            border: 1px solid #eee;
+            background: white;
+        }
         @keyframes zoomIn {
             from {
                 transform: translate(-50%, -50%) scale(0, 0);
@@ -224,7 +231,6 @@ Popup.prototype = {
    * 关闭弹窗
    */
   close: function () {
-    console.log(this.$wrapper)
     replaceClass(this.$wrapper, 'popup-open', 'popup-close')
   },
   move: DragDrop.enable,

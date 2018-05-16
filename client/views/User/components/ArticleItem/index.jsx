@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import dateFormat from 'dateformat'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import './style.css'
 
 class ArticleItem extends Component {
   constructor (props) {
     super(props)
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
   }
   render () {
     const {data} = this.props

@@ -1,4 +1,4 @@
-import {on, off, getEvent, getTarget} from '../../lib/event'
+import {on, off, getEvent, getTarget, preventDefault} from '../../lib/event'
 import {throttle} from '../../lib/timer'
 /**
  * // === 单例模式：保证一个类仅有一个实例，并提供一个访问它的全局访问点（就是一个对外的接口） === //
@@ -68,14 +68,18 @@ const DragDrop = (function () {
       case 'mousedown':
         if (target.getAttribute('jm-drag')) {
           dragging = target
-          console.log(this)
 
           diffX = ev.clientX - $wrapper.offsetLeft
           diffY = ev.clientY - $wrapper.offsetTop
+
+          // 防止移动弹窗时选中文字
+          return false
         }
         break
       case 'mousemove':
         if (dragging !== null) {
+          // 阻止默认事件后，弹窗不会被移动到clientWidth之外，即使出现了滚动条
+          preventDefault(ev)
           $wrapper.style.left = ev.clientX - diffX + 'px'
           $wrapper.style.top = ev.clientY - diffY + 'px'
         }
@@ -86,19 +90,22 @@ const DragDrop = (function () {
     }
   }
 
+  // 节流
+  const throttleEvent = function (self) {
+    return throttle(handleEvent.bind(self), 5)
+  }
+
   return {
     enable: function () {
       on(document, 'mousedown', handleEvent.bind(this))
-      on(document, 'mousemove', throttle(handleEvent.bind(this), 100))
+      on(document, 'mousemove', throttleEvent(this))
       on(document, 'mouseup', handleEvent.bind(this))
-
       return this
     },
     disable: function () {
       off(document, 'mousedown', handleEvent)
-      off(document, 'mousemove', handleEvent)
+      off(document, 'mousemove', throttleEvent(this))
       off(document, 'mouseup', handleEvent)
-
       return this
     }
   }

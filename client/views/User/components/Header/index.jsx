@@ -1,19 +1,14 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import PropTypes from 'prop-types'
 
 import SearchBar from '../SearchBar'
 
 import './style.css'
 
-
 class Header extends Component {
   constructor (props) {
     super(props)
   }
-
   render () {
     return (
       <header className="blog-header">
@@ -38,30 +33,9 @@ class Header extends Component {
       </header>
     )
   }
-
-  componentDidMount () {
-  }
-  componentWillMount () {
+  shouldComponentUpdate () {
+    return false
   }
 }
 
-Header.defaultProps = {
-}
-
-Header.propTypes = {
-}
-
-function mapStateToProps (state) {
-  return {
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-  }
-}
-
-export default connect (
-  mapStateToProps,
-  mapDispatchToProps
-)(Header)
+export default Header

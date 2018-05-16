@@ -3,11 +3,11 @@ import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import dateFormat from 'dateformat'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { Validator, reg } from '../../../../lib/verification'
-import {alert} from '../../../../plugin/popup/alert'
 
-import {actions as CommentActions} from '../../../../redux/reducer/commentReducer'
-import {postRequest, api} from '../../../../fetch/fetch'
+import { actions as CommentActions } from '../../../../redux/reducer/commentReducer'
+import { postRequest, api } from '../../../../fetch/fetch'
 
 import './style.css'
 
@@ -27,6 +27,10 @@ class Comment extends Component {
       },
       sign: ''
     }
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
+    this.handlePublishClick = this.handlePublishClick.bind(this)
+    this.handleOnChange = this.handleOnChange.bind(this)
   }
   validateForm (form) {
     const validator = new Validator()
@@ -76,6 +80,7 @@ class Comment extends Component {
     const target = e.target
     const name = target.name
     const value = target.value
+
     this.setState({
       commentsData: Object.assign({}, this.state.commentsData, {
         [name]: reg.replaceHtml(value)
@@ -85,8 +90,9 @@ class Comment extends Component {
 
   async handlePublishClick (e) {
     const form = this.form
-    // 表单验证
     const errorMsg = this.validateForm(form)
+
+    // 表单验证
     if (errorMsg) {
       alert(errorMsg)
       return
@@ -114,12 +120,11 @@ class Comment extends Component {
     }
   }
 
-
   render () {
-    console.log(this.props)
     const {comments} = this.props
     const {sign, commentsData} = this.state
     const {name, email, content, website, Article_id} = commentsData
+
     return (
       <div className="comment-container">
         <div className="comment-header-wrapper">
@@ -128,19 +133,19 @@ class Comment extends Component {
         <div className="comment-wrapper">
           <form className="comment-box" ref={ele => this.form = ele}>
             <div className="comment-basic-info">
-              <input className="info-input" value={name} onChange={this.handleOnChange.bind(this)} name="name" type="text" placeholder="昵称"/>
-              <input className="info-input" value={email} onChange={this.handleOnChange.bind(this)} name="email" type="text" placeholder="邮箱"/>
-              <input className="info-input" value={website} onChange={this.handleOnChange.bind(this)} name="website" type="text" placeholder="网址"/>
-              <input className="info-input" value={Article_id} onChange={this.handleOnChange.bind(this)} name="Article_id" type="hidden"/>
-              <input className="info-input" value={sign} onChange={this.handleOnChange.bind(this)} name="sign" type="hidden"/>
+              <input className="info-input" value={name} onChange={this.handleOnChange} name="name" type="text" placeholder="昵称"/>
+              <input className="info-input" value={email} onChange={this.handleOnChange} name="email" type="text" placeholder="邮箱"/>
+              <input className="info-input" value={website} onChange={this.handleOnChange} name="website" type="text" placeholder="网址"/>
+              <input className="info-input" value={Article_id} onChange={this.handleOnChange} name="Article_id" type="hidden"/>
+              <input className="info-input" value={sign} onChange={this.handleOnChange} name="sign" type="hidden"/>
             </div>
             <div className="reply-area">
               <img src="/static/imgs/avatar.png" className="comment-avatar"/>
               <div className="textarea-wrapper">
-                <textarea name="content" value={content} onChange={this.handleOnChange.bind(this)}></textarea>
+                <textarea name="content" value={content} onChange={this.handleOnChange}></textarea>
               </div>
               <div className="reply-tool-bar">
-                <button className="btn" type="button" onClick={this.handlePublishClick.bind(this)}>发布</button>
+                <button className="btn" type="button" onClick={this.handlePublishClick}>发布</button>
               </div>
             </div>
           </form>
