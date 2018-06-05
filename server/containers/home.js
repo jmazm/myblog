@@ -3,7 +3,7 @@ import{renderToString} from 'react-dom/server'
 import {StaticRouter} from 'react-router-dom'
 import {Provider}  from 'react-redux'
 import configureStore from '../../client/redux/store/configureStore'
-import Home from '../../client/containers/Home'
+import Home from '../../client/views/User/containers/Home'
 import layout from '../view/layout'
 
 

@@ -12,7 +12,7 @@ router.get(/\/admin\/.*/, function (ctx) {
   ctx.body = data
 })
 
-// router.get('/', require("../containers/home").index)
-// router.get('/article/:articleId', require("../containers/articleDetail").index)
+router.get('/', require("../containers/home").index)
+router.get('/article/:articleId', require("../containers/articleDetail").index)
 
 module.exports = router

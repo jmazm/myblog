@@ -33,7 +33,10 @@ class Comment {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async addComment (ctx) {
+  static async addComment (ctx, next) {
+    // 进行csrf token验证
+    await next()
+
     const contentType = ctx.request.headers["content-type"]
     let params = ctx.request.body
     let postData = params.data

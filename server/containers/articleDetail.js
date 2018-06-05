@@ -5,7 +5,7 @@ import { Provider }  from 'react-redux'
 
 
 import configureStore from '../../client/redux/store/configureStore'
-import ArticleDetailPage from '../../client/containers/ArticleDetailPage'
+import ArticleDetailPage from '../../client/views/User/containers/ArticleDetailPage'
 import layout from '../view/layout'
 
 import articleModel from '../models/article'

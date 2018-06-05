@@ -27,10 +27,19 @@ class Article {
         total = result.total
       }
     }
-    // 根据类别获取文章：v1/article?category=1&pageNum=1&pageSize=10
+    // 根据类别获取文章：api/article?category=1&pageNum=1&pageSize=10
     else if (query.category) {
       const category = query.category
       const result = await articleModel.getByCategory(category, pageNum, pageSize)
+      if (result) {
+        articles = result.articles
+        total = result.total
+      }
+    }
+    // 根据文章标题获取文章：api/article?search=你好&pageNum=1&pageSize=10
+    else if (query.search) {
+      const search = query.search
+      const result = await articleModel.getByName(search, pageNum, pageSize)
       if (result) {
         articles = result.articles
         total = result.total
@@ -77,6 +86,14 @@ class Article {
     articleData.Category_id = await categoryModel.getById(Category_id)
     // 文章里展示的图片需要添加前缀
     articleData.content = articleData.content.replace(/\!\[(.*?)\]\((.*?)\)/g, `![$1](${prefix}$2)`)
+
+    // 在打开文章详情的时候，在cookie中不存在index_csrf_token的情况下，设置index_csrf_token
+    if (ctx.cookies.get('INDEX_CSRF_TOKEN') == null) {
+      const csrfToken = parseInt(Math.random() * 999999999, 10)
+      ctx.cookies.set('INDEX_CSRF_TOKEN', csrfToken, {
+        maxAge: 60 * 60 * 1000 // 1h
+      })
+    }
 
     ctx.body = {
       status: 'success',

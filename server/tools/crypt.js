@@ -10,8 +10,12 @@ class Crypt {
     if (!val) {
       return
     }
+
+    // 创建密文
     const cipher = crypto.createCipher('aes192', KEY)
+    // 根据数据更新密文
     let encrypted = cipher.update(`${val}`, 'utf8', 'hex')
+    // 获取密文
     encrypted += cipher.final('hex')
     return encrypted
   }
@@ -24,6 +28,7 @@ class Crypt {
     if (!encryptedVal) {
       return
     }
+    // returns a Decipher object
     const decipher = crypto.createDecipher('aes192', KEY)
     let decrypted = decipher.update(encryptedVal, 'hex', 'utf8')
     decrypted += decipher.final('utf8')

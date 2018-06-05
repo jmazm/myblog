@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== 'test') {
 const Koa = require("koa")
 const path = require("path")
 const compress = require("koa-compress")
-const koaStatic = require("koa-static")
+const koaStatic = require("koa-static-cache")
 const mysql = require("mysql2/promise")
 const debug = require("debug")('app')
 const body = require("koa-body")
@@ -66,8 +66,6 @@ app.use(body({
   multipart: true
 }))
 
-
-
 // 设置session(uses signed session cookies, with no server storage)
 // app.use(session(app))
 
@@ -85,6 +83,7 @@ app.use(async (ctx, next) => {
     const statusCode = err.status || err.statusCode || 500
     const errMsg = err.message || 'Internal Server Error'
     ctx.response.status = statusCode
+
     ctx.body = {
       status: 'failure',
       msg: errMsg
@@ -93,8 +92,12 @@ app.use(async (ctx, next) => {
 })
 
 // 设置静态路径
-app.use(koaStatic(path.resolve(__dirname, '../dist')))
-app.use(koaStatic(path.resolve(__dirname, '../static')))
+app.use(koaStatic(path.resolve(__dirname, '../dist'), {
+  maxAge: '60 * 60 * 24'
+}))
+app.use(koaStatic(path.resolve(__dirname, '../static'), {
+  maxAge: '60 * 60 * 24 * 30'
+}))
 
 app.use(routerMap.routes())
   .use(routerMap.allowedMethods())

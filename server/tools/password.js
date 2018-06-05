@@ -1,5 +1,8 @@
-const password = {}
-
+/**
+ * md5 加密
+ * @param str
+ * @return {*}
+ */
 const md5 = (str) => {
   const crypto = require("crypto")
   const md5Hash = crypto.createHash('md5')
@@ -14,6 +17,13 @@ class Password {
   static getSault () {
     return md5(Math.random() * 999999 + '' + new Date().getTime())
   }
+
+  /**
+   * 只是简单的md5加密
+   * @param sault
+   * @param password
+   * @return {*}
+   */
   static encryptPassword (sault, password) {
     return md5(`${sault}*&1iop)92nbd-2ZJ^a${password}`)
   }

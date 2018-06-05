@@ -30,6 +30,26 @@ class Article {
     return articles
   }
 
+  static async getByName (title, pageNum, pageSize) {
+    // 注意：如果用模糊查询，那么%必须用引号括起来
+
+    let sql =  `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
+                  t.id AS Tag_id, t.name AS Tag_name, 
+                  c.id AS Category_id, c.name AS Category_name
+                  FROM article AS a, tag AS t, category AS c 
+                  WHERE a.title LIKE '%${title}%' AND a.Tag_id=t.id AND a.Category_id=c.id 
+                  ORDER BY date Limit ?,?`
+    const [articles] = await global.db.query(sql, [(pageNum - 1) * pageSize, pageSize])
+
+    sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article WHERE title LIKE '%${title}%'`
+    const [total] = await global.db.query(sql)
+
+    return {
+      articles,
+      total: total[0]["TOTAL_ARTICLE"]
+    }
+  }
+
   static async getAllIsPublished (isPublished,pageNum, pageSize) {
     const sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date,  a.isPublished,
                   t.id AS Tag_id, t.name AS Tag_name, 

@@ -2,16 +2,25 @@ const crypt = require("./crypt")
 const jsonwebtoken = require("jsonwebtoken")
 const config = require("../../config")
 
-export async function userAuth (ctx) {
+/**
+ * 用户登录验证
+ * // ===
+ * 1、referer验证
+ * 2、csrf_token验证
+ * 3、access_token验证
+ * === //
+ * @param ctx
+ */
+export function userAuth (ctx) {
   try {
     // referer验证
-    await _refererAuth(ctx)
+    _cmsRefererAuth(ctx)
 
     // csrf token验证
-    await _csrfAuth(ctx)
+     _csrfAuth(ctx)
 
     // 登录验证
-    await _accessAuth(ctx)
+     _accessAuth(ctx)
 
   } catch (err) {
     let code = err.status || err.statusCode || 500
@@ -27,8 +36,17 @@ export async function csrfAuth (ctx, next) {
   _csrfAuth(ctx)
 }
 
-export async function refererAuth (ctx) {
-  _refererAuth(ctx)
+// 在开发环境中，refer的校验依然为：cms的端口为3003， index的端口为3000
+// 尽管服务器的的端口为3001，但是webpack-dev-server中的proxy代理，
+// 能帮我们将相应的请求的地址由3000端口或者3003端口指向3001端口，
+// 所以就不存在预检请求（cors）
+
+export async function indexRefererAuth (ctx) {
+  _indexRefererAuth(ctx)
+}
+
+export async function cmsRefererAuth (ctx) {
+  _cmsRefererAuth(ctx)
 }
 
 /**
@@ -49,19 +67,33 @@ function _csrfAuth (ctx) {
 }
 
 /**
- * referer验证
+ * cms的referer验证
  * @param ctx
  * @private
  */
-function _refererAuth (ctx) {
-  // referer 验证
-  if (!/^https?:\/\/127\.0\.0\.1:8080/.test(ctx.headers['referer'])) {
+function _cmsRefererAuth (ctx) {
+  if (!/^https?:\/\/127\.0\.0\.1:3003/.test(ctx.headers['referer'])) {
+    ctx.throw(403, 'FORBIDDEN: REFERER WRONG')
+  }
+}
+
+
+/**
+ * index的referer验证
+ * @param ctx
+ * @private
+ */
+function _indexRefererAuth (ctx) {
+  if (!/^https?:\/\/127\.0\.0\.1:3000/.test(ctx.headers['referer'])) {
     ctx.throw(403, 'FORBIDDEN: REFERER WRONG')
   }
 }
 
 /**
  * 登录验证
+ * // ===
+ * access_token存储的就是用户名以及用户Id
+ * === //
  * @param ctx
  * @private
  */
@@ -70,9 +102,12 @@ function _accessAuth (ctx) {
   // const accessToken = ctx.request.body.accessToken || ctx.query.accessToken || ctx.headers['x-access-token']
   let accessToken = ctx.headers['authorization'] ? ctx.headers['authorization'].split(' ')[1] : ''
 
-  // 解码access token
+  // 通过模块jsonwebtoken 中的verify方法，解码access token
+  // jwt.sign(payload, secretOrPrivateKey, [options, callback])
   let d_accessToken = jsonwebtoken.verify(accessToken, config.auth.CMS_ACCESS_TOKEN)
 
+  // 判断拿过来的 access_token是否有过期 - 将token.exp属性和Date.now()作比较，过期了，就直接抛出401
+  // 记得exp是秒，而Date.now()是ms，要么jwt.exp * 1000 或者 Date.now / 1000
   if (!(d_accessToken && d_accessToken.exp * 1000 > Date.now())) {
     ctx.throw(401, 'jwt is expired')
   }
