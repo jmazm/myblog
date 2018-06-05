@@ -43,7 +43,9 @@ module.exports = {
       'react-router-dom',
       'react-redux',
       'redux',
-      'redux-saga'
+      'redux-saga',
+      'antd',
+      'axios'
     ]
   },
   output: {

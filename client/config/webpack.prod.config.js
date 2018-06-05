@@ -2,23 +2,19 @@ const path = require("path")
 const webpack = require('webpack')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const WebpackParallelUglifyPlugin = require("webpack-parallel-uglify-plugin")
-const CompressionWebpackPlugin = require("compression-webpack-plugin")
-// const DllReferencePlugin = require("webpack/lib/DllReferencePlugin")
-const ModuleConcatenationPlugin = require("webpack/lib/optimize/ModuleConcatenationPlugin")
+// const WebpackParallelUglifyPlugin = require("webpack-parallel-uglify-plugin")
+// const CompressionWebpackPlugin = require("compression-webpack-plugin")
+const DllReferencePlugin = require("webpack/lib/DllReferencePlugin")
+// const ModuleConcatenationPlugin = require("webpack/lib/optimize/ModuleConcatenationPlugin")
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin")
+const HtmlWebpackIncludeAssestsPlugin = require("html-webpack-include-assets-plugin")
 
 const config = require('./webpack.base.config')
 
 config.mode = 'production'
 
 config.entry = {
-  index: ['babel-polyfill', './client/views/index.jsx'],
-  vendor: [
-    'react',
-    'react-dom',
-    'react-router-dom'
-  ]
+  index: ['babel-polyfill', './client/views/index.jsx']
 }
 
 // 确认在哪里解析文件
@@ -46,6 +42,12 @@ config.plugins.push(
   })
 )
 
+config.plugins.push(
+  new DllReferencePlugin({
+    manifest: require(path.resolve(process.cwd(), './dist/lib/manifest.json'))
+  })
+)
+
 // 定义模板
 config.plugins.push(
   new HtmlWebpackPlugin({
@@ -63,6 +65,13 @@ config.plugins.push(
     // ],
     // 指定子目录
     filename: 'index.html'
+  })
+)
+
+config.plugins.push(
+  new HtmlWebpackIncludeAssestsPlugin({
+    assets: ['lib/lib.js'], //  添加的資源相對html的路徑
+    append: false // false 在其他資源的之前添加 true 在其他資源之後添加
   })
 )
 
@@ -114,11 +123,7 @@ config.plugins.push(
   new webpack.optimize.AggressiveMergingPlugin()
 )
 
-// config.plugins.push(
-//   new DllReferencePlugin({
-//     manifest: require(path.resolve(process.cwd(), '../dist/js/remark.manifest.json'))
-//   })
-// )
+
 // config.plugins.push(
 //   new DllReferencePlugin({
 //     manifest: require(path.resolve(process.cwd(), '../dist/js/reactRenderer.manifest.json'))

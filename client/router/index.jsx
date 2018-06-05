@@ -39,7 +39,7 @@ const AdminRouteMap = () => {
 
 const UserRouteMap = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Switch>
         <Route exact  path="/" component={HOME}/>
         <Route path="/article/:articleId" component={ArticleDetailPage}/>
@@ -51,7 +51,7 @@ const UserRouteMap = () => {
         <Route path="/message" component={Message}/>
         <Route path="/404" component={NotFound}/>
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
