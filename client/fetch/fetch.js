@@ -42,9 +42,9 @@ export function putRequest (url, data, config) {
 
 let domain = ''
 
-if (process.env.NODE_ENV !== 'development') {
-  domain = `http://127.0.0.1:${location.port}`
-}
+// if (process.env.NODE_ENV !== 'development') {
+//   domain = location.host
+// }
 
 export const api = {
   getAllArticleApi: (pageNum, pageSize) => `${domain}/api/article?pageNum=${pageNum}&pageSize=${pageSize}`,
