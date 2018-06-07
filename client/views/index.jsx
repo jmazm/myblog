@@ -13,7 +13,7 @@ import './reset.css'
 import common from '../../config'
 
 const renderRoot = () => {
-  if (window.location.port === common.server.indexServerPort) {
+  if (window.location.port === common.server.indexServerPort || window.location.port == 80) {
     ReactDOM.render(
       <AppContainer>
         <Provider store={configureStore}>
@@ -22,7 +22,7 @@ const renderRoot = () => {
       </AppContainer>,
       document.getElementById('root')
     );
-  } else if (window.location.port === common.server.cmsServerPort) {
+  } else if (window.location.port === common.server.cmsServerPort || window.location.port == 8080) {
     ReactDOM.render(
       <AppContainer>
         <Provider store={configureStore}>
