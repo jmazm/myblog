@@ -8,6 +8,8 @@ const DllReferencePlugin = require("webpack/lib/DllReferencePlugin")
 // const ModuleConcatenationPlugin = require("webpack/lib/optimize/ModuleConcatenationPlugin")
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin")
 const HtmlWebpackIncludeAssestsPlugin = require("html-webpack-include-assets-plugin")
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 
 const config = require('./webpack.base.config')
 
@@ -47,6 +49,7 @@ config.plugins.push(
     manifest: require(path.resolve(process.cwd(), './dist/lib/manifest.json'))
   })
 )
+
 
 // 定义模板
 config.plugins.push(
@@ -114,6 +117,17 @@ config.plugins.push(
   new webpack.HashedModuleIdsPlugin()
 )
 
+// 将图片复制到dist目录下
+config.plugins.push(
+  new CopyWebpackPlugin([
+    {
+      from: './client/static/imgs',
+      to: './../dist/imgs',
+      toType: 'dir'
+    }
+  ])
+)
+
 // 主要处理闭包
 // config.plugins.push(
 //   new ModuleConcatenationPlugin()
@@ -124,16 +138,6 @@ config.plugins.push(
 )
 
 
-// config.plugins.push(
-//   new DllReferencePlugin({
-//     manifest: require(path.resolve(process.cwd(), '../dist/js/reactRenderer.manifest.json'))
-//   })
-// )
-
-
-// config.plugins.push(
-//   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-// )
 
 // config.plugins.push(
 //   new CompressionWebpackPlugin({
@@ -145,20 +149,6 @@ config.plugins.push(
 //     minRatio: 0.8
 //   })
 // )
-
-// config.externals = {
-//   'react': 'React',
-//   'react-dom': 'ReactDOM',
-//   'react-router': 'ReactRouter',
-//   'react-router-dom': 'ReactRouterDOM',
-//   'redux': 'Redux',
-//   'react-redux': 'ReactRedux',
-//   'redux-saga': 'ReduxSaga',
-//   'axios': 'axios',
-//   'remark': 'remark',
-//   'remark-react': 'reactRenderer'
-// }
-
 
 config.plugins.push(
   new ProgressBarPlugin()

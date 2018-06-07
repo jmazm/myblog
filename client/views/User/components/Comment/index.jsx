@@ -140,7 +140,7 @@ class Comment extends Component {
               <input className="info-input" value={sign} onChange={this.handleOnChange} name="sign" type="hidden"/>
             </div>
             <div className="reply-area">
-              <img src="/static/imgs/avatar.png" className="comment-avatar"/>
+              <img src="/imgs/avatar.png" className="comment-avatar"/>
               <div className="textarea-wrapper">
                 <textarea name="content" value={content} onChange={this.handleOnChange}></textarea>
               </div>
@@ -160,7 +160,7 @@ class Comment extends Component {
                     <li className="list-item" key={i}>
                       <div className="list-inner">
                         <div className="comment-avatar">
-                          <img src="/static/imgs/avatar.png"/>
+                          <img src="/imgs/avatar.png"/>
                         </div>
                         <div className="comment-body">
                           <div className="comment-header">
