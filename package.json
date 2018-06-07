@@ -107,6 +107,5 @@
     "babel-polyfill": "^6.26.0",
     "asset-require-hook": "^1.2.0",
     "css-modules-require-hook": "^4.2.3"
-
   }
 }
