@@ -2,7 +2,7 @@ const path = require("path")
 const webpack = require('webpack')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-// const WebpackParallelUglifyPlugin = require("webpack-parallel-uglify-plugin")
+const WebpackParallelUglifyPlugin = require("webpack-parallel-uglify-plugin")
 // const CompressionWebpackPlugin = require("compression-webpack-plugin")
 const DllReferencePlugin = require("webpack/lib/DllReferencePlugin")
 // const ModuleConcatenationPlugin = require("webpack/lib/optimize/ModuleConcatenationPlugin")
@@ -83,31 +83,31 @@ config.plugins.push(
   })
 )
 
-// config.plugins.push(
-//   new WebpackParallelUglifyPlugin({
-//     // 传递给uglifyJS的参数
-//     uglifyJS: {
-//       output: {
-//         // 最紧凑的输出
-//         beautify: true,
-//         // 删除所有的注释
-//         comments: false
-//       },
-//       compress: {
-//         // 在UglifyJs删除没有用到的代码时不输出警告
-//         warnings: false,
-//         // 删除所有的console.log语句
-//         drop_console: true,
-//         // 内嵌定义了但是只用到一次的变量
-//         collapse_vars: true,
-//         // 提取出出现多次但是没有定义成变量去引用的静态值
-//         reduce_vars: true
-//       }
-//     },
-//     include: process.cwd(),
-//     exclude: /node_modules/
-//   })
-// )
+config.plugins.push(
+  new WebpackParallelUglifyPlugin({
+    // 传递给uglifyJS的参数
+    uglifyJS: {
+      output: {
+        // 最紧凑的输出
+        beautify: true,
+        // 删除所有的注释
+        comments: false
+      },
+      compress: {
+        // 在UglifyJs删除没有用到的代码时不输出警告
+        warnings: false,
+        // 删除所有的console.log语句
+        drop_console: true,
+        // 内嵌定义了但是只用到一次的变量
+        collapse_vars: true,
+        // 提取出出现多次但是没有定义成变量去引用的静态值
+        reduce_vars: true
+      }
+    },
+    include: process.cwd(),
+    exclude: /node_modules/
+  })
+)
 
 // 用 HashedModuleIdsPlugin 可以轻松地实现 chunkhash 的稳定化
 config.plugins.push(

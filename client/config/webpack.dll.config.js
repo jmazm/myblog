@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path')
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const WebpackParallelUgilifyPlugin  = require("webpack-parallel-uglify-plugin")
 
 // module.exports = {
 //   mode: 'production',
@@ -33,8 +34,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 // }
 
 module.exports = {
-  mode: 'development',
-  devtool: 'source-map',
+  mode: 'production',
   entry: {
     lib: [
       'react',
@@ -44,7 +44,6 @@ module.exports = {
       'react-redux',
       'redux',
       'redux-saga',
-      'antd',
       'axios'
     ]
   },
@@ -62,6 +61,7 @@ module.exports = {
       path: path.resolve(process.cwd(), './dist/lib/manifest.json'), // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
       name: '[name]'
     })
+
     // new HtmlWebpackPlugin({
     //   template: './client/views/index.html',
     //   inject: 'body',
