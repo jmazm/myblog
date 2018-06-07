@@ -122,6 +122,32 @@ class Article {
   }
 
   /**
+   * 根据文章名获取文章数据
+   * @param articleName
+   * @param pageNum
+   * @param pageSize
+   * @return {Promise.<*>}
+   */
+  static async getByTitle (articleName, pageNum, pageSize) {
+    let sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
+                  t.id AS Tag_id, t.name AS Tag_name, 
+                  c.id AS Category_id, c.name AS Category_name
+                  FROM article AS a, tag AS t, category AS c 
+                  WHERE a.title LIKE "%${articleName}%" AND a.Tag_id=t.id AND a.Category_id=c.id 
+                  ORDER BY date Limit ?,?`
+    const [articles] = await global.db.query(sql, [(pageNum - 1) * pageSize, pageSize])
+
+    sql = `SELECT COUNT(id) AS TOTAL_ARTICLE FROM article WHERE title LIKE "%${articleName}%"`
+
+    const [total] = await global.db.query(sql)
+
+    return {
+      articles,
+      total: total[0]["TOTAL_ARTICLE"]
+    }
+  }
+
+  /**
    * 添加文章数据
    * @param articleDataObj
    * @return {Promise.<Number|number|*>}

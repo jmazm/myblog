@@ -27,10 +27,18 @@ class Article {
         total = result.total
       }
     }
-    // 根据类别获取文章：v1/article?category=1&pageNum=1&pageSize=10
+    // 根据类别获取文章：api/article?category=1&pageNum=1&pageSize=10
     else if (query.category) {
       const category = query.category
       const result = await articleModel.getByCategory(category, pageNum, pageSize)
+      if (result) {
+        articles = result.articles
+        total = result.total
+      }
+    }
+    else if  (query.title) {
+      const title = query.title
+      const result = await articleModel.getByTitle(title, pageNum, pageSize)
       if (result) {
         articles = result.articles
         total = result.total

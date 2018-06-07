@@ -94,7 +94,6 @@ app.use(async (ctx, next) => {
 
 // 设置静态路径
 app.use(koaStatic(path.resolve(__dirname, '../dist')))
-app.use(koaStatic(path.resolve(__dirname, '../static')))
 
 app.use(routerMap.routes())
   .use(routerMap.allowedMethods())
