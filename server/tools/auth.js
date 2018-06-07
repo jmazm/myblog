@@ -2,7 +2,7 @@ const crypt = require("./crypt")
 const jsonwebtoken = require("jsonwebtoken")
 const config = require("../../config")
 
-export async function userAuth (ctx) {
+exports.userAuth =  async function (ctx) {
   try {
     // referer验证
     await _refererAuth(ctx)
@@ -23,11 +23,11 @@ export async function userAuth (ctx) {
   }
 }
 
-export async function csrfAuth (ctx, next) {
+exports.csrfAuth = async function (ctx, next) {
   _csrfAuth(ctx)
 }
 
-export async function refererAuth (ctx) {
+exports.refererAuth =  async function (ctx) {
   _refererAuth(ctx)
 }
 
