@@ -11,12 +11,11 @@ import Header from '../../components/Header'
 import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
 
 import { Pagination } from 'antd';
-import './style.css'
 
 
 const {get_all_articles} = ArticleReducer
 
-class Tag extends Component {
+class ArticleListByCategory extends Component {
   constructor (props) {
     super(props)
 
@@ -29,30 +28,30 @@ class Tag extends Component {
     this.pageOnChange = this.pageOnChange.bind(this)
   }
   pageOnChange (page, pagesize) {
-    const tag = decodeURIComponent(this.props.match.params.tag)
+    const title = decodeURIComponent(this.props.match.params.title)
+
     this.props.get_all_articles({
       pageNum: page,
       pageSize: pagesize,
-      tag: tag
+      title: title
     })
+
     this.setState({
       currentPage: page
     })
   }
   render () {
     const {articleList, total} = this.props
-    console.log(this.props)
+
     return (
       <div className="container my--blog">
         <Header/>
         <div className="main">
           <div className="main-inner">
-            {/*<ArticleList data={articleList}/>*/}
-
             <div className="collection-wrapper">
               <div className="collection-inner">
                 <div className="collection-title">
-                  <h2>{this.props.match.params.tag}<small>标签</small></h2>
+                  <h2><small>搜索</small>{this.props.match.params.title}<small>结果如下：</small></h2>
                 </div>
                 {
                   articleList.length > 0 ?
@@ -72,7 +71,6 @@ class Tag extends Component {
                     }):
                     <div className="tips">暂无数据</div>
                 }
-
               </div>
               <div className="pagination-wrapper">
                 <Pagination onChange={this.pageOnChange} defaultCurrent={1} total={parseInt(total)} defaultPageSize={10}/>
@@ -84,37 +82,34 @@ class Tag extends Component {
     )
   }
   componentDidMount () {
-    const tag = this.props.match.params.tag
-
+    const title = this.props.match.params.title
     this.props.get_all_articles({
       pageNum: 1,
       pageSize: 10,
-      tag: tag
+      title: title
     })
   }
 
   componentDidUpdate (prevPros) {
-    const preTag = prevPros.match.params.tag
-    const curTag = this.props.match.params.tag
-
-    if (curTag && preTag && preTag !== curTag) {
-      console.log(preTag, curTag)
+    const preTitle = prevPros.match.params.title
+    const curTitle = this.props.match.params.title
+    if (curTitle && preTitle && preTitle !== curTitle) {
       this.props.get_all_articles({
         pageNum: 1,
         pageSize: 5,
-        tag: curTag
+        title: curTitle
       })
     }
   }
 }
 
 // 设置默认值
-Tag.defaultProps = {
+ArticleListByCategory.defaultProps = {
   articleList: [],
   total: 0
 }
 
-Tag.propTypes = {
+ArticleListByCategory.propTypes = {
   articleList: PropTypes.array,
   total: PropTypes.number
 }
@@ -136,4 +131,4 @@ function mapDispatchToProps (dispatch) {
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(Tag)
+)(ArticleListByCategory)

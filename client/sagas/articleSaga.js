@@ -1,6 +1,5 @@
 import {take, call, put} from 'redux-saga/effects'
-import {getRequest, putRequest, postRequest, delRequest, api} from '../fetch/fetch'
-import {actionTypes as IndexActionTypes} from '../redux/reducer'
+import {getRequest, postRequest, delRequest, api} from '../fetch/fetch'
 import {actionTypes as ArticleActionTypes} from '../redux/reducer/articleReducer'
 
 /**
@@ -13,17 +12,25 @@ function* getAllArticle (paramsObj) {
   const {pageNum, pageSize} = paramsObj
 
   try {
-      if (paramsObj.tag) {
-        return yield call(getRequest, api.getAllArticleByTagApi(pageNum, pageSize, paramsObj.tag))
-      } else if (paramsObj.category) {
-        console.log(paramsObj)
-        return yield call(getRequest, api.getAllArticleByCategoryApi(pageNum, pageSize, paramsObj.category))
-      } else {
-        return yield call(getRequest, api.getAllArticleApi(pageNum, pageSize))
-      }
+    // 标签
+    if (paramsObj.tag) {
+      return yield call(getRequest, api.getAllArticleByTagApi(pageNum, pageSize, paramsObj.tag))
+    }
+    // 类别
+    else if (paramsObj.category) {
+      return yield call(getRequest, api.getAllArticleByCategoryApi(pageNum, pageSize, paramsObj.category))
+    }
+    // 文章名称
+    else if (paramsObj.title) {
+      return yield call(getRequest, api.getAllArticleByTitleApi(pageNum, pageSize, paramsObj.title))
+    }
+    // 全部文章
+    else {
+      return yield call(getRequest, api.getAllArticleApi(pageNum, pageSize))
+    }
 
   } catch (err) {
-      console.log(err)
+    console.log(err)
   }
 }
 
@@ -33,7 +40,7 @@ export function* getAllArticleFlow () {
     let req = yield take(ArticleActionTypes.GET_ALL_ARTICLES)
 
     let res = yield call(getAllArticle, req.paramsObj)
-    
+
     // 判断返回的响应
     if (res.status === 'success') {
       // 存储数据
@@ -48,7 +55,6 @@ export function* getAllArticleFlow () {
   }
 }
 
-
 /**
  * 保存文章（发送请求的准备：即打开连接，发送数据）
  * @param data
@@ -56,17 +62,6 @@ export function* getAllArticleFlow () {
  */
 function* saveArticle (data) {
   try {
-    // let id = yield select (state => state.articles.id)
-    // if (id) {
-    //   data.id = id
-    //   // 更新文章
-    //   return yield call(putRequest, '/v1/article', data)
-    // } else {
-    //   console.log(data)
-    //
-    //   // 添加文章
-    //   return yield call(postRequest, api.saveArticleApi, data)
-    // }
     const accessToken = localStorage.getItem('ACCESS_TOKEN')
     return yield call(postRequest, api.saveArticleApi, data, {
       headers: {
@@ -84,41 +79,10 @@ export function* saveArticleFlow () {
     let request = yield take(ArticleActionTypes.POST_SAVE_ARTICLE)
     let articleData = request.data.articleData
 
-    // if (articleData.title === '') {
-    //   yield put({
-    //     type: IndexActionTypes.SET_MESSAGE,
-    //     msgContent: '请输入文章标题',
-    //     msgType: 0
-    //   })
-    // } else if (articleData.content === '') {
-    //   yield put({
-    //     type: IndexActionTypes.SET_MESSAGE,
-    //     msgContent: '请输入文章内容',
-    //     msgType: 0
-    //   })
-    // } else if (articleData.Tag_id === '') {
-    //   yield put({
-    //     type: IndexActionTypes.SET_MESSAGE,
-    //     msgContent: '请输入文章标签',
-    //     msgType: 0
-    //   })
-    // } else if (articleData.Category_id === '') {
-    //   yield put({
-    //     type: IndexActionTypes.SET_MESSAGE,
-    //     msgContent: '请输入文章类别',
-    //     msgType: 0
-    //   })
-    // }
-
     if (articleData.title && articleData.content && articleData.Category_id && articleData.Category_id) {
       let res = yield call(saveArticle, request.data)
       // 判断返回的响应
       if (res.status === 'success') {
-        // yield put({
-        //   type: IndexActionTypes.SET_MESSAGE,
-        //   msgContent: res.message,
-        //   msgType: 1
-        // })
         alert('添加文章成功')
         const form = document.getElementById('newArticleForm')
         form.title.value = ''
@@ -126,13 +90,8 @@ export function* saveArticleFlow () {
         form.foreword.value = ''
         form.content.value = ''
       } else {
-        // yield put({
-        //   type: IndexActionTypes.SET_MESSAGE,
-        //   msgContent: res.message,
-        //   msgType: 0
-        // });
         alert(res.msg)
-        // location.href = '/#/admin/login'
+        location.href = '/#/admin/login'
       }
     }
   }
@@ -149,7 +108,7 @@ function* getArticleDetail (id) {
     return yield call(getRequest, api.getArticleDetailApi(id))
   } catch (err) {
     // 报错处理
-   console.log(err)
+    console.log(err)
   }
 }
 
@@ -184,7 +143,7 @@ function* deleteArticleById (id) {
       }
     })
   } catch (err) {
-      console.log(err)
+    console.log(err)
   }
 }
 

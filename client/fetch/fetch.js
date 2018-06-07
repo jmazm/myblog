@@ -50,6 +50,7 @@ export const api = {
   getAllArticleApi: (pageNum, pageSize) => `${domain}/api/article?pageNum=${pageNum}&pageSize=${pageSize}`,
   getAllArticleByTagApi: (pageNum, pageSize, tag) => `${domain}/api/article?tag=${tag}&pageNum=${pageNum}&pageSize=${pageSize}`,
   getAllArticleByCategoryApi: (pageNum, pageSize, category) => `${domain}/api/article?category=${category}&pageNum=${pageNum}&pageSize=${pageSize}`,
+  getAllArticleByTitleApi: (pageNum, pageSize, title) => `${domain}/api/article?title=${title}&pageNum=${pageNum}&pageSize=${pageSize}`,
   getArticleDetailApi: (id) => `${domain}/api/article/${id}`,
   saveArticleApi: `${domain}/api/article`,
   deleteArticleApi: (id) => `${domain}/api/article/${id}`,

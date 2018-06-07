@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom'
-// import {, Route, Switch} from 'react-router-dom'
 
 import HOME from '../views/User/containers/Home'
 import ArticleDetailPage from '../views/User/containers/ArticleDetailPage'
@@ -10,6 +9,7 @@ import Demo from '../views/User/containers/DemoPage'
 import Message from '../views/User/containers/MessagePage'
 import ArticleListByTagPage from '../views/User/containers/ArticleListByTagPage'
 import ArticleListByCategoryPage from '../views/User/containers/ArticleListByCategoryPage'
+import SearchPage from '../views/User/containers/SearchPage'
 
 import NotFound from '../views/NotFound'
 
@@ -47,6 +47,7 @@ const UserRouteMap = () => {
         <Route exact path="/tag" component={TagPage}/>
         <Route path="/tag/:tag/article" component={ArticleListByTagPage}/>
         <Route path="/category/:category/article" component={ArticleListByCategoryPage}/>
+        <Route path="/search/:title" component={SearchPage}/>
         <Route path="/demo" component={Demo}/>
         <Route path="/message" component={Message}/>
         <Route path="/404" component={NotFound}/>

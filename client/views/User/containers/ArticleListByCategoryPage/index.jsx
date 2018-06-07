@@ -68,7 +68,7 @@ class ArticleListByCategory extends Component {
                         </article>
                       )
                     }):
-                    <div>暂无数据</div>
+                    <div className="tips">暂无数据</div>
                 }
               </div>
               <div className="pagination-wrapper">
