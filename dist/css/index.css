@@ -5381,11 +5381,7 @@ a.ant-btn-sm {
 .nav-bar .list-item a:hover {
     color: black;
 }
-
-
-.bgtest {
-    background: url(/../../static/imgs/638a9858e251be9b57168a896c8394c0.jpg);
-}.article-item {
+.article-item {
     padding: 10px 30px;
     margin-bottom: 15px;
     border: 1px solid #eeeeee;

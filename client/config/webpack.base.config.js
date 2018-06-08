@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const HardSourceWebpackPlugin  = require("hard-source-webpack-plugin")
-
 const common = require("../../config")
 
 /**
@@ -48,20 +47,9 @@ module.exports = {
         test: /\.(jpg|png|gif|jpeg$)/i,
         exclude: /node_modules/,
         use: [
-          // {
-          //   loader: 'file-loader',
-          //   options: {
-          //     // name: 指定打包生成后资源文件的name值
-          //     // name: 'imgs/[name].[ext]',
-          //     name: '[name].[ext]',
-          //     // 定义图片输出存放的文件夹位置
-          //     ouputPath: '/imgs/',
-          //     // 设置路径为相对位置
-          //     useRelativePath: true
-          //   }
-          // }
-
-          // url-loader：
+          // url-loader：url-loader作用和file-loader的作用基本是一致的，
+          // 不同点是url-loader可以通过配置一个limit值来决定图片是要像file-loader一样返回一个公共的url路径，
+          // 或者直接把图片进行base64编码，写入到对应的路径中去。
           {
             loader: 'url-loader',
             options: {
@@ -73,10 +61,23 @@ module.exports = {
 
               // output设置：'/imgs/' ==> http://imgs/638a9858e251be9b57168a896c8394c0.jpg
               // output设置：'imgs/' ==> http://127.0.0.1:3000/imgs/638a9858e251be9b57168a896c8394c0.jpg
+              // outputPath是相对于output的path而言，所以imgs文件夹会被建立在dist文件夹下
               outputPath: 'imgs/',
               // 如果设置了useRelativePath为true，则图片最后的请求路径为：http://127.0.0.1:3000/static/imgs/638a9858e251be9b57168a896c8394c0.jpg
               // 如果设置了useRelativePath为false，则图片最后的请求路径为：http://127.0.0.1:3000/imgs/638a9858e251be9b57168a896c8394c0.jpg
               // useRelativePath: true
+            }
+          },
+
+          // 用来对编译过后的文件进行压缩处理，在不损失图片质量的情况下减小图片的体积大小。
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              // 设置对jpg格式的图片压缩的程度
+              mozjpeg: {
+                progressive: true,
+                quality: 70
+              }
             }
           }
         ]
@@ -88,7 +89,8 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'fonts/[name].[ext]'
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
             }
           }
         ]
