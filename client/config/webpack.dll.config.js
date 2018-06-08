@@ -1,37 +1,6 @@
 const webpack = require('webpack');
 const path = require('path')
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const WebpackParallelUgilifyPlugin  = require("webpack-parallel-uglify-plugin")
-
-// module.exports = {
-//   mode: 'production',
-//   entry: {
-//     remark: [
-//       'remark',
-//     ],
-//     reactRenderer: [
-//       'remark-react'
-//     ]
-//   },
-//   output: {
-//     filename: '[name].dll.js',
-//     path: path.resolve(process.cwd(), '../dist/js'),
-//     library: '[name]'
-//   },
-//   plugins: [
-//     new DllPlugin({
-//       name: '[name]',
-//       path: path.resolve(process.cwd(), '../dist/js', '[name].manifest.json')
-//     }),
-//     new CompressionPlugin({
-//       asset: '[path].gz[query]',
-//       algorithm: 'gzip',
-//       test: /\.js$|\.css$|\.html$/,
-//       threshold: 10240,
-//       minRatio: 0.8
-//     })
-//   ]
-// }
+const CompressionWebpackPlugin = require("compression-webpack-plugin") 
 
 module.exports = {
   mode: 'production',
@@ -60,6 +29,14 @@ module.exports = {
       context: process.cwd(), // 'E:\\projectAndNote\\blog\\myblog'
       path: path.resolve(process.cwd(), './dist/lib/manifest.json'), // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
       name: '[name]'
+    }),
+    new CompressionWebpackPlugin({
+      test: /\.js$|\.css$|\.html$/,
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      // 只处理大于这个字节的文件
+      threshold: 10240,
+      minRatio: 0.8
     })
 
     // new HtmlWebpackPlugin({
