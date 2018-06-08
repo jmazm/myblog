@@ -5,14 +5,27 @@ const CompressionWebpackPlugin = require("compression-webpack-plugin")
 module.exports = {
   mode: 'production',
   entry: {
-    lib: [
-      'react',
-      'react-dom',
-      'react-router',
-      'react-router-dom',
-      'react-redux',
-      'redux',
-      'redux-saga',
+    // lib: [
+    //   'react',
+    //   'react-dom',
+    //   'react-router',
+    //   'react-router-dom',
+    //   'react-redux',
+    //   'redux',
+    //   'redux-saga',
+    //   'axios',
+    //   'babel-polyfill'
+    // ]
+    react: [
+      'react', 'react-dom', 'react-router', 'react-router-dom'
+    ],
+    redux: [
+      'redux', 'react-redux', 'redux-saga'
+    ],
+    remark: [
+      'remark', 'remark-react'
+    ],
+    axios: [
       'axios'
     ]
   },
@@ -27,7 +40,7 @@ module.exports = {
   plugins: [  
     new webpack.DllPlugin({
       context: process.cwd(), // 'E:\\projectAndNote\\blog\\myblog'
-      path: path.resolve(process.cwd(), './dist/lib/manifest.json'), // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
+      path: path.resolve(process.cwd(), './dist/lib/[name].manifest.json'), // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
       name: '[name]'
     }),
     new CompressionWebpackPlugin({

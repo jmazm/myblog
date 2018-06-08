@@ -44,12 +44,17 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(jpg|png|gif|jpeg$)/i,
+        test: /\.(jpg|png|gif|jpeg|bmp$)/i,
         exclude: /node_modules/,
         use: [
-          // url-loader：url-loader作用和file-loader的作用基本是一致的，
-          // 不同点是url-loader可以通过配置一个limit值来决定图片是要像file-loader一样返回一个公共的url路径，
-          // 或者直接把图片进行base64编码，写入到对应的路径中去。
+          /**
+           // === url-loader：url-loader作用和file-loader的作用基本是一致的 ，
+              不同点是url-loader可以通过配置一个limit值来决定图片是要像file-loader一样返回一个公共的url路径，
+              或者直接把图片进行base64编码，写入到对应的路径中去。=== //
+
+           // === 图片优化之Image Inline：将图片转化成base64编码内嵌到html/css中以减少HTTP请求数 === //
+           // === 使用场景：图片1~2K左右，因为base64会比原来大，而且最好是存在css中进行缓存 === //
+           */
           {
             loader: 'url-loader',
             options: {
@@ -121,7 +126,7 @@ module.exports = {
   //     cacheGroups: {
   //       vendor: {
   //         test: /node_modules/,
-  //         name: 'lib',
+  //         name: 'vendor',
   //         chunks: 'all',
   //         reuseExistingChunk: true
   //       }
