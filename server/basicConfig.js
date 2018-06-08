@@ -49,8 +49,9 @@ app.use(async function responseTime (ctx, next) {
   ctx.set('X-Response-Time', Math.ceil(time2 - time1) + 'ms')
 })
 
-// HTTP 压缩
+// HTTP 压缩，自动读取.gz文件
 app.use(compress({}))
+
 
 //使用logger日志库
 if (process.env.NODE_ENV !== 'test') {
