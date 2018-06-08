@@ -1,0 +1,27 @@
+.search-bar {
+    margin-bottom: 20px;
+}
+.search-bar-inner {
+    position: relative;
+}
+.search-bar .search-input {
+    width: 200px;
+    padding-right: 24px;
+    font: 16px/2 '';
+    text-indent: 8px;
+    border: none;
+    border-bottom: 1px solid #696969;
+    box-shadow: inset rgba(0, 0, 0, 0.3) 1px 1px 3px;
+}
+.search-bar .search-input:focus {
+    box-shadow: inset rgba(0, 0, 0, 0.4) 2px 2px 4px;
+}
+.search-bar-inner .fa-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+    line-height: 2;
+    border: none;
+    background: none;
+}

@@ -1,0 +1,110 @@
+.article-detail {
+    flex: 1;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: white;
+    border: 1px solid #c0c0c0;
+}
+.article-detail .article-title {
+    font: bolder 24px/2 '';
+}
+.article-content .article-meta-list {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #c0c0c0;
+    box-shadow:inset rgba(0, 0, 0, 0.5) 1px 1px 3px;
+}
+.article-meta-list .meta-list-item {
+    margin-bottom: 5px;
+    list-style: none;
+}
+.article-meta-list .meta-list-item:last-of-type {
+    margin-bottom: 0;
+}
+.article-meta-list a {
+    color: dodgerblue;
+}
+.article-meta-list a:hover {
+    text-decoration: underline;
+}
+.article-content h2 {
+    font: bolder 18px/2 '';
+}
+.article-content h3 {
+    font: bolder 16px/2 '';
+}
+.article-content p {
+    margin-bottom: 10px;
+}
+.article-content ol {
+    margin-left: 10px;
+    list-style-type: none;
+    counter-reset: sectioncounter;
+}
+.article-content ul {
+    margin-left: 10px;
+    list-style-type: circle;
+}
+
+.article-content li p {
+    display: inline-block;
+    word-wrap: break-word;
+}
+.article-content li ul,
+.article-content li ol {
+    padding-left: 20px;
+}
+.article-content ol li {
+    margin-bottom: 5px;
+}
+.article-content ol > li::before {
+    content: counter(sectioncounter) '、';
+    counter-increment: sectioncounter;
+    display: inline-block;
+}
+.article-content ul li {
+    margin-bottom: 5px;
+}
+.article-content pre {
+    padding: 10px;
+    color: #333333;
+    border-radius: 5px;
+    border: 1px solid #c0c0c0;
+    box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 5px;
+}
+.article-content code {
+    font: 14px/1 '';
+    color: orangered;
+}
+.article-content pre code {
+    display: inline-block;
+    width: 100%;
+    color: blue;
+}
+.article-content hr {
+    margin: 15px 0;
+    border: none;
+    border-bottom: 1px solid #c0c0c0;
+}
+.article-content a {
+    font: 14px/2 '';
+    color: dodgerblue;
+}
+.article-content a:hover {
+    color: orangered;
+}
+.article-content img {
+    display: block;
+    margin: 10px 0;
+}
+.article-footer {
+    font: bold 16px/3 '';
+    padding: 0 10px;
+    margin-top: 20px;
+    border: 1px dashed #c0c0c0;
+    border-radius: 5px;
+    box-shadow: inset rgba(0, 0, 0, 0.3) -2px -2px 1px;
+}
+.article-footer p {
+    margin-bottom: 0;
+}
