@@ -1,0 +1,21 @@
+.filter-input-bar {
+    position: relative;
+}
+.filter-input-bar .input {
+    width: 300px;
+    height: 28px;
+    font: 14px/2 '';
+    border: 1px solid #c0c0c0;
+    text-indent: 5px;
+}
+.filter-list {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 300px;
+    max-height: 300px;
+    border: 1px solid #c0c0c0;
+    background: white;
+    overflow: auto;
+    display: none;
+}

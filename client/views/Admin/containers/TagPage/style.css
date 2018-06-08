@@ -1,0 +1,8 @@
+.blog-management {
+    display: flex;
+    background: #ffffff;
+}
+.blog-management-content {
+    flex: 1;
+    padding: 20px;
+}
