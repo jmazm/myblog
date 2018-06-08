@@ -135,6 +135,9 @@ module.exports = merge(base, {
     new DllReferencePlugin({
       manifest: require(path.resolve(process.cwd(), './dist/lib/axios.manifest.json'))
     }),
+    new DllReferencePlugin({
+      manifest: require(path.resolve(process.cwd(), './dist/lib/other.manifest.json'))
+    }),
     new HtmlWebpackIncludeAssestsPlugin({
       //  添加的资源相对 html 路径而言
       // <script type="text/javascript" src="/lib/react.js">

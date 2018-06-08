@@ -5,17 +5,6 @@ const CompressionWebpackPlugin = require("compression-webpack-plugin")
 module.exports = {
   mode: 'production',
   entry: {
-    // lib: [
-    //   'react',
-    //   'react-dom',
-    //   'react-router',
-    //   'react-router-dom',
-    //   'react-redux',
-    //   'redux',
-    //   'redux-saga',
-    //   'axios',
-    //   'babel-polyfill'
-    // ]
     react: [
       'react', 'react-dom', 'react-router', 'react-router-dom'
     ],
@@ -27,6 +16,9 @@ module.exports = {
     ],
     axios: [
       'axios'
+    ],
+    other: [
+      'dateformat', 'js-cookie'
     ]
   },
   output: {
