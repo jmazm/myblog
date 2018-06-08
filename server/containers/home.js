@@ -8,7 +8,6 @@ import layout from '../view/layout'
 
 
 export function index (ctx) {
-  console.log(ctx.url) 
   switch (ctx.accepts('json', 'html')) {
     case 'html':
     {

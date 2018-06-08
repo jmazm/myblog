@@ -12,17 +12,18 @@ import articleModel from '../models/article'
 
 export async function index (ctx) {
   const articleId = ctx.params.articleId
+
   switch (ctx.accepts('json', 'html')) {
     case 'html':
-
       const ret = await articleModel.getById(articleId)
+
       const article = {
         articleDetail: {
           ArticleContent: ret.ArticleContent,
           ArticleTitle: ret.ArticleTitle
         }
       }
-      console.log(ret)
+
       const store = configureStore({
         articles: article
       });
@@ -33,19 +34,19 @@ export async function index (ctx) {
             <ArticleDetailPage/>
           </StaticRouter>
         </Provider>
-      ), store.getState());
+      ), store.getState())
 
-      ctx.body = html;
-      break;
+      ctx.body = html
+      break
 
     case 'json':
       let callBackData = {
         'status': 200,
         'message': '这个是主页',
         'data': {}
-      };
-      ctx.body = callBackData;
-      break;
+      }
+      ctx.body = callBackData
+      break
 
     default: {
       // allow json and html only

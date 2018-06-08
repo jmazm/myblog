@@ -95,7 +95,6 @@ class Article {
   static async getByCategory (categoryName, pageNum, pageSize) {
     let sql = `SELECT * FROM category WHERE name=?`
     const [category] = await global.db.query(sql, [categoryName])
-    console.log(category)
 
     if (!category[0]) {
       return
