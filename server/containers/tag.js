@@ -5,33 +5,25 @@ import { Provider }  from 'react-redux'
 
 
 import configureStore from '../../client/redux/store/configureStore'
-import ArticleDetailPage from '../../client/views/User/containers/ArticleDetailPage'
+import TagPage from '../../client/views/User/containers/TagPage'
 import layout from '../view/layout'
 
-import articleModel from '../models/article'
+import tagModel from '../models/tag'
 
 export async function index (ctx) {
-  const articleId = ctx.params.articleId
 
   switch (ctx.accepts('json', 'html')) {
     case 'html':
-      const ret = await articleModel.getById(articleId)
-
-      const article = {
-        articleDetail: {
-          ArticleContent: ret.ArticleContent,
-          ArticleTitle: ret.ArticleTitle
-        }
-      }
+      const ret = await tagModel.get()
 
       const store = configureStore({
-        articles: article
+        tags: ret.tags
       });
 
       const html = layout(renderToString(
         <Provider store={store}>
           <StaticRouter location={ctx.url} context={{}}>
-            <ArticleDetailPage/>
+            <TagPage/>
           </StaticRouter>
         </Provider>
       ), store.getState())
@@ -42,7 +34,7 @@ export async function index (ctx) {
     case 'json':
       let callBackData = {
         'status': 200,
-        'message': '这个是主页',
+        'message': '这是文章类别列表展示',
         'data': {}
       }
       ctx.body = callBackData

@@ -40,7 +40,9 @@ class ArticleListByCategory extends Component {
     })
   }
   render () {
-    const {articleList, total} = this.props
+    const {articleList, total, match} = this.props
+    const category = match.params.category
+    console.log(category)
 
     return (
       <div className="container my--blog">
@@ -50,7 +52,7 @@ class ArticleListByCategory extends Component {
             <div className="collection-wrapper">
               <div className="collection-inner">
                 <div className="collection-title">
-                  <h2>{this.props.match.params.category}<small>类别</small></h2>
+                  <h2>{category}<small>类别</small></h2>
                 </div>
                 {
                   articleList.length > 0 ?
@@ -106,12 +108,18 @@ class ArticleListByCategory extends Component {
 // 设置默认值
 ArticleListByCategory.defaultProps = {
   articleList: [],
-  total: 0
+  total: 0,
+  match: {
+    params: {}
+  }
 }
 
 ArticleListByCategory.propTypes = {
   articleList: PropTypes.array,
-  total: PropTypes.number
+  total: PropTypes.number,
+  match: {
+    params: PropTypes.object
+  }
 }
 
 function mapStateToProps (state) {

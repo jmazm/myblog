@@ -111,12 +111,18 @@ class Tag extends Component {
 // 设置默认值
 Tag.defaultProps = {
   articleList: [],
-  total: 0
+  total: 0,
+  match: {
+    params: {}
+  }
 }
 
 Tag.propTypes = {
   articleList: PropTypes.array,
-  total: PropTypes.number
+  total: PropTypes.number,
+  match: {
+    params: PropTypes.object
+  }
 }
 
 function mapStateToProps (state) {

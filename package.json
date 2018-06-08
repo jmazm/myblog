@@ -7,7 +7,7 @@
     "test": "cross-env NODE_ENV=test jest --forceExit --runInBand --watch",
     "coverage": "jest --coverage",
     "cms": "cross-env NODE_ENV=production node ./server/cmsServer.js",
-    "index": "cross-env NODE_ENV=production node ./server/indexServer.js",
+    "index": "cross-env NODE_ENV=production nodemon ./server/indexServer.js",
     "webpackDev": "cross-env NODE_ENV=development webpack --config ./client/config/webpack.dev.config.js --colors --profile",
     "webpackProd": "cross-env NODE_ENV=production webpack --config ./client/config/webpack.prod.config.js",
     "dll": "webpack --config ./client/config/webpack.dll.config.js",

@@ -106,12 +106,18 @@ class ArticleListByCategory extends Component {
 // 设置默认值
 ArticleListByCategory.defaultProps = {
   articleList: [],
-  total: 0
+  total: 0,
+  match: {
+    params: {}
+  }
 }
 
 ArticleListByCategory.propTypes = {
   articleList: PropTypes.array,
-  total: PropTypes.number
+  total: PropTypes.number,
+  match: {
+    params: PropTypes.object
+  }
 }
 
 function mapStateToProps (state) {
