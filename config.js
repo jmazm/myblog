@@ -15,8 +15,8 @@ module.exports = {
   },
   demoRootPath: 'http://garvenzhang.github.io/',
   auth: {
-    key: './server/auth/2_www.hellojm.cn.key',
-    cert: './server/auth/1_www.hellojm.cn_bundle.crt',
+    key: './server/auth/2_www.jmazm.com.key',
+    cert: './server/auth/1_www.jmazm.com_bundle.crt',
     subToken01: '#$%^%Gdsc#%&e@',
     subToken02: 'd24g&&3ad##w',
     CMS_ACCESS_TOKEN: '*2J)js*k>1+*'
