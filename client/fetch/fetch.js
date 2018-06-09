@@ -1,5 +1,4 @@
 import axios from 'axios'
-import commonConfig from '../../config'
 
 let defaultConfig = {
   baseURI: '/',
