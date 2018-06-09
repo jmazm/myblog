@@ -25,7 +25,6 @@ function layout (content, data) {
   <script type="text/javascript" src="${common.publicPath}lib/redux.js"></script>
   <script type="text/javascript" src="${common.publicPath}lib/axios.js"></script>
   <script type="text/javascript" src="${common.publicPath}lib/remark.js"></script>
-  <script type="text/javascript" src="${common.publicPath}lib/other.js"></script>
   <script type="text/javascript" src="${common.publicPath}js/index.js"></script>
   </body>
   </html>
