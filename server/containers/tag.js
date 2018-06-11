@@ -14,10 +14,10 @@ export async function index (ctx) {
 
   switch (ctx.accepts('json', 'html')) {
     case 'html':
-      const ret = await tagModel.get()
+      const tags = await tagModel.get()
 
       const store = configureStore({
-        tags: ret.tags
+        tags: tags
       });
 
       const html = layout(renderToString(

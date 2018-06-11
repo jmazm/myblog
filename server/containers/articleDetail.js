@@ -12,6 +12,7 @@ import articleModel from '../models/article'
 
 export async function index (ctx) {
   const articleId = ctx.params.articleId
+  console.log(articleId)
 
   switch (ctx.accepts('json', 'html')) {
     case 'html':
@@ -19,8 +20,8 @@ export async function index (ctx) {
 
       const article = {
         articleDetail: {
-          ArticleContent: ret.ArticleContent,
-          ArticleTitle: ret.ArticleTitle
+          content: ret.content,
+          title: ret.title
         }
       }
 

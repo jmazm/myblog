@@ -42,7 +42,6 @@ class ArticleListByCategory extends Component {
   render () {
     const {articleList, total, match} = this.props
     const category = match.params.category
-    console.log(category)
 
     return (
       <div className="container my--blog">

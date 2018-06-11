@@ -29,12 +29,14 @@ const Koa = require("koa")
 const path = require("path")
 const compress = require("koa-compress")
 const koaStatic = require("koa-static")
+const koaStaticCache = require("koa-static-cache")
 const mysql = require("mysql2/promise")
 const debug = require("debug")('app')
 const body = require("koa-body")
 const logger = require('koa-logger')
 const routerMap = require("./router")
 const common = require("../config")
+const STATICDIST = path.resolve(__dirname, '../dist')
 
 const app = new Koa()
 
@@ -94,7 +96,9 @@ app.use(async (ctx, next) => {
 })
 
 // 设置静态路径
-app.use(koaStatic(path.resolve(__dirname, '../dist')))
+app.use(koaStatic(STATICDIST, {
+  maxage: 1000 * 60 * 60 * 24 * 15
+}))
 
 app.use(routerMap.routes())
   .use(routerMap.allowedMethods())
