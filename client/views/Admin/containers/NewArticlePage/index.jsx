@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import dateformat from 'dateformat'
 import Cookies from 'js-cookie'
+import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
 import {Validator, reg} from '../../../../lib/verification'
 
@@ -31,6 +32,17 @@ class AdminNewArticle extends Component {
       Tag_id: 1,
       Category_id: 1
     }
+
+    this.shouldComponentUpdate = ReactAddonsPureRenderMixin.shouldComponentUpdate
+
+    this.titleOnChange = this.titleOnChange.bind(this)
+    this.forewordOnChange = this.forewordOnChange.bind(this)
+    this.imgUrlOnChange = this.imgUrlOnChange.bind(this)
+    this.categoryOnChange = this.categoryOnChange.bind(this)
+    this.tagOnChange = this.tagOnChange.bind(this)
+    this.contentOnChange = this.contentOnChange.bind(this)
+    this.publishArticle = this.publishArticle.bind(this)
+    this.clearContent = this.clearContent.bind(this)
   }
   // 正文内容
   contentOnChange (e) {
@@ -143,7 +155,8 @@ class AdminNewArticle extends Component {
     form.content.value = ''
   }
   render () {
-    const {tags, categories} = this.props
+    const {tags, categories, newArticleData} = this.props
+    const {title, foreword, imgSrc, Category_id, Tag_id, content} = newArticleData
     return (
       <div className="blog-management-wrapper blog--management">
         <AdminNav/>
@@ -153,31 +166,31 @@ class AdminNewArticle extends Component {
             <form className="publish-article" id="newArticleForm" ref={ele => this.form = ele}>
               <div className="form-item-wrapper">
                 <span className="article-item-ti">标题</span>
-                <input className="input" name="title" value={this.props.newArticleData.title} placeholder="请输入文章标题" onChange={this.titleOnChange.bind(this)}/>
+                <input className="input" name="title" value={title} placeholder="请输入文章标题" onChange={this.titleOnChange}/>
               </div>
               <div className="form-item-wrapper">
                 <span className="article-item-ti">文章前言</span>
-                <input className="input"  name="foreword" value={this.props.newArticleData.foreword} placeholder="请输入文章前言" onChange={this.forewordOnChange.bind(this)}/>
+                <input className="input"  name="foreword" value={foreword} placeholder="请输入文章前言" onChange={this.forewordOnChange}/>
               </div>
               <div className="form-item-wrapper">
                 <span className="article-item-ti">文章展示的图片</span>
-                <input className="input" name="imgSrc" value={this.props.newArticleData.imgSrc} placeholder="请输入文章展示图片的地址" onChange={this.imgUrlOnChange.bind(this)}/>
+                <input className="input" name="imgSrc" value={imgSrc} placeholder="请输入文章展示图片的地址" onChange={this.imgUrlOnChange}/>
               </div>
               <div className="form-item-wrapper">
                 <span className="article-item-ti">文章类别</span>
-                <CategorySelect value={this.props.newArticleData.Category_id} data={categories} onChange={this.categoryOnChange.bind(this)}/>
+                <CategorySelect value={Category_id} data={categories} onChange={this.categoryOnChange}/>
               </div>
               <div className="form-item-wrapper">
                 <span className="article-item-ti">文章标签</span>
-                <TagSelect value={this.props.newArticleData.Tag_id}  data={tags} onChange={this.tagOnChange.bind(this)}/>
+                <TagSelect value={Tag_id}  data={tags} onChange={this.tagOnChange}/>
               </div>
               <div className="form-item-wrapper">
                 <span className="article-item-ti">正文</span>
-                <textarea className="textarea" name="content" value={this.props.newArticleData.content} onChange={this.contentOnChange.bind(this)}></textarea>
+                <textarea className="textarea" name="content" value={content} onChange={this.contentOnChange}></textarea>
               </div>
               <div className="btn-wrapper">
-                <button type="button" className="btn" onClick={this.publishArticle.bind(this)}>发布</button>
-                <button type="button" className="btn" onClick={this.clearContent.bind(this)}>清空</button>
+                <button type="button" className="btn" onClick={this.publishArticle}>发布</button>
+                <button type="button" className="btn" onClick={this.clearContent}>清空</button>
               </div>
             </form>
           </div>

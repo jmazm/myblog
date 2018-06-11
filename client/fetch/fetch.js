@@ -1,4 +1,5 @@
 import axios from 'axios'
+import commonConfig from '../../config'
 
 let defaultConfig = {
   baseURI: '/',
@@ -55,6 +56,8 @@ export const api = {
   deleteArticleApi: (id) => `${domain}/api/article/${id}`,
   getAllTagApi: `${domain}/api/tag`,
   saveTagApi: `${domain}/api/tag`,
+  saveCategoryApi: `${domain}/api/category`,
+  deleteCategoryApi: (id) => `${domain}/api/category/${id}`,
   getAllCategoryApi: `${domain}/api/category`,
   getCommentsApi: `${domain}/api/comment`,
   addCommentApi: `${domain}/api/comment`,

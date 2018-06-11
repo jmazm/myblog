@@ -110,8 +110,8 @@ module.exports = merge(base, {
     // 分离css
     new ExtractTextWebpackPlugin({
       filename: 'css/[name].css',
-      disable: false,
-      allChunks: true
+      disable: false
+      // allChunks: true
     }),
 
     // 复制图片
@@ -145,7 +145,8 @@ module.exports = merge(base, {
         'lib/react.js',
         'lib/redux.js',
         'lib/axios.js',
-        'lib/remark.js'
+        'lib/remark.js',
+        'lib/other.js'
       ],
       append: false // false 在其他資源的之前添加 true 在其他資源之後添加
     })

@@ -22,7 +22,7 @@ const renderRoot = () => {
       </AppContainer>,
       document.getElementById('root')
     );
-  } else if (window.location.port === common.server.cmsServerPort || window.location.port == 8080) {
+  } else if (window.location.port === common.server.cmsServerPort || window.location.port == 442) {
     ReactDOM.render(
       <AppContainer>
         <Provider store={configureStore}>
