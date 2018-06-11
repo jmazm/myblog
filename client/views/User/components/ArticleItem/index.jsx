@@ -39,7 +39,7 @@ class ArticleItem extends Component {
             }
           </div>
           <footer className="article-tag-list">
-            所属：<a href={`/category/${Category_id}/article`} className="tag-item">{Category_name}</a><a href={`/tag/${Tag_id}/article`} className="tag-item">{Tag_name}</a>
+            所属：<a href={`/category/${Category_name}/article`} className="tag-item">{Category_name}</a><a href={`/tag/${Tag_name}/article`} className="tag-item">{Tag_name}</a>
           </footer>
         </div>
       </article>
