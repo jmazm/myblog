@@ -1,6 +1,5 @@
 import {take, call, put, select} from 'redux-saga/effects'
 import {getRequest, postRequest, putRequest, api} from '../fetch/fetch'
-import {actionTypes as IndexActionTypes} from '../redux/reducer'
 import {actionTypes as TagActionTypes} from '../redux/reducer/tagReducer'
 
 /**
@@ -10,33 +9,11 @@ import {actionTypes as TagActionTypes} from '../redux/reducer/tagReducer'
  */
 function* saveTag (data) {
   // 开始进行异步请求
-  yield put({
-    type: IndexActionTypes.FETCH_START
-  })
   try {
-    let id = yield select (state => state.tag.id)
-
-    if (id) {
-      data.id = id
-      // 更新标签
-      return yield call(putRequest, '/v1/tag', data)
-    } else {
-      // 添加标签
-      return yield call(postRequest, '/v1/tag', data)
-    }
+    return yield call(postRequest, api.saveTagApi, data)
 
   } catch (err) {
-    // 报错处理
-    yield put({
-      type: IndexActionTypes.SET_MESSAGE,
-      msgContent: '网络请求错误',
-      msgType: 0
-    })
-  } finally {
-    // 异步请求结束
-    yield put({
-      type: IndexActionTypes.FETCH_END
-    })
+    console.log(err.message)
   }
 }
 
@@ -47,23 +24,10 @@ function* saveTag (data) {
  */
 function* getTags () {
   // 开始进行异步请求
-  yield put({
-    type: IndexActionTypes.FETCH_START
-  })
   try {
     return yield call(getRequest, api.getAllTagApi)
   } catch (err) {
-    // 报错处理
-    yield put({
-      type: IndexActionTypes.SET_MESSAGE,
-      msgContent: '网络请求错误',
-      msgType: 0
-    })
-  } finally {
-    // 异步请求结束
-    yield put({
-      type: IndexActionTypes.FETCH_END
-    })
+    console.log(err.message)
   }
 }
 
@@ -71,30 +35,18 @@ export function* saveTagFlow () {
   while (true) {
     let request = yield take(TagActionTypes.SAVE_TAG)
 
-    if (request.data.name === '') {
-      yield put({
-        type: IndexActionTypes.SET_MESSAGE,
-        msgContent: '请输入标签名',
-        msgType: 0
-      })
-    } else {
-      let res = yield call(saveTag, request.data)
+    let res = yield call(saveTag, {
+      name: request.tag
+    })
 
-      // 判断返回的响应
-      if (res.code === 0) {
-        yield put({
-          type: IndexActionTypes.SET_MESSAGE,
-          msgContent: res.message,
-          msgType: 1
-        })
-      } else {
-        yield put({
-          type: IndexActionTypes.SET_MESSAGE,
-          msgContent: res.message,
-          msgType: 0
-        });
-      }
+    if (res.status == 'success') {
+      alert('添加成功')
+    } else {
+      alert(res.msg)
     }
+
+    const tagInput = document.getElementById('tag-input')
+    tagInput.value = ''
   }
 }
 
@@ -113,11 +65,7 @@ export function* getTagsFlow () {
         data: res.data
       })
     } else {
-      yield put({
-        type: IndexActionTypes.SET_MESSAGE,
-        msgContent: res.message,
-        msgType: 0
-      });
+      alert(status.msg)
     }
   }
 }

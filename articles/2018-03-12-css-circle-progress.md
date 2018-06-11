@@ -74,13 +74,13 @@ background: #655;
 
 ### 1.5 demo
 
-* [demo](/effects/demo/css/progress/v1-1.html)
+* [demo](https://jmhello.github.io/effects/demo/css/progress/v1-1.html)
 
 ### 1.6 动态进度条的遗憾
 
 对于占比在50%之内的饼图，其动态实现进度条是完全没有问题的！
 
-![p-01.gif](/css/progress/p-01.gif)
+![p-01.gif](/progress/p-01.gif)
 
 但是，对于占比超过50%的饼图，却是有问题的：进度条是一步一步去实现的，但是这里除了改变角度为，还要改变背景颜色，
 然而，在改变背景颜色的时候，显得整个进度条十分突兀，一点都不连续！
@@ -89,7 +89,7 @@ background: #655;
 
 ---
 
-* [demo](/progress/v2.html)
+* [demo](https://jmhello.github.io/effects/demo/css/progress/v2.html)
 
 ## 二、终极版环形进度条
 
@@ -122,7 +122,7 @@ background: #655;
 
 补充：
 
-一开始我在想用左右半圆实现的时候，其`html`结构如下：【[demo](/progress/v3.html)】
+一开始我在想用左右半圆实现的时候，其`html`结构如下：【[demo](https://jmhello.github.io/effects/demo/css/progress/v3.html)】
 
 ```html
 <div class="circle-bar">
@@ -140,7 +140,7 @@ background: #655;
 
 ### 2.2 先实现静态的进度条
 
-[demo](/progress/v4.html)
+[demo](https://jmhello.github.io/effects/demo/css/progress/v4.html)
 
 ```css
 .circle-bar {
@@ -207,7 +207,7 @@ background: #655;
 
 ### 2.3 实现动态进度条
 
-关键代码如下：【[demo](/progress/v5.html)】
+关键代码如下：【[demo](https://jmhello.github.io/effects/demo/css/progress/v5.html)】
 
 ```css
 .p20 .left {

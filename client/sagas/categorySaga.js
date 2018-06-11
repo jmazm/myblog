@@ -1,4 +1,4 @@
-import {take, call, put, select} from 'redux-saga/effects'
+import {take, call, put} from 'redux-saga/effects'
 import {getRequest, postRequest, putRequest, api} from '../fetch/fetch'
 import {actionTypes as IndexActionTypes} from '../redux/reducer'
 import {actionTypes as CategoryActionTypes} from '../redux/reducer/categoryReducer'
@@ -9,34 +9,10 @@ import {actionTypes as CategoryActionTypes} from '../redux/reducer/categoryReduc
  * @return {*}
  */
 function* saveCategory (data) {
-  // 开始进行异步请求
-  yield put({
-    type: IndexActionTypes.FETCH_START
-  })
   try {
-    let id = yield select (state => state.categories.id)
-
-    if (id) {
-      data.id = id
-      // 更新标签
-      return yield call(putRequest, '/v1/category', data)
-    } else {
-      // 添加标签
-      return yield call(postRequest, api.saveTagApi, data)
-    }
-
+    return yield call(postRequest, api.saveCategoryApi, data)
   } catch (err) {
-    // 报错处理
-    yield put({
-      type: IndexActionTypes.SET_MESSAGE,
-      msgContent: '网络请求错误',
-      msgType: 0
-    })
-  } finally {
-    // 异步请求结束
-    yield put({
-      type: IndexActionTypes.FETCH_END
-    })
+    return err.message
   }
 }
 
@@ -69,32 +45,20 @@ function* getCategories () {
 
 export function* saveCategoryFlow () {
   while (true) {
-    let request = yield take(CategoryActionTypes.SAVE_TAG)
+    let request = yield take(CategoryActionTypes.ADD_CATEGORY)
 
-    if (request.data.name === '') {
-      yield put({
-        type: IndexActionTypes.SET_MESSAGE,
-        msgContent: '请输入标签名',
-        msgType: 0
-      })
+    let res = yield call(saveCategory, {
+      name: request.category
+    })
+
+    if (res.status == 'success') {
+      alert('添加成功')
     } else {
-      let res = yield call(saveCategory, request.data)
-
-      // 判断返回的响应
-      if (res.status === 'success') {
-        yield put({
-          type: IndexActionTypes.SET_MESSAGE,
-          msgContent: res.message,
-          msgType: 1
-        })
-      } else {
-        yield put({
-          type: IndexActionTypes.SET_MESSAGE,
-          msgContent: res.message,
-          msgType: 0
-        });
-      }
+      alert(res.msg)
     }
+
+    const categoryInput = document.getElementById('category-input')
+    categoryInput.value = ''
   }
 }
 

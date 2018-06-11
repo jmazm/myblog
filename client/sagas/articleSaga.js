@@ -50,7 +50,7 @@ export function* getAllArticleFlow () {
         total: res.total
       })
     } else {
-      console.log(err)
+      console.log(res.message)
     }
   }
 }

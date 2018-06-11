@@ -25,12 +25,18 @@ export const actions = {
    * @param name
    * @return {{type: string, content: *}}
    */
-  delete_tag: function (name) {
+  delete_tag: function (tag) {
     return {
       type: actionTypes.DELETE_TAG,
-      name
+      tag
     }
   },
+  add_tag: function (tag) {
+    return {
+      type: actionTypes.SAVE_TAG,
+      tag
+    }
+  }
 }
 
 export function reducer (state=initialState, action) {

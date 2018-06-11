@@ -1,6 +1,6 @@
 import {fork} from 'redux-saga/effects'
 import {saveTagFlow, getTagsFlow} from './tagSaga'
-import {getCategoriesFlow} from './categorySaga'
+import {getCategoriesFlow, saveCategoryFlow} from './categorySaga'
 import {getAllArticleFlow, getArticleDetailFlow, saveArticleFlow, deleteArticleByIdFlow} from './articleSaga'
 import {getCommentsFlow} from './commentSaga'
 
@@ -12,5 +12,6 @@ export default function* rootSage () {
   yield fork(saveTagFlow)
   yield fork(getTagsFlow)
   yield fork(getCategoriesFlow)
+  yield fork(saveCategoryFlow)
   yield fork(getCommentsFlow)
 }
