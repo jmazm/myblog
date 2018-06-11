@@ -15,8 +15,6 @@ export async function index (ctx) {
   switch (ctx.accepts('json', 'html')) {
     case 'html':
       const ret = await articleModel.getByCategory(decodeURIComponent(categoryName), 1, 10)
-      
-      console.log(ret)
 
       const store = configureStore({
         articles: ret.articles,
