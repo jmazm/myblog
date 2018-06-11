@@ -110,8 +110,8 @@ module.exports = merge(base, {
     // 分离css
     new ExtractTextWebpackPlugin({
       filename: 'css/[name].css',
-      disable: false,
-      allChunks: true
+      disable: false
+      // allChunks: true
     }),
 
     // 复制图片

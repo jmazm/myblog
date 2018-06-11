@@ -14,10 +14,11 @@ export async function index (ctx) {
 
   switch (ctx.accepts('json', 'html')) {
     case 'html':
-      const ret = await categoryModel.get()
+      const categories = await categoryModel.get()
+      
 
       const store = configureStore({
-        categories: ret.categories
+        categories: categories
       });
 
       const html = layout(renderToString(
