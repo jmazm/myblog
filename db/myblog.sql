@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 60011
 File Encoding         : 65001
 
-Date: 2018-06-11 19:58:20
+Date: 2018-06-12 20:51:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -76,7 +76,7 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL COMMENT '博客分类名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
@@ -84,7 +84,6 @@ CREATE TABLE `category` (
 INSERT INTO `category` VALUES ('1', '原创');
 INSERT INTO `category` VALUES ('2', '学习笔记');
 INSERT INTO `category` VALUES ('3', '项目经验');
-INSERT INTO `category` VALUES ('4', '面试经历');
 
 -- ----------------------------
 -- Table structure for comment
@@ -97,7 +96,7 @@ CREATE TABLE `comment` (
   `website` varchar(255) DEFAULT NULL COMMENT '评论人的网址',
   `content` varchar(255) DEFAULT NULL COMMENT '评论内容',
   `date` datetime DEFAULT NULL COMMENT '评论时间',
-  `Article_id` int(11) NOT NULL,
+  `Article_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idComment_UNIQUE` (`id`),
   KEY `fk_Comment_Article1_idx` (`Article_id`),
@@ -138,7 +137,7 @@ CREATE TABLE `tag` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idTag_UNIQUE` (`id`),
   KEY `idName_UNIQUE` (`id`,`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tag
@@ -150,6 +149,3 @@ INSERT INTO `tag` VALUES ('4', 'git');
 INSERT INTO `tag` VALUES ('5', 'nodeJS');
 INSERT INTO `tag` VALUES ('6', 'webpack');
 INSERT INTO `tag` VALUES ('7', 'react');
-INSERT INTO `tag` VALUES ('8', 'web安全');
-INSERT INTO `tag` VALUES ('9', '数据结构');
-INSERT INTO `tag` VALUES ('10', '算法');
