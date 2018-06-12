@@ -38,6 +38,20 @@ class Category {
       }
     }
   }
+  static async del (id) {
+    // 先将对应的文章的Category_Id 设置为null
+    let sql = `UPDATE article SET Category_id=null WHERE Category_id=?`
+    await global.db.query(sql, [id])
+
+    // 再删除对应的类别
+    sql = `DELETE FROM category WHERE id=?`
+    await global.db.query(sql, [id])
+
+    // 再获取所有类别名称，返回出去
+    const result = this.get()
+
+    return result
+  }
 }
 
 module.exports = Category

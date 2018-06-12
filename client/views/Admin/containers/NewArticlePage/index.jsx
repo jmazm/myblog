@@ -8,7 +8,6 @@ import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
 import {Validator, reg} from '../../../../lib/verification'
 
-
 import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
 import TagSelect from '../../components/TagSelect'
@@ -44,6 +43,7 @@ class AdminNewArticle extends Component {
     this.publishArticle = this.publishArticle.bind(this)
     this.clearContent = this.clearContent.bind(this)
   }
+
   // 正文内容
   contentOnChange (e) {
     this.props.update_content(e.target.value)
@@ -137,14 +137,16 @@ class AdminNewArticle extends Component {
     articleData.Admin_id = 1
 
     const csrfToken = Cookies.get('CSRF_TOKEN')
-    // const accessToken = localStorage.getItem('ACCESS_TOKEN')
 
     // 发送请求
     this.props.save_article({
       articleData,
       csrfToken
     })
+
+    this.clearContent()
   }
+
 
   clearContent () {
     const form = this.form
@@ -153,7 +155,15 @@ class AdminNewArticle extends Component {
     form.imgSrc.value = ''
     form.foreword.value = ''
     form.content.value = ''
+
+    this.props.update_content('')
+    this.props.update_foreword('')
+    this.props.update_showed_img_url('')
+    this.props.update_category(1)
+    this.props.update_tag(1)
+    this.props.update_title('')
   }
+
   render () {
     const {tags, categories, newArticleData} = this.props
     const {title, foreword, imgSrc, Category_id, Tag_id, content} = newArticleData
@@ -220,7 +230,6 @@ AdminNewArticle.propTypes = {
 };
 
 function mapStateToProps(state) {
-  // const {title, content, Tag_id, Category_id, foreword, imgSrc} = state.articles.newArticleData;
   return {
     newArticleData: state.articles.newArticleData,
     tags: state.tags,

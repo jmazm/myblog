@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
 import {Input, Button, Modal, Table, Divider} from 'antd'
 import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
 
-// import {api} from '../../../../fetch/fetch'
 import {actions as tagActions} from '../../../../redux/reducer/tagReducer'
 
-const {get_all_tags, add_tag} = tagActions
+const {get_all_tags, add_tag, delete_tag} = tagActions
 
 class AdminTag extends Component {
   constructor (props) {
@@ -18,12 +18,14 @@ class AdminTag extends Component {
       visible: false,
       tag: ''
     }
+    this.shouldComponentUpdate = ReactAddonsPureRenderMixin.shouldComponentUpdate
 
     this.showModal = this.showModal.bind(this)
     this.handleOk = this.handleOk.bind(this)
     this.handleCancel = this.handleCancel.bind(this)
     this.handleData = this.handleData.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDel = this.handleDel.bind(this)
   }
 
   columns = [
@@ -41,14 +43,17 @@ class AdminTag extends Component {
       title: '操作',
       dataIndex: 'operation',
       key: 'operation',
-      render: this.handerRender
+      render: this.handlerRender.bind(this)
     }
   ]
 
-  handerRender (o, row, index) {
+  handleDel (id) {
+    this.props.delete_tag(id)
+  }
+  handlerRender (o, row, index) {
     return (
       <span>
-        <a href="javascript:;">删除</a>
+        <a href="javascript:;" onClick={() => this.handleDel(row.id)}>删除</a>
         <Divider type="vertical" />
         <a href="javascript:;">修改</a>
       </span>
@@ -137,6 +142,7 @@ function mapDispatchToProps (dispatch) {
   return {
     get_all_tags: bindActionCreators(get_all_tags, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
     add_tag: bindActionCreators(add_tag, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
+    delete_tag: bindActionCreators(delete_tag, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
   }
 }
 

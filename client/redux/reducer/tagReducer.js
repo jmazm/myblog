@@ -22,13 +22,13 @@ export const actions = {
   },
   /**
    * 删除标签
-   * @param name
+   * @param tagId
    * @return {{type: string, content: *}}
    */
-  delete_tag: function (tag) {
+  delete_tag: function (tagId) {
     return {
       type: actionTypes.DELETE_TAG,
-      tag
+      id: tagId
     }
   },
   add_tag: function (tag) {

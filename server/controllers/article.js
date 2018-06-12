@@ -138,6 +138,10 @@ class Article {
     await next()
 
     try {
+      const query = ctx.query
+      const pageNum = parseInt(query.pageNum)
+      const pageSize = parseInt(query.pageSize)
+
       const contentType = ctx.request.headers["content-type"]
       let postData = ctx.request.body
 
@@ -145,13 +149,13 @@ class Article {
         postData = postData.fields
       }
 
-      let articleData = postData.articleData
-      let articleId = postData.id
-
-      await articleModel.modifyById(articleId, articleData)
+      const data = await articleModel.modifyById(postData, pageNum, pageSize)
+      const total = await articleModel.getTotal()
 
       ctx.body = {
-        status: 'success'
+        status: 'success',
+        data: data,
+        total: total
       }
 
     } catch (err) {
@@ -167,27 +171,18 @@ class Article {
   static async delArticle (ctx, next) {
     await next()
 
+    const query = ctx.query
+    const pageNum = parseInt(query.pageNum)
+    const pageSize = parseInt(query.pageSize)
     const id = ctx.params.id
-    await articleModel.delById(id)
-    ctx.body = {
-      status: 'success'
-    }
-  }
 
-  static async publish (ctx, next) {
-    await next()
-    const contentType = ctx.request.headers["content-type"]
-    let postData = ctx.request.body
-
-    if (contentType.includes('multipart')) {
-      postData = postData.fields
-    }
-
-    let data = postData.data
-    await articleModel.modifyIsPublishedById(data)
+    const data = await articleModel.delById(id, pageNum, pageSize)
+    const total = await articleModel.getTotal()
 
     ctx.body = {
-      status: 'success'
+      status: 'success',
+      data: data,
+      total: total
     }
   }
 }

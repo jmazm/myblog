@@ -39,6 +39,7 @@ exports.refererAuth =  async function (ctx) {
 function _csrfAuth (ctx) {
   // 获取用户传来的csrf token
   const csrfToken = ctx.request.body.csrfToken || ctx.query.csrfToken || ctx.headers['x-csrf-token']
+  
   // 获取cookie中存储的csrf token
   const c_csrfToken = ctx.cookies.get('CSRF_TOKEN')
 

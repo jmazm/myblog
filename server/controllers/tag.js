@@ -54,6 +54,22 @@ class Tag {
       }
     }
   }
+
+  /**
+   * 删除标签
+   * @param ctx
+   * @return {Promise.<void>}
+   */
+  static async delTag (ctx) {
+    const id = ctx.params.id
+
+    const result = await TagModel.del(id)
+
+    ctx.body = {
+      status: 'success',
+      data: result
+    }
+  }
 }
 
 
