@@ -18,7 +18,7 @@ class User {
     const postData = ctx.request.body
 
     // referer验证
-    refererAuth(ctx)
+    // refererAuth(ctx)
 
     // 判断用户是否存在
     const userData = await UserModel.get(postData.name)
@@ -102,6 +102,30 @@ class User {
       status: 'success',
       accessToken: accessToken
       // csrfToken: csrfToken
+    }
+  }
+
+  /**
+   * 注销
+   * @param ctx
+   * @return {Promise.<void>}
+   */
+  static async logout (ctx) {
+    // 删除相应的cookie
+    ctx.cookies.set('U_ID', '', {
+      maxAge: 0
+    })
+
+    ctx.cookies.set('USER_SIGN', '', {
+      maxAge: 0
+    })
+
+    ctx.cookies.set('CSRF_TOKEN', '', {
+      maxAge: 0
+    })
+
+    ctx.body = {
+      status: 'success'
     }
   }
 }

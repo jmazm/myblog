@@ -1,4 +1,4 @@
-const categoryModel = require("../models/category")
+const CategoryModel = require("../models/category")
 
 class Category {
   /**
@@ -7,16 +7,22 @@ class Category {
    * @return {Promise.<void>}
    */
   static async getCategories (ctx) {
-    const categories = await categoryModel.get()
+    const categories = await CategoryModel.get()
     ctx.body = {
       status: 'success',
       data: categories
     }
   }
+
+  /**
+   * 根据id获取类别
+   * @param ctx
+   * @return {Promise.<void>}
+   */
   static async getCategory (ctx) {
     const id = parseInt(ctx.params.id)
 
-    const category = await categoryModel.getById(id)
+    const category = await CategoryModel.getById(id)
 
     ctx.body = {
       status: 'success',
@@ -24,7 +30,7 @@ class Category {
     }
   }
   /**
-   * 添加标签
+   * 添加类别
    * @param ctx
    * @return {Promise.<void>}
    */
@@ -36,7 +42,7 @@ class Category {
       val = val.fields
     }
 
-    const result = await categoryModel.set(val)
+    const result = await CategoryModel.set(val)
 
     if (typeof result === 'number') {
       // 返回响应
@@ -51,6 +57,22 @@ class Category {
 
 
 
+  }
+
+  /**
+   * 删除类别
+   * @param ctx
+   * @return {Promise.<void>}
+   */
+  static async delCategory (ctx) {
+    const id = ctx.params.id
+
+    const result = await CategoryModel.del(id)
+
+    ctx.body = {
+      status: 'success',
+      data: result
+    }
   }
 }
 

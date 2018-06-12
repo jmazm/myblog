@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== 'test') {
 const Koa = require("koa")
 const path = require("path")
 const compress = require("koa-compress")
-const koaStatic = require("koa-static")
+const koaStaticCache = require("koa-static-cache")
 const mysql = require("mysql2/promise")
 const debug = require("debug")('app')
 const body = require("koa-body")
@@ -95,8 +95,8 @@ app.use(async (ctx, next) => {
 })
 
 // 设置静态路径
-app.use(koaStatic(STATICDIST, {
-  maxage: 1000 * 60 * 60 * 24 * 15
+app.use(koaStaticCache(STATICDIST, {
+  maxAge: 60 * 60 * 24 * 30
 }))
 
 app.use(routerMap.routes())

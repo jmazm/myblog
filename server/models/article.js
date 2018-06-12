@@ -20,7 +20,7 @@ class Article {
    * ]
    */
   static async getAll (pageNum, pageSize) {
-    const sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished,
+    const sql = `SELECT a.id, a.title, a.foreword, a.imgSrc, a.date, a.isPublished, a.content,
                   t.id AS Tag_id, t.name AS Tag_name, 
                   c.id AS Category_id, c.name AS Category_name
                   FROM article AS a, tag AS t, category AS c 
@@ -159,12 +159,20 @@ class Article {
 
   /**
    * 根据id修改文章数据
-   * @param articleDataObj
+   * @param postData
+   * @param pageSize
+   * @param pageNum
    * @return {Promise.<void>}
    */
-  static async modifyById (articleId, articleDataObj) {
+  static async modifyById (postData, pageNum, pageSize) {
+    const {articleData, id} = postData
     const sql = `UPDATE article SET ? WHERE id=?`
-    const result = await global.db.query(sql, [articleDataObj, parseInt(articleId)])
+
+    await global.db.query(sql, [articleData, parseInt(id)])
+
+    // 再获取文章数据
+    const result = await this.getAll(pageNum, pageSize)
+
     return result
   }
 
@@ -182,12 +190,28 @@ class Article {
   /**
    * 根据id删除文章
    * @param id
+   * @param pageSize
+   * @param pageNum
    * @return {Promise.<void>}
    */
-  static async delById (id) {
-    const sql = `DELETE FROM article WHERE id=?`
-    const result = await global.db.query(sql, [id])
-    return result[0]
+  static async delById (id, pageNum, pageSize) {
+    // 先将文章相关评论的Article_id设置为null
+    let sql = `UPDATE comment SET Article_id=null WHERE Article_id=?`
+    await global.db.query(sql, [id])
+
+    // 再删除文章
+    sql = `DELETE FROM article WHERE id=?`
+    await global.db.query(sql, [id])
+
+    // 再获取文章数据
+    let result = await this.getAll(pageNum, pageSize)
+
+    if (result.length == 0 && pageNum != 1) {
+      pageNum = pageNum - 1
+      result = await this.getAll(pageNum, pageSize)
+    }
+
+    return result
   }
 
   /**

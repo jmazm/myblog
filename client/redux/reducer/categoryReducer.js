@@ -22,13 +22,13 @@ export const actions = {
   },
   /**
    * 删除类别
-   * @param category
+   * @param categoryId
    * @return {{type: string, content: *}}
    */
-  delete_category: function (category) {
+  delete_category: function (categoryId) {
     return {
       type: actionTypes.DELETE_CATEGORY,
-      category
+      id: categoryId
     }
   },
   /**

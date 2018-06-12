@@ -39,6 +39,21 @@ class Tag {
       }
     }
   }
+
+  static async del (id) {
+    // 先将对应的文章的 Tag_id 设置为null
+    let sql = `UPDATE article SET Tag_id=null WHERE Tag_id=?`
+    await global.db.query(sql, [id])
+
+    // 再删除对应的类别
+    sql = `DELETE FROM tag WHERE id=?`
+    await global.db.query(sql, [id])
+
+    // 再获取所有类别名称，返回出去
+    const result = this.get()
+
+    return result
+  }
 }
 
 module.exports = Tag

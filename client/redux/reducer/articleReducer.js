@@ -172,10 +172,35 @@ export const actions = {
       data: postData
     }
   },
-  delete_an_article: function (id) {
+  /**
+   * 修改文章
+   * @param postData
+   * @example {
+   * articleData: {}
+   * }
+   * @return {{type: string, data: *}}
+   */
+  modify_article: function (pageNum, pageSize, postData) {
+    return {
+      type:actionTypes.PUT_MODIFY_ARTICLE,
+      data: postData,
+      pageNum,
+      pageSize
+    }
+  },
+  /**
+   * 删除文章
+   * @param id
+   * @param pageNum
+   * @param pageSize
+   * @return {{type: string, id: *, pageSize: *, pageNum: *}}
+   */
+  delete_an_article: function (id, pageNum, pageSize) {
     return {
       type:actionTypes.DELETE_ARTICLE,
-      id
+      id,
+      pageNum,
+      pageSize
     }
   }
 }

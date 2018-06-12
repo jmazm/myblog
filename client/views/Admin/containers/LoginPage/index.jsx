@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import md5 from 'js-md5'
+import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
-import {postRequest, getRequest,api} from '../../../../fetch/fetch'
+import {postRequest,api} from '../../../../fetch/fetch'
 
 import './style.css'
 
@@ -12,6 +13,9 @@ class Login extends Component {
       loginTotal: 0,
       captUrl: api.getCaptchaApi
     }
+
+    this.shouldComponentUpdate = ReactAddonsPureRenderMixin.shouldComponentUpdate
+
   }
   async loginHandle () {
     const form = this.form

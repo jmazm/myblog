@@ -1,6 +1,7 @@
 import {take, call, put} from 'redux-saga/effects'
-import {getRequest, postRequest, delRequest, api} from '../fetch/fetch'
+import {getRequest, postRequest, delRequest, putRequest, api} from '../fetch/fetch'
 import {actionTypes as ArticleActionTypes} from '../redux/reducer/articleReducer'
+import Cookie from 'js-cookie'
 
 /**
  * 获取所有文章
@@ -63,6 +64,7 @@ export function* getAllArticleFlow () {
 function* saveArticle (data) {
   try {
     const accessToken = localStorage.getItem('ACCESS_TOKEN')
+
     return yield call(postRequest, api.saveArticleApi, data, {
       headers: {
         Authorization: `Bearer ${accessToken}`
@@ -84,11 +86,6 @@ export function* saveArticleFlow () {
       // 判断返回的响应
       if (res.status === 'success') {
         alert('添加文章成功')
-        const form = document.getElementById('newArticleForm')
-        form.title.value = ''
-        form.imgSrc.value = ''
-        form.foreword.value = ''
-        form.content.value = ''
       } else {
         alert(res.msg)
         location.href = '/#/admin/login'
@@ -133,13 +130,15 @@ export function* getArticleDetailFlow () {
   }
 }
 
-function* deleteArticleById (id) {
+function* deleteArticleById (id, pageNum, pageSize) {
   try {
     const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    const csrfToken = Cookie.get('CSRF_TOKEN')
 
-    return yield call(delRequest, api.deleteArticleApi(id),  {
+    return yield call(delRequest, api.deleteArticleApi(id, pageNum, pageSize),  {
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
       }
     })
   } catch (err) {
@@ -151,12 +150,67 @@ export function* deleteArticleByIdFlow () {
   while (true) {
     let req = yield take(ArticleActionTypes.DELETE_ARTICLE)
 
-    let res = yield call(deleteArticleById, req.id)
+    let res = yield call(deleteArticleById, req.id, req.pageNum, req.pageSize)
 
     if (res.status === 'success') {
+      // 存储数据
+      yield put({
+        type: ArticleActionTypes.RESPONSE_ALL_ARTICLES,
+        data: res.data,
+        total: res.total
+      })
+
       alert('删除成功')
     } else {
       alert(`删除失败，原因: ${res.msg}`)
+    }
+  }
+}
+
+/**
+ * 修改文章（发送请求的准备：即打开连接，发送数据）
+ * @param data
+ * @return {*}
+ */
+function* modifyArticle (pageNum, pageSize, data) {
+  try {
+    const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
+    return yield call(putRequest, api.modifyArticleApi(pageNum, pageSize), data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
+      }
+    })
+  } catch (err) {
+    // 报错处理
+    console.log(err)
+  }
+}
+
+export function* modifyArticleFlow () {
+  while (true) {
+    let request = yield take(ArticleActionTypes.PUT_MODIFY_ARTICLE)
+    let articleData = request.data.articleData
+
+    if (articleData.title && articleData.content && articleData.Category_id && articleData.Category_id) {
+      let res = yield call(modifyArticle, request.pageNum, request.pageSize, request.data)
+
+      // 判断返回的响应
+      if (res.status === 'success') {
+        // 存储数据
+        yield put({
+          type: ArticleActionTypes.RESPONSE_ALL_ARTICLES,
+          data: res.data,
+          total: res.total
+        })
+
+        alert('修改文章成功！')
+      } else {
+        alert(res.msg)
+        location.href = '/#/admin/login'
+      }
     }
   }
 }
