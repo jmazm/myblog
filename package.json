@@ -6,8 +6,8 @@
   "scripts": {
     "cms": "cross-env NODE_ENV=production node ./server/cmsServer.js",
     "index": "cross-env NODE_ENV=production node ./server/indexServer.js",
-    "pm2-index": "cross-env NODE_ENV=production pm2 start ./server/indexServer.js --watch",
-    "pm2-cms": "cross-env NODE_ENV=production pm2 start ./server/cmsServer.js --watch"
+    "pm2-index": "cross-env NODE_ENV=production pm2 start ./server/indexServer.js --watch --name blogindex",
+    "pm2-cms": "cross-env NODE_ENV=production pm2 start ./server/cmsServer.js --watch --name blogcms"
   },
   "author": "张静宜",
   "license": "ISC",
