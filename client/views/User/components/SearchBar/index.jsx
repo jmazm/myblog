@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import './style.css'
@@ -33,7 +31,7 @@ class SearchBar extends Component {
       <div className="search-bar">
         <div className="search-bar-inner">
           <input className="search-input" name="title" onChange={this.handleOnChange}/>
-          <button className="fa fa-search" onClick={this.handleOnClick}></button>
+          <button className="search-btn" onClick={this.handleOnClick}></button>
         </div>
       </div>
     )

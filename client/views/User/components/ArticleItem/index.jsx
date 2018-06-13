@@ -20,7 +20,7 @@ class ArticleItem extends Component {
         <div className="article-item-inner">
           <header className="article-header">
             <h2 className="article-title"><Link to={`/article/${id}`}>{title}</Link></h2>
-            <div className="article-time"><i className="fa fa-calendar"></i>{dateFormat(date, 'yyyy/mm/dd ddd')}</div>
+            <div className="article-time"><i className="calendar"></i>{dateFormat(date, 'yyyy/mm/dd ddd')}</div>
           </header>
           <div className="article-main">
             {

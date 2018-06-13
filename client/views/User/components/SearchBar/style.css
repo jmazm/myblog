@@ -16,12 +16,12 @@
 .search-bar .search-input:focus {
     box-shadow: inset rgba(0, 0, 0, 0.4) 2px 2px 4px;
 }
-.search-bar-inner .fa-search {
+.search-bar-inner .search-btn {
     position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 16px;
-    line-height: 2;
+    top: 6px;
+    right: 4px;
+    width: 22px;
+    height: 22px;
     border: none;
-    background: none;
+    background: transparent url(../../../../static/imgs/icon.png) no-repeat -10px -44px;
 }

@@ -33,9 +33,12 @@
 .article-header .article-time {
     font: 15px/56px '';
 }
-.article-time .fa-calendar {
+.article-time .calendar {
+    display: inline-block;
+    width: 20px;
+    height: 16px;
     margin-right: 8px;
-    color: #333333;
+    background: transparent url(../../../../static/imgs/icon.png) no-repeat -10px -74px;
 }
 .article-main .article-img-link {
     display: block;

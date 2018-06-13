@@ -16,6 +16,7 @@ const base = require('./webpack.base.config')
 
 module.exports = merge(base, {
   mode: 'production',
+  devtool: 'source-map',
   entry: {
     index: ['./client/views/index.jsx']
   },
@@ -34,7 +35,8 @@ module.exports = merge(base, {
         use:ExtractTextWebpackPlugin.extract({
           fallback:'style-loader',
           use:[
-            'css-loader'
+            'css-loader',
+            'postcss-loader'
           ]
         })
       }
@@ -83,6 +85,7 @@ module.exports = merge(base, {
       minRatio: 0.8
     }),
 
+    // 压缩js
     new WebpackParallelUglifyPlugin({
       // 传递给uglifyJS的参数
       uglifyJS: {
@@ -123,6 +126,7 @@ module.exports = merge(base, {
       }
     ]),
 
+    // dll
     new DllReferencePlugin({
       manifest: require(path.resolve(process.cwd(), './dist/lib/react.manifest.json'))
     }),
@@ -138,6 +142,8 @@ module.exports = merge(base, {
     new DllReferencePlugin({
       manifest: require(path.resolve(process.cwd(), './dist/lib/other.manifest.json'))
     }),
+
+    // 将资源路径自动添加到页面上
     new HtmlWebpackIncludeAssestsPlugin({
       //  添加的资源相对 html 路径而言
       // <script type="text/javascript" src="/lib/react.js">

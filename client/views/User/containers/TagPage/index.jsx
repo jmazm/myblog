@@ -30,7 +30,7 @@ class Tag extends Component {
         <div className="main">
           <div className="main-inner">
             <div className="widget-wrapper">
-              <h2 className="widget-title"><i className="fa fa-bookmark"></i>标签展示</h2>
+              <h2 className="widget-title"><i className="icon-tags"></i>标签展示</h2>
               <TagList data={tags} type="tag"/>
             </div>
           </div>
