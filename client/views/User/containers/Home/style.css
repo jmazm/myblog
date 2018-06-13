@@ -25,7 +25,12 @@
     text-align: center;
     border-bottom: 1px dashed #999999;
 }
-.widget-title .fa-bookmark {
+.widget-title .icon-tags {
+    display: inline-block;
+    width: 23px;
+    height: 30px;
     margin-right: 10px;
+    transform: translateY(7px);
+    background: transparent url(../../../../static/imgs/icon.png) no-repeat -10px -10px;
 }
 
