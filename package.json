@@ -4,16 +4,10 @@
   "description": "张静宜个人前端博客",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --forceExit --runInBand --watch",
-    "coverage": "jest --coverage",
     "cms": "cross-env NODE_ENV=production node ./server/cmsServer.js",
     "index": "cross-env NODE_ENV=production node ./server/indexServer.js",
-    "webpackDev": "cross-env NODE_ENV=development webpack --config ./client/config/webpack.dev.config.js --colors --profile",
-    "webpackProd": "cross-env NODE_ENV=production webpack --config ./client/config/webpack.prod.config.js",
-    "dll": "webpack --config ./client/config/webpack.dll.config.js",
-    "cmsDev": "cross-env NODE_ENV=development node ./client/server/cms.js",
-    "indexDev": "cross-env NODE_ENV=development node ./client/server/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon ./server/devServer.js"
+    "pm2-index": "cross-env NODE_ENV=production pm2 start ./server/indexServer.js --watch",
+    "pm2-cms": "cross-env NODE_ENV=production pm2 start ./server/cmsServer.js --watch"
   },
   "author": "张静宜",
   "license": "ISC",
