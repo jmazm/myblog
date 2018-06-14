@@ -27,6 +27,7 @@ class Article {
                   WHERE a.Tag_id=t.id AND a.Category_id=c.id 
                   ORDER BY date Limit ?,?`
     const [articles] = await global.db.query(sql, [(pageNum - 1) * pageSize, pageSize])
+
     return articles
   }
 

@@ -47,7 +47,6 @@ export const actionTypes = {
 }
 
 // action creator：创建action的函数
-
 export const actions = {
   /**
    * @example {
@@ -262,12 +261,6 @@ export function reducer (state = initialState, action) {
           Category_id: action.Category_id
         })
       }
-    // case actionTypes.SET_ARTICLE_ID:
-    //   return {
-    //     newArticleData: Object.assign({}, state.newArticleData, {
-    //       id: action.id
-    //     })
-    //   }
     default:
       return state
   }

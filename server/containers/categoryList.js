@@ -15,20 +15,19 @@ export async function index (ctx) {
   switch (ctx.accepts('json', 'html')) {
     case 'html':
       const ret = await articleModel.getByCategory(decodeURIComponent(categoryName), 1, 10)
-      
-      console.log(ret)
 
       const store = configureStore({
         articles: ret.articles,
         total: ret.total
       });
 
-      const html = layout(renderToString(
-        <Provider store={store}>
-          <StaticRouter location={ctx.url} context={{}}>
-            <ArticleListByCategoryPage/>
-          </StaticRouter>
-        </Provider>
+      const html = layout(
+        renderToString(
+          <Provider store={store}>
+            <StaticRouter location={ctx.url} context={{}}>
+              <ArticleListByCategoryPage/>
+            </StaticRouter>
+          </Provider>
       ), store.getState())
       
       ctx.body = html
