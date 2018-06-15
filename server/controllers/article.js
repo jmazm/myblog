@@ -73,12 +73,12 @@ class Article {
   static async getArticleDetail (ctx) {
     const id = parseInt(ctx.params.id)
     let articleData = await articleModel.getById(id)
-    let prefix = config.dev.fileServerIP
+    let prefix = config.prod.fileServerIP
     const Category_id = articleData.Category_id
     const Tag_id = articleData.Tag_id
 
-    if(process.env.NODE_ENV === 'production') {
-      prefix = config.prod.fileServerIP
+    if(process.env.NODE_ENV === 'development') {
+      prefix = config.dev.fileServerIP
     }
 
     articleData.Tag_id = await tagModel.getById(Tag_id)
