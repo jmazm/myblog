@@ -10,7 +10,7 @@ module.exports = {
     fileServerIP: 'http://127.0.0.1:3002',
   },
   prod: { // 生成环境中，因为是同构，所以只需分官网和cms
-    fileServerIP: 'http://120.79.205.192',
+    fileServerIP: 'https://file.jmazm.com',
     imageUploadApi: 'http://localhost:3001/upload',
   },
   demoRootPath: 'http://garvenzhang.github.io/',
