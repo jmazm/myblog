@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux'
 import {reducer as tags} from './tagReducer'
-// import {reducer as newArticle} from './newArticleReducer'
 import {reducer as categories} from './categoryReducer'
 import {reducer as articles} from './articleReducer'
 import {reducer as comments} from './commentReducer'

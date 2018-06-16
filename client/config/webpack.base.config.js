@@ -24,7 +24,7 @@ module.exports = {
       '.css'
     ],
     // 'E:\\projectAndNote\\blog\\myblog\\client\\node_modules'
-    modules: [ path.resolve(srcDir, 'node_modules') ]
+    // modules: [ path.resolve(srcDir, 'node_modules') ]
   },
   // 文件输出接口
   output: {

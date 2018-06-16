@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader'
 
 import {AdminRouteMap, UserRouteMap} from '../router/index'
 import configureStore from '../redux/store/index'
