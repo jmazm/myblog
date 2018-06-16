@@ -12,7 +12,8 @@ import './reset.css'
 import common from '../../config'
 
 const renderRoot = () => {
-  if (window.location.port === common.server.indexServerPort || !window.location.port) {
+  console.log(window.location.port)
+  if (window.location.port === common.server.indexServerPort || /blog\.jmazm\.com/.test(location.href)) {
     ReactDOM.render(
       <AppContainer>
         <Provider store={configureStore}>
@@ -21,7 +22,7 @@ const renderRoot = () => {
       </AppContainer>,
       document.getElementById('root')
     );
-  } else if (window.location.port === common.server.cmsServerPort || window.location.port == 442) {
+  } else if (window.location.port === common.server.cmsServerPort || /admin\.jmazm\.com/.test(location.href)) {
     ReactDOM.render(
       <AppContainer>
         <Provider store={configureStore}>
