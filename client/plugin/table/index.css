@@ -1,0 +1,29 @@
+.table {
+    width: 100%;
+}
+.tr {
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    font: 16px/2 '';
+    padding: 6px 0;
+}
+
+.header-tr {
+    color: #333333;
+    border-top: 1px solid #e0e0e0;
+    background: rgb(250, 250, 250);
+}
+.body-tr {
+    border-top: 1px solid #e0e0e0;
+}
+.body-tr:last-of-type {
+    border-bottom: 1px solid #e0e0e0;
+}
+.body-tr:hover {
+    background: rgba(118, 161, 239, 0.5);
+}
+.th,
+.td {
+    min-width: 150px;
+}

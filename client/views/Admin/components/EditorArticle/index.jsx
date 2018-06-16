@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
-import {Form, Input, Select, AutoComplete} from 'antd'
+import {Form, Input, Select} from 'antd'
 
 const FormItem = Form.Item
 const Option = Select.Option
