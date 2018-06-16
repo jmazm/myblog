@@ -9,7 +9,7 @@ import AdminHeader from '../../components/AdminHeader'
 
 import {actions as categoryActions} from '../../../../redux/reducer/categoryReducer'
 
-import JModal from '../../../../plugin/modal'
+// import JModal from '../../../../plugin/modal'
 
 const {get_all_categories, add_category, delete_category} = categoryActions
 
@@ -154,7 +154,7 @@ class AdminCategory extends Component {
             <div>
               <Table dataSource={this.handleData(categories)} columns={this.columns} pagination={{defaultPageSize: 50}}/>
             </div>
-            <JModal/>
+            {/*<JModal/>*/}
           </div>
         </div>
       </div>
