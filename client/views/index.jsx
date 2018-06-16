@@ -6,7 +6,6 @@ import { AppContainer } from 'react-hot-loader'
 import {AdminRouteMap, UserRouteMap} from '../router/index'
 import configureStore from '../redux/store/index'
 
-import 'antd/dist/antd.min.css'
 import './reset.css'
 
 import common from '../../config'

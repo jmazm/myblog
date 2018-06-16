@@ -9,11 +9,11 @@ import ArticleList from '../../components/ArticleList'
 
 import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
 
-import { Pagination } from 'antd';
+import Pagination from '../../../../plugin/pagination';
 
 import './style.css'
 
-const {get_all_articles} = ArticleReducer
+const { get_all_articles } = ArticleReducer
 
 class Home extends Component {
   constructor (props) {
@@ -22,6 +22,12 @@ class Home extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
     this.pageOnChange = this.pageOnChange.bind(this)
   }
+
+  /**
+   * 控制分页插件页数变化函数
+   * @param page
+   * @param pagesize
+   */
   pageOnChange (page, pagesize) {
     this.props.get_all_articles({
       pageNum: page,
@@ -29,13 +35,12 @@ class Home extends Component {
     })
   }
   render () {
-    const {articleList, total} = this.props
+    const { articleList, total } = this.props
 
     return (
       <div className="container my--blog">
         <Header/>
         <div className="main">
-          {/*<SearchBar/>*/}
           <div className="main-inner">
             <ArticleList data={articleList}/>
             <div className="pagination-wrapper">

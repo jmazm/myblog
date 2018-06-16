@@ -4,7 +4,8 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
-import {Table, Divider, Modal} from 'antd'
+import Table from '../../../../plugin/table'
+import Modal from '../../../../plugin/modal'
 
 import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
@@ -127,14 +128,12 @@ class AdminArticle extends Component {
    * @param index
    * @return {XML}
    */
-  handleRenderOperation (o, row, index) {
+  handleRenderOperation (row, index) {
     const {pageNum, pageSize} = this.state
     return (
       <span>
         <a href="javascript:;">查看</a>
-        <Divider type="vertical" />
         <a href="javascript:;" onClick={() => this.handleDel(row.id, pageNum, pageSize)}>删除</a>
-        <Divider type="vertical" />
         <a href="javascript:;" onClick={() => this.showModal(row.id)}>修改</a>
       </span>
     )
@@ -146,6 +145,7 @@ class AdminArticle extends Component {
    * @return {{defaultPageSize: number, onChange: AdminArticle.pageOnChange, defaultCurrent: number, total: Number}}
    */
   handlePagConfig (total) {
+
     const config = {
       defaultPageSize: 10,
       onChange: this.pageOnChange,
@@ -187,7 +187,7 @@ class AdminArticle extends Component {
    * @return {Promise.<void>}
    */
   async handleOk () {
-    const {articleData, pageSize, pageNum} = this.state
+    const { articleData, pageSize, pageNum } = this.state
     let postData = {
       articleData: {}
     }
@@ -252,7 +252,7 @@ class AdminArticle extends Component {
    * @param value
    */
   handleTagChange (value) {
-    const {articleData} = this.state
+    const { articleData } = this.state
 
     this.setState({
       articleData: Object.assign({}, articleData, {
@@ -261,9 +261,19 @@ class AdminArticle extends Component {
     })
   }
 
+  renderModalContent (articleData, categories, tags) {
+    return <EditorArticle
+      articleData={articleData}
+      categories={categories}
+      tags={tags}
+      handleChange={this.handleChange}
+      handleCategoryChange={this.handleCategoryChange}
+      handleTagChange={this.handleTagChange}
+    />
+  }
   render () {
-    const {articleList, total, tags, categories} = this.props
-    const {articleData, visible} = this.state
+    const { articleList, total, tags, categories } = this.props
+    const { articleData, visible } = this.state
 
     return (
       <div className="blog-management-wrapper blog--management">
@@ -284,16 +294,8 @@ class AdminArticle extends Component {
               onOk={this.handleOk}
               onCancel={this.handleCancel}
               width="750"
-            >
-              <EditorArticle
-                articleData={articleData}
-                categories={categories}
-                tags={tags}
-                handleChange={this.handleChange}
-                handleCategoryChange={this.handleCategoryChange}
-                handleTagChange={this.handleTagChange}
-              />
-            </Modal>
+              content={this.renderModalContent(articleData, categories, tags)}
+            />
           </div>
         </div>
       </div>
@@ -315,13 +317,13 @@ AdminArticle.defaultProps = {
   tags: [],
   categories: [],
   articleList: []
-};
+}
 
 AdminArticle.propTypes = {
   articleList: PropTypes.array,
   tags: PropTypes.array,
   categories: PropTypes.array,
-};
+}
 
 function mapStateToProps (state) {
   const {articleList, total} = state.articles
