@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import modal from './index.css'
 
@@ -8,22 +10,25 @@ class Modal extends Component {
     super(props)
 
     this.shouldComponentUpdate = ReactAddonsPureRenderMixin.shouldComponentUpdate
+    this.setModalClassName = this.setModalClassName.bind(this)
+  }
 
-    this.state = {
-      // 模态弹框的显示状态
-      visible: false
-    }
+  setModalClassName (visible) {
+    return classnames({
+      modal: true,
+      hide: !visible
+    })
   }
 
   render () {
-    const { content, title } = this.props
+    const { content, title, visible, onCancel, onOk } = this.props
 
     return (
-      <div className="modal">
+      <div className={this.setModalClassName(visible)}>
         <div className="modal-inner">
           <header className="modal-header">
-            <h2 className="header-title">{title || '标题'}</h2>
-            <a href="javascript:;" className="del">x</a>
+            <h2 className="header-title">{title}</h2>
+            <a href="javascript:;" className="del" onClick={onCancel}>x</a>
           </header>
           <div className="modal-content">
             <div className="content-inner">
@@ -31,13 +36,24 @@ class Modal extends Component {
             </div>
           </div>
           <footer className="modal-footer">
-            <button type="button" className="primary">确定</button>
-            <button type="button" className="normal">取消</button>
+            <button type="button" className="primary" onClick={onOk}>确定</button>
+            <button type="button" className="normal" onClick={onCancel}>取消</button>
           </footer>
         </div>
       </div>
     )
   }
+}
+
+Modal.defaultProps = {
+  title: '请输入标题',
+  visible: false,
+  content: ''
+}
+
+Modal.propTypes = {
+  title: PropTypes.string,
+  visible: PropTypes.bool
 }
 
 export default Modal

@@ -3,15 +3,16 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
-import {Input, Button, Modal, Table, Divider} from 'antd'
 import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
 
-import {actions as categoryActions} from '../../../../redux/reducer/categoryReducer'
+import Modal from '../../../../plugin/modal'
+import Table from '../../../../plugin/table'
 
-// import JModal from '../../../../plugin/modal'
+import { actions as categoryActions } from '../../../../redux/reducer/categoryReducer'
 
-const {get_all_categories, add_category, delete_category} = categoryActions
+
+const { get_all_categories, add_category, delete_category } = categoryActions
 
 class AdminCategory extends Component {
   constructor (props) {
@@ -28,6 +29,7 @@ class AdminCategory extends Component {
     this.handleCancel = this.handleCancel.bind(this)
     this.handleData = this.handleData.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.renderModalContent = this.renderModalContent.bind(this)
   }
 
   /**
@@ -69,11 +71,10 @@ class AdminCategory extends Component {
    * @param index
    * @return {XML}
    */
-  handleRender (o, row, index) {
+  handleRender (row, index) {
     return (
       <span>
         <a href="javascript:;" onClick={() => this.handleDel(row.id)}>删除</a>
-        <Divider type="vertical" />
         <a href="javascript:;">修改</a>
       </span>
     )
@@ -131,6 +132,11 @@ class AdminCategory extends Component {
     return copyData
   }
 
+  renderModalContent () {
+    return (
+      <input type="text" placeholder="类别名称" onChange={this.handleChange}  id="category-input"/>
+    )
+  }
   render () {
     const {categories} = this.props
 
@@ -141,20 +147,18 @@ class AdminCategory extends Component {
           <AdminHeader title="管理类别"/>
           <div className="content-inner">
             <div>
-              <Button type="primary" onClick={this.showModal}>添加类别</Button>
-              <Modal
-                title="添加类别"
-                visible={this.state.visible}
-                onOk={this.handleOk}
-                onCancel={this.handleCancel}
-              >
-                <Input placeholder="类别名称" onChange={this.handleChange} id="category-input"/>
-              </Modal>
+              <button type="button" onClick={this.showModal}>添加类别</button>
             </div>
             <div>
-              <Table dataSource={this.handleData(categories)} columns={this.columns} pagination={{defaultPageSize: 50}}/>
+              <Table dataSource={this.handleData(categories)} columns={this.columns} pagination={false}/>
             </div>
-            {/*<JModal/>*/}
+            <Modal
+              title="添加类别"
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              content={this.renderModalContent()}
+            />
           </div>
         </div>
       </div>
