@@ -24,6 +24,7 @@ const AdminRouteMap = () => {
   return  (
     <HashRouter>
       <Switch>
+        <Route exact path="/" component={AdminNewArticlePage}/>
         <Route path="/admin/newArticle" component={AdminNewArticlePage}/>
         <Route path="/admin/login" component={LoginPage}/>
         <Route path="/admin/article" component={AdminArticlePage}/>
