@@ -5,7 +5,7 @@ const app = require("./basicConfig")
 // const https = require("https")
 // const fs = require("fs")
 const config = require("../config")
-const port = config.server.cmsServerPort
+const port = config.dev.serverPort
 
 
 app.listen(port, () => {

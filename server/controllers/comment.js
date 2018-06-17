@@ -20,7 +20,7 @@ class Comment {
    */
   static async getTagById (ctx) {
     const idTag = parseInt(ctx.params.id)
-    let tag = await TagModel.getById(idTag)
+    let tag = await CommentModel.getById(idTag)
 
     ctx.body = {
       status: 'success',
@@ -33,7 +33,9 @@ class Comment {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async addComment (ctx) {
+  static async addComment (ctx, next) {
+    await next()
+
     const contentType = ctx.request.headers["content-type"]
     let params = ctx.request.body
     let postData = params.data

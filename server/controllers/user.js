@@ -2,7 +2,7 @@ const jsonWebToken = require("jsonwebtoken")
 const UserModel = require("../models/user")
 const Password = require("../tools/password")
 const crypt = require("../tools/crypt")
-const {refererAuth} = require("../tools/auth")
+// const {refererAuth} = require("../tools/auth")
 const captcha = require("../tools/captcha")
 const config = require("../../config")
 
@@ -101,7 +101,6 @@ class User {
     ctx.body = {
       status: 'success',
       accessToken: accessToken
-      // csrfToken: csrfToken
     }
   }
 

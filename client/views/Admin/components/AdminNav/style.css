@@ -4,19 +4,23 @@
     height: 100vh;
     padding: 20px 0;
     background: white;
-    border-right: 1px solid #c0c0c0;
+    border: 1px solid #c0c0c0;
+    border-right-width: 5px;
 }
 
 .admin-aside .list-item {
     min-width: 85px;
-    padding: 0 15px;
+    padding: 0 20px;
     margin-bottom: 10px;
-    font: 14px/2 '';
+    font: 16px/2 '';
     border-bottom: 2px solid #c0c0c0;
 }
 .admin-aside .list-item:last-of-type {
     border-bottom: none;
 }
 .admin-aside .list-item a {
-    color: white;
+    color: #696969;
+}
+.admin-aside .list-item a:hover {
+    color: #ff6666;
 }

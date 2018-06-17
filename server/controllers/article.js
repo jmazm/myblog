@@ -10,7 +10,9 @@ class Article {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async getArticle (ctx) {
+  static async getArticle (ctx, next) {
+    await next()
+
     const query = ctx.query
     const pageNum = parseInt(query.pageNum)
     const pageSize = parseInt(query.pageSize)
@@ -57,7 +59,6 @@ class Article {
       total = await articleModel.getTotal()
     }
 
-
     ctx.body = {
       status: 'success',
       data: articles,
@@ -70,7 +71,9 @@ class Article {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async getArticleDetail (ctx) {
+  static async getArticleDetail (ctx, next) {
+    await next()
+
     const id = parseInt(ctx.params.id)
     let articleData = await articleModel.getById(id)
     let prefix = config.prod.fileServerIP
@@ -169,6 +172,7 @@ class Article {
    * @return {Promise.<void>}
    */
   static async delArticle (ctx, next) {
+    // 用户权限验证
     await next()
 
     const query = ctx.query

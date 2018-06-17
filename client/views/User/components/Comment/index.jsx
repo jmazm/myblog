@@ -11,7 +11,7 @@ import { postRequest, api } from '../../../../fetch/fetch'
 
 import './style.css'
 
-const {get_all_comments} = CommentActions
+const {  get_all_comments } = CommentActions
 
 class Comment extends Component {
   constructor (props) {
@@ -121,9 +121,9 @@ class Comment extends Component {
   }
 
   render () {
-    const {comments} = this.props
-    const {sign, commentsData} = this.state
-    const {name, email, content, website, Article_id} = commentsData
+    const { comments } = this.props
+    const { sign, commentsData } = this.state
+    const { name, email, content, website, Article_id } = commentsData
 
     return (
       <div className="comment-container">
@@ -177,7 +177,6 @@ class Comment extends Component {
                 }) :
                 <li>暂无评论</li>
             }
-
           </ul>
         </div>
       </div>

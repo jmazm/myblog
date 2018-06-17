@@ -16,7 +16,7 @@ class Header extends Component {
         localStorage.removeItem('ACCESS_TOKEN')
         localStorage.removeItem('articleList')
 
-        location.href = '/#/admin/login'
+        location.href = '/'
       }
     }
     render () {
@@ -24,7 +24,7 @@ class Header extends Component {
           <aside className="admin-aside">
               <nav className="nav-bar">
                   <ul className="nav-list clearfix">
-                      <li className="list-item"><Link to="/">发表文章</Link></li>
+                      <li className="list-item"><Link to="/admin/newArticle">发表文章</Link></li>
                       <li className="list-item"><Link to="/admin/category">管理类别</Link></li>
                       <li className="list-item"><Link to="/admin/tag">管理标签</Link></li>
                       <li className="list-item"><Link to="/admin/article">管理文章</Link></li>

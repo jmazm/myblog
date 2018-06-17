@@ -34,7 +34,9 @@ class Category {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async addCategory (ctx) {
+  static async addCategory (ctx, next) {
+    await next()
+
     const contentType = ctx.request.headers["content-type"]
     let val = ctx.request.body
 

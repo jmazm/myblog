@@ -21,12 +21,13 @@ export async function index (ctx) {
         total: ret.total
       });
 
-      const html = layout(renderToString(
-        <Provider store={store}>
-          <StaticRouter location={ctx.url} context={{}}>
-            <ArticleListByCategoryPage/>
-          </StaticRouter>
-        </Provider>
+      const html = layout(
+        renderToString(
+          <Provider store={store}>
+            <StaticRouter location={ctx.url} context={{}}>
+              <ArticleListByCategoryPage/>
+            </StaticRouter>
+          </Provider>
       ), store.getState())
       
       ctx.body = html
