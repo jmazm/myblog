@@ -33,7 +33,9 @@ class Tag {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async addTag (ctx) {
+  static async addTag (ctx, next) {
+    await next()
+
     const contentType = ctx.request.headers["content-type"]
     let val = ctx.request.body
 
@@ -60,7 +62,9 @@ class Tag {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async delTag (ctx) {
+  static async delTag (ctx, next) {
+    await next()
+
     const id = ctx.params.id
 
     const result = await TagModel.del(id)

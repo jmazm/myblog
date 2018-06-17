@@ -17,8 +17,10 @@ export async function index (ctx) {
       const ret = await articleModel.getByTitle(decodeURIComponent(title), 1, 10)
 
       const store = configureStore({
-        articles: ret.articles,
-        total: ret.total
+        articles:  {
+          articleList: ret.articles,
+          total: ret.total
+        }
       });
 
       const html = layout(renderToString(
