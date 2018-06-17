@@ -15,9 +15,30 @@ export async function index (ctx) {
       const articles = await articleModel.getAll(1, 10)
       const total = await articleModel.getTotal()
 
+      // 如果要使用react 同构，那么，所传的参数state的值必须与相应模块的initialState一致
+      // 比如：文章模块的initialState，由于首页需要的是文章列表数据，因此，就要按照以下的格式去传递文章列表的数据
+      /**
+       const initialState = {
+          articleList: [], // 文章列表
+          articleDetail: {}, // 文章细节
+          currentPage: 1, // 当前页
+          total: 0, // 文章总数
+          newArticleData: {
+            title: '', // 文章标题
+            content: '', // 文章内容
+            Tag_id: 1, // 文章标签
+            Category_id: 1, // 文章类别
+            id: '', // 文章ID
+            imgSrc: '', // 文章列表要展示的图片地址
+            foreword: '' // 文章前言
+          }
+        }
+       */
       const store = configureStore({
-        articles: articles,
-        total: total
+        articles:  {
+          articleList: articles,
+          total: total
+        }
       });
 
       const html = layout(
