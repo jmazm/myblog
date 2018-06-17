@@ -1,15 +1,20 @@
 .login-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 500px;
     margin: 0 auto;
     padding: 15px 20px;
-    border: 1px solid #333333;
-    background: #999999;
+    border: 1px solid #c0c0c0;
+    background: white;
 }
 .login-header {
     text-align: center;
 }
 .login-header .header-ti {
     font: bold 18px/1.5 '';
+    color: #666666;
 }
 .login-form {
     text-align: center;
@@ -24,16 +29,20 @@
     height: 26px;
     font: 13px/2 '';
     text-indent: 5px;
-    border: 1px solid #000000;
+    border: 1px solid #c0c0c0;
 }
 .login-tool-bar {
     text-align: right;
 }
 .login-tool-bar .btn {
-    padding: 5px 10px;
+    padding: 3px 12px;
     border: 1px solid #c0c0c0;
     border-radius: 5px;
     background: white;
+}
+.login-tool-bar .btn:hover {
+    color: dodgerblue;
+    border-color: dodgerblue;
 }
 .captcha-wrapper {
     width: 90%;

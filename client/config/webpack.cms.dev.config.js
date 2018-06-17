@@ -15,7 +15,7 @@ module.exports = merge(dev, {
   },
   plugins: [
     new OpenBrowserWebpackPlugin({
-      url: `http://127.0.0.1:${port}/#/admin/login`
+      url: `http://127.0.0.1:${port}/`
     })
   ]
 })
