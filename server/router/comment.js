@@ -11,7 +11,7 @@ router.get('/comment', commentCtrl.getComments)
 // router.get('/v1/article/:id', commentCtrl.getArticleDetail)
 
 // 添加文章
-router.post('/comment', commentCtrl.addComment, )
+router.post('/comment', commentCtrl.addComment)
 
 // 修改文章
 // router.put('/v1/article', commentCtrl.modifyArticle)
