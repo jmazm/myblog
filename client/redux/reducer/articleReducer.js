@@ -1,7 +1,5 @@
 // 初始状态
 const initialState = {
-  tag: [], // 文章标签
-  category: [], // 文章类别
   articleList: [], // 文章列表
   articleDetail: {}, // 文章细节
   currentPage: 1, // 当前页
