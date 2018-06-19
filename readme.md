@@ -2,11 +2,6 @@
 
 ## 一、项目
 
-### 新版博客主页
-
-* 链接：[https://blog.jmazm.com](https://blog.jmazm.com)
-* github：[https://github.com/JMHello/myblog](https://github.com/JMHello/myblog)
-
 ### 新版博客
 
 * 链接：[https://blog.jmazm.com](https://blog.jmazm.com)
