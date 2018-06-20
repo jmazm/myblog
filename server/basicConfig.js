@@ -32,6 +32,7 @@ const koaStaticCache = require("koa-static-cache")
 const mysql = require("mysql2/promise")
 const debug = require("debug")('app')
 const body = require("koa-body")
+const validate = require("koa-validate")
 const logger = require('koa-logger')
 const routerMap = require("./router")
 const common = require("../config")
@@ -41,6 +42,9 @@ const app = new Koa()
 
 // 将myql连接池暴露在全局环境下
 global.db = mysql.createPool(common.dbConfig)
+
+// 拦截器 - validate url params, url queries, request bodies, headers as well as files
+validate(app)
 
 // 在 X-Response-Time 的响应头返回响应时间
 app.use(async function responseTime (ctx, next) {
@@ -52,7 +56,6 @@ app.use(async function responseTime (ctx, next) {
 
 // HTTP 压缩，自动读取.gz文件
 app.use(compress({}))
-
 
 //使用logger日志库
 if (process.env.NODE_ENV !== 'test') {
@@ -67,17 +70,6 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(body({
   multipart: true
 }))
-
-
-
-// 设置session(uses signed session cookies, with no server storage)
-// app.use(session(app))
-
-// 追踪每一个请求
-app.use(async function (ctx, next) {
-  debug(`${ctx.method}: ${ctx.url}`)
-  await next()
-})
 
 // 处理一些抛出错误的情况（这里主要是处理用户权限验证）
 app.use(async (ctx, next) => {
@@ -122,6 +114,36 @@ app.use(async (ctx, next) => {
 app.use(koaStaticCache(STATICDIST, {
   maxAge: 60 * 60 * 24 * 30
 }))
+
+// 追踪每一个请求
+app.use(async function (ctx, next) {
+  debug(`${ctx.method}: ${ctx.url}`)
+  await next()
+})
+
+/**
+ * 点击劫持：将目标网站放入iframe中，视觉上隐藏，并指导用户操作
+ * // ===
+ * 1. 特点：用户亲手操作，用户不知情
+ * 2. 危害：盗取用户资金，获取用户敏感信息
+ * 3. 防御
+   3.1 Javascript禁止内嵌，但sandbox能禁止js
+   3.2 X-Frame-Options：给浏览器指示允许一个页面可否在 <frame>, <iframe> 或者 <object> 中展现的标记
+     有三个值：
+      DENY - 完全禁止嵌套iframe
+      SAMEORIGIN - 表示该页面可以在相同域名页面的 frame 中展示。
+      ALLOW-FROM uri - 表示该页面可以在指定来源的 frame 中展示。
+   3.3 其它辅助手段：增加用户操作成本，如验证码
+   3.4 X-XSS-Protection ：现代浏览器已不再需要
+ * === //
+ */
+
+app.use(async function (ctx, next) {
+  ctx.set('X-XSS-Protection', '1; mode=block')
+  ctx.set('X-Frame-Options', 'DENY')
+
+  await next()
+})
 
 app.use(routerMap.routes())
   .use(routerMap.allowedMethods())

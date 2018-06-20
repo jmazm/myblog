@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import dateFormat from 'dateformat'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Validator, reg } from '../../../../lib/verification'
+import { Validator } from '../../../../lib/form'
+import { replaceHtml } from '../../../../lib/xss'
 
 import { actions as CommentActions } from '../../../../redux/reducer/commentReducer'
 import { postRequest, api } from '../../../../fetch/fetch'
@@ -96,7 +97,7 @@ class Comment extends Component {
 
     this.setState({
       commentsData: Object.assign({}, commentsData, {
-        [name]: reg.replaceHtml(value)
+        [name]: replaceHtml(value)
       })
     })
   }

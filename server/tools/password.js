@@ -1,5 +1,3 @@
-const password = {}
-
 const md5 = (str) => {
   const crypto = require("crypto")
   const md5Hash = crypto.createHash('md5')

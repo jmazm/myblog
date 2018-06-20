@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
@@ -11,20 +11,20 @@ import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
 import EditorArticle from '../../components/EditorArticle'
 
-import {reg} from '../../../../lib/verification'
+import { replaceHtml } from '../../../../lib/xss'
 
+import { actions as ArticleReducer } from '../../../../redux/reducer/articleReducer'
+import { actions as tagReducer } from '../../../../redux/reducer/tagReducer'
+import { actions as articleReducer } from '../../../../redux/reducer/categoryReducer'
 
-import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
-import {actions as tagReducer} from '../../../../redux/reducer/tagReducer'
-import {actions as articleReducer} from '../../../../redux/reducer/categoryReducer'
-
-const {get_all_articles, delete_an_article, modify_article} = ArticleReducer
-const {get_all_tags} = tagReducer
-const {get_all_categories} = articleReducer
+const { get_all_articles, delete_an_article, modify_article } = ArticleReducer
+const { get_all_tags } = tagReducer
+const { get_all_categories } = articleReducer
 
 class AdminArticle extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
       pageNum: 1,
       pageSize: 10,
@@ -194,12 +194,12 @@ class AdminArticle extends Component {
 
     postData.id = articleData.id
 
-    postData.articleData.title = reg.replaceHtml(articleData.title)
-    postData.articleData.foreword = reg.replaceHtml(articleData.foreword)
+    postData.articleData.title = replaceHtml(articleData.title)
+    postData.articleData.foreword = replaceHtml(articleData.foreword)
     postData.articleData.imgSrc = articleData.imgSrc
     postData.articleData.Category_id = articleData.Category_id
     postData.articleData.Tag_id = articleData.Tag_id
-    postData.articleData.content = reg.replaceHtml(articleData.content)
+    postData.articleData.content = replaceHtml(articleData.content)
 
     await this.props.modify_article(pageNum, pageSize, postData)
 

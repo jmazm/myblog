@@ -1,32 +1,34 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import dateformat from 'dateformat'
 import Cookies from 'js-cookie'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
-import {Validator, reg} from '../../../../lib/verification'
+import { Validator } from '../../../../lib/form'
+import { replaceHtml } from '../../../../lib/xss'
 
 import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
 import TagSelect from '../../components/TagSelect'
 import CategorySelect from '../../components/CategorySelect'
 
-import {actions as articleActions} from '../../../../redux/reducer/articleReducer'
-import {actions as tagActions} from '../../../../redux/reducer/tagReducer'
-import {actions as categoryActions} from '../../../../redux/reducer/categoryReducer'
+import { actions as articleActions } from '../../../../redux/reducer/articleReducer'
+import { actions as tagActions } from '../../../../redux/reducer/tagReducer'
+import { actions as categoryActions } from '../../../../redux/reducer/categoryReducer'
 import './style.css'
 
 
 // action creator
-const {get_all_tags} = tagActions
-const {get_all_categories} = categoryActions
-const {update_content, update_foreword, update_showed_img_url, update_category, update_tag, update_title, save_article} = articleActions
+const { get_all_tags } = tagActions
+const { get_all_categories } = categoryActions
+const { update_content, update_foreword, update_showed_img_url, update_category, update_tag, update_title, save_article } = articleActions
 
 class AdminNewArticle extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
       Tag_id: 1,
       Category_id: 1
@@ -132,9 +134,9 @@ class AdminNewArticle extends Component {
     }
 
     let articleData = {}
-    articleData.title = reg.replaceHtml(this.props.newArticleData.title)
-    articleData.content = reg.replaceHtml(this.props.newArticleData.content)
-    articleData.foreword = reg.replaceHtml(this.props.newArticleData.foreword)
+    articleData.title = replaceHtml(this.props.newArticleData.title)
+    articleData.content = replaceHtml(this.props.newArticleData.content)
+    articleData.foreword = replaceHtml(this.props.newArticleData.foreword)
 
     articleData.Tag_id = this.state.Tag_id
     articleData.Category_id = this.state.Category_id

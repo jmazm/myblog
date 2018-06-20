@@ -15,13 +15,19 @@ class Login extends Component {
     }
 
     this.shouldComponentUpdate = ReactAddonsPureRenderMixin.shouldComponentUpdate
-
+    this.captClickHandler = this.captClickHandler.bind(this)
+    this.loginHandle = this.loginHandle.bind(this)
   }
+
+  /**
+   * 登录
+   * @return {Promise.<void>}
+   */
   async loginHandle () {
     const form = this.form
     const KEY = `a1&890AJN-=+O2,X`
     const name = form.username.value.trim()
-    const password = md5(`${name}${KEY}${form.password.value.trim()}`)
+    const password = md5(`${ name }${ KEY }${ form.password.value.trim() }`)
     const captcha = form.captcha? form.captcha.value.trim() : ''
 
     // ajax 请求
@@ -45,18 +51,25 @@ class Login extends Component {
       })
     }
   }
+
+  /**
+   * 获取验证码
+   * @return {Promise.<void>}
+   */
   async captClickHandler () {
     this.setState({
-      captUrl: api.getCaptchaApi + `?id=${Math.random() * 20}`
+      captUrl: api.getCaptchaApi + `?id=${ Math.random() * 20 }`
     })
   }
+
   render () {
+    const { loginTotal, captUrl } = this.state
     return (
       <div className="login-wrapper">
         <div className="login-header">
           <h2 className="header-ti">张静宜个人前端博客cms登录</h2>
         </div>
-        <form className="login-form" ref={ele => this.form = ele}>
+        <form className="login-form" ref={ ele => this.form = ele }>
           <label htmlFor="username" className="form-label">
             <input type="text" className="form-input" id="username" name="username" placeholder="用户名"/>
           </label>
@@ -64,9 +77,9 @@ class Login extends Component {
             <input type="password" className="form-input" id="password" name="password" placeholder="密码"/>
           </label>
           {
-            this.state.loginTotal >= 3 ?
+            loginTotal >= 3 ?
               <div className="captcha-wrapper">
-                <img src={this.state.captUrl} alt="captcha" onClick={this.captClickHandler.bind(this)}/>
+                <img src={captUrl} alt="captcha" onClick={ this.captClickHandler }/>
                 <label htmlFor="captcha" className="form-label">
                   <input type="text" className="form-input" id="captcha" name="captcha" placeholder="验证码"/>
                 </label>
@@ -75,7 +88,7 @@ class Login extends Component {
           }
 
           <div className="login-tool-bar">
-            <button className="btn" type="button" onClick={this.loginHandle.bind(this)}>登录</button>
+            <button className="btn" type="button" onClick={ this.loginHandle }>登录</button>
           </div>
         </form>
       </div>

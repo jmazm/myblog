@@ -34,21 +34,21 @@
 
 ### 数据结构
 
-* [[栈]()
-* [[队列]()
-* [[字典]()
-* [[BST]()
-* [Trie Tree]()
-[图]
+* [栈]
+* [队列]
+* [字典]
+* [BST]
+* [Trie Tree]
+* [图]
 
 ### 算法
 
-* [冒泡排序]()
-* [[选择排序]()
-* [[插入排序]()
-* [[快速排序]()
-* [[希尔排序]()
-* [[归并排序]()
+* [冒泡排序]
+* [选择排序]
+* [插入排序]
+* [快速排序]
+* [希尔排序]
+* [归并排序]
 
 ### 计算机基础
 
@@ -58,7 +58,7 @@
 
 * [http缓存](/server/basicConfig.js)
 * [DNS]
-* [http2.0]()
+* [http2.0]
 * [https](/server/indexServer.js)
 * [tcp三次握手和四次挥手]
 * [UDP]
@@ -67,136 +67,133 @@
 
 ### HTML5
 
-* [[语义化]
-* [[浏览器渲染]
-* [[Websocket]
+* [语义化]
+* [浏览器渲染]
+* [Websocket]
 
 ### CSS
-* [[选择器]
+* [选择器]
 
-* [[重排/重绘]
+* [重排/重绘]
 
 
 布局
 
-* [[居中 - position + transform](/client/plugin/modal/index.css)
-* [[float布局]()
-* [[flex布局]()
+* [居中 - position + transform](/client/plugin/modal/index.css)
+* [float布局]
+* [flex布局]
 
 ### Javascript
 
-* [[深拷贝]()
-* [[new 本质]()
-* [[防抖]()
-* [[BOM]()
-* [[ajax实现]()
-* [[预加载]()
-* [[闭包]()
-* [[this]()
-* [[执行上下文]()
-* [[异步]()
-* [[递归]()
-* [[attribute和property](/client/plugin/popup/drag-drop.js)
-* [[回文]()
-* [[类名处理 - 增加/查询/删除/修改](/client/lib/className.js)
+* [深拷贝]
+* [new 本质]
+* [防抖]
+* [BOM]
+* [ajax实现]
+* [预加载]
+* [闭包]
+* [this]
+* [执行上下文]
+* [异步]
+* [递归]
+* [attribute和property](/client/plugin/popup/drag-drop.js)
+* [回文]
+* [类名处理 - 增加/查询/删除/修改](/client/lib/className.js)
 
 
 es6
-* [[promise]()
-* [[箭头函数]()
+* [promise]
+* [箭头函数]
 
 
 继承
-* [[原型链继承]()
-* [[借用构造函数继承]()
-* [[组合继承]()
-* [[寄生组合继承](/client/plugin/popup/alert.js)
+* [原型链继承]
+* [借用构造函数继承]
+* [组合继承]
+* [寄生组合继承](/client/plugin/popup/alert.js)
 
 DOM操作
 
-* [[dom - 创建/添加/删除/插入/克隆节点](/client/plugin/popup/popup.js)
-* [[innerText 和 textContent](/client/plugin/popup/popup.js)
+* [dom - 创建/添加/删除/插入/克隆节点](/client/plugin/popup/popup.js)
+* [innerText 和 textContent](/client/plugin/popup/popup.js)
 
 
 事件
 
-* [事件循环机制]()
-* [[事件处理程序](/client/lib/event.js)
-* [[事件委托]
-* [[原生键盘类事件触发顺序]
+* [事件循环机制]
+* [事件处理程序](/client/lib/event.js)
+* [事件委托]
+* [原生键盘类事件触发顺序]
 
 
 * 存储
-* [[cookie]()
-* [[localStorage]()
-* [[seessionStorage]()
+* [cookie]
+* [localStorage]
+* [seessionStorage]
 
 ### nodejs
-* [[fs模块]
-* [[path模块]
+* [fs模块]
+* [path模块]
 
 
 ### koa 
-* [[koa-static-cache源码解读]()
+* [koa-static-cache源码解读]
 
 
 ### mysql
 
 ### React
-* [[jsx语法]
-* [[生命周期]()
-* [[defaultProps + propTypes]()
-* [[虚拟DOM]()
-* [[Diff算法]()
-* [[React 直出开发环境热更新优化方案]()
-* [[ssr]
+* [jsx语法]
+* [生命周期]
+* [defaultProps + propTypes]
+* [虚拟DOM]
+* [Diff算法]
+* [React 直出开发环境热更新优化方案]
+* [ssr]
 
 ### Redux
-* [[基础]()
-* [[中间件 - middleware]()
+* [基础](/client/redux/store/configureStore.js)
+* [中间件 - middleware]
 
 
 ### Redux-saga
-[]()
 
 
 
 ### Webpack
-* [[工作原理]
-* [[url-loader 与 file-loader的区别 （以及image inline的实现）](/client/config/webpack.base.config.js)
-* [[提取第三方库 - DLL](/client/config/webpack.dll.config.js)
-* [[开启gzip压缩](/client/config/webpack.prod.config.js)
-* [[压缩js](/client/config/webpack.prod.config.js)
-* [[按需加载]
-* [[css前缀兼容处理]
-* [[css模块化]
-* [[cdn]
+* [工作原理]
+* [url-loader 与 file-loader的区别 （以及image inline的实现）](/client/config/webpack.base.config.js)
+* [提取第三方库 - DLL](/client/config/webpack.dll.config.js)
+* [开启gzip压缩](/client/config/webpack.prod.config.js)
+* [压缩js](/client/config/webpack.prod.config.js)
+* [按需加载]
+* [css前缀兼容处理]
+* [css模块化]
+* [cdn]
 
 
 ### 设计模式
-* [[单例模式](/client/plugin/popup/drag-drop.js)
-* [[装饰器模式]
-* [[观察者模式]
-* [[MVC]
-* [[MVVM]
+* [单例模式](/client/plugin/popup/drag-drop.js)
+* [装饰器模式]
+* [观察者模式]
+* [MVC]
+* [MVVM]
 
 
 ### 安全
-* [[XSS](/client/lib/verification.js)
-* [[CSRF]()
-* [[密码安全]()
-* [[点击劫持]()
-* [[DDOS]()
-* [[SQL注入]
-* [[上传漏洞]
-* [[传输安全]
-* [[重放攻击]
+* [XSS](/client/lib/xss.js)
+* [CSRF](/server/tools/auth.js)
+* [密码安全](/server/controllers/user.js)
+* [点击劫持](/server/basicConfig.js)
+* [DDOS]
+* [SQL注入]
+* [上传漏洞]
+* [传输安全]
+* [重放攻击]
 
 
 ### 测试
-* [[TTD]
-
-
+* [TTD]
 
 ### 常用功能（原生实现）
 * [上传图片插件]()
