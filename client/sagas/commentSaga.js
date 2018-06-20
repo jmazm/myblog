@@ -1,8 +1,7 @@
-import { take, call, put, select } from 'redux-saga/effects'
-import { getRequest, postRequest, putRequest, api } from '../fetch/fetch'
-import { actionTypes as IndexActionTypes } from '../redux/reducer'
+import { take, call, put } from 'redux-saga/effects'
+import { getRequest, api } from '../fetch/fetch'
+import { actionTypes as GlobalActionTypes } from '../redux/reducer/globalReducer'
 import { actionTypes as CommentActionTypes } from '../redux/reducer/commentReducer'
-import {alert} from '../plugin/popup/alert'
 
 /**
  * 获取评论（发送请求的准备：即打开连接，发送数据）
@@ -10,10 +9,25 @@ import {alert} from '../plugin/popup/alert'
  * @return {*}
  */
 function* getComments () {
+  // 开始请求
+  yield put({
+      type: GlobalActionTypes.FETCH_START
+  })
+
   try {
     return yield call(getRequest, api.getCommentsApi)
   } catch (err) {
-    alert(err)
+    // 发生错误，就设置全局提醒
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -32,7 +46,11 @@ export function* getCommentsFlow () {
         data: res.data
       })
     } else {
-      alert(res.message)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
   }
 }

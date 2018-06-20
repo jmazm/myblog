@@ -1,7 +1,9 @@
-import {take, call, put} from 'redux-saga/effects'
-import {getRequest, postRequest, delRequest, api} from '../fetch/fetch'
-import {actionTypes as IndexActionTypes} from '../redux/reducer'
-import {actionTypes as CategoryActionTypes} from '../redux/reducer/categoryReducer'
+import { take, call, put } from 'redux-saga/effects'
+import { getRequest, postRequest, delRequest, api } from '../fetch/fetch'
+import { actionTypes as GlobalActionTypes } from '../redux/reducer/globalReducer'
+import { actionTypes as CategoryActionTypes } from '../redux/reducer/categoryReducer'
+
+import Cookie from 'js-cookie'
 
 /**
  * 添加/修改标签（发送请求的准备：即打开连接，发送数据）
@@ -9,29 +11,58 @@ import {actionTypes as CategoryActionTypes} from '../redux/reducer/categoryReduc
  * @return {*}
  */
 function* saveCategory (data) {
+  // 开始请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
+
   try {
-    return yield call(postRequest, api.saveCategoryApi, data)
+    const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
+    return yield call(postRequest, api.saveCategoryApi, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
+      }
+    })
   } catch (err) {
-    return err.message
+    // 发生错误，就设置全局提醒
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
 export function* saveCategoryFlow () {
   while (true) {
-    let request = yield take(CategoryActionTypes.ADD_CATEGORY)
+    let req = yield take(CategoryActionTypes.ADD_CATEGORY)
 
     let res = yield call(saveCategory, {
-      name: request.category
+      name: req.category
     })
 
     if (res.status == 'success') {
-      alert('添加成功')
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 1,
+        msgInfo: '添加成功'
+      })
     } else {
-      alert(res.msg)
+      alert(res.message)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
-
-    const categoryInput = document.getElementById('category-input')
-    categoryInput.value = ''
   }
 }
 
@@ -43,21 +74,22 @@ export function* saveCategoryFlow () {
 function* getCategories () {
   // 开始进行异步请求
   yield put({
-    type: IndexActionTypes.FETCH_START
+    type: GlobalActionTypes.FETCH_START
   })
+
   try {
     return yield call(getRequest, api.getAllCategoryApi)
   } catch (err) {
     // 报错处理
     yield put({
-      type: IndexActionTypes.SET_MESSAGE,
-      msgContent: '网络请求错误',
-      msgType: 0
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
     })
   } finally {
     // 异步请求结束
     yield put({
-      type: IndexActionTypes.FETCH_END
+      type: GlobalActionTypes.FETCH_END
     })
   }
 }
@@ -79,10 +111,10 @@ export function* getCategoriesFlow () {
       })
     } else {
       yield put({
-        type: IndexActionTypes.SET_MESSAGE,
-        msgContent: res.message,
-        msgType: 0
-      });
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
   }
 }
@@ -94,10 +126,24 @@ export function* getCategoriesFlow () {
  */
 function* delCategory (id) {
   // 开始进行异步请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
+
   try {
     return yield call(delRequest, api.deleteCategoryApi(id))
   } catch (err) {
-    console.log(err.message)
+    // 报错处理
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -115,9 +161,18 @@ export function* delCategoryFlow () {
         type: CategoryActionTypes.SET_CATEGORIES,
         data: res.data
       })
-      alert('删除成功')
+
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 1,
+        msgInfo: '删除成功'
+      })
     } else {
-      alert(status.msg)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
   }
 }

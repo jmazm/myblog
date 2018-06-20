@@ -1,6 +1,18 @@
-import {take, call, put} from 'redux-saga/effects'
-import {getRequest, postRequest, delRequest, putRequest, api} from '../fetch/fetch'
-import {actionTypes as ArticleActionTypes} from '../redux/reducer/articleReducer'
+/**
+ * // ===
+ * 1. call(fn, ...args): 创建一条描述结果的信息 - call 只是一个返回纯文本对象的函数而已。
+ * === //
+ *
+ * // ===
+ * 2. take()
+ * === //
+ *
+ */
+
+import { take, call, put } from 'redux-saga/effects'
+import { getRequest, postRequest, delRequest, putRequest, api } from '../fetch/fetch'
+import { actionTypes as ArticleActionTypes } from '../redux/reducer/articleReducer'
+import { actionTypes as GlobalActionTypes } from '../redux/reducer/globalReducer'
 import Cookie from 'js-cookie'
 
 /**
@@ -10,9 +22,14 @@ import Cookie from 'js-cookie'
  * @return {*}
  */
 function* getAllArticle (paramsObj) {
-  const {pageNum, pageSize} = paramsObj
+  // 开始进行异步请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
 
   try {
+    const { pageNum, pageSize } = paramsObj
+
     // 标签
     if (paramsObj.tag) {
       return yield call(getRequest, api.getAllArticleByTagApi(pageNum, pageSize, paramsObj.tag))
@@ -31,7 +48,19 @@ function* getAllArticle (paramsObj) {
     }
 
   } catch (err) {
-    console.log(err)
+    // 报错处理
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      message: {
+        type: 0,
+        info: err.message
+      }
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -44,14 +73,20 @@ export function* getAllArticleFlow () {
 
     // 判断返回的响应
     if (res.status === 'success') {
+
       // 存储数据
       yield put({
         type: ArticleActionTypes.RESPONSE_ALL_ARTICLES,
         data: res.data,
         total: res.total
       })
+
     } else {
-      console.log(res.message)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
   }
 }
@@ -62,17 +97,33 @@ export function* getAllArticleFlow () {
  * @return {*}
  */
 function* saveArticle (data) {
+  // 开始进行异步请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
+
   try {
     const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    const csrfToken = Cookie.get('CSRF_TOKEN')
 
     return yield call(postRequest, api.saveArticleApi, data, {
       headers: {
-        Authorization: `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
       }
     })
   } catch (err) {
     // 报错处理
-    console.log(err)
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -87,8 +138,11 @@ export function* saveArticleFlow () {
       if (res.status === 'success') {
         alert('添加文章成功')
       } else {
-        alert(res.msg)
-        location.href = '/#/admin/login'
+        yield put({
+          type: GlobalActionTypes.SET_MESSAGE,
+          msgType: 0,
+          msgInfo: res.message
+        })
       }
     }
   }
@@ -101,11 +155,24 @@ export function* saveArticleFlow () {
  */
 function* getArticleDetail (id) {
   // 开始进行异步请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
+
   try {
     return yield call(getRequest, api.getArticleDetailApi(id))
   } catch (err) {
     // 报错处理
-    console.log(err)
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -125,12 +192,21 @@ export function* getArticleDetailFlow () {
         data: res.data
       })
     } else {
-      alert(res.msg)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
   }
 }
 
 function* deleteArticleById (id, pageNum, pageSize) {
+  // 开始进行异步请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
+
   try {
     const accessToken = localStorage.getItem('ACCESS_TOKEN')
     const csrfToken = Cookie.get('CSRF_TOKEN')
@@ -142,7 +218,17 @@ function* deleteArticleById (id, pageNum, pageSize) {
       }
     })
   } catch (err) {
-    console.log(err)
+    // 报错处理
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -162,7 +248,11 @@ export function* deleteArticleByIdFlow () {
 
       alert('删除成功')
     } else {
-      alert(`删除失败，原因: ${res.msg}`)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
   }
 }
@@ -173,6 +263,11 @@ export function* deleteArticleByIdFlow () {
  * @return {*}
  */
 function* modifyArticle (pageNum, pageSize, data) {
+  // 开始进行异步请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
+
   try {
     const accessToken = localStorage.getItem('ACCESS_TOKEN')
     const csrfToken = Cookie.get('CSRF_TOKEN')
@@ -185,7 +280,16 @@ function* modifyArticle (pageNum, pageSize, data) {
     })
   } catch (err) {
     // 报错处理
-    console.log(err)
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -208,8 +312,11 @@ export function* modifyArticleFlow () {
 
         alert('修改文章成功！')
       } else {
-        alert(res.msg)
-        location.href = '/#/admin/login'
+        yield put({
+          type: GlobalActionTypes.SET_MESSAGE,
+          msgType: 0,
+          msgInfo: res.message
+        })
       }
     }
   }

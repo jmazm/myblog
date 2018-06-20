@@ -1,6 +1,9 @@
-import {take, call, put, select} from 'redux-saga/effects'
+import {take, call, put } from 'redux-saga/effects'
 import {getRequest, postRequest, delRequest, api} from '../fetch/fetch'
 import {actionTypes as TagActionTypes} from '../redux/reducer/tagReducer'
+import {actionTypes as GlobalActionTypes} from '../redux/reducer/globalReducer'
+
+import Cookie from 'js-cookie'
 
 /**
  * 添加/修改标签（发送请求的准备：即打开连接，发送数据）
@@ -9,11 +12,32 @@ import {actionTypes as TagActionTypes} from '../redux/reducer/tagReducer'
  */
 function* saveTag (data) {
   // 开始进行异步请求
-  try {
-    return yield call(postRequest, api.saveTagApi, data)
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
 
+  try {
+    const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
+    return yield call(postRequest, api.saveTagApi, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
+      }
+    })
   } catch (err) {
-    console.log(err.message)
+    // 报错处理
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -26,17 +50,20 @@ export function* saveTagFlow () {
     })
 
     if (res.status == 'success') {
-      alert('添加成功')
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 1,
+        msgInfo: '添加成功'
+      })
     } else {
-      alert(res.msg)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
-
-    const tagInput = document.getElementById('tag-input')
-    tagInput.value = ''
   }
 }
-
-
 
 /**
  * 获取标签（发送请求的准备：即打开连接，发送数据）
@@ -45,10 +72,24 @@ export function* saveTagFlow () {
  */
 function* getTags () {
   // 开始进行异步请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
+
   try {
     return yield call(getRequest, api.getAllTagApi)
   } catch (err) {
-    console.log(err.message)
+    // 报错处理
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -66,14 +107,16 @@ export function* getTagsFlow () {
         type: TagActionTypes.SET_TAGS,
         data: res.data
       })
+
     } else {
-      alert(status.msg)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
   }
 }
-
-
-
 
 /**
  * 删除标签
@@ -82,10 +125,32 @@ export function* getTagsFlow () {
  */
 function* delTag (id) {
   // 开始进行异步请求
+  yield put({
+    type: GlobalActionTypes.FETCH_START
+  })
+
   try {
-    return yield call(delRequest, api.deleteTagApi(id))
+    const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
+    return yield call(delRequest, api.deleteTagApi(id), {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
+      }
+    })
   } catch (err) {
-    console.log(err.message)
+    // 报错处理
+    yield put({
+      type: GlobalActionTypes.SET_MESSAGE,
+      msgType: 0,
+      msgInfo: err.message
+    })
+  } finally {
+    // 异步请求结束
+    yield put({
+      type: GlobalActionTypes.FETCH_END
+    })
   }
 }
 
@@ -103,9 +168,18 @@ export function* delTagFlow () {
         type: TagActionTypes.SET_TAGS,
         data: res.data
       })
-      alert('删除成功')
+
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 1,
+        msgInfo: '删除成功'
+      })
     } else {
-      alert(status.msg)
+      yield put({
+        type: GlobalActionTypes.SET_MESSAGE,
+        msgType: 0,
+        msgInfo: res.message
+      })
     }
   }
 }
