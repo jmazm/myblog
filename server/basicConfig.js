@@ -89,7 +89,7 @@ app.use(async (ctx, next) => {
     ctx.response.status = statusCode
     ctx.body = {
       status: 'failure',
-      msg: errMsg
+      message: errMsg
     }
   }
 })

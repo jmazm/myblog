@@ -13,20 +13,6 @@ class Tag {
       data: tags
     }
   }
-  /**
-   * 获取标签
-   * @param ctx
-   * @return {Promise.<void>}
-   */
-  static async getTagById (ctx) {
-    const idTag = parseInt(ctx.params.id)
-    let tag = await TagModel.getById(idTag)
-
-    ctx.body = {
-      status: 'success',
-      data: tag
-    }
-  }
 
   /**
    * 添加标签
@@ -75,7 +61,5 @@ class Tag {
     }
   }
 }
-
-
 
 module.exports = Tag

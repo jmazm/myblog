@@ -8,27 +8,13 @@ class Category {
    */
   static async getCategories (ctx) {
     const categories = await CategoryModel.get()
+
     ctx.body = {
       status: 'success',
       data: categories
     }
   }
 
-  /**
-   * 根据id获取类别
-   * @param ctx
-   * @return {Promise.<void>}
-   */
-  static async getCategory (ctx) {
-    const id = parseInt(ctx.params.id)
-
-    const category = await CategoryModel.getById(id)
-
-    ctx.body = {
-      status: 'success',
-      data: category
-    }
-  }
   /**
    * 添加类别
    * @param ctx
@@ -66,7 +52,9 @@ class Category {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async delCategory (ctx) {
+  static async delCategory (ctx, next) {
+    await next()
+
     const id = ctx.params.id
 
     const result = await CategoryModel.del(id)

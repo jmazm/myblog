@@ -13,20 +13,6 @@ class Comment {
       data: comments
     }
   }
-  /**
-   * 获取标签
-   * @param ctx
-   * @return {Promise.<void>}
-   */
-  static async getTagById (ctx) {
-    const idTag = parseInt(ctx.params.id)
-    let tag = await CommentModel.getById(idTag)
-
-    ctx.body = {
-      status: 'success',
-      data: tag
-    }
-  }
 
   /**
    * 添加评论

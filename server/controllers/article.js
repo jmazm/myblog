@@ -140,29 +140,24 @@ class Article {
     // 用户权限验证
     await next()
 
-    try {
-      const query = ctx.query
-      const pageNum = parseInt(query.pageNum)
-      const pageSize = parseInt(query.pageSize)
+    const query = ctx.query
+    const pageNum = parseInt(query.pageNum)
+    const pageSize = parseInt(query.pageSize)
 
-      const contentType = ctx.request.headers["content-type"]
-      let postData = ctx.request.body
+    const contentType = ctx.request.headers["content-type"]
+    let postData = ctx.request.body
 
-      if (contentType.includes('multipart')) {
-        postData = postData.fields
-      }
+    if (contentType.includes('multipart')) {
+      postData = postData.fields
+    }
 
-      const data = await articleModel.modifyById(postData, pageNum, pageSize)
-      const total = await articleModel.getTotal()
+    const data = await articleModel.modifyById(postData, pageNum, pageSize)
+    const total = await articleModel.getTotal()
 
-      ctx.body = {
-        status: 'success',
-        data: data,
-        total: total
-      }
-
-    } catch (err) {
-      ctx.throw(500, err.message)
+    ctx.body = {
+      status: 'success',
+      data: data,
+      total: total
     }
   }
 
