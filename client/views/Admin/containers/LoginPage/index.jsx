@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import md5 from 'js-md5'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
-import {postRequest,api} from '../../../../fetch/fetch'
+import { postRequest, api } from '../../../../fetch/fetch'
 
 import './style.css'
 

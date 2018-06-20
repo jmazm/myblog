@@ -1,5 +1,12 @@
+/*
+  居中 - position + transform - 解决未知宽高（不过知道宽高也可以使用）
+  1. 实现
+  1.1 父：position: relative/fixed
+  1.2 子：position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  2. 特点：子未知宽高，且不会参与translate 的动画
+*/
 .modal {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;

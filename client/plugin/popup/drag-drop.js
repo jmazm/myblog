@@ -1,5 +1,5 @@
-import {on, off, getEvent, getTarget, preventDefault} from '../../lib/event'
-import {throttle} from '../../lib/timer'
+import { on, off, getEvent, getTarget, preventDefault } from '../../lib/event'
+import { throttle } from '../../lib/timer'
 /**
  * // === 单例模式：保证一个类仅有一个实例，并提供一个访问它的全局访问点（就是一个对外的接口） === //
 
