@@ -1,6 +1,6 @@
 const Router = require("koa-router")
 const articleCtrl = require('../controllers/article')
-const {userAuth, csrfAuth} = require("../tools/auth")
+const { userAuth } = require("../tools/auth")
 
 const router = new Router()
 

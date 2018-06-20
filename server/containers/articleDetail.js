@@ -3,7 +3,6 @@ import{ renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { Provider }  from 'react-redux'
 
-
 import configureStore from '../../client/redux/store/configureStore'
 import ArticleDetailPage from '../../client/views/User/containers/ArticleDetailPage'
 import layout from '../view/layout'
@@ -12,7 +11,6 @@ import articleModel from '../models/article'
 
 export async function index (ctx) {
   const articleId = ctx.params.articleId
-  console.log(articleId)
 
   switch (ctx.accepts('json', 'html')) {
     case 'html':
