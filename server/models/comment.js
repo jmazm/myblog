@@ -1,3 +1,5 @@
+const mysqlErr = require("../tools/mysql-error")
+
 class Comment{
   /**
    * 添加评论
@@ -5,9 +7,13 @@ class Comment{
    * @return {Promise.<Number|number|*>}
    */
     static async add (val) {
-      const sql = `INSERT INTO comment SET ?`
-      const result = await global.db.query(sql, val)
-      return result[0].insertId
+      try {
+        const sql = `INSERT INTO comment SET ?`
+        const result = await global.db.query(sql, val)
+        return result[0].insertId
+      } catch (e) {
+        throw mysqlErr(e)
+      }
     }
 
   /**
@@ -15,10 +21,14 @@ class Comment{
    * @return {Promise.<void>}
    */
   static async get () {
-    const sql = `SELECT * FROM comment ORDER BY date DESC`
-    const [comments] = await global.db.query(sql)
-    return comments
+    try {
+      const sql = `SELECT * FROM comment ORDER BY date DESC`
+      const [comments] = await global.db.query(sql)
+      return comments
+    } catch (e) {
+      throw mysqlErr(e)
     }
+  }
 }
 
 module.exports = Comment
