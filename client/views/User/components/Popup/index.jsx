@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import {replaceClass} from '../../../../lib/className'
+import { replaceClass } from '../../../../lib/className'
 
 import './style.css'
 

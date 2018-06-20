@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
+import PropsType from 'prop-types'
 
 import Table from '../../../../plugin/table'
 import Modal from '../../../../plugin/modal'
@@ -9,16 +10,20 @@ import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
 
 import { actions as tagActions } from '../../../../redux/reducer/tagReducer'
+import { actions as globalActions } from '../../../../redux/reducer/globalReducer'
 
 const { get_all_tags, add_tag, delete_tag } = tagActions
+const { clear_msg } = globalActions
 
 class AdminTag extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
       visible: false,
       tag: ''
     }
+    
     this.shouldComponentUpdate = ReactAddonsPureRenderMixin.shouldComponentUpdate
 
     this.showModal = this.showModal.bind(this)
@@ -30,6 +35,10 @@ class AdminTag extends Component {
     this.renderModalContent = this.renderModalContent.bind(this)
   }
 
+  /**
+   * 表头
+   * @type {[null,null,null]}
+   */
   columns = [
     {
       title: 'id',
@@ -45,32 +54,48 @@ class AdminTag extends Component {
       title: '操作',
       dataIndex: 'operation',
       key: 'operation',
-      render: this.handlerRender.bind(this)
+      render: this.handlerOperationRender.bind(this)
     }
   ]
 
-  handleDel (id) {
-    this.props.delete_tag(id)
+  /**
+   * 删除
+   * @param id
+   */
+  async handleDel (id) {
+    await this.props.delete_tag(id)
+    console.log(this.props)
+    await this.props.clear_msg({
+      msgType: 0,
+      msgInfo: 'xxx'
+    })
+
+    console.log(this.props)
   }
 
-  handlerRender (row, index) {
-    return (
-      <span>
-        <a href="javascript:;" onClick={() => this.handleDel(row.id)}>删除</a>
-        <a href="javascript:;">修改</a>
-      </span>
-    )
-  }
+  /**
+   * 输入框变化
+   * @param e
+   */
   handleChange (e) {
     this.setState({
       tag: e.target.value
     })
   }
+
+  /**
+   * 展示模态框
+   */
   showModal () {
     this.setState({
       visible: true
     });
   }
+
+  /**
+   * 模态框 - 确认
+   * @return {Promise.<void>}
+   */
   async handleOk () {
     await this.props.add_tag(this.state.tag)
 
@@ -80,6 +105,10 @@ class AdminTag extends Component {
 
     await this.props.get_all_tags()
   }
+
+  /**
+   * 模态框 - 取消
+   */
   handleCancel (){
     this.setState({
       visible: false
@@ -94,6 +123,7 @@ class AdminTag extends Component {
   handleData (data) {
     let copyData = data.slice(0)
 
+    // 表格每一项需要添加key值
     for (let item of copyData) {
       item.key = item.id
     }
@@ -101,6 +131,24 @@ class AdminTag extends Component {
     return copyData
   }
 
+  /**
+   * 表格操作列渲染模板
+   * @param row
+   * @return {XML}
+   */
+  handlerOperationRender (row) {
+    return (
+      <span>
+        <a href="javascript:;" onClick={() => this.handleDel(row.id)}>删除</a>
+        <a href="javascript:;">修改</a>
+      </span>
+    )
+  }
+  
+  /**
+   * 模态框内容模板
+   * @return {XML}
+   */
   renderModalContent () {
     return (
       <input type="text" placeholder="类别名称" onChange={this.handleChange}  id="category-input"/>
@@ -108,7 +156,8 @@ class AdminTag extends Component {
   }
 
   render () {
-    const {tags} = this.props
+    const { tags, visible } = this.props
+
     return (
       <div className="blog-management-wrapper blog--management">
         <AdminNav/>
@@ -116,18 +165,18 @@ class AdminTag extends Component {
           <AdminHeader title="管理标签"/>
           <div className="content-inner">
             <div>
-              <button type="button" onClick={this.showModal}>添加标签</button>
+              <button type="button" onClick={ this.showModal }>添加标签</button>
             </div>
             <div>
-              <Table dataSource={this.handleData(tags)} columns={this.columns} pagination={false}/>
+              <Table dataSource={ this.handleData(tags) } columns={ this.columns } pagination={ false }/>
             </div>
 
             <Modal
               title="添加标签"
-              visible={this.state.visible}
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
-              content={this.renderModalContent()}
+              visible={ visible }
+              onOk={ this.handleOk }
+              onCancel={ this.handleCancel }
+              content={ this.renderModalContent() }
             />
           </div>
         </div>
@@ -140,9 +189,18 @@ class AdminTag extends Component {
   }
 }
 
+AdminTag.defaultProps = {
+  tags: []
+}
+
+AdminTag.propTypes = {
+  tags: PropsType.array
+}
+
 function mapStateToProps(state) {
   return {
-    tags: state.tags
+    tags: state.tags,
+    globalState: state.globalState
   }
 }
 
@@ -151,6 +209,7 @@ function mapDispatchToProps (dispatch) {
     get_all_tags: bindActionCreators(get_all_tags, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
     add_tag: bindActionCreators(add_tag, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
     delete_tag: bindActionCreators(delete_tag, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
+    clear_msg: bindActionCreators(clear_msg, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
   }
 }
 

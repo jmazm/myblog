@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {bindActionCreators} from 'redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import dateFormat from 'dateformat'
@@ -16,6 +16,7 @@ const {  get_all_comments } = CommentActions
 class Comment extends Component {
   constructor (props) {
     super(props)
+    
     this.state = {
       comments: [],
       commentsData: {
@@ -32,6 +33,12 @@ class Comment extends Component {
     this.handlePublishClick = this.handlePublishClick.bind(this)
     this.handleOnChange = this.handleOnChange.bind(this)
   }
+
+  /**
+   * 表单验证
+   * @param form
+   * @return {*}
+   */
   validateForm (form) {
     const validator = new Validator()
 
@@ -76,21 +83,33 @@ class Comment extends Component {
     const errorMsg = validator.start()
     return errorMsg
   }
+
+  /**
+   * 表单变化
+   * @param e
+   */
   handleOnChange (e) {
     const target = e.target
     const name = target.name
     const value = target.value
+    const { commentsData } = this.state
 
     this.setState({
-      commentsData: Object.assign({}, this.state.commentsData, {
+      commentsData: Object.assign({}, commentsData, {
         [name]: reg.replaceHtml(value)
       })
     })
   }
 
-  async handlePublishClick (e) {
+  /**
+   * 发表评论
+   * @return {Promise.<void>}
+   */
+  async handlePublishClick () {
     const form = this.form
     const errorMsg = this.validateForm(form)
+    const { commentsData, sign } = this.state
+    const { Article_id } = this.props
 
     // 表单验证
     if (errorMsg) {
@@ -100,8 +119,8 @@ class Comment extends Component {
 
     // 设置日期和文章id
     await this.setState({
-      commentsData: Object.assign({}, this.state.commentsData, {
-        Article_id: this.props.Article_id,
+      commentsData: Object.assign({}, commentsData, {
+        Article_id: Article_id,
         date: dateFormat(new Date(), 'yyyy-mm-dd HH:mm:ss')
       })
     })
@@ -109,14 +128,30 @@ class Comment extends Component {
     // 提交的数据
     const postData = {
       data: JSON.stringify(this.state.commentsData),
-      sign: this.state.sign
+      sign: sign
     }
 
     // 发送请求
     const result = await postRequest(api.addCommentApi, postData)
+
     if (result.status === 'success') {
       alert('发布评论成功')
+
+      // 表单重置
       form.reset()
+
+      // state 表单数据重置
+      this.setState ({
+        commentsData: {
+          name: '',
+          email: '',
+          website:  '',
+          content: '',
+          Article_id: 0
+        }
+      })
+
+      await this.props.get_all_comments()
     }
   }
 
@@ -131,21 +166,21 @@ class Comment extends Component {
           <h3 className="comment-ti">文章评论</h3>
         </div>
         <div className="comment-wrapper">
-          <form className="comment-box" ref={ele => this.form = ele}>
+          <form className="comment-box" ref={ ele => this.form = ele }>
             <div className="comment-basic-info">
-              <input className="info-input" value={name} onChange={this.handleOnChange} name="name" type="text" placeholder="昵称"/>
-              <input className="info-input" value={email} onChange={this.handleOnChange} name="email" type="text" placeholder="邮箱"/>
-              <input className="info-input" value={website} onChange={this.handleOnChange} name="website" type="text" placeholder="网址"/>
-              <input className="info-input" value={Article_id} onChange={this.handleOnChange} name="Article_id" type="hidden"/>
-              <input className="info-input" value={sign} onChange={this.handleOnChange} name="sign" type="hidden"/>
+              <input className="info-input" value={ name } onChange={ this.handleOnChange } name="name" type="text" placeholder="昵称"/>
+              <input className="info-input" value={ email } onChange={ this.handleOnChange } name="email" type="text" placeholder="邮箱"/>
+              <input className="info-input" value={ website } onChange={ this.handleOnChange } name="website" type="text" placeholder="网址，例：https://xxx.com"/>
+              <input className="info-input" value={ Article_id } onChange={ this.handleOnChange } name="Article_id" type="hidden"/>
+              <input className="info-input" value={ sign } onChange={ this.handleOnChange } name="sign" type="hidden"/>
             </div>
             <div className="reply-area">
               <img src="/imgs/avatar.png" className="comment-avatar"/>
               <div className="textarea-wrapper">
-                <textarea name="content" value={content} onChange={this.handleOnChange}></textarea>
+                <textarea name="content" value={ content } onChange={ this.handleOnChange }></textarea>
               </div>
               <div className="reply-tool-bar">
-                <button className="btn" type="button" onClick={this.handlePublishClick}>发布</button>
+                <button className="btn" type="button" onClick={ this.handlePublishClick }>发布</button>
               </div>
             </div>
           </form>
@@ -197,8 +232,6 @@ Comment.defaultProps = {
 Comment.propTypes = {
   comments: PropTypes.array
 }
-
-
 
 function mapStateToProps (state) {
   return {

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
+import PropsType from 'prop-types'
 
 import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
@@ -10,7 +11,6 @@ import Modal from '../../../../plugin/modal'
 import Table from '../../../../plugin/table'
 
 import { actions as categoryActions } from '../../../../redux/reducer/categoryReducer'
-
 
 const { get_all_categories, add_category, delete_category } = categoryActions
 
@@ -66,12 +66,10 @@ class AdminCategory extends Component {
 
   /**
    * 处理表格数据渲染
-   * @param o
    * @param row
-   * @param index
    * @return {XML}
    */
-  handleRender (row, index) {
+  handleRender (row) {
     return (
       <span>
         <a href="javascript:;" onClick={() => this.handleDel(row.id)}>删除</a>
@@ -79,6 +77,11 @@ class AdminCategory extends Component {
       </span>
     )
   }
+
+  /**
+   * 处理表单数据
+   * @param e
+   */
   handleChange (e) {
     this.setState({
       category: e.target.value
@@ -99,7 +102,10 @@ class AdminCategory extends Component {
    * @return {Promise.<void>}
    */
   async handleOk () {
-    await this.props.add_category(this.state.category)
+    const { category } = this.state
+    await this.props.add_category(category)
+    
+    console.log(this.props.globalState)
 
     this.setState({
       visible: false
@@ -134,11 +140,11 @@ class AdminCategory extends Component {
 
   renderModalContent () {
     return (
-      <input type="text" placeholder="类别名称" onChange={this.handleChange}  id="category-input"/>
+      <input type="text" placeholder="类别名称" onChange={ this.handleChange }  id="category-input"/>
     )
   }
   render () {
-    const {categories} = this.props
+    const { categories } = this.props
 
     return (
       <div className="blog-management-wrapper blog--management">
@@ -146,18 +152,14 @@ class AdminCategory extends Component {
         <div className="management-content-wrapper">
           <AdminHeader title="管理类别"/>
           <div className="content-inner">
-            <div>
-              <button type="button" onClick={this.showModal}>添加类别</button>
-            </div>
-            <div>
-              <Table dataSource={this.handleData(categories)} columns={this.columns} pagination={false}/>
-            </div>
+            <button type="button" onClick={ this.showModal }>添加类别</button>
+            <Table dataSource={ this.handleData(categories) } columns={ this.columns } pagination={ false }/>
             <Modal
               title="添加类别"
-              visible={this.state.visible}
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
-              content={this.renderModalContent()}
+              visible={ this.state.visible }
+              onOk={ this.handleOk }
+              onCancel={ this.handleCancel }
+              content={ this.renderModalContent() }
             />
           </div>
         </div>
@@ -170,9 +172,19 @@ class AdminCategory extends Component {
   }
 }
 
+AdminCategory.defaultProps = {
+  categories: []
+}
+
+AdminCategory.propTypes = {
+  categories: PropsType.array
+}
+
+
 function mapStateToProps(state) {
   return {
-    categories: state.categories
+    categories: state.categories,
+    globalState: state.globalState
   }
 }
 
@@ -180,7 +192,7 @@ function mapDispatchToProps (dispatch) {
   return {
     get_all_categories: bindActionCreators(get_all_categories, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
     add_category: bindActionCreators(add_category, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
-    delete_category: bindActionCreators(delete_category, dispatch), // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
+    delete_category: bindActionCreators(delete_category, dispatch) // ƒ () {return dispatch(actionCreator.apply(undefined, arguments));}
   }
 }
 

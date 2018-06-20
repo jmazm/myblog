@@ -78,6 +78,11 @@ class AdminNewArticle extends Component {
     this.props.update_category(categoryId)
   }
 
+  /**
+   * 表单验证
+   * @param form
+   * @return {*}
+   */
   validate (form) {
     const v = new Validator()
     console.log(form)
@@ -114,7 +119,9 @@ class AdminNewArticle extends Component {
     return errMsg
   }
 
-  // 发表
+  /**
+   * 发表文章
+   */
   publishArticle () {
     // 表单验证
     const errMsg = this.validate(this.form)
@@ -147,7 +154,9 @@ class AdminNewArticle extends Component {
     this.clearContent()
   }
 
-
+  /**
+   * 清除内容
+   */
   clearContent () {
     const form = this.form
 
@@ -165,8 +174,8 @@ class AdminNewArticle extends Component {
   }
 
   render () {
-    const {tags, categories, newArticleData} = this.props
-    const {title, foreword, imgSrc, Category_id, Tag_id, content} = newArticleData
+    const { tags, categories, newArticleData } = this.props
+    const { title, foreword, imgSrc, Category_id, Tag_id, content } = newArticleData
     return (
       <div className="blog-management-wrapper blog--management">
         <AdminNav/>
