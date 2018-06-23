@@ -16,6 +16,20 @@ class Category {
   }
 
   /**
+   *
+   * @return {Promise.<*>}
+   */
+  static async getById (categoryId) {
+    try {
+      const sql = `SELECT * FROM category WHERE id=?`
+      const [categories] = await global.db.query(sql, [categoryId])
+      return categories[0]
+    } catch (err) {
+      throw mysqlErr(err)
+    }
+  }
+
+  /**
    * 添加类别
    * @param val
    * @return {Promise.<Number>}

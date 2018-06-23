@@ -1,9 +1,13 @@
 const Router = require("koa-router")
+const fs = require("fs")
+const path = require("path")
 const articleCtrl = require('../controllers/article')
 const categoryCtrl = require("../controllers/category")
 const commentCtrl = require('../controllers/comment')
 const tagCtrl = require("../controllers/tag")
+const userCtrl = require("../controllers/user")
 const { userAuth } = require("../tools/auth")
+const captcha = require("../tools/captcha")
 
 
 // 同构页面
@@ -21,36 +25,47 @@ const { userAuth } = require("../tools/auth")
  */
 const router = new Router()
 
-// 同构
-router.get('/', require("../containers/home").index)
-router.get('/article/:articleId', require("../containers/articleDetail").index)
-router.get('/category', require("../containers/category").index)
-router.get('/tag', require("../containers/tag").index)
+router.get('/', async (ctx) => {
+  const data = await fs.readFileSync(path.resolve(process.cwd(), './dist/cms/index.html'), 'utf8')
 
-// {"status":"failure","msg":"Cannot read property 'params' of undefined"}
-// 因此，xxx.defaultProps.match.params = {}，即this.props.match.params要设置默认值
-router.get('/search/:title', require("../containers/searchList").index)
-router.get('/tag/:tag/article', require("../containers/tagList").index)
-router.get('/category/:category/article', require("../containers/categoryList").index)
+  ctx.body = data
+})
 
+
+// 获取验证码
+router.get('/api/captcha', captcha.createCaptcha)
 
 // 获取文章
 router.get('/api/article', articleCtrl.getArticle)
 // 获取文章详情
 router.get('/api/article/:id', articleCtrl.getArticleDetail)
+// 添加文章
+router.post('/api/article', articleCtrl.addArticle, userAuth)
+// 修改文章
+router.put('/api/article', articleCtrl.modifyArticle, userAuth)
+// 删除文章
+router.delete('/api/article/:id', articleCtrl.delArticle, userAuth)
+
 
 
 // 类别
 router.get('/api/category', categoryCtrl.getCategories)
+router.post('/api/category', categoryCtrl.addCategory, userAuth)
+router.delete('/api/category/:id', categoryCtrl.delCategory, userAuth)
+
 
 // 获取评论
-router.get('/api/comment', commentCtrl.getComments)
-// 添加评论
-router.post('/api/comment', commentCtrl.addComment)
+router.get('/api/comment', commentCtrl.getComments, userAuth)
 
 // 标签
 router.get('/api/tag', tagCtrl.getTags)
+router.post('/api/tag', tagCtrl.addTag, userAuth)
+router.delete('/api/tag/:id', tagCtrl.delTag, userAuth)
 
+// 登录
+router.post('/api/login', userCtrl.login)
+// 注销
+router.get('/api/logout', userCtrl.logout)
 
 module.exports = router
 

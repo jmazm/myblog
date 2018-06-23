@@ -16,6 +16,20 @@ class Tag {
   }
 
   /**
+   *
+   * @return {Promise.<*>}
+   */
+  static async getById (tagId) {
+    try {
+      const sql = `SELECT * FROM tag WHERE id=?`
+      const [tags] = await global.db.query(sql, [tagId])
+      return tags[0]
+    } catch (err) {
+      throw mysqlErr(err)
+    }
+  }
+
+  /**
    * 添加标签
    * @param val
    * @return {Promise.<Number>}
