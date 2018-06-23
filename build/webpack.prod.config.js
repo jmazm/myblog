@@ -9,19 +9,26 @@ const ModuleConcatenationPlugin = require("webpack/lib/optimize/ModuleConcatenat
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin")
 const HtmlWebpackIncludeAssestsPlugin = require("html-webpack-include-assets-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const autoprefixer = require('autoprefixer')
+// const precss = require('precss')
+// const postcsseasysprites = require('postcss-easysprites')
+
+const ModifyPrefixOfJsOrCss = require("./modifyPrefixOfJsOrCssPlugin")
 const merge = require("webpack-merge")
-
-
 const base = require('./webpack.base.config')
+
+const rootDir = process.cwd()
 
 module.exports = merge(base, {
   mode: 'production',
-  devtool: 'source-map',
+  devtool: false,
   entry: {
-    index: ['./client/views/index.jsx']
+    index: './client/views/User/index.jsx',
+    cms: './client/views/Admin/index.jsx'
   },
   resolve: {
-    // 确认在哪里解析文件
+    // 决定优先采用那份代码
+    // jsnext:main表示es6的代码，优先采用es6的那份代码
     mainFields: ['jsnext:main', 'browser', 'main']
   },
   output: {
@@ -48,9 +55,9 @@ module.exports = merge(base, {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
 
-    // 定义模板
+    // 定义模板 - index
     new HtmlWebpackPlugin({
-      template: './client/views/index.html',
+      template: path.resolve(rootDir, './client/views/User/index.html'),
       inject: true,
       showErrors:true,
       minify: {
@@ -60,8 +67,33 @@ module.exports = merge(base, {
         collapseWhitespace: true
       },
       // 指定子目录
-      filename: 'index.html'
+      filename: 'index/index.html',
+      chunks: [
+        'index'
+      ],
     }),
+
+    // 定义模板 - cms
+    new HtmlWebpackPlugin({
+      template: path.resolve(rootDir, './client/views/Admin/index.html'),
+      inject: true,
+      showErrors:true,
+      minify: {
+        // 移除评论
+        removeComment: true,
+        // 去除空白区域
+        collapseWhitespace: true
+      },
+      // 指定子目录
+      filename: 'cms/index.html',
+      chunks: [
+        'cms'
+      ],
+    }),
+
+    // 修改嵌入html中的js和css的路径
+    new ModifyPrefixOfJsOrCss(),
+
     // 进度条
     new ProgressBarPlugin(),
 
@@ -112,9 +144,9 @@ module.exports = merge(base, {
 
     // 分离css
     new ExtractTextWebpackPlugin({
-      filename: 'css/[name].css',
-      disable: false
-      // allChunks: true
+      filename: '[name]/index.css',
+      disable: false,
+      allChunks: true
     }),
 
     // 复制图片
@@ -146,13 +178,13 @@ module.exports = merge(base, {
     // 将资源路径自动添加到页面上
     new HtmlWebpackIncludeAssestsPlugin({
       //  添加的资源相对 html 路径而言
-      // <script type="text/javascript" src="/lib/react.js">
+      // <script type="text/javascript" src="/react.js">
       assets: [
-        'lib/react.js',
-        'lib/redux.js',
-        'lib/axios.js',
-        'lib/remark.js',
-        'lib/other.js'
+        'react.js',
+        'redux.js',
+        'axios.js',
+        'remark.js',
+        'other.js'
       ],
       append: false // false 在其他資源的之前添加 true 在其他資源之後添加
     })

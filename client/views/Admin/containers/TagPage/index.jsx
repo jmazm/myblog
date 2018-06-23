@@ -64,13 +64,6 @@ class AdminTag extends Component {
    */
   async handleDel (id) {
     await this.props.delete_tag(id)
-    console.log(this.props)
-    await this.props.clear_msg({
-      msgType: 0,
-      msgInfo: 'xxx'
-    })
-
-    console.log(this.props)
   }
 
   /**

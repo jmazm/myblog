@@ -1,15 +1,15 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
 import TagList from '../../components/TagList'
 
-import {actions as TagReducer} from '../../../../redux/reducer/tagReducer'
+import { actions as TagReducer} from '../../../../redux/reducer/tagReducer'
 
-const {get_all_tags} = TagReducer
+const { get_all_tags } = TagReducer
 
 class Tag extends Component {
   constructor (props) {

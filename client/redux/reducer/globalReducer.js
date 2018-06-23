@@ -70,7 +70,6 @@ export function reducer (state = initialState, action) {
         isFetching: false
       }
     case actionTypes.SET_MESSAGE:
-      console.log(action)
       return {
         ...state,
         isFetching: false,

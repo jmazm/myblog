@@ -1,7 +1,7 @@
-import {take, call, put } from 'redux-saga/effects'
-import {getRequest, postRequest, delRequest, api} from '../fetch/fetch'
-import {actionTypes as TagActionTypes} from '../redux/reducer/tagReducer'
-import {actionTypes as GlobalActionTypes} from '../redux/reducer/globalReducer'
+import { take, call, put } from 'redux-saga/effects'
+import { getRequest, postRequest, delRequest, api } from '../fetch/fetch'
+import { actionTypes as TagActionTypes } from '../redux/reducer/tagReducer'
+import { actionTypes as GlobalActionTypes } from '../redux/reducer/globalReducer'
 
 import Cookie from 'js-cookie'
 
@@ -50,11 +50,7 @@ export function* saveTagFlow () {
     })
 
     if (res.status == 'success') {
-      yield put({
-        type: GlobalActionTypes.SET_MESSAGE,
-        msgType: 1,
-        msgInfo: '添加成功'
-      })
+      alert('添加成功')
     } else {
       yield put({
         type: GlobalActionTypes.SET_MESSAGE,
@@ -163,16 +159,12 @@ export function* delTagFlow () {
 
     // 判断返回的响应
     if (res.status === 'success') {
+      alert('删除成功')
+
       // 存储数据
       yield put({
         type: TagActionTypes.SET_TAGS,
         data: res.data
-      })
-
-      yield put({
-        type: GlobalActionTypes.SET_MESSAGE,
-        msgType: 1,
-        msgInfo: '删除成功'
       })
     } else {
       yield put({

@@ -1,19 +1,23 @@
+// === 域名： === //
+// === 1 根域名： . === //
+// === 2 顶级域名：com gov edu cn com net等 === //
+// === 3 二级域名: hellojm === //
+// === 4 三级域名：www blog file === //
+// === 完整域名：www.hellojm.cn. [通常省略根域名] === //
+
 module.exports = {
   publicPath: '/',
-  server: {
-    indexServerPort: '3000',
-    cmsServerPort: '3003'
-  },
   dev: {
-    serverPort: '3001',
-    imageUploadApi: 'http://localhost:3001/upload',
+    indexServerPort: '3001',
+    cmsServerPort: '8080',
     fileServerIP: 'http://127.0.0.1:3002',
   },
-  prod: { // 生成环境中，因为是同构，所以只需分官网和cms
-    fileServerIP: 'https://file.jmazm.com',
-    imageUploadApi: 'http://localhost:3001/upload',
+  indexPort: '3000',
+  cmsPort: '3003',
+  prod: {
+    fileServerIP: 'https://file.jmazm.com'
   },
-  demoRootPath: 'http://garvenzhang.github.io/',
+  demoRootPath: 'http://jmhello.github.io/',
   auth: {
     key: './server/auth/2_www.jmazm.com.key',
     cert: './server/auth/1_www.jmazm.com_bundle.crt',

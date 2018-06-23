@@ -50,11 +50,7 @@ export function* saveCategoryFlow () {
     })
 
     if (res.status == 'success') {
-      yield put({
-        type: GlobalActionTypes.SET_MESSAGE,
-        msgType: 1,
-        msgInfo: '添加成功'
-      })
+     alert('添加成功')
     } else {
       alert(res.message)
       yield put({
@@ -156,16 +152,12 @@ export function* delCategoryFlow () {
 
     // 判断返回的响应
     if (res.status === 'success') {
+      alert('删除成功')
+
       // 存储数据
       yield put({
         type: CategoryActionTypes.SET_CATEGORIES,
         data: res.data
-      })
-
-      yield put({
-        type: GlobalActionTypes.SET_MESSAGE,
-        msgType: 1,
-        msgInfo: '删除成功'
       })
     } else {
       yield put({

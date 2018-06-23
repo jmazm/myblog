@@ -239,14 +239,14 @@ export function* deleteArticleByIdFlow () {
     let res = yield call(deleteArticleById, req.id, req.pageNum, req.pageSize)
 
     if (res.status === 'success') {
+      alert('删除成功')
+
       // 存储数据
       yield put({
         type: ArticleActionTypes.RESPONSE_ALL_ARTICLES,
         data: res.data,
         total: res.total
       })
-
-      alert('删除成功')
     } else {
       yield put({
         type: GlobalActionTypes.SET_MESSAGE,
@@ -303,14 +303,14 @@ export function* modifyArticleFlow () {
 
       // 判断返回的响应
       if (res.status === 'success') {
+        alert('修改文章成功！')
+
         // 存储数据
         yield put({
           type: ArticleActionTypes.RESPONSE_ALL_ARTICLES,
           data: res.data,
           total: res.total
         })
-
-        alert('修改文章成功！')
       } else {
         yield put({
           type: GlobalActionTypes.SET_MESSAGE,
