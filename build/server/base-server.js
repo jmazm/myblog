@@ -1,8 +1,7 @@
 const webpack = require("webpack")
 const WebpackDevServer = require("webpack-dev-server")
-const config = require("../config")
-const { indexPort, cmsPort, dev } = config
-
+const config = require("../../config")
+const { indexPort, dev } = config
 /**
  * webpack-dev-server
  * // ===
@@ -57,11 +56,12 @@ const { indexPort, cmsPort, dev } = config
 
 function devServer (port) {
   const proxyPort = port === indexPort ? dev.indexServerPort : dev.cmsServerPort
-  const devServerCongig = require("./webpack.dev.config")
+  const devServerCongig = require("../webpack.dev.config")
 
   let app = new WebpackDevServer(webpack(devServerCongig), {
+    // public指路由的host值或者说在给定路由的前面添加的值
     public: `http://127.0.0.1:${proxyPort}`,
-    // publicPath: '/',
+    // 告诉 DevServer 要开启模块热替换模式
     hot: true,
     historyApiFallback: true,
     proxy: {
@@ -69,6 +69,10 @@ function devServer (port) {
     },
     stats: {
       colors: true
+    },
+    watchOptions: {
+      // 排除一些巨大的文件夹
+      ignored: /node_modules/
     }
   })
 
@@ -80,6 +84,4 @@ function devServer (port) {
   })
 }
 
-devServer(indexPort)
-
-devServer(cmsPort)
+module.exports = devServer

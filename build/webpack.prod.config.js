@@ -13,7 +13,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const precss = require('precss')
 // const postcsseasysprites = require('postcss-easysprites')
 
-const ModifyPrefixOfJsOrCss = require("./modifyPrefixOfJsOrCssPlugin")
+const ModifyPrefixOfJsOrCss = require("./plugin/modifyPrefixOfJsOrCssPlugin")
 const merge = require("webpack-merge")
 const base = require('./webpack.base.config')
 
@@ -28,7 +28,8 @@ module.exports = merge(base, {
   },
   resolve: {
     // 决定优先采用那份代码
-    // jsnext:main表示es6的代码，优先采用es6的那份代码
+    // 针对 Npm 中的第三方模块优先采用 jsnext:main 中指向的 ES6 模块化语法的文件
+    // 这也是为了充分发挥 Scope Hoisting 的作用
     mainFields: ['jsnext:main', 'browser', 'main']
   },
   output: {
@@ -42,7 +43,8 @@ module.exports = merge(base, {
         use:ExtractTextWebpackPlugin.extract({
           fallback:'style-loader',
           use:[
-            'css-loader',
+            // 通过 minimize 选项压缩 CSS 代码
+            'css-loader?minimize',
             'postcss-loader'
           ]
         })
@@ -97,8 +99,18 @@ module.exports = merge(base, {
     // 进度条
     new ProgressBarPlugin(),
 
-    // 闭包降低浏览器中JS执行效率，原因：闭包函数降低了JS引擎解析速度。
-    // ModuleConcatenationPlugin 可将一些有联系的模块，放到一个闭包函数里面去，通过减少闭包函数数量从而加快JS的执行速度。
+    /**
+     * 开启 Scope Hoisting - webpack/lib/optimize/ModuleConcatenationPlugin
+     * // ===
+     * 1. 原理：析出模块之间的依赖关系，尽可能的把打散的模块合并到一个函数中去，但前提是不能造成代码冗余。 因此只有那些被引用了一次的模块才能被合并。
+     * 2. 注意：由于 Scope Hoisting 需要分析出模块之间的依赖关系，因此源码必须采用 ES6 模块化语句，不然它将无法生效。
+          在.babelrc中的preset中配置 {"modules": false}
+     * 3. 优势
+       3.1 代码体积更小，因为函数申明语句会产生大量代码；
+       3.2 代码在运行时因为创建的函数作用域更少了，内存开销也随之变小。
+     * === //
+     */
+    //
     new ModuleConcatenationPlugin(),
 
     // 用 HashedModuleIdsPlugin 可以轻松地实现 chunkhash 的稳定化
@@ -117,7 +129,16 @@ module.exports = merge(base, {
       minRatio: 0.8
     }),
 
-    // 压缩js
+    /**
+     * ParallelUglifyPlugin
+     * // ===
+     * 原理
+       当 Webpack 有多个 JavaScript 文件需要输出和压缩时，原本会使用 UglifyJS 去一个个挨着压缩再输出，
+       但是 ParallelUglifyPlugin 则会开启多个子进程，把对多个文件的压缩工作分配给多个子进程去完成，
+       每个子进程其实还是通过 UglifyJS 去压缩代码，但是变成了并行执行。
+       所以 ParallelUglifyPlugin 能更快的完成对多个文件的压缩工作。
+     * === //
+     */
     new WebpackParallelUglifyPlugin({
       // 传递给uglifyJS的参数
       uglifyJS: {
@@ -138,7 +159,7 @@ module.exports = merge(base, {
           reduce_vars: true
         }
       },
-      include: process.cwd(),
+      include: path.resolve(rootDir, './client'),
       exclude: /node_modules/
     }),
 

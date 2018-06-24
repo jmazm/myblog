@@ -7,10 +7,13 @@
     "test": "cross-env NODE_ENV=test jest --forceExit --runInBand --watch",
     "coverage": "jest --coverage",
     "dll": "webpack --config ./build/webpack.dll.config.js",
-    "devServer": "cross-env NODE_ENV=development node ./build/devServer.js",
-    "prod": "cross-env NODE_ENV=production nodemon ./app.js",
-    "dev": "cross-env NODE_ENV=development nodemon ./app.js",
-    "webpack": "cross-env NODE_ENV=production webpack --config ./build/webpack.prod.config.js"
+    "webpack": "cross-env NODE_ENV=production webpack --config ./build/webpack.prod.config.js",
+    "index-server": "cross-env NODE_ENV=development node ./build/server/index-server.js",
+    "cms-server": "cross-env NODE_ENV=development node ./build/server/cms-server.js",
+    "indexDev": "cross-env NODE_ENV=development nodemon ./app-index.js",
+    "cmsDev": "cross-env NODE_ENV=development nodemon ./app-cms.js",
+    "index": "cross-env NODE_ENV=production nodemon ./app-index.js",
+    "cms": "cross-env NODE_ENV=production nodemon ./app-cms.js"
   },
   "author": "张静宜",
   "license": "ISC",

@@ -162,9 +162,9 @@ BOM - history
 * [defaultProps + propTypes]
 * [虚拟DOM]
 * [Diff算法]
-* [React直出开发环境热更新优化方案](/build/devServer.js)
+* [React直出开发环境热更新优化方案](/build/server/devServer.js)
 * [React 同构 - ssr](/server/view/layout.js)
-* [BrowserRouter 和 HashRouter的本质]
+* [BrowserRouter 和 HashRouter的区别](/client/router/index.js)
 
 ### Redux
 * [基础](/client/redux/store/configureStore.js)
@@ -176,13 +176,14 @@ BOM - history
 
 
 ### Webpack
-* [工作原理]
+* [工作原理 - 包括核心概念和工作流程](/build/webpack.base.config.js)
+* [webpack-dev-server](/build/server/devServer.js)
 * [url-loader 与 file-loader的区别 （以及image inline的实现）](/build/webpack.base.config.js)
 * [提取第三方库 - DLL](/build/webpack.dll.config.js)
 * [开启gzip压缩](/build/webpack.prod.config.js)
-* [压缩js](/build/webpack.prod.config.js)
-* [webpack-dev-server](/build/devServer.js)
-* [webpack核心概念](/build/webpack.base.config.js)
+* [压缩js - ParallelUglifyPlugin](/build/webpack.prod.config.js)
+* [Scope Hoisting](/build/webpack.prod.config.js)
+* [开启热模块替换](/build/webpack.dev.config.js)
 * [按需加载]
 * [css前缀兼容处理]
 * [css模块化]

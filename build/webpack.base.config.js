@@ -34,7 +34,7 @@
  */
 
 /**
- * webpack
+ * webpack - 工作原理
  * // ===
  * 1. 核心概念:
    1.1 Entry：入口，webpack执行构建的第一步就是从入口文件开始，可抽象成输入
@@ -43,11 +43,13 @@
    1.4 Plugin：扩展插件，在 Webpack 构建流程中的特定时机会广播出对应的事件，插件可以监听这些事件的发生，在特定时机做对应的事情
    1.5 Loader：模块转换器，用于把模块原内容按照需求转换成新内容
    1.6 Chunk：代码块，一个 Chunk 由多个模块组合而成，用于代码合并与分割
- * 2. 总述
-   Webpack 启动后会从 Entry 里配置的 Module 开始递归解析 Entry 依赖的所有 Module。
-   每找到一个 Module， 就会根据配置的 Loader 去找出对应的转换规则，对 Module 进行转换后，再解析出当前 Module 依赖的 Module。
-   这些模块会以 Entry 为单位进行分组，一个 Entry 和其所有依赖的 Module 被分到一个组也就是一个 Chunk。
-   最后 Webpack 会把所有 Chunk 转换成文件输出。 在整个流程中 Webpack 会在恰当的时机执行 Plugin 里定义的逻辑。
+ * 2. 流程概括
+   2.1 初始化：启动构建，读取与合并配置参数，加载 Plugin，实例化 Compiler。
+      2.1.a Compiler 负责文件监听和启动编译。Compiler 实例中包含了完整的 Webpack 配置，全局只有一个 Compiler 实例。
+   2.2 编译：从 Entry 发出，针对每个 Module 串行调用对应的 Loader 去翻译文件内容，再找到该 Module 依赖的 Module，递归地进行编译处理。
+   2.3 输出：对编译后的 Module 组合成 Chunk，把 Chunk 转换成文件，输出到文件系统。
+
+   在整个流程中 Webpack 会在恰当的时机执行 Plugin 里定义的逻辑。
  * === //
  */
 
