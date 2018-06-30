@@ -160,8 +160,7 @@ BOM - history
 * [React直出开发环境热更新优化方案](/build/server/devServer.js)
 * [React 同构 - ssr](/server/view/layout.js)
 * [BrowserRouter 和 HashRouter的区别](/client/router/index.js)
-* [生命周期](/client/views/User/containers/Home/index.jsx)
-* [生命周期 - componentDidUpdate](/client/views/User/containers/SearchPage/index.jsx)
+* [生命周期](/client/views/User/containers/Home/index.jsx) / [生命周期 - componentDidUpdate](/client/views/User/containers/SearchPage/index.jsx)
 * [defaultProps + propTypes](/client/views/User/containers/TagPage/index.jsx)
 * [组件间通信](/client/views/User/containers/CategoryPage/index.jsx)
 * [jsx语法]
