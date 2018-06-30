@@ -1,0 +1,75 @@
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    padding: 10px 20px;
+    border: 1px solid #999999;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 4px;
+    background: white;
+}
+.popup-header {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #999999;
+}
+.popup-header .header-title{
+    font: 18px/24px 'Microsoft YaHei';
+    margin: 0;
+}
+.popup-content {
+    margin: 10px 0;
+    word-break: break-all;
+}
+.popup-footer {
+    text-align: right;
+}
+.popup-footer button {
+    font: 14px/1.5 'Microsoft YaHei';
+    padding: 0 12px;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #999999;
+    background: dodgerblue;
+    cursor: pointer;
+}
+.popup-footer button:first-of-type {
+    margin-right: 10px;
+}
+.popup-footer .cancel-btn {
+    color: #999999;
+    background: white;
+}
+.popup-footer .cancel-btn:hover {
+    background: #eeeeee;
+}
+.popup-open {
+    animation: zoomIn 0.3s linear;
+}
+.popup-close {
+    animation: zoomOut 0.3s linear forwards;
+}
+.popup-input {
+    display: block;
+    width: 80%;
+    margin: 10px 0;
+    border: 1px solid #eee;
+    background: white;
+}
+@keyframes zoomIn {
+    from {
+        transform: translate(-50%, -50%) scale(0, 0);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1, 1);
+    }
+}
+@keyframes zoomOut {
+    from {
+        transform: translate(-50%, -50%) scale(1, 1);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(0, 1);
+    }
+}

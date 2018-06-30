@@ -1,0 +1,27 @@
+.search-bar {
+    margin-bottom: 20px;
+}
+.search-bar-inner {
+    position: relative;
+}
+.search-input {
+    width: 200px;
+    padding-right: 24px;
+    font: 16px/2  'Microsoft YaHei';
+    text-indent: 8px;
+    border: none;
+    border-bottom: 1px solid #696969;
+    box-shadow: inset rgba(0, 0, 0, 0.3) 1px 1px 3px;
+}
+.search-input:focus {
+    box-shadow: inset rgba(0, 0, 0, 0.4) 2px 2px 4px;
+}
+.search-btn {
+    position: absolute;
+    top: 6px;
+    right: 4px;
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: transparent url(../../../../static/imgs/icon.png) no-repeat -10px -44px;
+}

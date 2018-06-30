@@ -1,0 +1,28 @@
+.article-item-ti {
+    display: block;
+    font: bold 16px/2 'Microsoft YaHei';
+    margin: 10px 0;
+}
+.input {
+    width: 300px;
+    height: 28px;
+    font: 14px/2 'Microsoft YaHei';
+    border: 1px solid #c0c0c0;
+    text-indent: 5px;
+}
+.textarea {
+    width: 600px;
+    height: 300px;
+    resize: none;
+}
+.btn-wrapper {
+    margin: 10px 0;
+}
+.btn {
+    padding: 5px 10px;
+    color: white;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    background: dodgerblue;
+}

@@ -1,0 +1,85 @@
+/*
+  居中 - position + transform - 解决未知宽高（不过知道宽高也可以使用）
+  1. 实现
+  1.1 父：position: relative/fixed
+  1.2 子：position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  2. 特点：子未知宽高，且不会参与translate 的动画
+*/
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+.modal-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-width: 800px;
+    border: 1px solid #999999;
+    border-radius: 10px;
+    background: white;
+}
+.modal-header {
+    padding: 5px 15px;
+    border-bottom: 1px solid #e8e8e8;
+    overflow: hidden;
+}
+.header-title {
+    font: 18px/ 1.5 'Microsoft YaHei';
+    float: left;
+    margin: 5px 0;
+}
+.del {
+    font: 16px/ 36px 'Microsoft YaHei';
+    float: right;
+    color: #999999;
+    cursor: pointer;
+}
+.del:hover {
+    color: grey;
+}
+.modal-content {
+    padding: 18px 15px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.content-inner {
+    max-height: 500px;
+    overflow-y: auto;
+}
+.modal-footer {
+    text-align: right;
+    padding: 10px 15px;
+}
+.modal-footer button {
+    display: inline-block;
+    padding: 0 12px;
+    margin: 0 5px;
+    font: 13px/2  'Microsoft YaHei';
+    border-radius: 5px;
+    border: none;
+}
+.primary {
+     color: white;
+     background: dodgerblue;
+}
+.primary:hover {
+    box-shadow: inset 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.modal-footer .normal {
+    color: #696969;
+    border: 1px solid #c0c0c0;
+    background: white;
+}
+.normal:hover {
+    box-shadow: inset 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.hide {
+    display: none;
+}

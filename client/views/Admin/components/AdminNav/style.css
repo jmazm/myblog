@@ -1,0 +1,25 @@
+.aside {
+    width: 40%;
+    max-width: 250px;
+    height: 100vh;
+    padding: 20px 0;
+    background: white;
+    border: 1px solid #c0c0c0;
+    border-right-width: 5px;
+}
+.list-item {
+    min-width: 85px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    font: 16px/2 'Microsoft YaHei';
+    border-bottom: 2px solid #c0c0c0;
+}
+.list-item:last-of-type {
+    border-bottom: none;
+}
+.list-item a {
+    color: #696969;
+}
+.list-item a:hover {
+    color: #ff6666;
+}

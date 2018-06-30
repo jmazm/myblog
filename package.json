@@ -4,13 +4,6 @@
   "description": "张静宜个人前端博客",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "cms": "cross-env NODE_ENV=production node ./server/cmsServer.js",
-    "index": "cross-env NODE_ENV=production node ./server/indexServer.js",
-    "pm2-index": "cross-env NODE_ENV=production pm2 start ./server/indexServer.js --watch --name blogindex",
-    "pm2-cms": "cross-env NODE_ENV=production pm2 start ./server/cmsServer.js --watch --name blogcms",
-    "restart": "cross-env NODE_ENV=production pm2 restart all --watch"
-=======
     "test": "cross-env NODE_ENV=test jest --forceExit --runInBand --watch",
     "coverage": "jest --coverage",
     "dll": "webpack --config ./build/webpack.dll.config.js",
@@ -21,17 +14,14 @@
     "cmsDev": "cross-env NODE_ENV=development nodemon ./app-cms.js",
     "index": "cross-env NODE_ENV=production nodemon ./app-index.js",
     "cms": "cross-env NODE_ENV=production nodemon ./app-cms.js"
->>>>>>> dev
   },
   "author": "张静宜",
   "license": "ISC",
   "devDependencies": {
-<<<<<<< HEAD
-=======
     "asset-require-hook": "^1.2.0",
     "autoprefixer": "^8.6.2",
->>>>>>> dev
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-import": "^1.7.0",
     "babel-plugin-syntax-class-properties": "^6.13.0",
@@ -41,6 +31,7 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-require-ignore": "^0.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
@@ -56,6 +47,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
+    "css-modules-require-hook": "^4.2.3",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "hard-source-webpack-plugin": "^0.6.4",
@@ -67,16 +59,13 @@
     "koa-webpack-hot-middleware": "^1.0.3",
     "nodemon": "^1.17.3",
     "open-browser-webpack-plugin": "0.0.5",
-<<<<<<< HEAD
-    "postcss-easysprites": "^0.1.9",
-=======
     "postcss-cssnext": "^3.1.0",
     "postcss-easysprites": "^0.1.8",
     "postcss-icss-values": "^2.0.1",
->>>>>>> dev
     "postcss-loader": "^2.1.3",
     "precss": "^3.1.2",
     "progress-bar-webpack-plugin": "^1.11.0",
+    "source-map-support": "^0.5.4",
     "style-loader": "^0.20.3",
     "supertest": "^3.0.0",
     "url-loader": "^1.0.1",
@@ -90,15 +79,11 @@
   },
   "dependencies": {
     "antd": "^3.4.1",
-    "asset-require-hook": "^1.2.0",
     "axios": "^0.18.0",
-    "babel-core": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
     "ccap": "^0.6.10",
     "classnames": "^2.2.6",
     "cross-env": "^5.1.4",
     "crypto": "^1.0.1",
-    "css-modules-require-hook": "^4.2.3",
     "dataformat": "^1.0.0",
     "dateformat": "^3.0.3",
     "debug": "^3.1.0",
@@ -116,13 +101,9 @@
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.1",
-<<<<<<< HEAD
-    "koa-static-cache": "^5.1.2",
-=======
     "koa-static": "^4.0.2",
     "koa-static-cache": "^5.1.2",
     "koa-validate": "^1.0.7",
->>>>>>> dev
     "mysql2": "^1.5.3",
     "path": "^0.12.7",
     "prop-types": "^15.6.1",
@@ -136,7 +117,6 @@
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "remark": "^9.0.0",
-    "remark-react": "^4.0.3",
-    "source-map-support": "^0.5.4"
+    "remark-react": "^4.0.1"
   }
 }
