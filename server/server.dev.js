@@ -1,5 +1,5 @@
 const baseServer = require("./sever.base")
-const Koa = require("Koa")
+const Koa = require("koa")
 const KoaStaticCache = require("koa-static-cache")
 const path = require("path")
 const distDir = path.resolve(process.cwd(), './dist')
