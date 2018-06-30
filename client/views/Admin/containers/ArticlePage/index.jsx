@@ -6,6 +6,8 @@ import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Table from '../../../../plugin/table'
 import Modal from '../../../../plugin/modal'
+import { Validator } from '../../../../lib/form'
+
 
 import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
@@ -13,13 +15,13 @@ import EditorArticle from '../../components/EditorArticle'
 
 import { replaceHtml } from '../../../../lib/xss'
 
-import { actions as ArticleReducer } from '../../../../redux/reducer/articleReducer'
+import { actions as articleReducer } from '../../../../redux/reducer/articleReducer'
 import { actions as tagReducer } from '../../../../redux/reducer/tagReducer'
-import { actions as articleReducer } from '../../../../redux/reducer/categoryReducer'
+import { actions as categoryReducer } from '../../../../redux/reducer/categoryReducer'
 
-const { get_all_articles, delete_an_article, modify_article } = ArticleReducer
+const { get_all_articles, delete_an_article, modify_article } = articleReducer
 const { get_all_tags } = tagReducer
-const { get_all_categories } = articleReducer
+const { get_all_categories } = categoryReducer
 
 class AdminArticle extends Component {
   constructor (props) {
@@ -33,8 +35,7 @@ class AdminArticle extends Component {
       articleData: {
         Tag_id: 1,
         Category_id: 1,
-      },
-      a: []
+      }
     }
 
     this.shouldComponentUpdate = ReactAddonsPureRenderMixin.shouldComponentUpdate
@@ -141,7 +142,8 @@ class AdminArticle extends Component {
    * @return {XML}
    */
   handleRenderOperation (row, index) {
-    const {pageNum, pageSize} = this.state
+    const { pageNum, pageSize } = this.state
+
     return (
       <span>
         <a href="javascript:;">查看</a>
@@ -171,7 +173,7 @@ class AdminArticle extends Component {
   /**
    * 展示模态框
    */
-  showModal (id) {
+  async showModal (id) {
     this.setState({
       visible: true
     });
@@ -189,9 +191,53 @@ class AdminArticle extends Component {
       }
     }
 
-    this.setState({
+    await this.setState({
       articleData: articleData
     })
+  }
+
+  /**
+   * 表单验证
+   * @param form
+   * @return {*}
+   */
+  validate () {
+    const form = document.getElementById('articleEditForm')
+    const v = new Validator()
+
+    v.add(form.title, [
+      {
+        strategy: 'isEmpty',
+        errorMsg: '标题不能为空'
+      }
+    ])
+
+    v.add(form.foreword, [
+      {
+        strategy: 'isEmpty',
+        errorMsg: '前言不能为空'
+      }
+    ])
+
+    if (form.imgSrc.value.trim().length > 0) {
+      v.add(form.imgSrc, [
+        {
+          strategy: 'isWebsite',
+          errorMsg: '网址格式不正确'
+        }
+      ])
+    }
+
+    v.add(form.content, [
+      {
+        strategy: 'isEmpty',
+        errorMsg: '内容不能为空'
+      }
+    ])
+
+    const errMsg = v.start()
+
+    return errMsg
   }
 
   /**
@@ -199,6 +245,14 @@ class AdminArticle extends Component {
    * @return {Promise.<void>}
    */
   async handleOk () {
+    // 表单验证
+    const errMsg = this.validate()
+
+    if (errMsg) {
+      alert(errMsg)
+      return
+    }
+
     const { articleData, pageSize, pageNum } = this.state
     let postData = {
       articleData: {}
@@ -278,11 +332,12 @@ class AdminArticle extends Component {
       articleData={articleData}
       categories={categories}
       tags={tags}
-      handleChange={this.handleChange}
-      handleCategoryChange={this.handleCategoryChange}
+      handleChange={ this.handleChange }
+      handleCategoryChange={ this.handleCategoryChange}
       handleTagChange={this.handleTagChange}
     />
   }
+
   render () {
     const { articleList, total, tags, categories } = this.props
     const { articleData, visible } = this.state

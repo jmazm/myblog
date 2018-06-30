@@ -194,7 +194,6 @@ class AdminNewArticle extends Component {
     const { tags, categories, newArticleData } = this.props
     const { title, foreword, imgSrc, Category_id, Tag_id, content } = newArticleData
     
-    // console.log(this.props.globalState)
     return (
       <div className='blog-management-wrapper' >
         <AdminNav/>
@@ -203,27 +202,27 @@ class AdminNewArticle extends Component {
           <div className="content-inner">
             <form className="publish-article" id="newArticleForm" ref={ele => this.form = ele}>
               <div className="form-item-wrapper">
-                <span className={ style["article-item-ti"] }>标题</span>
+                <label className={ style["article-item-ti"] }>标题</label>
                 <input className={ style["input"] } name="title" value={title} placeholder="请输入文章标题" onChange={this.titleOnChange}/>
               </div>
               <div className="form-item-wrapper">
-                <span className={ style["article-item-ti"] }>文章前言</span>
+                <label className={ style["article-item-ti"] }>文章前言</label>
                 <input className={ style["input"] }  name="foreword" value={foreword} placeholder="请输入文章前言" onChange={this.forewordOnChange}/>
               </div>
               <div className="form-item-wrapper">
-                <span className={ style["article-item-ti"] }>文章展示的图片</span>
+                <label className={ style["article-item-ti"] }>文章展示的图片</label>
                 <input className={ style["input"] } name="imgSrc" value={imgSrc} placeholder="请输入文章展示图片的地址" onChange={this.imgUrlOnChange}/>
               </div>
               <div className="form-item-wrapper">
-                <span className={ style["article-item-ti"] }>文章类别</span>
+                <label className={ style["article-item-ti"] }>文章类别</label>
                 <CategorySelect value={ Category_id } data={ categories } onChange={ this.categoryOnChange }/>
               </div>
               <div className="form-item-wrapper">
-                <span className={ style["article-item-ti"] }>文章标签</span>
+                <label className={ style["article-item-ti"] }>文章标签</label>
                 <TagSelect value={ Tag_id }   data={ tags } onChange={ this.tagOnChange }/>
               </div>
               <div className="form-item-wrapper">
-                <span className={ style["article-item-ti"] }>正文</span>
+                <label className={ style["article-item-ti"] }>正文</label>
                 <textarea className={ style["textarea"] } name="content" value={content} onChange={ this.contentOnChange }></textarea>
               </div>
               <div className={ style['btn-wrapper'] }>
