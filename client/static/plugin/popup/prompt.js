@@ -1,4 +1,4 @@
-import {on} from '../../lib/event'
+import {on} from '../../../lib/event'
 import Popup from './popup'
 
 /**

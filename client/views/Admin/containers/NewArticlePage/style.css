@@ -1,40 +1,24 @@
-.blog-management-wrapper {
-    display: flex;
-    background: #ffffff;
-}
-.management-content-wrapper {
-    flex: 1;
-    height: 100vh;
-    min-height: 600px;
-    padding: 20px;
-    overflow: auto;
-}
-.form-item-wrapper .article-item-ti {
+.article-item-ti {
     display: block;
-    font: bold 16px/2 '';
+    font: bold 16px/2 'Microsoft YaHei';
     margin: 10px 0;
 }
-.form-item-wrapper .input {
+.input {
     width: 300px;
     height: 28px;
-    font: 14px/2 '';
+    font: 14px/2 'Microsoft YaHei';
     border: 1px solid #c0c0c0;
     text-indent: 5px;
 }
-.form-item-wrapper .textarea {
+.textarea {
     width: 600px;
     height: 300px;
     resize: none;
 }
-.form-item-wrapper .select {
-    width: 300px;
-    height: 28px;
-    border: 1px solid #c0c0c0;
-}
 .btn-wrapper {
     margin: 10px 0;
 }
-.btn-wrapper .btn {
+.btn {
     padding: 5px 10px;
     color: white;
     margin-right: 5px;

@@ -8,7 +8,8 @@ import { AppContainer } from 'react-hot-loader'
 import { UserRouteMap } from '../../router/index'
 import configureStore from '../../redux/store/index'
 
-import '../reset.css'
+import '../../static/css/reset.css'
+import '../../static/css/index-common.css'
 
 const renderRoot = () => {
   ReactDOM.render(

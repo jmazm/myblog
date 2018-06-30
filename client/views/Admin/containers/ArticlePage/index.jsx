@@ -51,6 +51,18 @@ class AdminArticle extends Component {
     this.handleTagChange = this.handleTagChange.bind(this)
   }
 
+  static defaultProps = {
+    tags: [],
+    categories: [],
+    articleList: []
+  }
+
+  static propTypes = {
+    articleList: PropTypes.array,
+    tags: PropTypes.array,
+    categories: PropTypes.array,
+  }
+
   /**
    * 表格头部数据
    * @type {[null,null,null]}
@@ -276,7 +288,7 @@ class AdminArticle extends Component {
     const { articleData, visible } = this.state
 
     return (
-      <div className="blog-management-wrapper blog--management">
+      <div className="blog-management-wrapper">
         <AdminNav/>
         <div className="management-content-wrapper">
           <AdminHeader title="管理文章"/>
@@ -311,27 +323,26 @@ class AdminArticle extends Component {
     this.props.get_all_tags()
     this.props.get_all_categories()
   }
-}
 
-AdminArticle.defaultProps = {
-  tags: [],
-  categories: [],
-  articleList: []
-}
+  componentDidUpdate (prevProps) {
+    const { msg } = prevProps.globalState
 
-AdminArticle.propTypes = {
-  articleList: PropTypes.array,
-  tags: PropTypes.array,
-  categories: PropTypes.array,
+    // 更新完毕，如果遇到type为0，证明未登录或者验证未通过或者后台报错，会主动返回登录界面
+    if (msg.type == 0 && msg.info != '') {
+      location.href = '/'
+    }
+  }
 }
 
 function mapStateToProps (state) {
   const {articleList, total} = state.articles
+
   return {
     articleList,
     total,
     tags: state.tags,
-    categories: state.categories
+    categories: state.categories,
+    globalState: state.globalState
   }
 }
 

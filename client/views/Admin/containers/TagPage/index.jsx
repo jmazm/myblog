@@ -35,6 +35,15 @@ class AdminTag extends Component {
     this.renderModalContent = this.renderModalContent.bind(this)
   }
 
+
+  static defaultProps = {
+    tags: []
+  }
+
+  static propTypes = {
+    tags: PropsType.array
+  }
+
   /**
    * 表头
    * @type {[null,null,null]}
@@ -149,7 +158,8 @@ class AdminTag extends Component {
   }
 
   render () {
-    const { tags, visible } = this.props
+    const { tags } = this.props
+    const { visible } = this.state
 
     return (
       <div className="blog-management-wrapper blog--management">
@@ -180,14 +190,15 @@ class AdminTag extends Component {
   componentDidMount () {
     this.props.get_all_tags()
   }
-}
 
-AdminTag.defaultProps = {
-  tags: []
-}
+  componentDidUpdate (prevProps) {
+    const { msg } = prevProps.globalState
 
-AdminTag.propTypes = {
-  tags: PropsType.array
+    // 更新完毕，如果遇到type为0，证明未登录或者验证未通过或者后台报错，会主动返回登录界面
+    if (msg.type == 0 && msg.info != '') {
+      location.href = '/'
+    }
+  }
 }
 
 function mapStateToProps(state) {

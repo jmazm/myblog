@@ -73,7 +73,15 @@ function* getTags () {
   })
 
   try {
-    return yield call(getRequest, api.getAllTagApi)
+    const accessToken = localStorage.getItem('ACCESS_TOKEN') || ''
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
+    return yield call(getRequest, api.getAllTagApi,  {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
+      }
+    })
   } catch (err) {
     // 报错处理
     yield put({

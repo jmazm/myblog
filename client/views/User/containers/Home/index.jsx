@@ -8,14 +8,45 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
 import ArticleList from '../../components/ArticleList'
-import Pagination from '../../../../plugin/pagination';
+import Pagination from '../../../../plugin/pagination'
+
 
 import { actions as ArticleReducer } from '../../../../redux/reducer/articleReducer'
 
-
-import './style.css'
-
 const { get_all_articles } = ArticleReducer
+
+/**
+ * 生命周期 - 三大阶段
+ * 首次挂载：getDefaultProps、getInitialState、componentWillMount、render 和 componentDidMount
+ * 重新挂载：getInitialState、componentWillMount、render 和componentDidMount，但并不执行 getDefaultProps
+ * // ===
+ * 1. Mounting - 挂载
+   1.1 constructor
+       super(props)、设置默认的state、不要setState、 bind event handlers
+   1.2 componentWiilMount
+       没有任何组件可以使用，不能做任何关于DOM的事情；
+       不要setState
+   1.3 render
+   1.4 componentDidMount
+       加载数据（ajax）、 set up any subscriptions【don’t forget to unsubscribe in componentWillUnmount()】
+       setState()【会引起额外的渲染 - render会被调用两次，但会发生在浏览器更新屏幕之前】
+ * 2. Updating - 更新阶段
+   2.1 componentWillRecieveProps(object nextProps)
+      如果父组件引起子组件再渲染，那么这个方法就会被调用，无论props是否有改变；setState()
+   2.2 shouldComponentUpdate(object nextProps, object nextState)
+      不要setState；
+      return false并不是阻止子组件再渲染当他们的state变化时；
+      React.PureComponent；
+      不推荐深检查和使用JSON.stringify
+   2.3 componentWillUpdate(object nextPorps, object nextState)
+      不要setState
+   2.4 render()
+   2.1 componentDidUpdate(prevProps, prevState, snapshot)
+      setState()；发请求
+ * 3. Unmounting - 卸载
+   3.1 componentWillMount
+ * === //
+ */
 
 class Home extends Component {
   constructor (props) {
@@ -23,6 +54,17 @@ class Home extends Component {
 
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
     this.pageOnChange = this.pageOnChange.bind(this)
+  }
+
+  // 等价调用内部的 getDefaultProps方法(getDefaultProps只执行一次)
+  static defaultProps = {
+    articleList: [],
+    total: 0
+  }
+
+  static propTypes = {
+    articleList: PropTypes.array,
+    total: PropTypes.number
   }
 
   /**
@@ -61,17 +103,6 @@ class Home extends Component {
       pageSize: 5
     })
   }
-}
-
-// 设置默认值
-Home.defaultProps = {
-  articleList: [],
-  total: 0
-}
-
-Home.propTypes = {
-  articleList: PropTypes.array,
-  total: PropTypes.number
 }
 
 /**

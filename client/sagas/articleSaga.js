@@ -30,21 +30,44 @@ function* getAllArticle (paramsObj) {
   try {
     const { pageNum, pageSize } = paramsObj
 
+    const accessToken = localStorage.getItem('ACCESS_TOKEN') || ''
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
     // 标签
     if (paramsObj.tag) {
-      return yield call(getRequest, api.getAllArticleByTagApi(pageNum, pageSize, paramsObj.tag))
+      return yield call(getRequest, api.getAllArticleByTagApi(pageNum, pageSize, paramsObj.tag),  {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'x-csrf-token': csrfToken
+        }
+      })
     }
     // 类别
     else if (paramsObj.category) {
-      return yield call(getRequest, api.getAllArticleByCategoryApi(pageNum, pageSize, paramsObj.category))
+      return yield call(getRequest, api.getAllArticleByCategoryApi(pageNum, pageSize, paramsObj.category),  {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'x-csrf-token': csrfToken
+        }
+      })
     }
     // 文章名称
     else if (paramsObj.title) {
-      return yield call(getRequest, api.getAllArticleByTitleApi(pageNum, pageSize, paramsObj.title))
+      return yield call(getRequest, api.getAllArticleByTitleApi(pageNum, pageSize, paramsObj.title),  {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'x-csrf-token': csrfToken
+        }
+      })
     }
     // 全部文章
     else {
-      return yield call(getRequest, api.getAllArticleApi(pageNum, pageSize))
+      return yield call(getRequest, api.getAllArticleApi(pageNum, pageSize),  {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'x-csrf-token': csrfToken
+        }
+      })
     }
 
   } catch (err) {
@@ -160,7 +183,15 @@ function* getArticleDetail (id) {
   })
 
   try {
-    return yield call(getRequest, api.getArticleDetailApi(id))
+    const accessToken = localStorage.getItem('ACCESS_TOKEN') || ''
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
+    return yield call(getRequest, api.getArticleDetailApi(id),  {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
+      }
+    })
   } catch (err) {
     // 报错处理
     yield put({

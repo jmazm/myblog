@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import modal from './index.css'
+import style from './index.css'
 
 class Modal extends Component {
   constructor (props) {
@@ -13,10 +13,22 @@ class Modal extends Component {
     this.setModalClassName = this.setModalClassName.bind(this)
   }
 
+
+  static defaultProps = {
+    title: '请输入标题',
+    visible: false,
+    content: ''
+  }
+
+  static propTypes = {
+    title: PropTypes.string,
+    visible: PropTypes.bool
+  }
+
   setModalClassName (visible) {
     return classnames({
-      modal: true,
-      hide: !visible
+      [style.modal]: true,
+      [style.hide]: !visible
     })
   }
 
@@ -24,36 +36,25 @@ class Modal extends Component {
     const { content, title, visible, onCancel, onOk } = this.props
 
     return (
-      <div className={this.setModalClassName(visible)}>
-        <div className="modal-inner">
-          <header className="modal-header">
-            <h2 className="header-title">{title}</h2>
-            <a href="javascript:;" className="del" onClick={onCancel}>x</a>
+      <div className={ this.setModalClassName(visible) }>
+        <div className={ style['modal-inner'] }>
+          <header className={ style['modal-header'] }>
+            <h2 className={ style['header-title'] }>{ title }</h2>
+            <a href="javascript:;" className={ style.del } onClick={ onCancel }>x</a>
           </header>
-          <div className="modal-content">
-            <div className="content-inner">
+          <div className={ style['modal-content'] }>
+            <div className={ style['content-inner'] }>
               {content}
             </div>
           </div>
-          <footer className="modal-footer">
-            <button type="button" className="primary" onClick={onOk}>确定</button>
-            <button type="button" className="normal" onClick={onCancel}>取消</button>
+          <footer className={ style['modal-footer'] }>
+            <button type="button" className={ style['primary'] } onClick={ onOk }>确定</button>
+            <button type="button" className={ style['normal'] } onClick={ onCancel }>取消</button>
           </footer>
         </div>
       </div>
     )
   }
-}
-
-Modal.defaultProps = {
-  title: '请输入标题',
-  visible: false,
-  content: ''
-}
-
-Modal.propTypes = {
-  title: PropTypes.string,
-  visible: PropTypes.bool
 }
 
 export default Modal

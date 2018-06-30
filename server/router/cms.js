@@ -36,9 +36,9 @@ router.get('/', async (ctx) => {
 router.get('/api/captcha', captcha.createCaptcha)
 
 // 获取文章
-router.get('/api/article', articleCtrl.getArticle)
+router.get('/api/article', articleCtrl.getArticle, userAuth)
 // 获取文章详情
-router.get('/api/article/:id', articleCtrl.getArticleDetail)
+router.get('/api/article/:id', articleCtrl.getArticleDetail, userAuth)
 // 添加文章
 router.post('/api/article', articleCtrl.addArticle, userAuth)
 // 修改文章
@@ -49,16 +49,16 @@ router.delete('/api/article/:id', articleCtrl.delArticle, userAuth)
 
 
 // 类别
-router.get('/api/category', categoryCtrl.getCategories)
+router.get('/api/category', categoryCtrl.getCategories, userAuth)
 router.post('/api/category', categoryCtrl.addCategory, userAuth)
 router.delete('/api/category/:id', categoryCtrl.delCategory, userAuth)
 
 
 // 获取评论
-router.get('/api/comment', commentCtrl.getComments, userAuth)
+router.get('/api/comment', commentCtrl.getComments)
 
 // 标签
-router.get('/api/tag', tagCtrl.getTags)
+router.get('/api/tag', tagCtrl.getTags, userAuth)
 router.post('/api/tag', tagCtrl.addTag, userAuth)
 router.delete('/api/tag/:id', tagCtrl.delTag, userAuth)
 

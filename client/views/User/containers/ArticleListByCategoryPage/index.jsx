@@ -1,19 +1,17 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import dateformat from 'dateformat'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
+import Pagination from '../../../../plugin/pagination';
 
-import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
+import { actions as ArticleReducer } from '../../../../redux/reducer/articleReducer'
 
-import { Pagination } from 'antd';
-
-
-const {get_all_articles} = ArticleReducer
+const { get_all_articles } = ArticleReducer
 
 class ArticleListByCategory extends Component {
   constructor (props) {
@@ -26,6 +24,24 @@ class ArticleListByCategory extends Component {
     }
     this.pageOnChange = this.pageOnChange.bind(this)
   }
+
+  // 设置默认值
+  static defaultProps = {
+    articleList: [],
+    total: 0,
+    match: {
+      params: {}
+    }
+  }
+
+  static propTypes = {
+    articleList: PropTypes.array,
+    total: PropTypes.number,
+    match: {
+      params: PropTypes.object
+    }
+  }
+
   pageOnChange (page, pagesize) {
     const category = decodeURIComponent(this.props.match.params.category)
 
@@ -39,8 +55,9 @@ class ArticleListByCategory extends Component {
       currentPage: page
     })
   }
+
   render () {
-    const {articleList, total, match} = this.props
+    const { articleList, total, match } = this.props
     const category = match.params.category
 
     return (
@@ -60,10 +77,10 @@ class ArticleListByCategory extends Component {
                         <article className="post" key={i}>
                           <header className="post-header">
                             <div className="post-meta">
-                              <time>{dateformat(item.date, 'yyyy-mm')}</time>
+                              <time>{ dateformat(item.date, 'yyyy-mm') }</time>
                             </div>
                             <h1 className="post-title">
-                              <Link to={`/article/${item.id}`}>{item.title}</Link>
+                              <Link to={`/article/${ item.id }`}>{ item.title }</Link>
                             </h1>
                           </header>
                         </article>
@@ -73,7 +90,7 @@ class ArticleListByCategory extends Component {
                 }
               </div>
               <div className="pagination-wrapper">
-                <Pagination onChange={this.pageOnChange} defaultCurrent={1} total={parseInt(total)} defaultPageSize={10}/>
+                <Pagination onChange={ this.pageOnChange } defaultCurrent={1} total={ parseInt(total) } defaultPageSize={10}/>
               </div>
             </div>
           </div>
@@ -81,6 +98,7 @@ class ArticleListByCategory extends Component {
       </div>
     )
   }
+
   componentDidMount () {
     const category = this.props.match.params.category
     this.props.get_all_articles({
@@ -93,31 +111,14 @@ class ArticleListByCategory extends Component {
   componentDidUpdate (prevPros) {
     const preCategory = prevPros.match.params.category
     const curCategory = this.props.match.params.category
+
     if (curCategory && preCategory && preCategory !== curCategory) {
-      console.log(preCategory, curCategory)
       this.props.get_all_articles({
         pageNum: 1,
         pageSize: 5,
         category: curCategory
       })
     }
-  }
-}
-
-// 设置默认值
-ArticleListByCategory.defaultProps = {
-  articleList: [],
-  total: 0,
-  match: {
-    params: {}
-  }
-}
-
-ArticleListByCategory.propTypes = {
-  articleList: PropTypes.array,
-  total: PropTypes.number,
-  match: {
-    params: PropTypes.object
   }
 }
 

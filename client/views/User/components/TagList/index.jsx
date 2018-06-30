@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import TagItem from '../TagItem'
 
-import './style.css'
+import style from './style.css'
 
 class SearchBar extends Component {
   constructor (props) {
@@ -12,10 +12,10 @@ class SearchBar extends Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
   }
   render () {
-    const {data, type} = this.props
+    const { data, type } = this.props
     return (
-      <div className="tag-wrapper">
-        <ul className="tag-list">
+      <div className={ style['tag-wrapper'] }>
+        <ul className={ style['tag-list'] }>
           {
             data.length > 0 ?
               data.map((item, i) => {

@@ -1,5 +1,5 @@
 import DragDrop from './drag-drop'
-import { replaceClass } from '../../lib/className'
+import { replaceClass } from '../../../lib/className'
 
 /**
  * // === 创建节点：document.createElement(tagName) === //

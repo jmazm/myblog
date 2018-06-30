@@ -13,7 +13,7 @@
     left: 0;
     background: rgba(0, 0, 0, 0.3);
 }
-.modal .modal-inner {
+.modal-inner {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -24,34 +24,34 @@
     border-radius: 10px;
     background: white;
 }
-.modal .modal-header {
+.modal-header {
     padding: 5px 15px;
     border-bottom: 1px solid #e8e8e8;
     overflow: hidden;
 }
-.modal-header .header-title {
-    font: 18px/ 1.5 '';
+.header-title {
+    font: 18px/ 1.5 'Microsoft YaHei';
     float: left;
     margin: 5px 0;
 }
-.modal .del {
-    font: 16px/ 36px '';
+.del {
+    font: 16px/ 36px 'Microsoft YaHei';
     float: right;
     color: #999999;
     cursor: pointer;
 }
-.modal .del:hover {
+.del:hover {
     color: grey;
 }
-.modal .modal-content {
+.modal-content {
     padding: 18px 15px;
     border-bottom: 1px solid #e8e8e8;
 }
-.modal-content .content-inner {
+.content-inner {
     max-height: 500px;
     overflow-y: auto;
 }
-.modal .modal-footer {
+.modal-footer {
     text-align: right;
     padding: 10px 15px;
 }
@@ -59,15 +59,15 @@
     display: inline-block;
     padding: 0 12px;
     margin: 0 5px;
-    font: 13px/2 '';
+    font: 13px/2  'Microsoft YaHei';
     border-radius: 5px;
     border: none;
 }
-.modal-footer .primary {
+.primary {
      color: white;
      background: dodgerblue;
 }
-.modal-footer .primary:hover {
+.primary:hover {
     box-shadow: inset 1px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -76,7 +76,7 @@
     border: 1px solid #c0c0c0;
     background: white;
 }
-.modal-footer .normal:hover {
+.normal:hover {
     box-shadow: inset 1px 1px rgba(0, 0, 0, 0.3);
 }
 

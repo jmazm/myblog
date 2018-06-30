@@ -6,7 +6,9 @@ class Category {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async getCategories (ctx) {
+  static async getCategories (ctx, next) {
+    await next()
+
     const categories = await CategoryModel.get()
 
     ctx.body = {

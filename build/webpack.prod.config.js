@@ -9,9 +9,6 @@ const ModuleConcatenationPlugin = require("webpack/lib/optimize/ModuleConcatenat
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin")
 const HtmlWebpackIncludeAssestsPlugin = require("html-webpack-include-assets-plugin")
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-// const autoprefixer = require('autoprefixer')
-// const precss = require('precss')
-// const postcsseasysprites = require('postcss-easysprites')
 
 const ModifyPrefixOfJsOrCss = require("./plugin/modifyPrefixOfJsOrCssPlugin")
 const merge = require("webpack-merge")
@@ -40,13 +37,43 @@ module.exports = merge(base, {
     rules: [
       {
         test: /\.css$/,
-        use:ExtractTextWebpackPlugin.extract({
-          fallback:'style-loader',
-          use:[
-            // 通过 minimize 选项压缩 CSS 代码
-            'css-loader?minimize',
-            'postcss-loader'
+        // static文件夹下的css文件不会被模块化
+        exclude: path.resolve(rootDir, './client/static'),
+        use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                // 开启css模块化
+                modules: true,
+                // 样式的最终命名方式
+                localIdentName: '[local]_[name]_[hash:base64:5]',
+                importLoaders: 1,
+                minimize: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                // === webpack处理兼容性 === //
+                // === 1 css前缀：通过postcss的 autoprefixer 插件来设置，本质是上通过caniuse的数据来设置 === //
+                plugins: (loader) => [
+                  require('postcss-icss-values'),
+                  require('autoprefixer')
+                ]
+              }
+            }
           ]
+        })
+      },
+      {
+        test: /\.css$/,
+        include: path.resolve(rootDir, './client/static'),
+        use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader']
         })
       }
     ]

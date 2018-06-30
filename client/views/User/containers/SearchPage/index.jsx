@@ -8,14 +8,30 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 import Header from '../../components/Header'
 
-import {actions as ArticleReducer} from '../../../../redux/reducer/articleReducer'
+import { actions as ArticleReducer } from '../../../../redux/reducer/articleReducer'
 
-import { Pagination } from 'antd';
+import Pagination from '../../../../plugin/pagination';
 
 
-const {get_all_articles} = ArticleReducer
+const { get_all_articles } = ArticleReducer
 
 class ArticleListByCategory extends Component {
+  static defaultProps = {
+    articleList: [],
+    total: 0,
+    match: {
+      params: {}
+    }
+  }
+
+  static propTypes = {
+    articleList: PropTypes.array,
+    total: PropTypes.number,
+    match: {
+      params: PropTypes.object
+    }
+  }
+
   constructor (props) {
     super(props)
 
@@ -27,6 +43,7 @@ class ArticleListByCategory extends Component {
 
     this.pageOnChange = this.pageOnChange.bind(this)
   }
+
   pageOnChange (page, pagesize) {
     const title = decodeURIComponent(this.props.match.params.title)
 
@@ -40,8 +57,9 @@ class ArticleListByCategory extends Component {
       currentPage: page
     })
   }
+
   render () {
-    const {articleList, total} = this.props
+    const { articleList, total } = this.props
 
     return (
       <div className="container my--blog">
@@ -60,10 +78,10 @@ class ArticleListByCategory extends Component {
                         <article className="post" key={i}>
                           <header className="post-header">
                             <div className="post-meta">
-                              <time>{dateformat(item.date, 'yyyy-mm')}</time>
+                              <time>{ dateformat(item.date, 'yyyy-mm') }</time>
                             </div>
                             <h1 className="post-title">
-                              <Link to={`/article/${item.id}`}>{item.title}</Link>
+                              <Link to={ `/article/${item.id}` }>{ item.title }</Link>
                             </h1>
                           </header>
                         </article>
@@ -73,7 +91,7 @@ class ArticleListByCategory extends Component {
                 }
               </div>
               <div className="pagination-wrapper">
-                <Pagination onChange={this.pageOnChange} defaultCurrent={1} total={parseInt(total)} defaultPageSize={10}/>
+                <Pagination onChange={ this.pageOnChange } defaultCurrent={1} total={ parseInt(total) } defaultPageSize={10}/>
               </div>
             </div>
           </div>
@@ -81,6 +99,7 @@ class ArticleListByCategory extends Component {
       </div>
     )
   }
+
   componentDidMount () {
     const title = this.props.match.params.title
     this.props.get_all_articles({
@@ -90,9 +109,15 @@ class ArticleListByCategory extends Component {
     })
   }
 
+  /**
+   * componentDidUpdate
+   * @param prevPros
+   */
   componentDidUpdate (prevPros) {
     const preTitle = prevPros.match.params.title
     const curTitle = this.props.match.params.title
+
+    // 新标题与就标题不一样才发送请求
     if (curTitle && preTitle && preTitle !== curTitle) {
       this.props.get_all_articles({
         pageNum: 1,
@@ -100,23 +125,6 @@ class ArticleListByCategory extends Component {
         title: curTitle
       })
     }
-  }
-}
-
-// 设置默认值
-ArticleListByCategory.defaultProps = {
-  articleList: [],
-  total: 0,
-  match: {
-    params: {}
-  }
-}
-
-ArticleListByCategory.propTypes = {
-  articleList: PropTypes.array,
-  total: PropTypes.number,
-  match: {
-    params: PropTypes.object
   }
 }
 

@@ -10,7 +10,7 @@ import { replaceHtml } from '../../../../lib/xss'
 import { actions as CommentActions } from '../../../../redux/reducer/commentReducer'
 import { postRequest, api } from '../../../../fetch/fetch'
 
-import './style.css'
+import style from './style.css'
 
 const {  get_all_comments } = CommentActions
 
@@ -162,48 +162,48 @@ class Comment extends Component {
     const { name, email, content, website, Article_id } = commentsData
 
     return (
-      <div className="comment-container">
-        <div className="comment-header-wrapper">
-          <h3 className="comment-ti">文章评论</h3>
+      <div className={ style['comment-container'] }>
+        <div className={ style['header-wrapper'] }>
+          <h3 className={ style['comment-ti'] }>文章评论</h3>
         </div>
-        <div className="comment-wrapper">
-          <form className="comment-box" ref={ ele => this.form = ele }>
-            <div className="comment-basic-info">
-              <input className="info-input" value={ name } onChange={ this.handleOnChange } name="name" type="text" placeholder="昵称"/>
-              <input className="info-input" value={ email } onChange={ this.handleOnChange } name="email" type="text" placeholder="邮箱"/>
-              <input className="info-input" value={ website } onChange={ this.handleOnChange } name="website" type="text" placeholder="网址，例：https://xxx.com"/>
-              <input className="info-input" value={ Article_id } onChange={ this.handleOnChange } name="Article_id" type="hidden"/>
-              <input className="info-input" value={ sign } onChange={ this.handleOnChange } name="sign" type="hidden"/>
+        <div className={ style['comment-wrapper'] }>
+          <form className={ style['comment-box'] } ref={ ele => this.form = ele }>
+            <div className={ style['comment-basic-info'] }>
+              <input className={ style['info-input'] } value={ name } onChange={ this.handleOnChange } name="name" type="text" placeholder="昵称"/>
+              <input className={ style['info-input'] } value={ email } onChange={ this.handleOnChange } name="email" type="text" placeholder="邮箱"/>
+              <input className={ style['info-input'] } value={ website } onChange={ this.handleOnChange } name="website" type="text" placeholder="网址，例：https://xxx.com"/>
+              <input className={ style['info-input'] } value={ Article_id } onChange={ this.handleOnChange } name="Article_id" type="hidden"/>
+              <input className={ style['info-input'] } value={ sign } onChange={ this.handleOnChange } name="sign" type="hidden"/>
             </div>
-            <div className="reply-area">
-              <img src="/imgs/avatar.png" className="comment-avatar"/>
-              <div className="textarea-wrapper">
-                <textarea name="content" value={ content } onChange={ this.handleOnChange }></textarea>
+            <div className={ style['reply-area'] }>
+              <img src="/avatar.png" className={ style['reply-comment-avatar'] }/>
+              <div className={ style['textarea-wrapper'] }>
+                <textarea className={ style['textarea']} name="content" value={ content } onChange={ this.handleOnChange }></textarea>
               </div>
-              <div className="reply-tool-bar">
-                <button className="btn" type="button" onClick={ this.handlePublishClick }>发布</button>
+              <div className={ style['reply-tool-bar'] }>
+                <button className={ style['btn'] } type="button" onClick={ this.handlePublishClick }>发布</button>
               </div>
             </div>
           </form>
-          <div className="comment-detail">
+          <div className={ style['comment-detail'] }>
             <p>文章评论 <span>{comments.length}</span> 条</p>
           </div>
-          <ul className="comment-list">
+          <ul className={ style['comment-list'] }>
             {
               comments.length > 0 ?
                 comments.map((comment, i) => {
                   return (
-                    <li className="list-item" key={i}>
-                      <div className="list-inner">
-                        <div className="comment-avatar">
-                          <img src="/imgs/avatar.png"/>
+                    <li className={ style['list-item'] } key={i}>
+                      <div className={ style['list-inner'] }>
+                        <div className={ style['comment-avatar'] }>
+                          <img src="/avatar.png"/>
                         </div>
-                        <div className="comment-body">
-                          <div className="comment-header">
-                            <span className="comment-name">{comment.name}</span>
+                        <div className={ style['comment-body'] }>
+                          <div className={ style['comment-header'] }>
+                            <span className="comment-name">{ comment.name }</span>
                           </div>
-                          <p className="comment-content">{comment.content}</p>
-                          <div className="comment-info">
+                          <p className={ style['comment-content'] }>{ comment.content }</p>
+                          <div className={ style['comment-info'] }>
                             <span className="comment-time">{dateFormat(comment.date, `yyyy 年 mm 月 dd 日 HH:mm`)}</span>
                           </div>
                         </div>

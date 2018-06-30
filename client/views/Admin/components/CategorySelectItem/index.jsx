@@ -1,12 +1,13 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class CategorySelectItem extends Component {
   constructor (props) {
     super(props)
   }
   render () {
+    const { id, value } = this.props
     return (
-      <option value={this.props.id}>{this.props.value}</option>
+      <option value={ id }>{ value }</option>
     )
   }
 }

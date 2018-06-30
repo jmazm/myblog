@@ -1,3 +1,41 @@
+.container {
+    width: 100%;
+    background: #eaeaea;
+}
+.container .main {
+    overflow: auto;
+    margin-left: 330px;
+}
+.container .main-inner {
+    position: relative;
+    height: 100%;
+    margin: 30px 30px 30px 0;
+}
+.pagination-wrapper {
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* 标签页和分类页 */
+.widget-wrapper {
+    padding: 10px 40px;
+    background: white;
+}
+.widget-title {
+    font: bold 30px/2  'Microsoft YaHei';
+    text-align: center;
+    border-bottom: 1px dashed #999999;
+}
+.widget-title .icon-tags {
+    display: inline-block;
+    width: 23px;
+    height: 30px;
+    margin-right: 10px;
+    transform: translateY(7px);
+    background: transparent url(../imgs/icon.png) no-repeat -10px -10px;
+}
+
+/* 标签和分类详细 */
 .collection-wrapper {
     padding: 30px 40px;
     background: white;
@@ -26,12 +64,12 @@
     z-index: 100;
 }
 .collection-title h2{
-    font: 28px/2 '';
+    font: 28px/2 'Microsoft YaHei';
     margin-left: 20px;
     margin-bottom: 30px;
 }
 .collection-title small {
-    font: 14px/2 '';
+    font: 14px/2 'Microsoft YaHei';
 }
 .post {
     padding-top: 20px;
@@ -56,12 +94,12 @@
     z-index: 100;
 }
 .post .post-meta {
-    font: 12px/36px '';
+    font: 12px/36px 'Microsoft YaHei';
     margin-left: 20px;
     margin-right: 15px;
 }
 .post .post-title {
-    font: 20px/36px '';
+    font: 20px/36px 'Microsoft YaHei';
 }
 .post .post-title a {
     color: #999999;

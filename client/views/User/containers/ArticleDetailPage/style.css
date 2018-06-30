@@ -5,17 +5,17 @@
     background: white;
     border: 1px solid #c0c0c0;
 }
-.article-detail .article-title {
-    font: bolder 28px/2 '';
+.article-title {
+    font: bolder 28px/2 'Microsoft YaHei';
 }
-.article-content .article-meta-list {
+.article-meta-list {
     position: relative;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #c0c0c0;
     box-shadow:inset rgba(0, 0, 0, 0.5) 1px 1px 3px;
 }
-.article-content .article-meta-list::after {
+.article-meta-list::after {
     position: absolute;
     top: 0;
     right: 0;
@@ -23,25 +23,25 @@
     height: 100px;
     background: dodgerblue;
 }
-.article-meta-list .meta-list-item {
+.meta-list-item {
     margin-bottom: 5px;
     list-style: none;
 }
-.article-meta-list .meta-list-item:last-of-type {
+.meta-list-item:last-of-type {
     margin-bottom: 0;
 }
-.article-meta-list a {
+.list-link {
     color: dodgerblue;
 }
-.article-meta-list a:hover {
+.list-link:hover {
     text-decoration: underline;
 }
 .article-content h2 {
-    font: bolder 22px/2 '';
+    font: bolder 22px/2 'Microsoft YaHei';
     margin-bottom: 5px;
 }
 .article-content h3 {
-    font: bolder 18px/2 '';
+    font: bolder 18px/2 'Microsoft YaHei';
     margin-bottom: 5px;
 }
 .article-content p {
@@ -85,7 +85,7 @@
     box-shadow: inset rgba(0, 0, 0, 0.2) 3px 3px 5px;
 }
 .article-content code {
-    font: italic 14px/1 '';
+    font: italic 14px/1 'Microsoft YaHei';
     color: #8b008b;
     margin: 0 2px;
     padding: 0 5px;
@@ -108,7 +108,7 @@
     border-bottom: 1px solid #c0c0c0;
 }
 .article-content a {
-    font: 16px/2 '';
+    font: 16px/2 'Microsoft YaHei';
     color: dodgerblue;
 }
 .article-content a:hover {
@@ -120,13 +120,13 @@
     margin: 10px 0;
 }
 .article-footer {
-    font: bold 16px/3 '';
+    font: bold 16px/3 'Microsoft YaHei';
     padding: 0 10px;
     margin-top: 20px;
     border: 1px dashed #c0c0c0;
     border-radius: 5px;
     box-shadow: inset rgba(0, 0, 0, 0.3) -2px -2px 1px;
 }
-.article-footer p {
+.article-copyright {
     margin-bottom: 0;
 }

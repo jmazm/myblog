@@ -1,4 +1,4 @@
-.admin-aside {
+.aside {
     width: 40%;
     max-width: 250px;
     height: 100vh;
@@ -7,20 +7,19 @@
     border: 1px solid #c0c0c0;
     border-right-width: 5px;
 }
-
-.admin-aside .list-item {
+.list-item {
     min-width: 85px;
     padding: 0 20px;
     margin-bottom: 10px;
-    font: 16px/2 '';
+    font: 16px/2 'Microsoft YaHei';
     border-bottom: 2px solid #c0c0c0;
 }
-.admin-aside .list-item:last-of-type {
+.list-item:last-of-type {
     border-bottom: none;
 }
-.admin-aside .list-item a {
+.list-item a {
     color: #696969;
 }
-.admin-aside .list-item a:hover {
+.list-item a:hover {
     color: #ff6666;
 }

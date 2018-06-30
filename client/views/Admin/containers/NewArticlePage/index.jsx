@@ -17,7 +17,7 @@ import CategorySelect from '../../components/CategorySelect'
 import { actions as articleActions } from '../../../../redux/reducer/articleReducer'
 import { actions as tagActions } from '../../../../redux/reducer/tagReducer'
 import { actions as categoryActions } from '../../../../redux/reducer/categoryReducer'
-import './style.css'
+import style from './style.css'
 
 
 // action creator
@@ -44,6 +44,19 @@ class AdminNewArticle extends Component {
     this.contentOnChange = this.contentOnChange.bind(this)
     this.publishArticle = this.publishArticle.bind(this)
     this.clearContent = this.clearContent.bind(this)
+  }
+
+
+  static defaultProps = {
+    tags: [],
+    categories: [],
+    newArticleData: {}
+  }
+
+  static propTypes = {
+    newArticleData: PropTypes.object,
+    tags: PropTypes.array,
+    categories: PropTypes.array,
   }
 
   // 正文内容
@@ -87,7 +100,7 @@ class AdminNewArticle extends Component {
    */
   validate (form) {
     const v = new Validator()
-    console.log(form)
+    
     v.add(form.title, [
       {
         strategy: 'isEmpty',
@@ -117,7 +130,9 @@ class AdminNewArticle extends Component {
         errorMsg: '内容不能为空'
       }
     ])
+    
     const errMsg = v.start()
+    
     return errMsg
   }
 
@@ -178,40 +193,42 @@ class AdminNewArticle extends Component {
   render () {
     const { tags, categories, newArticleData } = this.props
     const { title, foreword, imgSrc, Category_id, Tag_id, content } = newArticleData
+    
+    // console.log(this.props.globalState)
     return (
-      <div className="blog-management-wrapper blog--management">
+      <div className='blog-management-wrapper' >
         <AdminNav/>
-        <div className="management-content-wrapper">
+        <div className='management-content-wrapper' >
           <AdminHeader title="发表文章"/>
           <div className="content-inner">
             <form className="publish-article" id="newArticleForm" ref={ele => this.form = ele}>
               <div className="form-item-wrapper">
-                <span className="article-item-ti">标题</span>
-                <input className="input" name="title" value={title} placeholder="请输入文章标题" onChange={this.titleOnChange}/>
+                <span className={ style["article-item-ti"] }>标题</span>
+                <input className={ style["input"] } name="title" value={title} placeholder="请输入文章标题" onChange={this.titleOnChange}/>
               </div>
               <div className="form-item-wrapper">
-                <span className="article-item-ti">文章前言</span>
-                <input className="input"  name="foreword" value={foreword} placeholder="请输入文章前言" onChange={this.forewordOnChange}/>
+                <span className={ style["article-item-ti"] }>文章前言</span>
+                <input className={ style["input"] }  name="foreword" value={foreword} placeholder="请输入文章前言" onChange={this.forewordOnChange}/>
               </div>
               <div className="form-item-wrapper">
-                <span className="article-item-ti">文章展示的图片</span>
-                <input className="input" name="imgSrc" value={imgSrc} placeholder="请输入文章展示图片的地址" onChange={this.imgUrlOnChange}/>
+                <span className={ style["article-item-ti"] }>文章展示的图片</span>
+                <input className={ style["input"] } name="imgSrc" value={imgSrc} placeholder="请输入文章展示图片的地址" onChange={this.imgUrlOnChange}/>
               </div>
               <div className="form-item-wrapper">
-                <span className="article-item-ti">文章类别</span>
-                <CategorySelect value={Category_id} data={categories} onChange={this.categoryOnChange}/>
+                <span className={ style["article-item-ti"] }>文章类别</span>
+                <CategorySelect value={ Category_id } data={ categories } onChange={ this.categoryOnChange }/>
               </div>
               <div className="form-item-wrapper">
-                <span className="article-item-ti">文章标签</span>
-                <TagSelect value={Tag_id}  data={tags} onChange={this.tagOnChange}/>
+                <span className={ style["article-item-ti"] }>文章标签</span>
+                <TagSelect value={ Tag_id }   data={ tags } onChange={ this.tagOnChange }/>
               </div>
               <div className="form-item-wrapper">
-                <span className="article-item-ti">正文</span>
-                <textarea className="textarea" name="content" value={content} onChange={this.contentOnChange}></textarea>
+                <span className={ style["article-item-ti"] }>正文</span>
+                <textarea className={ style["textarea"] } name="content" value={content} onChange={ this.contentOnChange }></textarea>
               </div>
-              <div className="btn-wrapper">
-                <button type="button" className="btn" onClick={this.publishArticle}>发布</button>
-                <button type="button" className="btn" onClick={this.clearContent}>清空</button>
+              <div className={ style['btn-wrapper'] }>
+                <button type="button" className={ style["btn"] } onClick={ this.publishArticle }>发布</button>
+                <button type="button" className={ style["btn"] } onClick={ this.clearContent }>清空</button>
               </div>
             </form>
           </div>
@@ -226,25 +243,23 @@ class AdminNewArticle extends Component {
     // 获取所有类别
     this.props.get_all_categories()
   }
+
+  componentDidUpdate (prevProps) {
+    const { msg } = prevProps.globalState
+
+    // 更新完毕，如果遇到type为0，证明未登录或者验证未通过或者后台报错，会主动返回登录界面
+    if (msg.type == 0 && msg.info != '') {
+      location.href = '/'
+    }
+  }
 }
-
-AdminNewArticle.defaultProps = {
-  tags: [],
-  categories: [],
-  newArticleData: {}
-};
-
-AdminNewArticle.propTypes = {
-  newArticleData: PropTypes.object,
-  tags: PropTypes.array,
-  categories: PropTypes.array,
-};
 
 function mapStateToProps(state) {
   return {
     newArticleData: state.articles.newArticleData,
     tags: state.tags,
-    categories: state.categories
+    categories: state.categories,
+    globalState: state.globalState
   }
 }
 

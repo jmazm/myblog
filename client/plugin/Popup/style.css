@@ -15,7 +15,7 @@
     border-bottom: 1px solid #999999;
 }
 .popup-header .header-title{
-    font: 18px/24px '';
+    font: 18px/24px 'Microsoft YaHei';
     margin: 0;
 }
 .popup-content {
@@ -26,7 +26,7 @@
     text-align: right;
 }
 .popup-footer button {
-    font: 14px/1.5 '';
+    font: 14px/1.5 'Microsoft YaHei';
     padding: 0 12px;
     color: white;
     border-radius: 5px;

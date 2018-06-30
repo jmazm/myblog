@@ -1,8 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactAddonPureRenderMixin from 'react-addons-pure-render-mixin'
+import classnames from 'classnames'
 
-import pag from './index.css'
+import style from './index.css'
 
 class Pagination extends Component {
   constructor (props) {
@@ -23,6 +24,22 @@ class Pagination extends Component {
     this.handleOnClickPrevPage = this.handleOnClickPrevPage.bind(this)
   }
 
+  static defaultProps = {
+    total: 0,
+    defaultCurrent: 1,
+    defaultPageSize: 15,
+    config: {},
+    onChange: function () {}
+  }
+
+  static propTypes = {
+    total: PropTypes.number,
+    defaultCurrent: PropTypes.number,
+    defaultPageSize: PropTypes.number,
+    config: PropTypes.object,
+    onChange: PropTypes.func
+  }
+
   /**
    * 分页插件的基本结构
    * @param total
@@ -36,17 +53,40 @@ class Pagination extends Component {
 
     if (totalNum == 0) {
       return (
-        <div className="pagination"><small className="tips">暂无数据</small></div>
+        <div className={ style.pagination }><small className={ style['tips'] }>暂无数据</small></div>
       )
     }
 
+    const prevClass = classnames({
+      [style.btn]: true,
+      [style.forbidden]: pageNum == 1
+    })
+
+    const nextClass = classnames({
+      [style.btn]: true,
+      [style.forbidden]: pageNum == totalPage
+    })
+
     return (
-      <div className="pagination">
-        <a href="javascript:;" className={ pageNum == 1 ? 'btn forbidden' : 'btn' } onClick={this.handleOnClickPrevPage}>上一页</a>
+      <div className={ style['pagination'] }>
+        <a href="javascript:;" className={ prevClass } onClick={this.handleOnClickPrevPage}>上一页</a>
         { this.setList(pageNum) }
-        <a href="javascript:;" className={ pageNum == totalPage ? 'btn forbidden' : 'btn' } onClick={this.handleOnClickNextPage}>下一页</a>
+        <a href="javascript:;" className={ nextClass } onClick={this.handleOnClickNextPage}>下一页</a>
       </div>
     )
+  }
+
+  /**
+   * 设置active类
+   * @param pageNum 当前页数
+   * @param optPageNum 条件当前页数
+   * @return {*}
+   */
+  setActiveClass (pageNum, optPageNum) {
+    return classnames({
+      [style['page-txt']]: true,
+      [style.active]: pageNum == optPageNum,
+    })
   }
 
   /**
@@ -63,15 +103,15 @@ class Pagination extends Component {
       let arr = new Array(tP).fill(0)
 
       return (
-        <ul className="page-list">
+        <ul className={ style['page-list'] }>
           {
             arr.map((item, i) => {
             return (
-              <li className="page-item" key={i} title={i + 1}>
+              <li className={ style['page-item'] } key={i} title={i + 1}>
                 <a href="javascript:;"
-                   className={ pageNum == (i + 1) ? 'page-txt active' : 'page-txt' }
-                   onClick={this.handleOnClickPage}
-                >{i + 1}</a>
+                   className={ this.setActiveClass(pageNum, i + 1) }
+                   onClick={ this.handleOnClickPage }
+                >{ i + 1 }</a>
               </li>
             )
           })
@@ -84,27 +124,27 @@ class Pagination extends Component {
       let arr = new Array(5).fill(0)
 
       return (
-        <ul className="page-list">
+        <ul className={ style['page-list'] }>
           {
             arr.map((item, i) => {
               return (
-                <li className="page-item" key={i} title={i + 1}>
+                <li className={ style['page-item'] } key={i} title={i + 1}>
                   <a href="javascript:;"
-                     className={ pageNum == (i + 1) ? 'page-txt active' : 'page-txt' }
-                     onClick={this.handleOnClickPage}
+                     className={ this.setActiveClass(pageNum, i + 1) }
+                     onClick={ this.handleOnClickPage }
                   >{i + 1}</a>
                 </li>
               )
             })
           }
-          <li className="page-item">
+          <li className={ style['page-item'] }>
             ...
           </li>
-          <li className="page-item" title={tP}>
+          <li className={ style['page-item'] } title={ tP }>
             <a href="javascript:;"
-               className={ pageNum == (tP) ? 'page-txt active' : 'page-txt' }
-               onClick={this.handleOnClickPage}
-            >{tP}</a>
+               className={ this.setActiveClass(pageNum, tP) }
+               onClick={ this.handleOnClickPage }
+            >{ tP }</a>
           </li>
         </ul>
       )
@@ -114,24 +154,24 @@ class Pagination extends Component {
       let arr = [tP - 4, tP - 3, tP - 2, tP - 1, tP]
 
       return (
-        <ul className="page-list">
-          <li className="page-item" title={1}>
+        <ul className={ style['page-list'] }>
+          <li className={ style['page-item'] } title={1}>
             <a href="javascript:;"
-               className={ pageNum == 1 ? 'page-txt active' : 'page-txt' }
-               onClick={this.handleOnClickPage}
+               className={ this.setActiveClass(pageNum, 1) }
+               onClick={ this.handleOnClickPage }
             >{1}</a>
           </li>
-          <li className="page-item">
+          <li className={ style['page-item'] }>
             ...
           </li>
           {
             arr.map((item, i) => {
               return (
-                <li className="page-item" key={i} title={item}>
+                <li className={ style['page-item'] } key={i} title={item}>
                   <a href="javascript:;"
-                     className={ pageNum == item ? 'page-txt active' : 'page-txt' }
-                     onClick={this.handleOnClickPage}
-                  >{item}</a>
+                     className={ this.setActiveClass(pageNum, item) }
+                     onClick={ this.handleOnClickPage }
+                  >{ item }</a>
                 </li>
               )
             })
@@ -144,36 +184,36 @@ class Pagination extends Component {
       let centerArr = [cP - 2, cP - 1, cP, cP + 1, cP + 2]
 
       return (
-        <ul className="page-list">
-          <li className="page-item" title={1}>
+        <ul className={ style['page-list'] }>
+          <li className={ style['page-item'] } title={1}>
             <a href="javascript:;"
-               className={ pageNum == 1 ? 'page-txt active' : 'page-txt' }
-               onClick={this.handleOnClickPage}
+               className={ this.setActiveClass(pageNum, 1) }
+               onClick={ this.handleOnClickPage }
             >{1}</a>
           </li>
-          <li className="page-item">
+          <li className={ style['page-item'] }>
             ...
           </li>
           {
             centerArr.map((item, i) => {
               return (
-                <li class="page-item" title={item} key={i}>
+                <li class={ style['page-item'] } title={ item } key={ i }>
                   <a href="javascript:;"
-                     className={ pageNum == item ? 'page-txt active' : 'page-txt' }
-                     onClick={this.handleOnClickPage}
-                  >{item}</a>
+                     className={ this.setActiveClass(pageNum, item) }
+                     onClick={ this.handleOnClickPage }
+                  >{ item }</a>
                 </li>
               )
             })
           }
-          <li class="page-item">
+          <li class={ style['page-item'] }>
             ...
           </li>
-          <li class="page-item" title={tP} key={i}>
+          <li class={ style['page-item'] } title={ tP } key={ i }>
             <a href="javascript:;"
-               className={ pageNum == tP ? 'page-txt active' : 'page-txt' }
-               onClick={this.handleOnClickPage}
-            >{tP}</a>
+               className={ this.setActiveClass(pageNum, tP) }
+               onClick={ this.handleOnClickPage }
+            >{ tP }</a>
           </li>
         </ul>
       )
@@ -290,7 +330,7 @@ class Pagination extends Component {
 
   render () {
     return (
-      <div className="pag-wrapper">
+      <div className={ style['pag-wrapper'] }>
         { this.setBasicStru() }
       </div>
     )
@@ -317,20 +357,6 @@ class Pagination extends Component {
   }
 }
 
-Pagination.defaultProps = {
-  total: 0,
-  defaultCurrent: 1,
-  defaultPageSize: 15,
-  config: {},
-  onChange: function () {}
-}
 
-Pagination.propTypes = {
-  total: PropTypes.number,
-  defaultCurrent: PropTypes.number,
-  defaultPageSize: PropTypes.number,
-  config: PropTypes.object,
-  onChange: PropTypes.func
-}
 
 export default Pagination

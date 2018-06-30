@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import ReactAddonsPureRenderMixin from 'react-addons-pure-render-mixin'
 import PropsType from 'prop-types'
 
@@ -30,6 +30,14 @@ class AdminCategory extends Component {
     this.handleData = this.handleData.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.renderModalContent = this.renderModalContent.bind(this)
+  }
+
+  static defaultProps = {
+    categories: []
+  }
+
+  static propTypes = {
+    categories: PropsType.array
   }
 
   /**
@@ -104,8 +112,6 @@ class AdminCategory extends Component {
   async handleOk () {
     const { category } = this.state
     await this.props.add_category(category)
-    
-    console.log(this.props.globalState)
 
     this.setState({
       visible: false
@@ -143,6 +149,7 @@ class AdminCategory extends Component {
       <input type="text" placeholder="类别名称" onChange={ this.handleChange }  id="category-input"/>
     )
   }
+
   render () {
     const { categories } = this.props
 
@@ -170,14 +177,15 @@ class AdminCategory extends Component {
   componentDidMount () {
     this.props.get_all_categories()
   }
-}
 
-AdminCategory.defaultProps = {
-  categories: []
-}
+  componentDidUpdate (prevProps) {
+    const { msg } = prevProps.globalState
 
-AdminCategory.propTypes = {
-  categories: PropsType.array
+    // 更新完毕，如果遇到type为0，证明未登录或者验证未通过或者后台报错，会主动返回登录界面
+    if (msg.type == 0 && msg.info != '') {
+      location.href = '/'
+    }
+  }
 }
 
 

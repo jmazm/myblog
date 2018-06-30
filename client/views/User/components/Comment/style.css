@@ -1,19 +1,19 @@
 .comment-container p {
     margin-bottom: 0;
 }
-.comment-header-wrapper {
+.header-wrapper {
     margin-bottom: 10px;
 }
-.comment-header-wrapper::after {
+.header-wrapper::after {
     content: '';
     display: block;
     height: 2px;
     margin-top: 5px;
     background: linear-gradient(to right, dodgerblue 75px, #c0c0c0 76px);
 }
-.comment-header-wrapper .comment-ti {
+.comment-ti {
     display: inline-block;
-    font: bolder 18px/1 '';
+    font: bolder 18px/1 'Microsoft YaHei';
 }
 .comment-wrapper {
     padding: 20px;
@@ -27,35 +27,36 @@
 .comment-basic-info {
     margin-bottom: 10px;
 }
-.comment-basic-info .info-input {
+.info-input {
     width: 200px;
     height: 26px;
-    font: 13px/2 '';
+    font: 13px/2 'Microsoft YaHei';
     margin-right: 5px;
     text-indent: 5px;
     border: 1px solid #c0c0c0;
     background: white;
 }
-.comment-basic-info .info-input:focus {
+.info-input:focus {
     border-color: grey;
 }
-.comment-basic-info .info-input:last-of-type {
+.info-input:last-of-type {
     margin-right: 0;
 }
 .reply-area {
     position: relative;
     padding: 0 0 0 60px;
 }
+.reply-comment-avatar,
 .comment-avatar {
     width: 50px;
     height: 50px;
 }
-.reply-area .comment-avatar {
+.reply-comment-avatar {
     position: absolute;
     top: 0;
     left: 0;
 }
-.textarea-wrapper textarea {
+.textarea {
     width: 100%;
     height: 150px;
     margin-bottom: 10px;
@@ -63,36 +64,36 @@
     border: 1px solid #c0c0c0;
     box-shadow: inset rgba(0, 0, 0, 0.1) 2px 2px 2px;
 }
-.textarea-wrapper textarea:focus {
+.textarea:focus {
     box-shadow: inset rgba(0, 0, 0, 0.3) 2px 2px 2px;
 }
 .reply-tool-bar {
     text-align: right;
     margin-bottom: 10px;
 }
-.reply-tool-bar .btn {
+.btn {
     padding: 2px 10px;
     color: #333333;
     border: 1px solid #c0c0c0;
     border-radius: 5px;
     background: white;
 }
-.reply-tool-bar .btn:hover {
+.btn:hover {
     color: #333333;
     box-shadow: inset rgba(0, 0, 0, 0.3) -1px -1px 5px;
 }
 .comment-list {
     background: white;
 }
-.comment-list .list-item {
+.list-item {
     border-bottom: 1px solid #c0c0c0;
     margin-bottom: 10px;
 }
-.comment-list .list-inner {
+.list-inner {
     display: flex;
     align-items: flex-start;
 }
-.comment-list .comment-avatar {
+.comment-avatar {
     margin-top: 5px;
     margin-right: 10px;
 }
@@ -113,7 +114,7 @@
 .comment-detail span {
     color: red;
 }
-.comment-list .comment-body {
+.comment-body {
     flex: 1;
     padding-bottom: 10px;
 }

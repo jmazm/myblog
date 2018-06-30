@@ -6,7 +6,9 @@ class Tag {
    * @param ctx
    * @return {Promise.<void>}
    */
-  static async getTags (ctx) {
+  static async getTags (ctx, next) {
+    await next()
+
     const tags = await TagModel.get()
     ctx.body = {
       status: 'success',

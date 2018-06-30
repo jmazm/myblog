@@ -95,7 +95,7 @@
 * [执行上下文]
 * [异步]
 * [递归]
-* [attribute和property](/client/plugin/popup/drag-drop.js)
+* [attribute和property](/client/static/plugin/popup/drag-drop.js)
 * [回文]
 * [类名处理 - 增加/查询/删除/修改](/client/lib/className.js)
 
@@ -108,12 +108,12 @@ es6
 * [原型链继承]
 * [借用构造函数继承]
 * [组合继承]
-* [寄生组合继承](/client/plugin/popup/alert.js)
+* [寄生组合继承](/client/static/plugin/popup/alert.js)
 
 DOM操作
 
-* [dom - 创建/添加/删除/插入/克隆节点](/client/plugin/popup/popup.js)
-* [innerText 和 textContent](/client/plugin/popup/popup.js)
+* [dom - 创建/添加/删除/插入/克隆节点](/client/static/plugin/popup/popup.js)
+* [innerText 和 textContent](/client/static/plugin/popup/popup.js)
 
 
 事件
@@ -157,14 +157,17 @@ BOM - history
 ### mysql
 
 ### React
-* [jsx语法]
-* [生命周期]
-* [defaultProps + propTypes]
-* [虚拟DOM]
-* [Diff算法]
 * [React直出开发环境热更新优化方案](/build/server/devServer.js)
 * [React 同构 - ssr](/server/view/layout.js)
 * [BrowserRouter 和 HashRouter的区别](/client/router/index.js)
+* [生命周期](/client/views/User/containers/Home/index.jsx)
+* [生命周期 - componentDidUpdate](/client/views/User/containers/SearchPage/index.jsx)
+* [defaultProps + propTypes](/client/views/User/containers/TagPage/index.jsx)
+* [组件间通信](/client/views/User/containers/CategoryPage/index.jsx)
+* [jsx语法]
+* [虚拟DOM]
+* [Diff算法]
+
 
 ### Redux
 * [基础](/client/redux/store/configureStore.js)
@@ -184,14 +187,15 @@ BOM - history
 * [压缩js - ParallelUglifyPlugin](/build/webpack.prod.config.js)
 * [Scope Hoisting](/build/webpack.prod.config.js)
 * [开启热模块替换](/build/webpack.dev.config.js)
+* [css模块化](/build/webpack.dev.config.js)
+* [css前缀兼容处理](/build/webpack.prod.config.js)
+
 * [按需加载]
-* [css前缀兼容处理]
-* [css模块化]
 * [cdn]
 
 
 ### 设计模式
-* [单例模式](/client/plugin/popup/drag-drop.js)
+* [单例模式](/client/static/plugin/popup/drag-drop.js)
 * [装饰器模式]
 * [观察者模式]
 * [MVC]

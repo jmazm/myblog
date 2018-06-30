@@ -74,7 +74,15 @@ function* getCategories () {
   })
 
   try {
-    return yield call(getRequest, api.getAllCategoryApi)
+    const accessToken = localStorage.getItem('ACCESS_TOKEN') || ''
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
+    return yield call(getRequest, api.getAllCategoryApi,  {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
+      }
+    })
   } catch (err) {
     // 报错处理
     yield put({
@@ -127,7 +135,15 @@ function* delCategory (id) {
   })
 
   try {
-    return yield call(delRequest, api.deleteCategoryApi(id))
+    const accessToken = localStorage.getItem('ACCESS_TOKEN')
+    const csrfToken = Cookie.get('CSRF_TOKEN')
+
+    return yield call(delRequest, api.deleteCategoryApi(id),  {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'x-csrf-token': csrfToken
+      }
+    })
   } catch (err) {
     // 报错处理
     yield put({

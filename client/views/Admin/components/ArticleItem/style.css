@@ -1,4 +1,4 @@
-.article-management-wrapper .article-item {
+ .article-item {
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
@@ -7,15 +7,15 @@
     border-bottom: none;
     box-shadow: none;
 }
-.article-management-wrapper .article-item:last-of-type{
+.article-item:last-of-type{
     border-bottom: 1px solid #c0c0c0;
 }
 .article-item > div {
-    font: 12px/3 '';
+    font: 12px/3 'Microsoft YaHei';
 }
-.article-opt .btn {
+.btn {
     padding: 3px 5px;
-    font: 12px/1.5 '';
+    font: 12px/1.5 'Microsoft YaHei';
     color: white;
     margin-right: 5px;
     border: none;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import Pagination from '../pagination'
 
-import table from './index.css'
+import style from './index.css'
 
 class Table extends Component {
   constructor (props) {
@@ -13,6 +13,21 @@ class Table extends Component {
     this.shouldComponentUpdate = ReactAddonsPureRenderMixin.shouldComponentUpdate
 
     this.setBodyTd = this.setBodyTd.bind(this)
+  }
+
+  static defaultProps = {
+    columns: [],
+    dataSource: [],
+    pagination: {}
+  }
+
+  static propTypes = {
+    columns: PropTypes.array,
+    dataSource: PropTypes.array,
+    pagination: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.object
+    ]),
   }
 
   /**
@@ -28,12 +43,12 @@ class Table extends Component {
     const { columns } = this.props
 
     return (
-      <div className="table-header">
-        <div className="header-tr tr">
+      <div className={ style['table-header'] }>
+        <div className={ `${style['header-tr']} ${ style['tr'] }` }>
           {
             columns.map((item, i) => {
               return (
-                <div className="th" key={item.key}><span>{item.title}</span></div>
+                <div className={ style['th'] } key={ item.key }><span>{ item.title }</span></div>
               )
             })
           }
@@ -52,18 +67,18 @@ class Table extends Component {
     const { dataSource } = this.props
 
     return (
-      <div className="table-body">
+      <div className={ style['table-body'] }>
         {
           dataSource.length > 0 ?
             dataSource.map((item, i) => {
               return (
-                <div className="body-tr tr" key={item.key}>
-                  {this.setBodyTd(item, i)}
+                <div className={ `${ style['body-tr'] } ${style['tr']}` } key={item.key}>
+                  { this.setBodyTd(item, i) }
                 </div>
               )
             })
              :
-            <div className="none">暂无数据</div>
+            <div className={ style['none'] }>暂无数据</div>
         }
       </div>
     )
@@ -80,7 +95,7 @@ class Table extends Component {
 
     return columns.map((item) => {
       return (
-        <div className="td" key={`${item.key}_${index}`}>
+        <div className={ style['td'] } key={`${ item.key }_${ index }`}>
           {
             item.render ?
               bodyTdContent(item.render(data, index)) :
@@ -96,33 +111,18 @@ class Table extends Component {
 
     return (
       <div>
-        <div className="table">
-          {this.setHeader()}
-          {this.setBody()}
+        <div className={ style['table'] }>
+          { this.setHeader() }
+          { this.setBody() }
         </div>
         {
           pagination == false ?
             '' :
-            <Pagination config={pagination}/>
+            <Pagination config={ pagination }/>
         }
       </div>
     )
   }
-}
-
-Table.defaultProps = {
-  columns: [],
-  dataSource: [],
-  pagination: {}
-}
-
-Table.propTypes = {
-  columns: PropTypes.array,
-  dataSource: PropTypes.array,
-  pagination: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.object
-  ]),
 }
 
 export default Table

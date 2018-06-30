@@ -16,15 +16,17 @@ module.exports = function (port) {
     .use(routerMap.allowedMethods())
 
   // koa-static-cache ： 可以设置Http缓存
-  app.use(KoaStaticCache(path.resolve(distDir, './lib'), {
+
+  app.use(KoaStaticCache(path.resolve(distDir, 'lib'), {
     maxAge: 60 * 60 * 24 * 30
   }))
 
-  app.use(KoaStaticCache(path.resolve(distDir, './imgs'), {
+  app.use(KoaStaticCache(path.resolve(distDir, 'imgs'), {
     maxAge: 60 * 60 * 24 * 30
   }))
 
-  app.use(KoaStaticCache(path.resolve(distDir, `./${port == config.indexPort ? 'index' : 'cms'}`), {
+
+  app.use(KoaStaticCache(path.resolve(distDir, `${port == config.indexPort ? 'index' : 'cms'}`), {
     maxAge: 60 * 60 * 24 * 30
   }))
 
