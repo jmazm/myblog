@@ -95,28 +95,28 @@
 * [执行上下文]
 * [异步]
 * [递归]
-* [attribute和property](/client/static/plugin/popup/drag-drop.js)
 * [回文]
 * [类名处理 - 增加/查询/删除/修改](/client/lib/className.js)
+* [attribute和property](/client/static/plugin/popup/drag-drop.js)
 
-es6
+**es6**
 * [promise]
 * [箭头函数]
 
 
-继承
+**继承**
 * [原型链继承]
 * [借用构造函数继承]
 * [组合继承]
 * [寄生组合继承](/client/static/plugin/popup/alert.js)
 
-DOM操作
+**DOM操作**
 
 * [dom - 创建/添加/删除/插入/克隆节点](/client/static/plugin/popup/popup.js)
 * [innerText 和 textContent](/client/static/plugin/popup/popup.js)
 
 
-事件
+**事件**
 
 * [事件循环机制]
 * [事件处理程序](/client/lib/event.js)
@@ -124,22 +124,19 @@ DOM操作
 * [原生键盘类事件触发顺序]
 
 
-存储
+**存储**
 
 * [cookie]
-* [localStorage]
+* [localStorage](/client/views/Admin/containers/LoginPage/index.jsx)
 * [seessionStorage]
 
-跨域
+**跨域**
 * [cors](/server/controllers/article.js)
-* [jsonp]()
+* [jsonp]
 * [iframe + window.name]
-* [iframe + ]
 
-BOM - location
+**BOM**
 * [URL的井号 - location.hash](/client/router/index.jsx)
-
-BOM - history
 * [history的相关api](/client/router/index.jsx)
 * [onhashchange事件，onpopstate事件](/client/router/index.jsx)
 
@@ -195,6 +192,8 @@ BOM - history
 
 ### 设计模式
 * [单例模式](/client/static/plugin/popup/drag-drop.js)
+* [策略模式](/client/lib/form.js)
+* [迭代器模式](/client/lib/array.js)
 * [装饰器模式]
 * [观察者模式]
 * [MVC]
@@ -217,10 +216,10 @@ BOM - history
 * [TTD]
 
 ### 常用功能（原生实现）
-* [上传图片插件]()
-* [分页插件]()
-* [拖放插件]()
-* [模态弹框插件]()
+* [上传图片插件]
+* [分页插件]
+* [拖放插件]
+* [模态弹框插件]
 
 
 
