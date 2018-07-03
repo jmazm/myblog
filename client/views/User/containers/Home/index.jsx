@@ -109,7 +109,7 @@ class Home extends Component {
  *
   // ===
    mapStateToProps(state)：
-   1、作为第一个参数，定义需要从Redux状态树中提取哪些部分作为props传给当前组件；
+   1、建立一个从（外部的）state对象到（UI 组件的）props对象的映射关系。；
    2、如果不传入这个参数，React 组件将永远不会和 Redux 的状态树产生任何关系。
   === //
  */
@@ -138,7 +138,15 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-// ===  connect(mapStateToProps, mapDispatchToProps, mergeProps, options = {})  === //
+/**
+ * connect(mapStateToProps, mapDispatchToProps, mergeProps, options = {})
+ * // ===
+ * 1. 用途：用于从 UI 组件生成容器组件。connect的意思，就是将这两种组件连起来。
+ * 2. 需要定义业务逻辑，包括两方面信息
+   2.1 输入逻辑 - mapStateToProps ：外部的数据（即state对象）如何转换为 UI 组件的参数 - 即将state映射到 UI 组件的参数（props）
+   2.2 输出逻辑 - mapDispatchToProps ：用户发出的动作如何变为 Action 对象，从 UI 组件传出去 - 即将用户对 UI 组件的操作映射成 Action。
+ * === //
+ */
 export default connect (
   mapStateToProps,
   mapDispatchToProps

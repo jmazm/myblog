@@ -167,7 +167,8 @@
 
 ### Redux
 * [基础](/client/redux/store/configureStore.js)
-* [中间件 - middleware]
+* [工作流程](/client/redux/store/configureStore.js)
+* [中间件 - middleware](/client/redux/store/configureStore.js)
 
 
 ### Redux-saga

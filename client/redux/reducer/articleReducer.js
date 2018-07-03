@@ -63,7 +63,7 @@ export const actions = {
   },
   /**
    * 获取已发布或者未发布的文章
-   * @param paramsObj
+   * @param {Object} paramsObj
    * @example {
    *  pageNum: paramsObj.pageNum,
       pageSize: paramsObj.pageSize,
