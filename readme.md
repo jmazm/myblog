@@ -74,12 +74,13 @@
 
 **传输层**
 
-* [tcp三次握手和四次挥手]
-* [UDP]
+* [TCP和UDP的区别以及应用场景](/doc/计算机网络原理/传输层/传输层协议UDP和TCP.md)
+* [TCP三次握手和四次挥手](/doc/计算机网络原理/传输层/TCP.md)
 
 
 **应用层**
 
+* [DNS、域名](/doc/计算机网络原理/应用层/DNS.md)
 * [http缓存](/server/basicConfig.js)
 * [http2.0](/server/indexServer.js)
 * [https](/server/indexServer.js)
@@ -139,8 +140,8 @@
 
 **事件**
 
-* [事件循环机制]
 * [事件处理程序](/client/lib/event.js)
+* [事件循环机制]
 * [事件委托]
 * [原生键盘类事件触发顺序]
 
@@ -238,16 +239,13 @@
 * [TTD]
 
 ### 常用功能（原生实现）
-* [上传图片插件]
-* [分页插件]
-* [拖放插件]
-* [模态弹框插件]
-
-
+* [上传图片插件](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/uploadImgs)
+* [分页插件](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/pagination)
+* [模态弹框插件](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/modal)
 
 ### 常见命令
 * [git](/doc/git.md)
-* [linux]()
 * [npm](/doc/npm.md)
 * [nginx](/doc/nginx.md)
+* [linux]
 
