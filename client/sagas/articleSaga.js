@@ -1,12 +1,9 @@
 /**
  * // ===
- * 1. call(fn, ...args): 创建一条描述结果的信息 - call 只是一个返回纯文本对象的函数而已。
+ * 1. call(fn, ...args) - 创建一条描述结果的信息 - call 只是一个返回纯文本对象的函数而已。
+ * 2. take() - 创建一个 Effect 描述信息，用来命令 middleware 在 Store 上等待指定的 action。 在发起与 pattern 匹配的 action 之前，Generator 将暂停。
+ * 3. put() - 创建一个 Effect 描述信息，用来命令 middleware 向 Store 发起一个 action。 这个 effect 是非阻塞型的，并且所有向下游抛出的错误（例如在 reducer 中），都不会冒泡回到 saga 当中。
  * === //
- *
- * // ===
- * 2. take()
- * === //
- *
  */
 
 import { take, call, put } from 'redux-saga/effects'

@@ -25,7 +25,7 @@ class Header extends Component {
               <li className={ style['list-item'] }><Link to="/category">博客分类</Link></li>
               <li className={ style['list-item'] }><Link to="/tag">标签分类</Link></li>
               {/*<li className="list-item"><Link to="/demo">DEMO</Link></li>*/}
-              <li className={ style['list-item'] }><Link to="https://jmhello.github.io/effects/demo/resume/v5/index.html" target="_blank">关于我</Link></li>
+              <li className={ style['list-item'] }><Link to="https://jmhello.github.io/effects/demo/resume/v6/index.html" target="_blank">关于我</Link></li>
               {/*<li className="list-item"><Link to="/message">留言</Link></li>*/}
             </ul>
           </nav>
