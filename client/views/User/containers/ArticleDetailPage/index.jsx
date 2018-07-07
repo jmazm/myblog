@@ -11,12 +11,10 @@ import Header from '../../components/Header'
 import Comment from '../../components/Comment'
 
 import { actions as articleAction } from '../../../../redux/reducer/articleReducer'
-import { actions as tagAction } from '../../../../redux/reducer/tagReducer'
 
 import style from './style.css'
 
 const { get_article_detail } = articleAction
-const { get_all_tags } = tagAction
 
 class ArticleDetail extends Component {
   constructor (props) {
@@ -28,13 +26,11 @@ class ArticleDetail extends Component {
   // 设置默认值
 
   static defaultProps = {
-    articleDetail: {},
-    tags: []
+    articleDetail: {}
   }
 
   static propTypes = {
-    articleDetail: PropTypes.object,
-    tags: PropTypes.array,
+    articleDetail: PropTypes.object
   }
 
   render () {
@@ -90,23 +86,20 @@ class ArticleDetail extends Component {
   componentDidMount () {
     const id = this.props.match.params.articleId
     this.props.get_article_detail(id)
-    this.props.get_all_tags()
   }
 }
 
 function mapStateToProps(state) {
-  const {articleDetail} = state.articles
+  const { articleDetail } = state.articles
 
   return {
-    articleDetail,
-    tags: state.tags
+    articleDetail
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    get_article_detail: bindActionCreators(get_article_detail, dispatch),
-    get_all_tags: bindActionCreators(get_all_tags, dispatch)
+    get_article_detail: bindActionCreators(get_article_detail, dispatch)
   }
 }
 

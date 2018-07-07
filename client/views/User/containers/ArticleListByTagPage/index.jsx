@@ -38,9 +38,9 @@ class Tag extends Component {
   static propTypes = {
     articleList: PropTypes.array,
     total: PropTypes.number,
-    match: {
+    match: PropTypes.shape({
       params: PropTypes.object
-    }
+    })
   }
 
   pageOnChange (page, pagesize) {
@@ -56,6 +56,7 @@ class Tag extends Component {
       currentPage: page
     })
   }
+
   render () {
     const { articleList, total, match } = this.props
 

@@ -6,6 +6,7 @@ import { Provider }  from 'react-redux'
 import configureStore from '../../client/redux/store/configureStore'
 import ArticleDetailPage from '../../client/views/User/containers/ArticleDetailPage'
 import layout from '../view/layout'
+import config from '../../config'
 
 import articleModel from '../models/article'
 
@@ -15,6 +16,16 @@ export async function index (ctx) {
   switch (ctx.accepts('json', 'html')) {
     case 'html':
       const ret = await articleModel.getById(articleId)
+      let prefix = config.prod.fileServerIP
+
+      if(process.env.NODE_ENV === 'development') {
+        prefix = config.dev.fileServerIP
+      }
+
+      console.log(ctx.cookies.get('webp_show'))
+      
+      ret.content = ret.content.replace(/\!\[(.*?)\]\((.*?)\)/g, `![$1](${prefix}$2)`)
+        .replace(/\.(png|jpg)/g, '\.$1\?webp=check')
 
       const article = {
         articleDetail: {
@@ -41,7 +52,7 @@ export async function index (ctx) {
     case 'json':
       let callBackData = {
         'status': 200,
-        'message': '这个是主页',
+        'message': '这个是详情页',
         'data': {}
       }
       ctx.body = callBackData

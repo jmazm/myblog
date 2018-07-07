@@ -1,5 +1,5 @@
 const baseServer = require("./sever.base")
-const Koa = require("koa")
+const Koa = require("Koa")
 const KoaStaticCache = require("koa-static-cache")
 const path = require("path")
 const distDir = path.resolve(process.cwd(), './dist')
@@ -41,6 +41,10 @@ module.exports = function (port) {
 
   // koa-static-cache ： 可以设置Http缓存
   app.use(KoaStaticCache(path.resolve(distDir, `./${port == config.dev.indexServerPort ? 'index' : 'cms'}`), {
+    maxAge: 60 * 60 * 24 * 30
+  }))
+
+  app.use(KoaStaticCache(path.resolve(distDir, `./lib`), {
     maxAge: 60 * 60 * 24 * 30
   }))
 
