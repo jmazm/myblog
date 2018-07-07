@@ -50,6 +50,10 @@
 * [希尔排序]
 * [归并排序]
 
+### 计算机基础知识
+
+* [图片基础知识](/client/lib/isSupportWebp.js)
+
 ### 计算机网络原理
 
 **物理层**
@@ -84,8 +88,12 @@
 * [http缓存](/server/basicConfig.js)
 * [http2.0](/server/indexServer.js)
 * [https](/server/indexServer.js)
-* [http常用状态码]
-* [get, post]
+* [http常用状态码](/doc/计算机网络原理/应用层/状态码.md)
+* [HTTP方法](/server/router/cms.js)
+* [GET和POST的区别](/server/router/cms.js)
+
+**RESTful架构**
+* [RESTful架构](/server/router/cms.js)
 
 ### HTML5
 
@@ -94,12 +102,12 @@
 * [Websocket]
 
 ### CSS
-* [选择器]
 
+* [选择器]
 * [重排/重绘]
 
 
-布局
+**布局**
 
 * [居中 - position + transform](/client/plugin/modal/index.css)
 * [float布局]
@@ -162,16 +170,18 @@
 * [history的相关api](/client/router/index.jsx)
 * [onhashchange事件，onpopstate事件](/client/router/index.jsx)
 
-**图片处理**
+**优化**
 
-* [webp](/client/lib/isSupportWebp.js)
+* 图片优化：[图片优化](/client/lib/isSupportWebp.js) / [webp兼容](/client/lib/isSupportWebp.js)
 
 ### nodejs
+
 * [fs模块]
 * [path模块]
 
 
 ### koa 
+
 * [koa-static-cache源码解读]
 
 
@@ -200,6 +210,7 @@
 * [基础](/client/sagas/index.js)
 
 ### Webpack
+
 * [工作原理 - 包括核心概念和工作流程](/build/webpack.base.config.js)
 * [webpack-dev-server](/build/server/devServer.js)
 * [url-loader 与 file-loader的区别 （以及image inline的实现）](/build/webpack.base.config.js)
@@ -210,7 +221,6 @@
 * [开启热模块替换](/build/webpack.dev.config.js)
 * [css模块化](/build/webpack.dev.config.js)
 * [css前缀兼容处理](/build/webpack.prod.config.js)
-
 * [按需加载]
 * [cdn]
 

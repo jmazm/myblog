@@ -1,5 +1,49 @@
+/**
+ * 图片知识
+ * // ===
+ * 1. png系列
+   1.1 png8、png24、png32区别
+       png8 - 256色 + 支持透明
+       png24 - 2^24色 + 不支持透明
+       png32 - 2^24色 + 支持透明
+   1.2 特点：支持透明，浏览器兼容好
+   1.3 应用场景：大部分需要透明图片的业务场景
+ * 2. jpeg
+   2.1 特点：有损压缩，压缩率高，不支持透明
+   2.2 应用场景：大部分不需要透明图片的业务场景
+ * 3. webp
+   3.1 特点：压缩程度更好，在 ios webview 有兼容性问题
+   3.2 应用场景：安卓全部
+ * 4. svg - 矢量图
+   4.1 特点：代码内嵌，相对较小，图片样式相对简单的场景
+   4.2 应用场景：图片样式相对简单的业务场景
+ * === //
+ */
+/**
+ * 图片优化
+ * // ===
+ * 1. css雪碧图
+   1.1 含义：把网站上用到的一些图片整合到一张单独的图片中
+   1.2 优点：减少网站的HTTP请求数量
+   1.3 缺点：整合图片比较大时，一次加载比较慢
+ * 2. Image inline
+   2.1 含义：将图片的内容内嵌到html当中
+   2.2 优点：减少网站的HTTP请求数量
+   2.3 实现：url-loader
+ * 3. 使用矢量图
+   3.1 使用SVG进行矢量图的绘制
+   3.2 使用iconfont解决icon问题
+ * 4. webp
+   4.1 优势：
+       有更优的压缩算法，带来更小的图片体积，质量高；
+       同时具备无损和有损的压缩模式、Alpha透明以及动画的特性，
+       在 jpeg 和 png 上的转化效果都非常优秀稳定。
+   4.2 缺点：兼容性问题
+   4.3 实现：nodejs - imagemin-webp；网站 - 智图
+ * === //
+ */
+
 import cookie from 'js-cookie'
-// import { addClass } from './className'
 
 /**
  * 检测浏览器是否支持 webp 格式的图片
@@ -12,41 +56,31 @@ import cookie from 'js-cookie'
 
  * // ===
  * 总体思路：
-   如果支持，则设置cookie - webp_showjoy=available以及为html元素设置类名webp，
-   以便后端根据这个cookie或者类名webp判断返回的图片格式为webp还是png/jpg。
-   后端则会自动转化src
+ * 1. 客户端：通过预加载一张webp格式的图片，如果预加载成功，则设置cookie - webp_show=available
+ * 2. 服务器端：根据这个cookie判断浏览器是否支持webp格式的图片，不支持则返回png/jpg格式的图片
+      最快捷的方法：直接在koa-static-cache中修改
 
-   图片原本格式：https://file.jmazm.com/gradient/gradient-11.png
-   支持webp的话，则会转化：https://file.jmazm.com/gradient/gradient-11.png.webp
- *
- * 为什么要设置类名webp？
- * - 以防cookie - webp_show被删除。对于非同构页面来说，js文件只会加载一起，
- * 如果cookie - webp_show被删除了，那么就无法再次判断浏览器是否支持webp格式的图片
+     // 图片原本格式：https://file.jmazm.com/gradient/gradient-11.png.webp
+     var filePath = file.path
+     var fileType = file.type
+
+     // 判断是否支持webp格式图片
+     if (/\.(png|jpg)\.webp/g.test(filePath)) {
+          var webpShow = ctx.cookies.get('webp_show')
+          if (!webpShow) {
+           //    不支持webp的话，则会转化：https://file.jmazm.com/gradient/gradient-11.png
+            filePath = filePath.replace(/\.webp$/, '')
+
+            var etc = path.extname(filePath)
+
+            fileType = (
+              etc == '.png' ? 'image/png': 'image/jpeg'
+            )
+          }
+        }
+
+     ctx.type = fileType
  * === //
-
- * // ===
- * 分类思路：
- * 1. 非同构页面：如果cookie中没有webp_showjoy，那么就调用下面的 isSupportWebp 方法
- * 2. 同构页面：如果是第一次访问页面，尽管会设置cookie设置类名，但是页面会直接渲染出来，
-      而后端也不能在渲染页面内容之前就检测到cookie - webp_showjoy的存在。
-
-      解决方法：由于目前只在文章详情页使用webp格式的图片，所以，在发送文章详情的请求时，
-      在判断 类名webp 或者cookie - webp_showjoy不存在的情况下，就调用多一次isSupportWebp这个方法，
-      如果返回 {support: true}，那么就在请求头上添加一个字段 is-support-webp: true；
-      后端检测到这个请求头 或者 cookie，则转化 src格式。
-
-      【发现，上面这个方法不可行，同构是后端实现，上述方法是在前端实现】
-       因此，只能在文件cms后端检测，如果 Accept 中包含 image/webp，则证明支持webp格式，
-       那么就返回webp格式的图片，否则返回png/jpg格式的图片
- * === //
-
- 1 客户端判断是否支持webp -> js -> cokie
- 2 img -> get url [xxxx.jpg.webp] 带着 cookie [.jamam.com]
- 3 后端 get cookie, 判断 isSupportWebp ? 不变 : 截取 字符 -> str.substring() -> xxxx.jpg ->  koa-static
-         处理.webp
-      后端 -> 前端  x
-
-
  */
 export function isSupportWebp () {
 
@@ -56,8 +90,6 @@ export function isSupportWebp () {
     // 图片加载完的操作
     image.onload = function () {
       if (image.width == 1) {
-        // addRootTag()
-
         let domain = ''
 
         if (process.env.NODE_ENV == 'production') {
@@ -76,8 +108,3 @@ export function isSupportWebp () {
     image.src = 'data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==';
   }
 }
-
-// function addRootTag() {
-//   addClass(document.documentElement, 'webp')
-// }
-
