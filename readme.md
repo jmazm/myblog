@@ -148,7 +148,7 @@
 
 **存储**
 
-* [cookie]
+* [cookie](/client/lib/cookie.js)
 * [localStorage](/client/views/Admin/containers/LoginPage/index.jsx)
 * [seessionStorage]
 
@@ -162,7 +162,9 @@
 * [history的相关api](/client/router/index.jsx)
 * [onhashchange事件，onpopstate事件](/client/router/index.jsx)
 
+**图片处理**
 
+* [webp](/client/lib/isSupportWebp.js)
 
 ### nodejs
 * [fs模块]

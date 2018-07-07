@@ -12,6 +12,7 @@
     "cms-server": "cross-env NODE_ENV=development node ./build/server/cms-server.js",
     "indexDev": "cross-env NODE_ENV=development nodemon ./app-index.js",
     "cmsDev": "cross-env NODE_ENV=development nodemon ./app-cms.js",
+    "index-c": "cross-env NODE_ENV=development nodemon ./app-index.js",
     "index": "cross-env NODE_ENV=production nodemon ./app-index.js",
     "cms": "cross-env NODE_ENV=production nodemon ./app-cms.js"
   },

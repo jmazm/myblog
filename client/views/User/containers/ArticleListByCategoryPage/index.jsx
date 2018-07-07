@@ -31,15 +31,15 @@ class ArticleListByCategory extends Component {
     total: 0,
     match: {
       params: {}
-    }
+    },
   }
 
   static propTypes = {
     articleList: PropTypes.array,
     total: PropTypes.number,
-    match: {
+    match: PropTypes.shape({
       params: PropTypes.object
-    }
+    })
   }
 
   pageOnChange (page, pagesize) {
@@ -68,7 +68,7 @@ class ArticleListByCategory extends Component {
             <div className="collection-wrapper">
               <div className="collection-inner">
                 <div className="collection-title">
-                  <h2>{category}<small>类别</small></h2>
+                  <h2>{ category }<small>类别</small></h2>
                 </div>
                 {
                   articleList.length > 0 ?

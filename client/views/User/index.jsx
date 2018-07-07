@@ -7,11 +7,21 @@ import { AppContainer } from 'react-hot-loader'
 
 import { UserRouteMap } from '../../router/index'
 import configureStore from '../../redux/store/index'
+import { isSupportWebp } from '../../lib/isSupportWebp'
+import { hasClass } from '../../lib/className'
+import { cookie } from '../../lib/cookie'
 
 import '../../static/css/reset.css'
 import '../../static/css/index-common.css'
 
-const renderRoot = () => {
+
+
+const renderRoot = async () => {
+  // 判断浏览器是否支持webp格式图片
+  if (!cookie.get('webp_show') || !hasClass(document.documentElement, 'webp')) {
+    isSupportWebp()
+  }
+
   ReactDOM.render(
     <AppContainer>
       <Provider store={ configureStore }>
@@ -21,6 +31,7 @@ const renderRoot = () => {
     document.getElementById('root')
   )
 }
+
 
 renderRoot()
 

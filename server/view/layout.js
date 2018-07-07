@@ -72,12 +72,12 @@ function layout (content, data) {
   <body>
     <div id="root"><div>${content}</div></div>
  
-  <script type="text/javascript" src="${common.publicPath}react.js"></script>
-  <script type="text/javascript" src="${common.publicPath}redux.js"></script>
-  <script type="text/javascript" src="${common.publicPath}axios.js"></script>
-  <script type="text/javascript" src="${common.publicPath}remark.js"></script>
-  <script type="text/javascript" src="${common.publicPath}other.js"></script>
-  <script type="text/javascript" src="${common.publicPath}index.js"></script>
+    <script type="text/javascript" src="${common.publicPath}react.js"></script>
+    <script type="text/javascript" src="${common.publicPath}redux.js"></script>
+    <script type="text/javascript" src="${common.publicPath}axios.js"></script>
+    <script type="text/javascript" src="${common.publicPath}remark.js"></script>
+    <script type="text/javascript" src="${common.publicPath}other.js"></script>
+    <script type="text/javascript" src="${common.publicPath}index.js"></script>
   </body>
   </html>
 `;

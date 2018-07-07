@@ -60,3 +60,15 @@ export function replaceClass (node, oldClassname, newClassname) {
 
   node.className = initClassName.join(' ')
 }
+
+/**
+ * 判断是否有类名
+ * @param node
+ * @param cName
+ * @return {boolean}
+ */
+export function hasClass (node, cName) {
+  let arr = node.className.split(' ')
+
+  return arr.includes(cName)
+}

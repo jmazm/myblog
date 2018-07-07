@@ -44,6 +44,10 @@ module.exports = function (port) {
     maxAge: 60 * 60 * 24 * 30
   }))
 
+  app.use(KoaStaticCache(path.resolve(distDir, `./lib`), {
+    maxAge: 60 * 60 * 24 * 30
+  }))
+
   app.listen(port, () => {
     console.log(`${process.version} listening on port ${port} (${app.env})`)
   })
