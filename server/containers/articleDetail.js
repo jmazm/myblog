@@ -22,10 +22,7 @@ export async function index (ctx) {
         prefix = config.dev.fileServerIP
       }
 
-      console.log(ctx.cookies.get('webp_show'))
-      
       ret.content = ret.content.replace(/\!\[(.*?)\]\((.*?)\)/g, `![$1](${prefix}$2)`)
-        .replace(/\.(png|jpg)/g, '\.$1\?webp=check')
 
       const article = {
         articleDetail: {

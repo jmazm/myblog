@@ -27,19 +27,19 @@ tag: CSS
 
 > * 先看第一幅图：
 
-![gradient-21.png](/gradient/gradient-21.png)
+![gradient-21.png.webp](/gradient/gradient-21.png.webp)
 
 > * 再看第二幅图：
 
-![gradient-22.png](/gradient/gradient-22.png)
+![gradient-22.png.webp](/gradient/gradient-22.png.webp)
 
 > * 再看第三幅图：
 
-![gradient-23.png](/gradient/gradient-23.png)
+![gradient-23.png.webp](/gradient/gradient-23.png.webp)
 
 > * 最后一幅图
 
-![gradient-20.png](/gradient/gradient-20.png)
+![gradient-20.png.webp](/gradient/gradient-20.png.webp)
 
 ## 二、理解径向距离
 
@@ -47,7 +47,7 @@ tag: CSS
 
 > * 请看下图：
 
-![gradient](/gradient/gradient-15.png)
+![gradient](/gradient/gradient-15.png.webp)
 
 > * 点击打开[demo](https://jmhello.github.io/effects/demo/css/gradient/demo5/index.html)，效果如下图：
 
@@ -58,7 +58,7 @@ tag: CSS
 > * 再次回顾以下这张图：
 >   * 这是它的径向渐变代码：`background: radial-gradient(red 100px, yellow 200px, blue 300px);`
 
-![gradient-20.png](/gradient/gradient-20.png)
+![gradient-20.png.webp](/gradient/gradient-20.png.webp)
 
 > * 这张图展现的是等间距的椭圆形径向渐变！！
 > * 当没有声明 `size` 的时候，`size` 默认为 `farthest-corner`。而径向距离指的就是从圆心到离圆心最远角的距离，即那条长长的黑线！！

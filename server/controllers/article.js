@@ -116,11 +116,6 @@ class Article {
     // 文章里展示的图片需要添加前缀
     articleData.content = articleData.content.replace(/\!\[(.*?)\]\((.*?)\)/g, `![$1](${prefix}$2)`)
 
-    // 判断浏览器是否支持webp格式图片
-    if (ctx.cookies.get('webp_show') == 'available') {
-      articleData.content = articleData.content.replace(/\.(png|jpg)/g, '\.$1\.webp')
-    }
-
     ctx.body = {
       status: 'success',
       data: articleData

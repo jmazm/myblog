@@ -21,7 +21,7 @@
 background-image: linear-gradient(to right, transparent 50%, #655 0);
 ```
 
-![progress-01](/progress/progress-01.png)
+![progress-01](/progress/progress-01.png.webp)
 
 ### 1.3 利用伪元素画新的右半圆
 
@@ -40,7 +40,7 @@ background-image: linear-gradient(to right, transparent 50%, #655 0);
 
 这里利用到了 `clip: rect(0 auto auto 100px)` 实现右半圆，如下图所示，蓝色半圆就是右半圆（这里为了好分辨，所以才将右半圆设置为蓝色）
 
-![progress-02](/progress/progress-02.png)
+![progress-02](/progress/progress-02.png.webp)
 
 ### 1.4 利用transform实现占比
 
@@ -51,7 +51,7 @@ background-image: linear-gradient(to right, transparent 50%, #655 0);
 transform: rotate(72deg);
 ```
 
-![progress-03](/progress/progress-03.png)
+![progress-03](/progress/progress-03.png.webp)
 
 ---
 
@@ -63,7 +63,7 @@ transform: rotate(36deg);
 background: #655;
 ```
 
-![progress-04](/progress/progress-04.png)
+![progress-04](/progress/progress-04.png.webp)
 
 ---
 
@@ -203,7 +203,7 @@ background: #655;
 }
 ```
 
-![progress-04](/progress/progress-05.png)
+![progress-04](/progress/progress-05.png.webp)
 
 ### 2.3 实现动态进度条
 

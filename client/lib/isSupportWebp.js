@@ -1,5 +1,5 @@
-import { cookie } from './cookie'
-import { addClass } from './className'
+import cookie from 'js-cookie'
+// import { addClass } from './className'
 
 /**
  * 检测浏览器是否支持 webp 格式的图片
@@ -39,6 +39,14 @@ import { addClass } from './className'
        因此，只能在文件cms后端检测，如果 Accept 中包含 image/webp，则证明支持webp格式，
        那么就返回webp格式的图片，否则返回png/jpg格式的图片
  * === //
+
+ 1 客户端判断是否支持webp -> js -> cokie
+ 2 img -> get url [xxxx.jpg.webp] 带着 cookie [.jamam.com]
+ 3 后端 get cookie, 判断 isSupportWebp ? 不变 : 截取 字符 -> str.substring() -> xxxx.jpg ->  koa-static
+         处理.webp
+      后端 -> 前端  x
+
+
  */
 export function isSupportWebp () {
 
@@ -48,13 +56,18 @@ export function isSupportWebp () {
     // 图片加载完的操作
     image.onload = function () {
       if (image.width == 1) {
-        addRootTag()
+        // addRootTag()
 
-        cookie.set({
-          name: 'webp_show',
-          value: 'available',
-          expires: '31536000',
-          path: '/'
+        let domain = ''
+
+        if (process.env.NODE_ENV == 'production') {
+          domain = '.jmazm.com'
+        }
+
+        cookie.set('webp_show', 'available', {
+          maxAge: 31536000,
+          path: '/',
+          domain: domain
         })
       } 
     }
@@ -62,12 +75,9 @@ export function isSupportWebp () {
     // 一张支持alpha透明度的webp的图片，使用base64编码
     image.src = 'data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==';
   }
-  else {
-    addRootTag()
-  }
 }
 
-function addRootTag() {
-  addClass(document.documentElement, 'webp')
-}
+// function addRootTag() {
+//   addClass(document.documentElement, 'webp')
+// }
 
