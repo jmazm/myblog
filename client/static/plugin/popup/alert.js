@@ -3,7 +3,16 @@ import {on} from '../../../lib/event'
 import Popup from './popup'
 
 /**
- * 下面用到寄生组合继承
+ * 寄生组合继承
+ * // ===
+ * 1. 在子类构造函数中调用 parent.call(this, ...args)，继承父类的属性
+ * 2. 调用 inheritProto方法，继承父类原型上的方法
+   function inheritProto (parent, child) {
+    const proto = Object.create(parent.prototype)
+    proto.constructor = child
+    child.prototype = proto
+}
+ * === //
  */
 
 /**

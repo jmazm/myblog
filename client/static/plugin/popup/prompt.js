@@ -20,7 +20,9 @@ import Popup from './popup'
 /**
  * 下面用到组合继承
  * 缺点：
- * 1、两次调用父类的构造函数（第一次调用：在子类的构造函数里调用 - Parent.call(this)，继承父类的属性； 第二次调用：继承父类的方法 - child.prototype = new Parent()）
+ * 1、两次调用父类的构造函数
+    第一次调用：在子类的构造函数里调用 - Parent.call(this)，继承父类的属性；
+    第二次调用：继承父类的方法 - child.prototype = new Parent()
  * 2、需要修正子类原型对象的constructor属性的值
  */
 

@@ -85,9 +85,9 @@
 **应用层**
 
 * [DNS、域名](/doc/计算机网络原理/应用层/DNS.md)
-* [http缓存](/server/basicConfig.js)
-* [http2.0](/server/indexServer.js)
-* [https](/server/indexServer.js)
+* [http缓存](/server/server.dev.js)
+* [http2.0](/server/server.prop.js)
+* [https](/server/server.prop.js)
 * [http常用状态码](/doc/计算机网络原理/应用层/状态码.md)
 * [HTTP方法](/server/router/cms.js)
 * [GET和POST的区别](/server/router/cms.js)
@@ -135,9 +135,10 @@
 
 
 **继承**
-* [原型链继承]
-* [借用构造函数继承]
-* [组合继承]
+
+* [原型链继承](/client/static/plugin/popup/prompt.js)
+* [借用构造函数继承](/client/static/plugin/popup/prompt.js)
+* [组合继承](/client/static/plugin/popup/prompt.js)
 * [寄生组合继承](/client/static/plugin/popup/alert.js)
 
 **DOM操作**
@@ -158,7 +159,7 @@
 
 * [cookie](/client/lib/cookie.js)
 * [localStorage](/client/views/Admin/containers/LoginPage/index.jsx)
-* [seessionStorage]
+* [sessionStorage]
 
 **跨域**
 * [cors](/server/controllers/article.js)
@@ -178,7 +179,6 @@
 
 * [fs模块]
 * [path模块]
-
 
 ### koa 
 
@@ -239,12 +239,12 @@
 * [XSS](/client/lib/xss.js)
 * [CSRF](/server/tools/auth.js)
 * [密码安全](/server/controllers/user.js)
-* [点击劫持](/server/basicConfig.js)
-* [DDOS]
+* [点击劫持](/server/sever.base.js)
+* [DOS、DDOS](/server/tools/auth.js)
+* [重放攻击](/server/tools/auth.js)
+* [传输安全](/server/server.prop.js)
 * [SQL注入]
 * [上传漏洞]
-* [传输安全]
-* [重放攻击]
 
 
 ### 测试
