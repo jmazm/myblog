@@ -115,65 +115,70 @@
 
 ### Javascript
 
+* **基础**：
+[位运算符] / 
+[类型判断] / 
+[闭包] / 
+[new本质]
+
+* **this**：[call/apply/bind]
+
+* **es6**
+[promise] / 
+[箭头函数]
+
+
+* **继承**：
+[原型链继承](/client/static/plugin/popup/prompt.js) / 
+[借用构造函数继承](/client/static/plugin/popup/prompt.js) / 
+[组合继承](/client/static/plugin/popup/prompt.js) /
+[寄生组合继承](/client/static/plugin/popup/alert.js)
+
+* **DOM**：
+[dom - 创建/添加/删除/插入/克隆节点](/client/static/plugin/popup/popup.js) / 
+[innerText 和 textContent](/client/static/plugin/popup/popup.js) / 
+[attribute和property](/client/static/plugin/popup/drag-drop.js)
+
+
+
+* **事件**：
+[事件处理程序](/client/lib/event.js) / 
+[事件循环机制] / 
+[事件委托] / 
+[原生键盘类事件触发顺序]
+
+
+* **存储**：
+[cookie](/client/lib/cookie.js) / 
+[localStorage](/client/views/Admin/containers/LoginPage/index.jsx)/ 
+[sessionStorage]
+
+* **跨域**：
+[cors](/server/controllers/article.js)/ 
+[jsonp] / 
+[iframe + window.name]
+
+* **BOM**：
+[URL的井号 - location.hash](/client/router/index.jsx) /
+[history的相关api](/client/router/index.jsx) / 
+[onhashchange事件，onpopstate事件](/client/router/index.jsx)
+
+* **优化**：
+[图片优化](/client/lib/isSupportWebp.js) / 
+[webp兼容](/client/lib/isSupportWebp.js)
+
+* **ajax**：[ajax实现]
+
+
 * [深拷贝]
-* [new 本质]
 * [防抖]
-* [ajax实现]
 * [预加载]
 * [闭包]
-* [this]
 * [执行上下文]
 * [异步]
 * [递归]
-* [回文]
 * [类名处理 - 增加/查询/删除/修改](/client/lib/className.js)
-* [attribute和property](/client/static/plugin/popup/drag-drop.js)
-
-**es6**
-* [promise]
-* [箭头函数]
-
-
-**继承**
-
-* [原型链继承](/client/static/plugin/popup/prompt.js)
-* [借用构造函数继承](/client/static/plugin/popup/prompt.js)
-* [组合继承](/client/static/plugin/popup/prompt.js)
-* [寄生组合继承](/client/static/plugin/popup/alert.js)
-
-**DOM操作**
-
-* [dom - 创建/添加/删除/插入/克隆节点](/client/static/plugin/popup/popup.js)
-* [innerText 和 textContent](/client/static/plugin/popup/popup.js)
-
-
-**事件**
-
-* [事件处理程序](/client/lib/event.js)
-* [事件循环机制]
-* [事件委托]
-* [原生键盘类事件触发顺序]
-
-
-**存储**
-
-* [cookie](/client/lib/cookie.js)
-* [localStorage](/client/views/Admin/containers/LoginPage/index.jsx)
-* [sessionStorage]
-
-**跨域**
-* [cors](/server/controllers/article.js)
-* [jsonp]
-* [iframe + window.name]
-
-**BOM**
-* [URL的井号 - location.hash](/client/router/index.jsx)
-* [history的相关api](/client/router/index.jsx)
-* [onhashchange事件，onpopstate事件](/client/router/index.jsx)
-
-**优化**
-
-* 图片优化：[图片优化](/client/lib/isSupportWebp.js) / [webp兼容](/client/lib/isSupportWebp.js)
+* [页面加载情况 - readystatechange/DOMContentLoaded/load/beforeunload/unload](/doc/js/DOMContentLoaded、readystatechange、load、beforeunload、unload详谈.md)
 
 
 ### Webpack
