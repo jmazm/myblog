@@ -65,7 +65,7 @@ export function isSupportWebp () {
         }
 
         cookie.set('webp_show', 'available', {
-          maxAge: 31536000,
+          maxAge: 30 * 24 * 60 * 60 * 1000,
           path: '/',
           domain: domain
         })
