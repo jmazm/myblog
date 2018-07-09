@@ -4,11 +4,10 @@
   "description": "张静宜个人前端博客",
   "main": "index.js",
   "scripts": {
-    "index": "cross-env NODE_ENV=production pm2 start ./app-index.js --name blogindex --watch",
     "index-c": "cross-env NODE_ENV=production node ./app-index.js",
-    "cms": "cross-env NODE_ENV=production pm2 start ./app-cms.js --name blogcms --watch",
     "cms-c": "cross-env NODE_ENV=production node ./app-cms.js",
-    "restart": "cross-env NODE_ENV=production pm2 restart all --watch"
+    "restart": "cross-env NODE_ENV=production pm2 restart all --watch",
+    "pm2": "cross-env NODE_ENV=production pm2 start ./build/ecosystem.config.js"
   },
   "author": "张静宜",
   "license": "ISC",

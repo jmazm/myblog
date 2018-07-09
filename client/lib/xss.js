@@ -42,7 +42,7 @@
 
 /**
  * html实体转义
- * @param html
+ * @param {String} html - html文本
  * @return {*}
  */
 export const replaceHtml = (html) => {
@@ -58,7 +58,7 @@ export const replaceHtml = (html) => {
 }
   /**
    * javascript转义
-   * @param html
+   * @param {String} html - html文本
    * @return {*}
    */
 export const replaceJavaScript = (html) => {

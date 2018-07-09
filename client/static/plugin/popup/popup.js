@@ -13,32 +13,23 @@ import { replaceClass } from '../../../lib/className'
 /**
  * innerText 、textContent、nodeValue
  * // ===
- * textContent:
- * 1、如果是document、document type、notation，就会返回null
- * 2、可读：其内容包含每一个子节点，包括注释节点、processing instruction节点
- * 3、可写：为其赋值后，相当于用一个文本节点替代了这个元素的所有子节点（相当于这个元素的所有子节点被移除了）
- * === //
- *
- * // ===
- * innerText:
- * a property that represents the "rendered" text content of a node and its descendants
- * === //
- *
- * // ===
- * nodeValue:
- * 1、返回null值的类型：Document DocumentFragment Element NamedNodeMap EntityReference Notation
- * 2、or text, comment, and CDATA nodes, nodeValue returns the content of the node
- * 3、For attribute nodes, the value of the attribute is returned.
- * 4、当nodeValue被定义为Null时，对其设置值无效
- * === //
- *
- * // ===
- * innerText 和 textContentd的区别
- * 1、textContent可以获取所有元素，包括<script>、<style>，innerText不能
- * 2、textContent 包含隐藏元素，innerText不包含
- * 3、textContent不会引起重排，innerText会
- * 4、到ie11为止，innerText不仅移除所有子节点，而且会永久破坏所有子文本节点【对文本中存在的 HTML 语法字符（小于号、大于号、引号及和号）进行了编码】
- * (so it is impossible to insert the nodes again into any other element or into the same element anymore) 而textContent不会
+ * 1. textContent:
+   1.1 如果是document、document type、notation，就会返回null
+   1.2 可读：其内容包含每一个子节点，包括注释节点、processing instruction节点
+   1.3 可写：为其赋值后，相当于用一个文本节点替代了这个元素的所有子节点（相当于这个元素的所有子节点被移除了）
+ * 2. innerText:
+   a property that represents the "rendered" text content of a node and its descendants
+ * 3. nodeValue:
+   3.1 返回null值的类型：Document DocumentFragment Element NamedNodeMap EntityReference Notation
+   3.2 or text, comment, and CDATA nodes, nodeValue returns the content of the node
+   3.3 For attribute nodes, the value of the attribute is returned.
+   3.4 当nodeValue被定义为Null时，对其设置值无效
+ * 4. innerText 和 textContentd的区别
+   4.1 textContent可以获取所有元素，包括<script>、<style>，innerText不能
+   4.2 textContent 包含隐藏元素，innerText不包含
+   4.3 textContent不会引起重排，innerText会
+   4.4 到ie11为止，innerText不仅移除所有子节点，而且会永久破坏所有子文本节点【对文本中存在的 HTML 语法字符（小于号、大于号、引号及和号）进行了编码】
+   (so it is impossible to insert the nodes again into any other element or into the same element anymore) 而textContent不会
  * === //
  */
 

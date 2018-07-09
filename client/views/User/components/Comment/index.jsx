@@ -176,7 +176,7 @@ class Comment extends Component {
               <input className={ style['info-input'] } value={ sign } onChange={ this.handleOnChange } name="sign" type="hidden"/>
             </div>
             <div className={ style['reply-area'] }>
-              <img src="/avatar.png" className={ style['reply-comment-avatar'] }/>
+              <img src="/avatar.jpg" className={ style['reply-comment-avatar'] }/>
               <div className={ style['textarea-wrapper'] }>
                 <textarea className={ style['textarea']} name="content" value={ content } onChange={ this.handleOnChange }></textarea>
               </div>
@@ -196,7 +196,7 @@ class Comment extends Component {
                     <li className={ style['list-item'] } key={i}>
                       <div className={ style['list-inner'] }>
                         <div className={ style['comment-avatar'] }>
-                          <img src="/avatar.png"/>
+                          <img src="/avatar.jpg"/>
                         </div>
                         <div className={ style['comment-body'] }>
                           <div className={ style['comment-header'] }>

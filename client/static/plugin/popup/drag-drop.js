@@ -1,5 +1,6 @@
 import { on, off, getEvent, getTarget, preventDefault } from '../../../lib/event'
 import { throttle } from '../../../lib/timer'
+
 /**
  * // === 单例模式：保证一个类仅有一个实例，并提供一个访问它的全局访问点（就是一个对外的接口） === //
 
@@ -16,23 +17,23 @@ import { throttle } from '../../../lib/timer'
  * 上面三个属性，如果元素是隐藏的（父元素或者元素本身设置了display:none）或者元素本身设置了position: fixed，则返回null
  * ie9：元素本身设置了position: fixed，则返回null，display:none并不会影响
  * ===//
+ */
 
+/**
+ * attribute 和 property
  * // ===
- *  attribute 和 property的区别：
- *  1、attribute是由HTML定义（即使是自定义属性），并不存在于DOM中；property属于DOM（document.getElementById('test').foo = 1）
- *  2、attribute是String类型；property是任意类型
- *
- *  attribute 和 property的关系：
- *  1、非自定义的attribute，如id、title等，都可以通过 节点.property名 访问
- *  2、非自定义的property或者attribute的变化都是联动（<div id="test" class="button"></div>  div.getAttribute('class')  div.setAttribute('class','green-input')）
- *  3、带默认值的attribute不随property变化而变化：input元素的value就是一个默认值，input.value = 'foo2'; input.getAttribute('value'); // 返回string："foo"
- *
- *  最佳实践：
- *  1、使用JavaScript操作property更为方便、快捷，并且property支持各种不同的类型，尤其是对于布尔类型的attribute的自动转换
- *  2、自定义属性使用attribute
- *
- *  注意：
- *  1、由于 class 为JavaScript的保留关键字，所以通过property操作class时应使用 className。
+ * 1. 区别：
+   1.1 attribute是由HTML定义（即使是自定义属性），并不存在于DOM中；property属于DOM（document.getElementById('test').foo = 1）
+   1.2 attribute是String类型；property是任意类型
+ * 2. attribute 和 property的关系：
+   2.1 非自定义的attribute，如id、title等，都可以通过 节点.property名 访问
+   2.2 非自定义的property或者attribute的变化都是联动（<div id="test" class="button"></div>  div.getAttribute('class')  div.setAttribute('class','green-input')）
+   2.3 带默认值的attribute不随property变化而变化：input元素的value就是一个默认值，input.value = 'foo2'; input.getAttribute('value'); // 返回string："foo"
+ * 3. 最佳实践：
+   3.1 使用JavaScript操作property更为方便、快捷，并且property支持各种不同的类型，尤其是对于布尔类型的attribute的自动转换
+   3.2 自定义属性使用attribute
+ * 4. 注意：
+   4.1 由于 class 为JavaScript的保留关键字，所以通过property操作class时应使用 className。
  * === //
  */
 

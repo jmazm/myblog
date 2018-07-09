@@ -16,7 +16,8 @@
  */
 const webpack = require('webpack');
 const path = require('path')
-const CompressionWebpackPlugin = require("compression-webpack-plugin") 
+const CompressionWebpackPlugin = require("compression-webpack-plugin")
+const CleanWebpackPlugin = require("clean-webpack-plugin")
 
 module.exports = {
   mode: 'production',
@@ -58,17 +59,12 @@ module.exports = {
       // 只处理大于这个字节的文件
       threshold: 10240,
       minRatio: 0.8
+    }),
+    // 清除
+    new CleanWebpackPlugin(['dist'],  {
+      root: path.resolve(process.cwd(), './'),
+      verbose: true,
+      dry: false
     })
-
-    // new HtmlWebpackPlugin({
-    //   template: './client/views/index.html',
-    //   inject: 'body',
-    //   hash: true,
-    //   minify: {
-    //     removeComments: true,
-    //     collapseWhitespace: true
-    //   },
-    //   filename: 'index.html'
-    // })
   ]
 };

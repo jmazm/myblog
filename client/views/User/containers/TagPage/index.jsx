@@ -16,6 +16,24 @@ class Tag extends Component {
     super(props)
     
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
+
+    /**
+     * react 数据流
+     * // ===
+     * 1. 数据流向：react的数据流是自上向下单向流动 - 从父组件到子组件
+       把组件看成一个函数，那么它接受了 props 作为参数，内部由 state
+       作为函数的内部参数，返回一个 Virtual DOM 的实现。
+     * 2. props：
+       2.1 作用：让组件间相互联系，实现父组件到子组件的通信
+       2.2 特点：props本身不可变
+       2.3 可以通过 defaultProps 为 props设置默认值，使用 propTypes 定义props的类型
+     * 3. state：
+       3.1 作用：管理组件的内部状态
+       3.2 使用：
+         在constructor中 通过 this.state = {} 初始化相应的状态；
+         可通过this.setState({})修改状态，调用这个方法的时候，该组件会尝试重新渲染。
+     * === //
+     */
     
     this.state = {
       currentPage: 1
