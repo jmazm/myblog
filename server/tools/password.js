@@ -9,9 +9,19 @@ class Password {
   static getPasswordFromTxt (username, password) {
     md5(`${username}a1&890AJN-=+O2,X${password}`)
   }
+
+  /**
+   * 获取盐
+   */
   static getSault () {
     return md5(Math.random() * 999999 + '' + new Date().getTime())
   }
+
+  /**
+   * 加密
+   * @param sault
+   * @param password
+   */
   static encryptPassword (sault, password) {
     return md5(`${sault}*&1iop)92nbd-2ZJ^a${password}`)
   }

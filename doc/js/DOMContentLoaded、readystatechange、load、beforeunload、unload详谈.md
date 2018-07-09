@@ -11,11 +11,14 @@
 ### readystatechange
 
 document.readyState：描述document的加载情况
-* loading：文档仍在加载
-* interactive：文档结束加载并且被解析，但是像图片，样式，frame之类的子资源仍在加载
-* complete：文档和子资源已经结束加载，该状态表明将要触发load事件。
+* uninitialized（未初始化）：对象存在但尚未初始化
+* loading（正在加载）：文档仍在加载
+* loaded（加载完毕）：对象加载数据完成
+* interactive（交互）：文档结束加载并且被解析，但是像图片，样式，frame之类的子资源仍在加载
+* complete（完成）：文档和子资源已经结束加载，该状态表明将要触发load事件。
 
 readyState的改变会触发readystatechange事件。
+
 
 ### beforeunload
 

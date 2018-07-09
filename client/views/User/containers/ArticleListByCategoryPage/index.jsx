@@ -22,6 +22,7 @@ class ArticleListByCategory extends Component {
     this.state = {
       currentPage: 1
     }
+
     this.pageOnChange = this.pageOnChange.bind(this)
   }
 
@@ -31,7 +32,7 @@ class ArticleListByCategory extends Component {
     total: 0,
     match: {
       params: {}
-    },
+    }
   }
 
   static propTypes = {
@@ -43,9 +44,11 @@ class ArticleListByCategory extends Component {
   }
 
   pageOnChange (page, pagesize) {
-    const category = decodeURIComponent(this.props.match.params.category)
+    const { match, get_all_articles } = this.props
 
-    this.props.get_all_articles({
+    const category = decodeURIComponent(match.params.category)
+
+    get_all_articles({
       pageNum: page,
       pageSize: pagesize,
       category: category

@@ -15,7 +15,19 @@ import Pagination from '../../../../plugin/pagination';
 
 const { get_all_articles } = ArticleReducer
 
-class ArticleListByCategory extends Component {
+class SearchPage extends Component {
+  constructor (props) {
+    super(props)
+
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
+
+    this.state = {
+      currentPage: 1
+    }
+
+    this.pageOnChange = this.pageOnChange.bind(this)
+  }
+
   static defaultProps = {
     articleList: [],
     total: 0,
@@ -27,21 +39,9 @@ class ArticleListByCategory extends Component {
   static propTypes = {
     articleList: PropTypes.array,
     total: PropTypes.number,
-    match: {
+    match: PropTypes.shape({
       params: PropTypes.object
-    }
-  }
-
-  constructor (props) {
-    super(props)
-
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate
-
-    this.state = {
-      currentPage: 1
-    }
-
-    this.pageOnChange = this.pageOnChange.bind(this)
+    })
   }
 
   pageOnChange (page, pagesize) {
@@ -145,4 +145,4 @@ function mapDispatchToProps (dispatch) {
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(ArticleListByCategory)
+)(SearchPage)

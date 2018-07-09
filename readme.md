@@ -116,14 +116,14 @@
 ### Javascript
 
 * **基础**：
-[位运算符] / 
-[类型判断] / 
+[运算符](/doc/js/运算符.md) / 
+[类型判断](/client/lib/type.js) / 
 [闭包] / 
-[new本质]
+[new本质](/client/lib/new.js)
 
-* **this**：[call/apply/bind]
+* **this**：[call/apply/bind]()
 
-* **es6**
+* **es6**：
 [promise] / 
 [箭头函数]
 
@@ -145,7 +145,7 @@
 [事件处理程序](/client/lib/event.js) / 
 [事件循环机制] / 
 [事件委托] / 
-[原生键盘类事件触发顺序]
+[原生键盘类事件](/client/views/User/components/SearchBar/index.jsx)
 
 
 * **存储**：
