@@ -43,12 +43,17 @@
 
 ### 算法
 
-* [冒泡排序]
-* [选择排序]
-* [插入排序]
-* [快速排序]
-* [希尔排序]
-* [归并排序]
+* **排序**：
+[冒泡排序] /
+[选择排序] /
+[插入排序] /
+[快速排序] /
+[希尔排序] /
+[归并排序]
+
+* **查找**：
+[顺序查找] /
+[二分法查找]
 
 ### 计算机基础知识
 
@@ -56,44 +61,40 @@
 
 ### 计算机网络原理
 
-**物理层**
+* **物理层**
+[物理层解基本概念](/doc/计算机网络原理/物理层/物理层基本概念.md) /
+[数据通信的基础知识](/doc/计算机网络原理/物理层/数据通信的基础知识.md) /
+[物理层下面的传输媒体 - 导引型传输媒体、非导引型传输媒体](/doc/计算机网络原理/物理层/物理层下面的传输媒体.md) /
+[信道复用技术 - 频分复用、时分复用、统计时分复用、波分复用、码分复用](/doc/计算机网络原理/物理层/信道复用技术.md) /
+[数字传输系统](/doc/计算机网络原理/物理层/数字传输系统.md) /
+[宽带接入技术]
 
-* [物理层解基本概念](/doc/计算机网络原理/物理层/物理层基本概念.md)
-* [数据通信的基础知识](/doc/计算机网络原理/物理层/数据通信的基础知识.md)
-* [物理层下面的传输媒体 - 导引型传输媒体、非导引型传输媒体](/doc/计算机网络原理/物理层/物理层下面的传输媒体.md)
-* [信道复用技术 - 频分复用、时分复用、统计时分复用、波分复用、码分复用](/doc/计算机网络原理/物理层/信道复用技术.md)
-* [数字传输系统](/doc/计算机网络原理/物理层/数字传输系统.md)
-* [宽带接入技术]
+* **数据链路层**
+[数据链路层基本概念 - 信道类型、帧、三个基本问题](/doc/计算机网络原理/数据链路层/数据链路层基本概念.md) /
+[两种情况下的数据链路层 - PPP协议、CSMD/CD协议](/doc/计算机网络原理/数据链路层/两种情况下的数据链路层.md) /
+[以太网 - 拓扑、集线器、信道利用率、MAC](/doc/计算机网络原理/数据链路层/以太网.md) /
+[扩展以太网、优化以太网](/doc/计算机网络原理/数据链路层/扩展以太网.md)
 
-**数据链路层**
-
-* [数据链路层基本概念 - 信道类型、帧、三个基本问题](/doc/计算机网络原理/数据链路层/数据链路层基本概念.md)
-* [两种情况下的数据链路层 - PPP协议、CSMD/CD协议](/doc/计算机网络原理/数据链路层/两种情况下的数据链路层.md)
-* [以太网 - 拓扑、集线器、信道利用率、MAC](/doc/计算机网络原理/数据链路层/以太网.md)
-* [扩展以太网、优化以太网](/doc/计算机网络原理/数据链路层/扩展以太网.md)
-
-**网络层**
+* **网络层**
 
 
 
-**传输层**
+* **传输层**
+[TCP和UDP的区别以及应用场景](/doc/计算机网络原理/传输层/传输层协议UDP和TCP.md) /
+[TCP三次握手和四次挥手](/doc/计算机网络原理/传输层/TCP.md)
 
-* [TCP和UDP的区别以及应用场景](/doc/计算机网络原理/传输层/传输层协议UDP和TCP.md)
-* [TCP三次握手和四次挥手](/doc/计算机网络原理/传输层/TCP.md)
 
+* **应用层**
+[DNS、域名](/doc/计算机网络原理/应用层/DNS.md) /
+[http缓存](/server/server.dev.js) /
+[http2.0](/server/server.prop.js) /
+[https](/server/server.prop.js) /
+[http常用状态码](/doc/计算机网络原理/应用层/状态码.md) /
+[HTTP方法](/server/router/cms.js) /
+[GET和POST的区别](/server/router/cms.js) /
 
-**应用层**
-
-* [DNS、域名](/doc/计算机网络原理/应用层/DNS.md)
-* [http缓存](/server/server.dev.js)
-* [http2.0](/server/server.prop.js)
-* [https](/server/server.prop.js)
-* [http常用状态码](/doc/计算机网络原理/应用层/状态码.md)
-* [HTTP方法](/server/router/cms.js)
-* [GET和POST的区别](/server/router/cms.js)
-
-**RESTful架构**
-* [RESTful架构](/server/router/cms.js)
+* **RESTful架构**
+[RESTful架构](/server/router/cms.js)
 
 ### HTML5
 
@@ -107,11 +108,10 @@
 * [重排/重绘]
 
 
-**布局**
-
-* [居中 - position + transform](/client/plugin/modal/index.css)
-* [float布局]
-* [flex布局]
+* **布局**
+[居中 - position + transform](/client/plugin/modal/index.css) /
+[float布局] /
+[flex布局]
 
 ### Javascript
 
@@ -123,11 +123,6 @@
 
 * **this**：[call/apply/bind]()
 
-* **es6**：
-[promise] / 
-[箭头函数]
-
-
 * **继承**：
 [原型链继承](/client/static/plugin/popup/prompt.js) / 
 [借用构造函数继承](/client/static/plugin/popup/prompt.js) / 
@@ -138,8 +133,6 @@
 [dom - 创建/添加/删除/插入/克隆节点](/client/static/plugin/popup/popup.js) / 
 [innerText 和 textContent](/client/static/plugin/popup/popup.js) / 
 [attribute和property](/client/static/plugin/popup/drag-drop.js)
-
-
 
 * **事件**：
 [事件处理程序](/client/lib/event.js) / 
@@ -155,7 +148,8 @@
 
 * **跨域**：
 [cors](/server/controllers/article.js)/ 
-[jsonp] / 
+[jsonp](/client/views/Admin/containers/UserPage/index.jsx) / 
+[XDM] /
 [iframe + window.name]
 
 * **BOM**：
@@ -169,13 +163,17 @@
 
 * **ajax**：[ajax实现]
 
+* **异步**：
+[Promise] /
+[Generator] / 
+[Async] 
+
+
 
 * [深拷贝]
 * [防抖]
 * [预加载]
-* [闭包]
 * [执行上下文]
-* [异步]
 * [递归]
 * [类名处理 - 增加/查询/删除/修改](/client/lib/className.js)
 * [页面加载情况 - readystatechange/DOMContentLoaded/load/beforeunload/unload](/doc/js/DOMContentLoaded、readystatechange、load、beforeunload、unload详谈.md)

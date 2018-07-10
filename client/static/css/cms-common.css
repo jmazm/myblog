@@ -15,3 +15,8 @@
     height: 28px;
     border: 1px solid #c0c0c0;
 }
+.iframe {
+    width: 90%;
+    height: 500px;
+    margin: 20px auto;
+}

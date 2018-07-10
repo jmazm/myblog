@@ -6,6 +6,8 @@ import AdminArticlePage from '../views/Admin/containers/ArticlePage'
 import AdminCategoryPage from '../views/Admin/containers/CategoryPage'
 import AdminTagPage from '../views/Admin/containers/TagPage'
 import LoginPage from '../views/Admin/containers/LoginPage'
+import UserPage from '../views/Admin/containers/UserPage'
+// import AdminFilePage from '../views/Admin/containers/FilePage'
 import NotFound from '../views/NotFound'
 
 // === webpack优化之按需加载：按需加载每个页面的逻辑 === //
@@ -45,6 +47,8 @@ export const AdminRouteMap = () => {
         <Route path="/admin/article" component={ AdminArticlePage }/>
         <Route path="/admin/category" component={ AdminCategoryPage }/>
         <Route path="/admin/tag" component={ AdminTagPage }/>
+        <Route path="/admin/management" component={ UserPage }/>
+        {/*<Route path="/admin/file" component={ AdminFilePage }/>*/}
         <Route path="/404" component={NotFound}/>
       </Switch>
     </HashRouter>

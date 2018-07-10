@@ -29,6 +29,7 @@ class Header extends Component {
             <li className={ style['list-item'] }><Link to="/admin/tag">管理标签</Link></li>
             <li className={ style['list-item'] }><Link to="/admin/article">管理文章</Link></li>
             <li className={ style['list-item'] }><Link to="/admin/management">管理用户</Link></li>
+            {/*<li className={ style['list-item'] }><Link to="/admin/file">文件管理系统</Link></li>*/}
             <li className={ style['list-item'] }><a href="javascript:;" onClick={this.handleLogout}>退出登录</a></li>
           </ul>
         </nav>

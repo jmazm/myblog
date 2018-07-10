@@ -42,10 +42,6 @@ export function putRequest (url, data, config) {
 
 let domain = ''
 
-// if (process.env.NODE_ENV !== 'development') {
-//   domain = location.host
-// }
-
 export const api = {
   getAllArticleApi: (pageNum, pageSize) => `${domain}/api/article?pageNum=${pageNum}&pageSize=${pageSize}`,
   getAllArticleByTagApi: (pageNum, pageSize, tag) => `${domain}/api/article?tag=${tag}&pageNum=${pageNum}&pageSize=${pageSize}`,
@@ -67,4 +63,15 @@ export const api = {
   adminLoginApi: `${domain}/api/login`,
   adminLogoutApi: `${domain}/api/logout`,
   getCaptchaApi: `${domain}/api/captcha`,
+}
+
+
+let crossDomain = commonConfig.prod.fileServerIP
+
+if (process.env.NODE_ENV == 'development') {
+  crossDomain = commonConfig.dev.fileServerIP
+}
+
+export const crossApi = {
+  getAddressApi: `${crossDomain}/api/address`
 }
