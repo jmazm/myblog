@@ -66,12 +66,13 @@ export const api = {
 }
 
 
-let crossDomain = commonConfig.prod.fileServerIP
+let crossDomain = commonConfig.dev.fileServerIP
 
-if (process.env.NODE_ENV == 'development') {
-  crossDomain = commonConfig.dev.fileServerIP
+if (process.env.NODE_ENV == 'production') {
+  crossDomain = commonConfig.prod.fileServerIP
 }
 
 export const crossApi = {
-  getAddressApi: `${crossDomain}/api/address`
+  getAddressApi: `${crossDomain}/api/address`,
+  getFileSystem: crossDomain
 }

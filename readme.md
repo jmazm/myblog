@@ -196,7 +196,7 @@
 * [cdn]
 
 ### React
-* [jsx语法]
+* [jsx语法](/client/views/User/containers/TagPage/index.jsx)
 * [数据流- props 和 state](/client/views/User/containers/TagPage/index.jsx)
 * [组件间通信](/client/views/User/containers/CategoryPage/index.jsx)
 * [生命周期](/client/views/User/containers/Home/index.jsx) / [生命周期 - componentDidUpdate](/client/views/User/containers/SearchPage/index.jsx)
@@ -204,7 +204,11 @@
 * [Diff算法]
 * [defaultProps + propTypes](/client/views/User/containers/TagPage/index.jsx)
 * [React 同构 - ssr](/server/view/layout.js)
-* [BrowserRouter 和 HashRouter的区别](/client/router/index.js)
+* [BrowserRouter 和 HashRouter的区别](/client/router/index.jsx)
+* [React创建组件的三种方式及其区别](/client/plugin/table/index.jsx)
+* [setState机制](/client/views/User/containers/SearchPage/index.jsx)
+* [React.Component 绑定方法](/client/views/User/containers/ArticleListByTagPage/index.jsx)
+* [循环，key值的重要性](/client/plugin/table/index.jsx)
 
 ### 安全
 * [XSS - httpOnly/转义/黑白名单/CSP](/client/lib/xss.js)

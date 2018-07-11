@@ -32,19 +32,29 @@ const { get_all_articles } = ArticleReducer
        setState()【会引起额外的渲染 - render会被调用两次，但会发生在浏览器更新屏幕之前】
  * 2. Updating - 更新阶段
    2.1 componentWillRecieveProps(object nextProps)
-      如果父组件引起子组件再渲染，那么这个方法就会被调用，无论props是否有改变；setState()
-   2.2 shouldComponentUpdate(object nextProps, object nextState)
+      用途：1、setState() - 更新state值，比如重置   2、 比较 this.props 和 nextProps
+      如果父组件引起子组件再渲染，那么这个方法就会被调用，无论props是否有改变；
+ 2.2 shouldComponentUpdate(object nextProps, object nextState) - 告诉组件是否要重新渲染
       不要setState；
-      return false并不是阻止子组件再渲染当他们的state变化时；
-      React.PureComponent；
+      return false - componentWillUpdate、render、componentDidUpdate都将不会被调用；当他们的state变化时，并不会阻止子组件再渲染；
+      浅层数据比较可以使用 React.PureComponent；
       不推荐深检查和使用JSON.stringify
    2.3 componentWillUpdate(object nextPorps, object nextState)
       不要setState
    2.4 render()
    2.1 componentDidUpdate(prevProps, prevState, snapshot)
-      setState()；发请求
+      setState()；
+      发请求、
+      操作 DOM
  * 3. Unmounting - 卸载
-   3.1 componentWillMount
+   3.1 componentWillMount - 清除计时器、断开网络请求、解绑dom事件
+ * === //
+ *
+ * // ===
+ * 注意：
+ * 1. componentWillMount 和 componentWillReceiveProps 调用 setState 不会重复渲染(re-render)
+ * 2.componentDidUpdate，不能直接 this.setState, 不然会溢出栈。
+     需要对 prevProps 与 this.props 和 prevState 和 this.state 做一个判断再执行 this.setState。
  * === //
  */
 

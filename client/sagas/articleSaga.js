@@ -4,6 +4,10 @@
  * 2. take() - 创建一个 Effect 描述信息，用来命令 middleware 在 Store 上等待指定的 action。 在发起与 pattern 匹配的 action 之前，Generator 将暂停。
  * 3. put() - 创建一个 Effect 描述信息，用来命令 middleware 向 Store 发起一个 action。 这个 effect 是非阻塞型的，并且所有向下游抛出的错误（例如在 reducer 中），都不会冒泡回到 saga 当中。
  * === //
+ * // ===
+   take =========》 call ========》 put
+   有指令过来，拿到指令返回的数据 ====》 调用一些方法，获取数据（比如 ajax） ====》 从新发起一个action，获取新的state
+ * === //
  */
 
 import { take, call, put } from 'redux-saga/effects'
@@ -85,6 +89,10 @@ function* getAllArticle (paramsObj) {
 }
 
 export function* getAllArticleFlow () {
+  /**
+   * 运行了一个无限循环的 while(true)的原因：
+   *  Generator 函数不具备 从运行至完成 的行为（run-to-completion behavior）。 Generator 将在每次迭代阻塞以等待 action 发起。
+   */
   while (true) {
 
     let req = yield take(ArticleActionTypes.GET_ALL_ARTICLES)

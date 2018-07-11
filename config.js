@@ -10,7 +10,7 @@ module.exports = {
   dev: {
     indexServerPort: '3001',
     cmsServerPort: '8080',
-    fileServerIP: 'http://127.0.0.1:3002',
+    fileServerIP: 'http://localhost:3002',
   },
   indexPort: '3000',
   cmsPort: '3003',

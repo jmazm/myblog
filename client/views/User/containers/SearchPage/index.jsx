@@ -53,6 +53,33 @@ class SearchPage extends Component {
       title: title
     })
 
+    /**
+     * setState(partialState,callback) - 异步更新
+     *    - callback(prevState, props) - 回调函数将在 setState 完成后执行，并且重新渲染组件，在这个回调函数中你可以拿到刚更新的state的值
+     * // ===
+                                 this.setState(newState)
+                                          |
+                              newState 存入 pending 队列
+                                          |
+                                   调用 enqueueUpdate
+                                          |
+                                    是否处于批量更新模式(!batchingStrategy.isBatchingUpdates)
+                       ——————————|————————
+                       |Y                                 N|
+     将组件保存到dirtyComponents中               遍历dirtyComponents
+                                                 调用updateComponent
+                                              更新 pending state or props
+     * === //
+     * // ===
+     * 1.可通过 this.state来访问state，通过 this.setState()来更新state，当 this.setState()被调用时，React又会重新调用render方法来重新渲染UI。
+     * 2. setState是通过一个队列机制实现state更新。当执行 setState的时候，将需要更新的state放到状态队列中，而不会立刻更新this.state。
+          如果多次传递的是对象 -  this.setState({ text: this.state.text + '111' }) - react会做对象合并的操作，如果key一样，后者的值就会覆盖前面的值
+          如果多次传递的是函数 -  this.setState((prevState) => { return { text: prevState.text + '222' }}) - 每次 React 从 setState 执行函数，并通过传递已更新的状态来更新你的状态
+
+          在 React.js 内部会把 JavaScript 事件循环中的消息队列的同一个消息中的 setState 都进行合并以后再重新渲染组件。
+     * 3、不能直接用 this.state = xxx 这种方式来修改，如果这样做 React.js 就没办法知道你修改了组件的状态，它也就没有办法更新页面
+     * === //
+     */
     this.setState({
       currentPage: page
     })

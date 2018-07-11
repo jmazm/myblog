@@ -15,7 +15,7 @@
    2.2 在 redux-saga 世界里，所有的 Effect 都必须被 yield 才会执行，并且原则上来说，所有的 yield 后面也只能跟Effect，以保证代码的易测性。
  * 3、阻塞调用和无阻塞调用
    3.1 fork - 无阻塞型调用 - 创建一个子 saga
-   3.2 call - 阻塞调用 - 有阻塞地调用 saga 或者返回 promise 的函数
+   3.2 call - 阻塞调用 - 有阻塞地调用 saga 或者返回 promise 的函数 - Generator 在调用结束之前不能执行或处理任何其他事情
  * 4. redux-saga 和 redux-thunk的区别
    4.1 Sagas 是通过 Generator 函数来创建的，意味着可以用同步的方式写异步的代码；
    4.2 Thunks 是在 action 被创建时才调用，Sagas 在应用启动时就开始调用，监听action 并做相应处理； （通过创建 Sagas 将所有的异步操作逻辑收集在一个地方集中处理）

@@ -13,6 +13,7 @@ const { indexPort, dev } = config
          DevServer 会让 Webpack 在构建出的 JavaScript 代码里注入一个代理客户端用于控制网页，网页和 DevServer 之间通过 WebSocket 协议通信，以方便 DevServer 主动向客户端发送命令。
          DevServer 在收到来自 Webpack 的文件变化通知时通过注入的客户端控制网页刷新。
    2.2 热模块替换：
+     模块热替换能做到在不重新加载整个网页的情况下，通过将被更新过的模块替换老的模块，再重新执行一次来实现实时预览。
    2.3 支持source-map：
  * === //
  * // ===
@@ -60,6 +61,7 @@ function devServer (port) {
     stats: {
       colors: true
     },
+    disableHostCheck: true,
     watchOptions: {
       // 排除一些巨大的文件夹
       ignored: /node_modules/

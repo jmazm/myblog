@@ -6,6 +6,7 @@ import PropsType from 'prop-types'
 
 import AdminNav from '../../components/AdminNav'
 import AdminHeader from '../../components/AdminHeader'
+import { crossApi } from '../../../../fetch/fetch'
 
 
 
@@ -36,7 +37,7 @@ class AdminTag extends Component {
         <div className="management-content-wrapper">
           <AdminHeader title="文件管理系统"/>
           <div className="content-inner">
-            <iframe src="https://file.jmazm.com/#/" className="iframe"></iframe>
+            <iframe src={ crossApi.getFileSystem } className="iframe"></iframe>
           </div>
         </div>
       </div>

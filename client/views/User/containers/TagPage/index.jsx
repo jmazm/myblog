@@ -1,3 +1,5 @@
+
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -33,6 +35,18 @@ class Tag extends Component {
          在constructor中 通过 this.state = {} 初始化相应的状态；
          可通过this.setState({})修改状态，调用这个方法的时候，该组件会尝试重新渲染。
      * === //
+     *
+     * // ===
+     * 总结：
+     * props是别人的，props实现的是组件间的状态传递，即：props可以实现父组件到子组件的通信；
+     * state是自己的，state只能定义在组件内部，用来管理组件内部的状态。
+     *
+     * props可以通过static defaultProps + static propTypes定义初始值；
+     * props可以被父组件改变，不可改变当前组件，可以改变子组件。
+     *
+     * state 可以在constructor中通过this.state定义初始值；
+     * state不可以被父组件改变、可以改变当前组件，不可以改变子组件
+     * // ===
      */
     
     this.state = {
@@ -65,6 +79,13 @@ class Tag extends Component {
   render () {
     const { tags } = this.props
 
+    /**
+     * JSX语法：
+     * // ===
+     * 1. JSX 将 HTML 语法直接加入到 JavaScript 代码中，再通过翻译器转换到纯JavaScript 后由浏览器执行。
+     * 2. jsx最终其实就是JavaScript对象"。react通这个对象来创建或者更新虚拟元素最终来管理virtual DOM(虚拟DOM)
+     * === //
+     */
     return (
       <div className="container my--blog">
         <Header/>

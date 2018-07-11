@@ -23,6 +23,23 @@ class Tag extends Component {
       currentPage: 1
     }
 
+    /**
+     * React.Component 绑定方法
+     * // ===
+     * 1. 构造函数中绑定 - this.xxx = this.xxx.bind(this) 【推荐使用】
+     * 2.  在render()行内事件使用bind来绑定
+       render() {
+         return <div onClick={this.onClickList.bind(this)}>点我点我点我</div>
+        }
+     * 3. 使用箭头函数
+        onClickList = () => {
+            console.log('我被点了')
+        }
+        render() {
+            return <div onClick={this.onClickList}>点我点我点我</div>
+        }
+     * === //
+     */
     this.pageOnChange = this.pageOnChange.bind(this)
   }
 
