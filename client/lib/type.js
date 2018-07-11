@@ -4,7 +4,7 @@
  * // ===
  * 1. typeof：只能得出 - number/string/object/function/boolean/undefined
      typeof /hello/ 或者 null 或者 [] ===》 object
- * 2. instanceof：用来判断引用类型属于哪一类
+ * 2. instanceof：用来判断引用类型属于哪一类 - 主要用来判断实例对象的属性（`__proto__`）和构造函数属性（`prototype`）是不是同一个引用
    reg instanceof RegExp
    array instanceof Array
    obj instanceof Object

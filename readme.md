@@ -123,7 +123,7 @@
 [闭包] / 
 [new本质](/client/lib/new.js)
 
-* **this**：[call/apply/bind]()
+* **this**：[call/apply/bind](/client/static/plugin/popup/alert.js)
 
 * **继承**：
 [原型链继承](/client/static/plugin/popup/prompt.js) / 
@@ -138,8 +138,9 @@
 
 * **事件**：
 [事件处理程序](/client/lib/event.js) / 
-[事件循环机制] / 
-[事件委托] / 
+[事件循环机制](https://github.com/JMHello/shooting-game/blob/master/js/bullet.js) / 
+[事件流(事件模型)](https://github.com/JMHello/shooting-game/blob/master/js/app.js)/
+[事件委托](https://github.com/JMHello/shooting-game/blob/master/js/app.js) / 
 [原生键盘类事件](/client/views/User/components/SearchBar/index.jsx)
 
 
@@ -163,13 +164,26 @@
 [图片优化](/client/lib/isSupportWebp.js) / 
 [webp兼容](/client/lib/isSupportWebp.js)
 
-* **ajax**：[ajax实现]
+* **ajax**：[ajax实现](/client/lib/ajax.js)
 
 * **异步**：
+[回调函数] / 
 [Promise] /
 [Generator] / 
 [Async] 
 
+* **canvas**
+[canvas语法](https://github.com/JMHello/shooting-game/blob/master/js/bullet.js) /
+[动画三要素](https://github.com/JMHello/shooting-game/blob/master/js/app.js) /
+[requestAnimationFrame](https://github.com/JMHello/shooting-game/blob/master/js/app.js)
+
+* **定时器**
+[setTimeout](https://github.com/JMHello/shooting-game/blob/master/js/app.js) /
+[setInterval](https://github.com/JMHello/shooting-game/blob/master/js/app.js)
+
+* **模块化**
+[模块化](/server/controllers/category.js) /
+[require 和 import 有什么区别](/server/controllers/category.js)
 
 
 * [深拷贝]

@@ -3,7 +3,7 @@ import Popup from './popup'
 
 /**
  * 原型链继承
- * 实现方式：hild.prototype = new Parent()
+ * 实现方式：child.prototype = new Parent()
  * 缺点：
  * 1、共享问题
  * 2、constructor的指向问题

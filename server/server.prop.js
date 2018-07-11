@@ -104,7 +104,7 @@ module.exports = function (port) {
    1.2 分为 HEADRS frame 和 DATA frame
    1.3 较于HTTP/1.x而言，http2.0在传输期间的编码方式变化。由以换行符作为纯文本的分隔符变为将所有传输的信息分割为更小的消息和帧，并采用二进制格式对它们编码
  * 2. 首部压缩：server与client各存首部表
- * 3. 多路复用：同一个TCP链接 且 并行双向字节流, 无需合并css,js,sprite, 无需多域名并行下载
+ * 3. 多路复用：所有的HTTP2.0的请求都在一个TCP链接上， 这个连接可以承载任意双向字节流, 无需合并css,js,sprite, 无需多域名并行下载
  * 4. 请求优先级：优先值确定着客户端和服务器处理不同的流采取不同的优先级策略
  * 5. 服务器推送：无需base64 http://www.ruanyifeng.com/blog/2018/03/http2_server_push.html
  * 6. 兼容性：https连接时先握手，发Client Hello包说明是否支持h2, 否则用http/1.1
