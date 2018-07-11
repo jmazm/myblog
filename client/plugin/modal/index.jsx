@@ -5,6 +5,19 @@ import classnames from 'classnames'
 
 import style from './index.css'
 
+/**
+ * reacr实现模态弹框
+ * // ===
+ * 1. 三部分组成
+   1.1 header - 标题 + 删除符号（隐藏模态弹框）
+   1.2 body - 想要展示的内容
+   1.3 footer - 主要是两个按钮
+       确认按钮：发送请求/重置表单/隐藏模态框 - onOk事件
+       取消按钮：隐藏模态框 - onCancel事件
+ * 2. 模态框的显示和隐藏 - 主要通过props: visible 控制
+ * === //
+ */
+
 class Modal extends Component {
   constructor (props) {
     super(props)

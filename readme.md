@@ -55,6 +55,8 @@
 [顺序查找] /
 [二分法查找]
 
+* [动态规划](https://github.com/JMHello/myblog-file-server/blob/dev/client/plugin/waterfallPics.js)
+
 ### 计算机基础知识
 
 * [图片基础知识](/client/lib/isSupportWebp.js)
@@ -200,8 +202,6 @@
 * [数据流- props 和 state](/client/views/User/containers/TagPage/index.jsx)
 * [组件间通信](/client/views/User/containers/CategoryPage/index.jsx)
 * [生命周期](/client/views/User/containers/Home/index.jsx) / [生命周期 - componentDidUpdate](/client/views/User/containers/SearchPage/index.jsx)
-* [虚拟DOM]
-* [Diff算法]
 * [defaultProps + propTypes](/client/views/User/containers/TagPage/index.jsx)
 * [React 同构 - ssr](/server/view/layout.js)
 * [BrowserRouter 和 HashRouter的区别](/client/router/index.jsx)
@@ -209,6 +209,9 @@
 * [setState机制](/client/views/User/containers/SearchPage/index.jsx)
 * [React.Component 绑定方法](/client/views/User/containers/ArticleListByTagPage/index.jsx)
 * [循环，key值的重要性](/client/plugin/table/index.jsx)
+* [高阶组件]
+* [虚拟DOM]
+* [Diff算法]
 
 ### 安全
 * [XSS - httpOnly/转义/黑白名单/CSP](/client/lib/xss.js)
@@ -260,10 +263,15 @@
 
 * [TTD]
 
-### 常用功能（原生实现）
-* [上传图片插件](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/uploadImgs)
-* [分页插件](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/pagination)
-* [模态弹框插件](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/modal)
+### 常用功能
+* **上传图片插件**：
+[上传图片插件 - 原生实现](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/uploadImgs)
+* **分页插件**：
+[分页插件 - 原生实现](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/pagination) /
+[分页插件 - react实现](/client/plugin/pagination/index.jsx) 
+* **模态弹框插件**：
+[模态弹框插件 - 原生实现](https://github.com/JMHello/JMHello.github.io/tree/master/effects/demo/plugins/modal) /
+[模态弹框插件 - react实现](/client/plugin/Popup/index.jsx) 
 
 ### 常见命令
 * [git](/doc/git.md)

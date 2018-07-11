@@ -35,6 +35,16 @@
      3.3.e 将生成的html结构插入模版中
         layout(html, finalState)
  * === //
+ *
+ *
+ * // ===
+ * 1. 首先要有一个layout模板函数，layout(content, data)
+      由于要保证前端和后端的store一致，而同构的话，store的初始值是在服务器端生成的，所以我们就可以把store写入到window中
+ * 2. 生成store，并直接从数据库中拿数据，作为store的initialState
+ * 3. 可以通过store.getState方法拿到state
+ * 4. 再通过 react-dom/server 的 renderToString方法，将虚拟DOM转化成html字符串
+ * 5. 最后，将html字符串以及数据插入到模板中，并将整个模板返回给客户端即可
+ * === //
  */
 
 

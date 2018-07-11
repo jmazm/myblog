@@ -9,7 +9,7 @@ import style from './index.css'
 /**
  * react创建组件的三种方式及其区别
  * // ===
- * 1. 函数式定义的无状态组件，被精简成一个render方法的函数来实现的，不会有组件实例化的过程
+ * 1. 函数式定义的无状态组件，被精简成一个render方法的函数来实现的，不会有组件实例化的过程 【实际上就是一个纯函数 - 给定相同的输入，它总是返回相同的输出；过程没有副作用，没有额外的状态依赖】
    1.1 组件不会被实例化，整体渲染性能得到提升
    1.2 组件不能访问this对象
    1.3 组件无法访问生命周期的方法
@@ -123,6 +123,8 @@ class Table extends Component {
 
       旧: A B C D
       新：B A D C
+
+     lastIndex 一直在更新，表示访问过的节点在旧集合中最右的位置（即最大的位置）
 
      if (prevChild === nextChild)
      if(child._mountIndex < lastIndex)
