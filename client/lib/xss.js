@@ -25,7 +25,7 @@
    5.1 浏览器自带拦截: X-XSS-Protection, 防御 HTML节点内容 和 HTML属性
      0  - 不需要xss过滤
      1 - 启用XSS过滤
-     1;mode=bloack - 使XSS过滤。浏览器不会对页面进行处理，而是在检测到攻击时阻止页面呈现。
+     1;mode=block - 使XSS过滤。浏览器不会对页面进行处理，而是在检测到攻击时阻止页面呈现。
      1; report=<reporting-URI>  (Chromium only)
    5.2 实体转义
        html环境:

@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.upload-img {
+    width: 700px;
+    margin: 10px auto;
+    background: white;
+}
+.upload-area {
+    display: flex;
+    flex-basis: 50%;
+}
+.upload-area .upload-file-area {
+    width: 50%;
+    height: 150px;
+    border: 2px solid #eeeeee;
+}
+.upload-area .clicking-upload-area {
+    position: relative;
+    border-right: none;
+}
+.clicking-upload-area .upload-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+.clicking-upload-area .upload-file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    filter: alpha(opacity:0);
+}
+.upload-file-area {
+    font: 14px/150px '';
+    text-align: center;
+}
+.text-area {
+    display: flex;
+    padding: 10px 5px;
+    border: 2px solid #eeeeee;
+    border-top: none;
+}
+.text-wrap {
+    width: 80%;
+    font: 14px/2 '';
+}
+.text-area .btn {
+    font: 14px/2 '';
+    padding: 0 15px;
+    margin-right: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background: dodgerblue;
+}
+.img-area {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 152px;
+    max-height: 456px;
+    border: 2px solid #eeeeee;
+    border-top: none;
+}
+.img-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    height: 130px;
+    margin: 5px 10px;
+    border: 1px solid #eeeeee;
+}
+.img-area .img-item-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    color: white;
+    background: rgba(0, 0, 0, .3);
+    z-index: 20;
+}
+.img-area .img-item-text .img-item-title {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.img-item-text .del {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font: 14px/25px '';
+    border-radius: 50%;
+    background: black;
+    cursor: pointer;
+}
+.img-item-text .del:hover {
+    background: red;
+}
+.img-area .img-wrap {
+    position: relative;
+    width: 120px;
+    height: 130px;
+    background: #eeeeee;
+}
+.img-area .img-item img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.upload-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+.upload-progress .progress-running {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 15px;
+    background: black;
+    border-radius: 15px;
+}
+.upload-progress .active {
+    background: dodgerblue;
+}
+.upload-progress .progress-txt {
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    color: white;
+    font: 12px/15px '';
+    text-align: center;
+}
+.hide {
+    display: none;
+}
